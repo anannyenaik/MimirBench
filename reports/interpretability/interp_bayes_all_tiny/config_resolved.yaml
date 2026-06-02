@@ -1,0 +1,31 @@
+run:
+  name: interp_bayes_all_tiny
+  seed: 123
+  output_dir: reports/interpretability/interp_bayes_all_tiny
+model:
+  checkpoint_path: reports/training/small_transformer_bayes_tiny/checkpoints/best.pt
+  vocab_path: reports/training/small_transformer_bayes_tiny/vocab.json
+  device: cpu
+data:
+  source: synthetic
+  num_examples: 96
+  num_pairs: 48
+  seed: 123
+  num_hypotheses: 2
+  min_observations: 1
+  max_observations: 6
+  signal_reliability: 0.7
+  posterior_buckets: 20
+  payoff:
+    reward_if_A: 1.0
+    loss_if_not_A: 1.0
+    decision_cost: 0.0
+    risk_tolerance: 0.35
+experiments:
+  probes: true
+  activation_patching: true
+  attention_analysis: true
+sites: null
+batch_size: 16
+max_examples: 48
+alpha: 1.0

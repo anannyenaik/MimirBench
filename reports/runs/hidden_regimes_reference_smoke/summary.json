@@ -1,0 +1,82 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "environments": [
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 100,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a reference solver sanity check, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.5582300000605755,
+        "latency_p50_ms": 0.5083500018372433,
+        "latency_p95_ms": 0.899820002632623,
+        "mean_score": 1.0,
+        "metric_means": {
+          "posterior_l1_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 100,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.5582300000605755,
+      "latency_p50_ms": 0.5083500018372433,
+      "latency_p95_ms": 0.899820002632623,
+      "mean_score": 1.0,
+      "metric_means": {
+        "posterior_l1_error": 0.0,
+        "posterior_tv_error": 0.0
+      },
+      "n_tasks": 100,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\hidden_regimes_reference_smoke",
+  "run_id": "hidden_regimes_reference_smoke-20260602T010928",
+  "run_name": "hidden_regimes_reference_smoke",
+  "timestamp": "2026-06-02T01:09:28Z"
+}

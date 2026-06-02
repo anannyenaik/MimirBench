@@ -1,0 +1,43 @@
+# Tiny real-model robustness probe on Bayesian-updating tasks.
+#
+# Requires the 'api' extra and OPENAI_API_KEY. NOT run by the test suite; running
+# it makes paid API calls (num_tasks * (1 + variants_per_task) completions).
+# Run `mimirbench check-provider openai` first.
+run:
+  name: api_openai_robustness_bayes_tiny
+  seed: 123
+  output_dir: reports/runs/api_openai_robustness_bayes_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: api
+  provider: openai
+  model: gpt-4.1-mini
+  temperature: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - order_permutation
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 3
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 15
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

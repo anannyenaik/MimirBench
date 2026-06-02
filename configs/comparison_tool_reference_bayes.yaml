@@ -1,0 +1,34 @@
+# Deterministic reference-tool comparison on Bayesian-updating tasks.
+#
+# Compares the direct reference solver with a deterministic non-model tool
+# policy that calls bayes_calculator and writes tool audit artefacts.
+run:
+  name: tool_reference_bayes
+  seed: 123
+  output_dir: reports/runs/comparisons/tool_reference_bayes
+  cache: true
+  max_workers: 1
+
+baseline_agent: reference
+
+agents:
+  - name: reference
+    type: reference
+  - name: tool_reference
+    type: tool
+    tool_policy: reference
+    tool_max_steps: 3
+
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - posterior_tv_error
+    - parse_failure_rate

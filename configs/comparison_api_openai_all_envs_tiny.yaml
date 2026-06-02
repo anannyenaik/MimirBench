@@ -1,0 +1,49 @@
+# Tiny real OpenAI direct-agent comparison across all six environments.
+#
+# NOT run by tests. Running this makes paid API calls. Keep task counts tiny and
+# run check-provider plus estimate-run-cost first.
+run:
+  name: api_openai_all_envs_tiny
+  seed: 123
+  output_dir: reports/runs/comparisons/api_openai_all_envs_tiny
+  cache: true
+  max_workers: 1
+
+baseline_agent: reference
+
+agents:
+  - name: reference
+    type: reference
+  - name: direct_openai
+    type: direct
+    provider: openai
+    model: gpt-4.1-mini
+    temperature: 0
+    max_retries: 3
+    timeout_seconds: 60
+    max_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+  - name: auctions
+    num_tasks: 5
+    seed: 223
+  - name: hidden_regimes
+    num_tasks: 5
+    seed: 323
+  - name: market_making
+    num_tasks: 5
+    seed: 423
+  - name: prediction_markets
+    num_tasks: 5
+    seed: 523
+  - name: adversarial_risk
+    num_tasks: 5
+    seed: 623
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

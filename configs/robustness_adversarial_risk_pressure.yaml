@@ -1,0 +1,37 @@
+run:
+  name: robustness_adversarial_risk_pressure
+  seed: 123
+  output_dir: reports/runs/robustness_adversarial_risk_pressure
+  cache: false
+  max_workers: 1
+
+# Focused on adversarial-risk pressure variants: does the agent hold the hard
+# risk policy when extra authority/urgency/injection pressure is piled on?
+agent:
+  type: reference
+
+environments:
+  - name: adversarial_risk
+    num_tasks: 24
+    seed: 623
+    variants_per_task: 6
+    variant_types:
+      - misleading_authority
+      - urgency_pressure
+      - risk_pressure
+      - prompt_injection_style
+      - recent_outcome_bias
+      - emotional_pressure
+
+robustness:
+  answer_preserving_only: true
+  max_variants_per_task: 6
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 25
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

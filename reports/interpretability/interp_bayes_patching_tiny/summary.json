@@ -1,0 +1,250 @@
+{
+  "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+  "data": {
+    "num_examples": 64,
+    "num_pairs": 48,
+    "seed": 123,
+    "source": "synthetic"
+  },
+  "experiments": {
+    "activation_patching": {
+      "best_action_recovery_site": null,
+      "by_site": {
+        "blocks.0.attn_out": {
+          "action_recovery_rate": null,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.003466920890836831,
+              "mean_causal_effect": -0.00035288780476912485,
+              "mean_clean_target_prob": 0.5153608022322819,
+              "mean_corrupted_target_prob": 0.5152907217400015,
+              "mean_patched_target_prob": 0.5149378339352324,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.003788065314488031,
+              "mean_causal_effect": -0.00047592452365907933,
+              "mean_clean_target_prob": 0.4557223120941209,
+              "mean_corrupted_target_prob": 0.4586323259385377,
+              "mean_patched_target_prob": 0.4581564014148787,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.0008925804903093387,
+              "mean_causal_effect": -0.00014968995986472446,
+              "mean_clean_target_prob": 0.0746411475052732,
+              "mean_corrupted_target_prob": 0.07501737370431388,
+              "mean_patched_target_prob": 0.07486768374444916,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.00759238141802207,
+              "mean_causal_effect": -0.00113809754049654,
+              "mean_clean_target_prob": 0.5177587817208941,
+              "mean_corrupted_target_prob": 0.5167747899149582,
+              "mean_patched_target_prob": 0.5156366923744616,
+              "n": 48,
+              "n_flipped": 2,
+              "recovery_rate": 0.0
+            }
+          },
+          "label_recovery_rate": 0.0,
+          "mean_causal_effect_action": -0.00035288780476912485,
+          "posterior_bucket_recovery_rate": null
+        },
+        "blocks.0.mlp_out": {
+          "action_recovery_rate": null,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.0008618297822543299,
+              "mean_causal_effect": 0.00014432711189667677,
+              "mean_clean_target_prob": 0.5153608022322819,
+              "mean_corrupted_target_prob": 0.5152907217400015,
+              "mean_patched_target_prob": 0.5154350488518982,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.0028200877809263433,
+              "mean_causal_effect": -0.0004993843749662904,
+              "mean_clean_target_prob": 0.4557223120941209,
+              "mean_corrupted_target_prob": 0.4586323259385377,
+              "mean_patched_target_prob": 0.4581329415635715,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.0006352070117438515,
+              "mean_causal_effect": 6.092371209624371e-05,
+              "mean_clean_target_prob": 0.0746411475052732,
+              "mean_corrupted_target_prob": 0.07501737370431388,
+              "mean_patched_target_prob": 0.07507829741641013,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.00038510001492123025,
+              "mean_causal_effect": 0.00019445917175584665,
+              "mean_clean_target_prob": 0.5177587817208941,
+              "mean_corrupted_target_prob": 0.5167747899149582,
+              "mean_patched_target_prob": 0.516969249086714,
+              "n": 48,
+              "n_flipped": 2,
+              "recovery_rate": 0.0
+            }
+          },
+          "label_recovery_rate": 0.0,
+          "mean_causal_effect_action": 0.00014432711189667677,
+          "posterior_bucket_recovery_rate": null
+        },
+        "blocks.0.resid_post": {
+          "action_recovery_rate": null,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.0004935241244102088,
+              "mean_causal_effect": 7.008049228042952e-05,
+              "mean_clean_target_prob": 0.5153608022322819,
+              "mean_corrupted_target_prob": 0.5152907217400015,
+              "mean_patched_target_prob": 0.5153608022322819,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.021206598440829394,
+              "mean_causal_effect": -0.0029100138444168983,
+              "mean_clean_target_prob": 0.4557223120941209,
+              "mean_corrupted_target_prob": 0.4586323259385377,
+              "mean_patched_target_prob": 0.4557223120941209,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.0027360658922588633,
+              "mean_causal_effect": -0.00037622619904068244,
+              "mean_clean_target_prob": 0.0746411475052732,
+              "mean_corrupted_target_prob": 0.07501737370431388,
+              "mean_patched_target_prob": 0.0746411475052732,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.007092701185027938,
+              "mean_causal_effect": 0.0009839918059358667,
+              "mean_clean_target_prob": 0.5177587817208941,
+              "mean_corrupted_target_prob": 0.5167747899149582,
+              "mean_patched_target_prob": 0.5177587817208941,
+              "n": 48,
+              "n_flipped": 2,
+              "recovery_rate": 1.0
+            }
+          },
+          "label_recovery_rate": 1.0,
+          "mean_causal_effect_action": 7.008049228042952e-05,
+          "posterior_bucket_recovery_rate": null
+        },
+        "embed": {
+          "action_recovery_rate": null,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.0004935241244102088,
+              "mean_causal_effect": 7.008049228042952e-05,
+              "mean_clean_target_prob": 0.5153608022322819,
+              "mean_corrupted_target_prob": 0.5152907217400015,
+              "mean_patched_target_prob": 0.5153608022322819,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.021206598440829394,
+              "mean_causal_effect": -0.0029100138444168983,
+              "mean_clean_target_prob": 0.4557223120941209,
+              "mean_corrupted_target_prob": 0.4586323259385377,
+              "mean_patched_target_prob": 0.4557223120941209,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.0027360658922588633,
+              "mean_causal_effect": -0.00037622619904068244,
+              "mean_clean_target_prob": 0.0746411475052732,
+              "mean_corrupted_target_prob": 0.07501737370431388,
+              "mean_patched_target_prob": 0.0746411475052732,
+              "n": 48,
+              "n_flipped": 0,
+              "recovery_rate": null
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.007092701185027938,
+              "mean_causal_effect": 0.0009839918059358667,
+              "mean_clean_target_prob": 0.5177587817208941,
+              "mean_corrupted_target_prob": 0.5167747899149582,
+              "mean_patched_target_prob": 0.5177587817208941,
+              "n": 48,
+              "n_flipped": 2,
+              "recovery_rate": 1.0
+            }
+          },
+          "label_recovery_rate": 1.0,
+          "mean_causal_effect_action": 7.008049228042952e-05,
+          "posterior_bucket_recovery_rate": null
+        }
+      },
+      "figures": [
+        "reports/interpretability/interp_bayes_patching_tiny/activation_patching/figures/causal_effect_by_layer.png",
+        "reports/interpretability/interp_bayes_patching_tiny/activation_patching/figures/label_recovery_by_layer.png",
+        "reports/interpretability/interp_bayes_patching_tiny/activation_patching/figures/action_recovery_by_layer.png"
+      ],
+      "heads": [
+        "action",
+        "posterior_bucket",
+        "risk_flag",
+        "confidence_bucket"
+      ],
+      "num_pairs": 48,
+      "results_path": "reports/interpretability/interp_bayes_patching_tiny/activation_patching/patching_results.jsonl",
+      "sites": [
+        "embed",
+        "blocks.0.attn_out",
+        "blocks.0.mlp_out",
+        "blocks.0.resid_post"
+      ],
+      "summary_path": "reports/interpretability/interp_bayes_patching_tiny/activation_patching/patching_summary.json"
+    }
+  },
+  "experiments_run": [
+    "activation_patching"
+  ],
+  "model": {
+    "architecture": "compact_transformer_encoder",
+    "d_model": 32,
+    "n_heads": 2,
+    "n_layers": 1,
+    "sites": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post"
+    ]
+  },
+  "no_frontier_claim": "These results characterise one small, fully synthetic Bayesian transformer. They are not evidence about frontier-model internals and must not be read that way.",
+  "output_dir": "reports/interpretability/interp_bayes_patching_tiny",
+  "report_path": "reports/interpretability/interp_bayes_patching_tiny/INTERPRETABILITY_REPORT.md",
+  "run_name": "interp_bayes_patching_tiny",
+  "status": "complete",
+  "timestamp": "2026-06-02T17:16:15+00:00",
+  "vocab_path": "reports/training/small_transformer_bayes_tiny/vocab.json"
+}

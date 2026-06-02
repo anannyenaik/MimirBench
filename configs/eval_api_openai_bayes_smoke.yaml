@@ -1,0 +1,37 @@
+# Tiny real-model smoke benchmark on Bayesian-updating tasks.
+#
+# Requires the 'api' extra (pip install -e ".[api]") and OPENAI_API_KEY in the
+# environment. This config IS NOT run by the test suite. Running it will make
+# paid API calls. Use `mimirbench check-provider openai` and
+# `mimirbench estimate-run-cost configs/eval_api_openai_bayes_smoke.yaml` first.
+run:
+  name: api_openai_bayes_smoke
+  seed: 123
+  output_dir: reports/runs/api_openai_bayes_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: api
+  provider: openai
+  model: gpt-4.1-mini
+  temperature: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 512
+  # Cost is only estimated when pricing is configured. Uncomment and set to your
+  # contracted prices (USD per 1,000 tokens) to enable cost estimation; otherwise
+  # reports will state cost was "not estimated".
+  # pricing:
+  #   input_usd_per_1k: 0.0
+  #   output_usd_per_1k: 0.0
+
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

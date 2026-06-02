@@ -1,0 +1,118 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": null,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": "reference",
+      "posterior_noise": 0.0,
+      "pricing": null,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "baseline_kind": "reference sanity check",
+  "comparison": {
+    "agent_key": "reference",
+    "baseline_agent_key": "reference",
+    "comparison_name": "reference_bayes",
+    "comparison_run_id": "reference_bayes-20260602T060923"
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 0.48723500040068757,
+    "n_model_tasks": 0,
+    "n_tasks": 20,
+    "p50_latency_ms": 0.4083500025444664,
+    "p95_latency_ms": 0.7415299958665857,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a reference solver sanity check, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.48723500040068757,
+        "latency_p50_ms": 0.4083500025444664,
+        "latency_p95_ms": 0.7415299958665857,
+        "mean_score": 1.0,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.0,
+          "posterior_max_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.48723500040068757,
+      "latency_p50_ms": 0.4083500025444664,
+      "latency_p95_ms": 0.7415299958665857,
+      "mean_score": 1.0,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.0,
+        "posterior_max_error": 0.0,
+        "posterior_tv_error": 0.0
+      },
+      "n_tasks": 20,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference",
+  "run_id": "reference_bayes_reference-20260602T060923",
+  "run_name": "reference_bayes_reference",
+  "timestamp": "2026-06-02T06:09:23Z"
+}

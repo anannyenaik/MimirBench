@@ -1,0 +1,44 @@
+# Tiny real-model smoke benchmark across all six environment families.
+#
+# Requires the 'api' extra and OPENAI_API_KEY. NOT run by the test suite; running
+# it makes paid API calls (a few dozen short completions). Keep num_tasks small.
+run:
+  name: api_openai_all_envs_tiny
+  seed: 123
+  output_dir: reports/runs/api_openai_all_envs_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: api
+  provider: openai
+  model: gpt-4.1-mini
+  temperature: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 5
+    seed: 123
+  - name: auctions
+    num_tasks: 5
+    seed: 123
+  - name: market_making
+    num_tasks: 5
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 5
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 5
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

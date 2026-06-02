@@ -1,0 +1,30 @@
+# Deterministic tool-using baseline on Bayesian-updating tasks.
+#
+# Uses the reference tool policy: it consults the allowed `bayes_calculator`
+# tool and answers from the tool output. No model and no network are involved, so
+# this config is safe to run locally and is used to exercise the tool loop and
+# the tool-use audit log (tool_audit.jsonl / tool_audit.md). It is NOT a model
+# result.
+run:
+  name: tool_reference_bayes
+  seed: 123
+  output_dir: reports/runs/tool_reference_bayes
+  cache: true
+  max_workers: 1
+
+agent:
+  type: tool
+  tool_policy: reference
+  tool_max_steps: 3
+  # allowed_tools defaults to the environment allow-list; override to restrict.
+  # allowed_tools: [bayes_calculator]
+
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

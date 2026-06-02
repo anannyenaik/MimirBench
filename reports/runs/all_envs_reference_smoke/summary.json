@@ -1,0 +1,221 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 50,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 50,
+      "seed": 223
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 50,
+      "seed": 323
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 50,
+      "seed": 423
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 50,
+      "seed": 523
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 50,
+      "seed": 623
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a reference solver sanity check, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.0844199996208772,
+        "latency_p50_ms": 0.07990000085555948,
+        "latency_p95_ms": 0.12267500023881436,
+        "mean_score": 1.0,
+        "metric_means": {
+          "correct_constraint_identified": 1.0,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.06818599977123085,
+        "latency_p50_ms": 0.0595499986957293,
+        "latency_p95_ms": 0.12274499913473844,
+        "mean_score": 1.0,
+        "metric_means": {
+          "expected_value_abs_error": 0.0,
+          "expected_value_rel_error": 0.0
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.34335999975155573,
+        "latency_p50_ms": 0.3436500010138843,
+        "latency_p95_ms": 0.44881499979965156,
+        "mean_score": 1.0,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.0,
+          "posterior_max_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.5155940000986448,
+        "latency_p50_ms": 0.48739999874669593,
+        "latency_p95_ms": 0.8114900001601199,
+        "mean_score": 1.0,
+        "metric_means": {
+          "posterior_l1_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.11385199992218986,
+        "latency_p50_ms": 0.11425000047893263,
+        "latency_p95_ms": 0.1391500005411217,
+        "mean_score": 0.9991746260331521,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.0,
+          "inventory_risk_score": 1.0,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.99587313016576
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.10589600016828626,
+        "latency_p50_ms": 0.09205000060319435,
+        "latency_p95_ms": 0.17364000013913022,
+        "mean_score": 1.0,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "action_optimality": 1.0,
+          "calibration_proxy": 1.0,
+          "expected_value_error": 0.0,
+          "fair_probability_error": 0.0,
+          "regret": 0.0,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.20521799988879744,
+      "latency_p50_ms": 0.1144500001828419,
+      "latency_p95_ms": 0.5709099990781398,
+      "mean_score": 0.9998624376721919,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "action_optimality": 1.0,
+        "adverse_selection_penalty": 0.0,
+        "answer_sum": 1.0,
+        "calibration_proxy": 1.0,
+        "correct_constraint_identified": 1.0,
+        "expected_value_abs_error": 0.0,
+        "expected_value_error": 0.0,
+        "expected_value_rel_error": 0.0,
+        "fair_probability_error": 0.0,
+        "inventory_risk_score": 1.0,
+        "posterior_l1_error": 0.0,
+        "posterior_max_error": 0.0,
+        "posterior_tv_error": 0.0,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 1.0,
+        "regret": 0.0,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.0,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.99587313016576,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 300,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\all_envs_reference_smoke",
+  "run_id": "all_envs_reference_smoke-20260602T014233",
+  "run_name": "all_envs_reference_smoke",
+  "timestamp": "2026-06-02T01:43:05Z"
+}

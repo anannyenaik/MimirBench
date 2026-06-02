@@ -1,0 +1,255 @@
+{
+  "agents": [
+    {
+      "agent": {
+        "config": {
+          "action_error_rate": 0.0,
+          "allowed_tools": null,
+          "api_key_env": null,
+          "backend": null,
+          "base_url": null,
+          "behaviour": null,
+          "confidence_bias": 0.0,
+          "device": null,
+          "do_sample": null,
+          "max_new_tokens": 512,
+          "max_retries": 3,
+          "max_steps": 6,
+          "max_tokens": 1024,
+          "model": null,
+          "model_name": null,
+          "name": "reference",
+          "posterior_noise": 0.0,
+          "pricing": null,
+          "provider": null,
+          "risk_violation_rate": 0.0,
+          "seed": 0,
+          "system_prompt": null,
+          "temperature": 0.0,
+          "timeout_seconds": 60.0,
+          "tool_max_steps": 3,
+          "tool_policy": "reference",
+          "top_p": null,
+          "type": "reference"
+        },
+        "name": "reference",
+        "type": "reference",
+        "warning": "This is a reference solver sanity check, not a real model benchmark."
+      },
+      "agent_key": "reference",
+      "baseline_kind": "reference sanity check",
+      "cost_latency": {
+        "cost_estimated": false,
+        "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+        "estimated_total_cost_usd": null,
+        "invalid_response_rate": 0.0,
+        "mean_latency_ms": 0.45137499982956797,
+        "n_model_tasks": 0,
+        "n_tasks": 20,
+        "p50_latency_ms": 0.39280000055441633,
+        "p95_latency_ms": 0.7437450007273585,
+        "parse_failure_rate": 0.0,
+        "provider_error_rate": 0.0,
+        "timeout_rate": 0.0,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "total_tokens": null
+      },
+      "metrics": {
+        "environments": {
+          "bayesian_games": {
+            "invalid_response_rate": 0.0,
+            "latency_mean_ms": 0.45137499982956797,
+            "latency_p50_ms": 0.39280000055441633,
+            "latency_p95_ms": 0.7437450007273585,
+            "mean_score": 1.0,
+            "metric_means": {
+              "answer_sum": 1.0,
+              "posterior_l1_error": 0.0,
+              "posterior_max_error": 0.0,
+              "posterior_tv_error": 0.0
+            },
+            "n_tasks": 20,
+            "parse_failure_rate": 0.0,
+            "pass_rate": 1.0,
+            "runtime_error_rate": 0.0,
+            "violation_rate": 0.0
+          }
+        },
+        "overall": {
+          "invalid_response_rate": 0.0,
+          "latency_mean_ms": 0.45137499982956797,
+          "latency_p50_ms": 0.39280000055441633,
+          "latency_p95_ms": 0.7437450007273585,
+          "mean_score": 1.0,
+          "metric_means": {
+            "answer_sum": 1.0,
+            "posterior_l1_error": 0.0,
+            "posterior_max_error": 0.0,
+            "posterior_tv_error": 0.0
+          },
+          "n_tasks": 20,
+          "parse_failure_rate": 0.0,
+          "pass_rate": 1.0,
+          "runtime_error_rate": 0.0,
+          "violation_rate": 0.0
+        }
+      },
+      "output_dir": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\reference",
+      "report_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\reference\\report.md",
+      "results_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\reference\\results.jsonl",
+      "run_id": "tool_reference_bayes_reference-20260602T061002",
+      "run_name": "tool_reference_bayes_reference",
+      "summary_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\reference\\summary.json"
+    },
+    {
+      "agent": {
+        "config": {
+          "action_error_rate": 0.0,
+          "allowed_tools": null,
+          "api_key_env": null,
+          "backend": null,
+          "base_url": null,
+          "behaviour": null,
+          "confidence_bias": 0.0,
+          "device": null,
+          "do_sample": null,
+          "max_new_tokens": 512,
+          "max_retries": 3,
+          "max_steps": 6,
+          "max_tokens": 1024,
+          "model": null,
+          "model_name": null,
+          "name": "tool_reference",
+          "posterior_noise": 0.0,
+          "pricing": null,
+          "provider": null,
+          "risk_violation_rate": 0.0,
+          "seed": 0,
+          "system_prompt": null,
+          "temperature": 0.0,
+          "timeout_seconds": 60.0,
+          "tool_max_steps": 3,
+          "tool_policy": "reference",
+          "top_p": null,
+          "type": "tool"
+        },
+        "name": "tool_reference",
+        "type": "tool",
+        "warning": null
+      },
+      "agent_key": "tool_reference",
+      "baseline_kind": "deterministic non-model tool baseline",
+      "cost_latency": {
+        "cost_estimated": false,
+        "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+        "estimated_total_cost_usd": null,
+        "invalid_response_rate": 0.0,
+        "mean_latency_ms": 0.40380999998888,
+        "n_model_tasks": 0,
+        "n_tasks": 20,
+        "p50_latency_ms": 0.36625000211643055,
+        "p95_latency_ms": 0.6708550001349068,
+        "parse_failure_rate": 0.0,
+        "provider_error_rate": 0.0,
+        "timeout_rate": 0.0,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "total_tokens": null
+      },
+      "metrics": {
+        "environments": {
+          "bayesian_games": {
+            "invalid_response_rate": 0.0,
+            "latency_mean_ms": 0.40380999998888,
+            "latency_p50_ms": 0.36625000211643055,
+            "latency_p95_ms": 0.6708550001349068,
+            "mean_score": 1.0,
+            "metric_means": {
+              "answer_sum": 1.0,
+              "posterior_l1_error": 0.0,
+              "posterior_max_error": 0.0,
+              "posterior_tv_error": 0.0
+            },
+            "n_tasks": 20,
+            "parse_failure_rate": 0.0,
+            "pass_rate": 1.0,
+            "runtime_error_rate": 0.0,
+            "violation_rate": 0.0
+          }
+        },
+        "overall": {
+          "invalid_response_rate": 0.0,
+          "latency_mean_ms": 0.40380999998888,
+          "latency_p50_ms": 0.36625000211643055,
+          "latency_p95_ms": 0.6708550001349068,
+          "mean_score": 1.0,
+          "metric_means": {
+            "answer_sum": 1.0,
+            "posterior_l1_error": 0.0,
+            "posterior_max_error": 0.0,
+            "posterior_tv_error": 0.0
+          },
+          "n_tasks": 20,
+          "parse_failure_rate": 0.0,
+          "pass_rate": 1.0,
+          "runtime_error_rate": 0.0,
+          "violation_rate": 0.0
+        }
+      },
+      "output_dir": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\tool_reference",
+      "report_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\tool_reference\\report.md",
+      "results_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\tool_reference\\results.jsonl",
+      "run_id": "tool_reference_bayes_tool_reference-20260602T061002",
+      "run_name": "tool_reference_bayes_tool_reference",
+      "summary_path": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs\\tool_reference\\summary.json"
+    }
+  ],
+  "artefacts": {
+    "agent_runs": "reports\\runs\\comparisons\\tool_reference_bayes\\agent_runs",
+    "comparison_report": "reports\\runs\\comparisons\\tool_reference_bayes\\comparison_report.md",
+    "comparison_summary": "reports\\runs\\comparisons\\tool_reference_bayes\\comparison_summary.json",
+    "figures": [
+      "reports\\runs\\comparisons\\tool_reference_bayes\\figures\\score_by_environment.png",
+      "reports\\runs\\comparisons\\tool_reference_bayes\\figures\\posterior_error_distribution.png",
+      "reports\\runs\\comparisons\\tool_reference_bayes\\figures\\risk_violation_rate_by_environment.png",
+      "reports\\runs\\comparisons\\tool_reference_bayes\\figures\\latency_distribution.png",
+      "reports\\runs\\comparisons\\tool_reference_bayes\\figures\\parse_failure_rate_by_agent.png"
+    ],
+    "paired_results": "reports\\runs\\comparisons\\tool_reference_bayes\\paired_results.jsonl"
+  },
+  "baseline_agent_key": "reference",
+  "baseline_kind": "reference sanity check",
+  "caveats": [
+    "All paired deltas are candidate minus baseline on identical task IDs.",
+    "Lower regret, posterior error, risk violations, parse failures, latency, and cost are better; higher score is better.",
+    "No hidden chain-of-thought is collected or reported.",
+    "No LLM judges are used; graders and labels are deterministic.",
+    "These results are benchmark diagnostics, not evidence of trading usefulness or profitability.",
+    "Reference, mock, and reference-tool rows are non-model baselines and must not be described as model performance."
+  ],
+  "comparison_name": "tool_reference_bayes",
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "output_dir": "reports\\runs\\comparisons\\tool_reference_bayes",
+  "paired_metrics": {
+    "tool_reference": {
+      "mean_estimated_cost_usd_difference": null,
+      "mean_latency_ms_difference": -0.04756499984068796,
+      "mean_parse_failure_difference": 0.0,
+      "mean_posterior_error_difference": 0.0,
+      "mean_regret_difference": null,
+      "mean_risk_violation_difference": 0.0,
+      "mean_robustness_score_difference": null,
+      "mean_score_difference": 0.0,
+      "n_pairs": 20
+    }
+  },
+  "run_id": "tool_reference_bayes-20260602T061002",
+  "timestamp": "2026-06-02T06:10:02Z"
+}

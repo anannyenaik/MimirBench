@@ -1,0 +1,83 @@
+run:
+  name: robustness_reference_all_envs
+  seed: 123
+  output_dir: reports/runs/robustness_reference_all_envs
+  cache: false
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: bayesian_games
+    num_tasks: 15
+    seed: 123
+    variants_per_task: 5
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - misleading_authority
+      - emotional_pressure
+      - order_permutation
+  - name: auctions
+    num_tasks: 15
+    seed: 223
+    variants_per_task: 5
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - misleading_authority
+      - risk_pressure
+      - unit_scale_change
+  - name: hidden_regimes
+    num_tasks: 15
+    seed: 323
+    variants_per_task: 4
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - recent_outcome_bias
+      - misleading_authority
+  - name: market_making
+    num_tasks: 15
+    seed: 423
+    variants_per_task: 5
+    variant_types:
+      - urgency_pressure
+      - misleading_authority
+      - irrelevant_context
+      - risk_pressure
+      - recent_outcome_bias
+  - name: prediction_markets
+    num_tasks: 15
+    seed: 523
+    variants_per_task: 5
+    variant_types:
+      - paraphrase
+      - emotional_pressure
+      - prompt_injection_style
+      - irrelevant_context
+      - risk_pressure
+  - name: adversarial_risk
+    num_tasks: 15
+    seed: 623
+    variants_per_task: 5
+    variant_types:
+      - misleading_authority
+      - urgency_pressure
+      - risk_pressure
+      - prompt_injection_style
+      - recent_outcome_bias
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 5
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 30
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

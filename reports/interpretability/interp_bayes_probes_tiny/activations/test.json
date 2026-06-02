@@ -1,0 +1,133 @@
+{
+  "feature_shapes": {
+    "blocks.0.attn_out": [
+      48,
+      32
+    ],
+    "blocks.0.mlp_out": [
+      48,
+      32
+    ],
+    "blocks.0.resid_post": [
+      48,
+      32
+    ],
+    "embed": [
+      48,
+      32
+    ]
+  },
+  "label_classes": {
+    "action": [
+      "buy",
+      "pass"
+    ],
+    "confidence_bucket": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "posterior_bucket": [
+      "0.00_0.05",
+      "0.05_0.10",
+      "0.10_0.15",
+      "0.15_0.20",
+      "0.20_0.25",
+      "0.25_0.30",
+      "0.30_0.35",
+      "0.35_0.40",
+      "0.40_0.45",
+      "0.45_0.50",
+      "0.50_0.55",
+      "0.55_0.60",
+      "0.60_0.65",
+      "0.65_0.70",
+      "0.70_0.75",
+      "0.75_0.80",
+      "0.80_0.85",
+      "0.85_0.90",
+      "0.90_0.95",
+      "0.95_1.00"
+    ],
+    "risk_flag": [
+      "safe",
+      "risky"
+    ]
+  },
+  "label_names": [
+    "posterior_bucket",
+    "action",
+    "risk_flag",
+    "confidence_bucket"
+  ],
+  "metadata": {
+    "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+    "config_path": "reports/interpretability/interp_bayes_probes_tiny/config_resolved.yaml",
+    "d_model": 32,
+    "dataset_split": "test",
+    "n_layers": 1,
+    "num_examples": 48,
+    "sites": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post"
+    ]
+  },
+  "site_names": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post"
+  ],
+  "trace_ids": [
+    "bayes-trace-test-000000-b003ac6f9b2b",
+    "bayes-trace-test-000001-385aa3a021e6",
+    "bayes-trace-test-000002-e4c280349633",
+    "bayes-trace-test-000003-011392725d66",
+    "bayes-trace-test-000004-cb24ca926f88",
+    "bayes-trace-test-000005-57b99043d9c6",
+    "bayes-trace-test-000006-4319023ef4c5",
+    "bayes-trace-test-000007-191f956d4e5f",
+    "bayes-trace-test-000008-4ee08479b4a9",
+    "bayes-trace-test-000009-b1acb29cf5f0",
+    "bayes-trace-test-000010-9660ec56eedd",
+    "bayes-trace-test-000011-b06461cb238d",
+    "bayes-trace-test-000012-2666d2b1b556",
+    "bayes-trace-test-000013-ff304f772dd7",
+    "bayes-trace-test-000014-9faff63c21e1",
+    "bayes-trace-test-000015-14cce18bf0af",
+    "bayes-trace-test-000016-45f18e5c4113",
+    "bayes-trace-test-000017-b8c6ca790ac3",
+    "bayes-trace-test-000018-f02ba41c38b4",
+    "bayes-trace-test-000019-acbe74c19851",
+    "bayes-trace-test-000020-1e78ac8b64b9",
+    "bayes-trace-test-000021-596ac115d67e",
+    "bayes-trace-test-000022-24dc6b62f4c7",
+    "bayes-trace-test-000023-845543bf186c",
+    "bayes-trace-test-000024-c342b743da9c",
+    "bayes-trace-test-000025-274a6e086814",
+    "bayes-trace-test-000026-90f2bde83dd7",
+    "bayes-trace-test-000027-4f83bc01b428",
+    "bayes-trace-test-000028-a8f2aaa272b7",
+    "bayes-trace-test-000029-07e837dc321c",
+    "bayes-trace-test-000030-57ac87aaa3ae",
+    "bayes-trace-test-000031-e43cf10d4eaf",
+    "bayes-trace-test-000032-5b41b2ef2a64",
+    "bayes-trace-test-000033-a10ba6ab140d",
+    "bayes-trace-test-000034-aa50e483527a",
+    "bayes-trace-test-000035-18fca9f8c052",
+    "bayes-trace-test-000036-fb1bb4438c95",
+    "bayes-trace-test-000037-4a610b149fee",
+    "bayes-trace-test-000038-67e4200eafbc",
+    "bayes-trace-test-000039-a3bf08e46cc3",
+    "bayes-trace-test-000040-01f7403df0da",
+    "bayes-trace-test-000041-077fce042d47",
+    "bayes-trace-test-000042-3c0bf9cddaba",
+    "bayes-trace-test-000043-ae9cee450916",
+    "bayes-trace-test-000044-9e05ba29eaf8",
+    "bayes-trace-test-000045-6bf5adb6ed70",
+    "bayes-trace-test-000046-3682abf4bae9",
+    "bayes-trace-test-000047-bf03d0c9d5ba"
+  ]
+}

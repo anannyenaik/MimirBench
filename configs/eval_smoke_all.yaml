@@ -1,0 +1,30 @@
+run:
+  name: all_reference_smoke
+  seed: 123
+  output_dir: reports/runs/all_reference_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+  - name: auctions
+    num_tasks: 20
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 20
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - pass_rate
+    - invalid_response_rate
+    - runtime_error_rate

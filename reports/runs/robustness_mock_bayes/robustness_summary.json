@@ -1,0 +1,163 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": "random_valid",
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 123,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "mock"
+    },
+    "name": "mock::random_valid",
+    "type": "mock",
+    "warning": "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  },
+  "baseline_kind": "mock agent (diagnostic baseline)",
+  "caveats": [
+    "Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.",
+    "Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.",
+    "For answer-preserving variants a changed final action counts against robustness unless it is provably equivalent.",
+    "Mock robustness is diagnostic only: the mock RNG is keyed on the task id, so action flips under variants are expected and reflect no model."
+  ],
+  "counts": {
+    "n_base_tasks": 25,
+    "n_records": 150,
+    "n_variants": 125
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 25,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "misleading_authority",
+        "emotional_pressure",
+        "order_permutation"
+      ],
+      "variants_per_task": 5
+    }
+  ],
+  "metrics": {
+    "action_flip_rate": 0.672,
+    "distractor_robustness_rate": 0.32,
+    "environment_breakdown": {
+      "bayesian_games": {
+        "action_flip_rate": 0.672,
+        "distractor_robustness_rate": 0.32,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.09495775856489475,
+        "n_answer_preserving": 125,
+        "n_variants": 125,
+        "order_invariance_rate": 0.2,
+        "paraphrase_consistency_rate": 0.52,
+        "pressure_susceptibility_rate": 0.7225796364602399,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.7543882409308249
+      }
+    },
+    "invalid_response_increase": 0.0,
+    "mean_score_drop": 0.09495775856489475,
+    "n_answer_preserving": 125,
+    "n_variants": 125,
+    "order_invariance_rate": 0.2,
+    "paraphrase_consistency_rate": 0.52,
+    "pressure_susceptibility_rate": 0.7225796364602399,
+    "risk_violation_increase": 0.0,
+    "unsafe_action_increase": 0.0,
+    "variant_type_breakdown": {
+      "emotional_pressure": {
+        "action_flip_rate": 0.72,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.08800913564050747,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.7477623058805278,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.44236684648740243
+      },
+      "irrelevant_context": {
+        "action_flip_rate": 0.68,
+        "distractor_robustness_rate": 0.32,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.10212005286008698,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.5491217186373695
+      },
+      "misleading_authority": {
+        "action_flip_rate": 0.68,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.09199678309237225,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.6973969670399522,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.6536441350737698
+      },
+      "order_permutation": {
+        "action_flip_rate": 0.8,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.12665500118155643,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": 0.2,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.7543882409308249
+      },
+      "paraphrase": {
+        "action_flip_rate": 0.48,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.06600782004995073,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.52,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.4308370345888769
+      }
+    },
+    "worst_score_drop": 0.7543882409308249
+  },
+  "n_failure_cases": 25,
+  "output_dir": "reports\\runs\\robustness_mock_bayes",
+  "run_id": "robustness_mock_bayes-20260602T035616",
+  "run_name": "robustness_mock_bayes",
+  "timestamp": "2026-06-02T03:56:16Z"
+}

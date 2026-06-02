@@ -1,0 +1,8 @@
+# Legacy single-environment config for the market-making environment.
+# Prefer configs/eval_reference_market_making.yaml for Stage 3 runs.
+environment: market_making
+n_tasks: 30
+seed: 0
+agent: reference
+pass_threshold: 0.5
+notes: "Toy quote decision under inventory, loss, and adverse-selection constraints."

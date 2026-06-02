@@ -1,0 +1,36 @@
+run:
+  name: robustness_mock_bayes
+  seed: 123
+  output_dir: reports/runs/robustness_mock_bayes
+  cache: false
+  max_workers: 1
+
+agent:
+  type: mock
+  behaviour: random_valid
+  seed: 123
+
+environments:
+  - name: bayesian_games
+    num_tasks: 25
+    seed: 123
+    variants_per_task: 5
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - misleading_authority
+      - emotional_pressure
+      - order_permutation
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 5
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 25
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

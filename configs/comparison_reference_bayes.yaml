@@ -1,0 +1,28 @@
+# Reference solver sanity check on Bayesian-updating tasks.
+#
+# This config is a comparison-shaped wrapper around the deterministic reference
+# solver. It is not a model result.
+run:
+  name: reference_bayes
+  seed: 123
+  output_dir: reports/runs/comparisons/reference_bayes
+  cache: true
+  max_workers: 1
+
+agents:
+  - name: reference
+    type: reference
+
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - posterior_tv_error
+    - parse_failure_rate

@@ -1,0 +1,90 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "environments": [
+    {
+      "name": "market_making",
+      "num_tasks": 50,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a reference solver sanity check, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.12252000014996156,
+        "latency_p50_ms": 0.11509999967529438,
+        "latency_p95_ms": 0.2166600001146432,
+        "mean_score": 0.9990495564610384,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.0,
+          "inventory_risk_score": 1.0,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.9952477823051923
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.12252000014996156,
+      "latency_p50_ms": 0.11509999967529438,
+      "latency_p95_ms": 0.2166600001146432,
+      "mean_score": 0.9990495564610384,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "adverse_selection_penalty": 0.0,
+        "inventory_risk_score": 1.0,
+        "quote_validity": 1.0,
+        "risk_limit_violation": 0.0,
+        "spread_reasonableness": 0.9952477823051923
+      },
+      "n_tasks": 50,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\market_making_reference_smoke",
+  "run_id": "market_making_reference_smoke-20260602T014211",
+  "run_name": "market_making_reference_smoke",
+  "timestamp": "2026-06-02T01:42:11Z"
+}

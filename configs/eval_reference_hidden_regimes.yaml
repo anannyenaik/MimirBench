@@ -1,0 +1,23 @@
+run:
+  name: hidden_regimes_reference_smoke
+  seed: 123
+  output_dir: reports/runs/hidden_regimes_reference_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: hidden_regimes
+    num_tasks: 100
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - posterior_tv_error
+    - invalid_response_rate

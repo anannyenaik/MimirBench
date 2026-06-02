@@ -1,0 +1,153 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mimirbench"
+version = "0.1.0"
+description = "Evaluating and interpreting strategic reasoning in language-model agents under uncertainty."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "MimirBench contributors" }]
+keywords = [
+    "llm",
+    "evaluation",
+    "agents",
+    "mechanistic-interpretability",
+    "bayesian-reasoning",
+    "decision-making",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.6",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "pyyaml>=6.0",
+    "typer>=0.12",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+# Tooling required to develop, lint, type-check, and test the project.
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "mypy>=1.10",
+    "types-PyYAML>=6.0",
+    "pre-commit>=3.7",
+]
+# Local model training and inference. Heavy; not needed for the core eval harness.
+ml = [
+    "torch>=2.2",
+    "transformers>=4.40",
+]
+# Mechanistic-interpretability tooling (pulls in torch via transformer-lens).
+interp = [
+    "transformer-lens>=1.0",
+]
+# Hosted-model API clients.
+api = [
+    "openai>=1.0",
+]
+# Experiment tracking.
+tracking = [
+    "wandb>=0.16",
+]
+# Everything optional in one extra (excluding dev tooling).
+all = [
+    "mimirbench[ml,interp,api,tracking]",
+]
+
+[project.scripts]
+mimirbench = "mimirbench.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/your-org/mimirbench"
+Documentation = "https://github.com/your-org/mimirbench#readme"
+Issues = "https://github.com/your-org/mimirbench/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mimirbench"]
+
+# ----------------------------------------------------------------------------- #
+# Linting / formatting
+# ----------------------------------------------------------------------------- #
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific rules
+]
+# E501 (line length) is intentionally relaxed: task prompts and docstrings are
+# allowed to be long and readable rather than wrapped.
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Typer relies on calls in argument defaults (typer.Option/Argument).
+"mimirbench/cli.py" = ["B008"]
+# Tests favour readability over some lint rules.
+"tests/*" = ["B011"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["mimirbench"]
+
+# ----------------------------------------------------------------------------- #
+# Type checking
+# ----------------------------------------------------------------------------- #
+[tool.mypy]
+python_version = "3.11"
+files = ["mimirbench"]
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+strict_equality = true
+plugins = ["pydantic.mypy"]
+
+# Optional dependencies imported lazily inside functions; they ship without type
+# stubs, so missing-import errors are silenced. Modules that are declared as
+# optional extras but never imported (scipy, pandas, transformer-lens, wandb)
+# are intentionally omitted to keep this list free of unused overrides.
+[[tool.mypy.overrides]]
+module = [
+    "matplotlib.*",
+    "torch.*",
+    "transformers.*",
+    "openai.*",
+    "anthropic.*",
+    "sklearn.*",
+]
+ignore_missing_imports = true
+
+# ----------------------------------------------------------------------------- #
+# Tests
+# ----------------------------------------------------------------------------- #
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-q --strict-markers"

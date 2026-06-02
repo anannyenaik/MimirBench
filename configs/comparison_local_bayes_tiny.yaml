@@ -1,0 +1,33 @@
+# Tiny local-model direct-agent comparison on Bayesian-updating tasks.
+#
+# NOT run by tests. Running may load or download local model weights depending
+# on your cache. Use `mimirbench check-provider local` first.
+run:
+  name: local_bayes_tiny
+  seed: 123
+  output_dir: reports/runs/comparisons/local_bayes_tiny
+  cache: true
+  max_workers: 1
+
+baseline_agent: reference
+
+agents:
+  - name: reference
+    type: reference
+  - name: direct_local
+    type: direct
+    model_name: Qwen/Qwen2.5-0.5B-Instruct
+    device: auto
+    temperature: 0
+    do_sample: false
+    max_new_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

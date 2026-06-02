@@ -1,0 +1,159 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": null,
+      "backend": null,
+      "base_url": null,
+      "behaviour": "random_valid",
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": "mock_random_valid",
+      "posterior_noise": 0.0,
+      "pricing": null,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 123,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "mock"
+    },
+    "name": "mock_random_valid",
+    "type": "mock",
+    "warning": "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  },
+  "baseline_kind": "mock diagnostic baseline",
+  "comparison": {
+    "agent_key": "mock_random_valid",
+    "baseline_agent_key": "reference",
+    "comparison_name": "mock_bayes",
+    "comparison_run_id": "mock_bayes-20260602T060943"
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 0.13691000058315694,
+    "n_model_tasks": 0,
+    "n_tasks": 20,
+    "p50_latency_ms": 0.09165000301436521,
+    "p95_latency_ms": 0.3159200055961265,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.822405885350871, 0.177594114649129], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.8639133352756547,
+      "task_id": "bayesian_games-123",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.14438348407161292, 0.4535985193585016, 0.17502497753831325, 0.22699301903157224], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.688103444445888,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.15403395917675972, 0.2808780893694978, 0.5650879514537425], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.5178401394309029,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.38896950401519204, 0.611030495984808], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.7822535175675418,
+      "task_id": "bayesian_games-126",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.39371429006782, 0.11626577686785805, 0.49001993306432196], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.8116696045231379,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.13691000058315694,
+        "latency_p50_ms": 0.09165000301436521,
+        "latency_p95_ms": 0.3159200055961265,
+        "mean_score": 0.7276569100799144,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.5446861798401713,
+          "posterior_max_error": 0.26216017061206365,
+          "posterior_tv_error": 0.27234308992008566
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.13691000058315694,
+      "latency_p50_ms": 0.09165000301436521,
+      "latency_p95_ms": 0.3159200055961265,
+      "mean_score": 0.7276569100799144,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.5446861798401713,
+        "posterior_max_error": 0.26216017061206365,
+        "posterior_tv_error": 0.27234308992008566
+      },
+      "n_tasks": 20,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid",
+  "run_id": "mock_bayes_mock_random_valid-20260602T060945",
+  "run_name": "mock_bayes_mock_random_valid",
+  "timestamp": "2026-06-02T06:09:45Z"
+}

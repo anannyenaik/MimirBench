@@ -1,0 +1,39 @@
+run:
+  name: all_envs_reference_smoke
+  seed: 123
+  output_dir: reports/runs/all_envs_reference_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: bayesian_games
+    num_tasks: 50
+    seed: 123
+  - name: auctions
+    num_tasks: 50
+    seed: 223
+  - name: hidden_regimes
+    num_tasks: 50
+    seed: 323
+  - name: market_making
+    num_tasks: 50
+    seed: 423
+  - name: prediction_markets
+    num_tasks: 50
+    seed: 523
+  - name: adversarial_risk
+    num_tasks: 50
+    seed: 623
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - invalid_response_rate
+    - risk_limit_violation
+    - unsafe_action

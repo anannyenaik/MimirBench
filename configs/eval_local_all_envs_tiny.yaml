@@ -1,0 +1,44 @@
+# Tiny local-model smoke benchmark across all six environment families.
+#
+# Requires the 'ml' extra and downloads the named model on first use. NOT run by
+# the test suite. Local inference has no provider billing; cost is always
+# reported as "not estimated".
+run:
+  name: local_all_envs_tiny
+  seed: 123
+  output_dir: reports/runs/local_all_envs_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: local
+  model_name: Qwen/Qwen2.5-0.5B-Instruct
+  device: auto
+  temperature: 0
+  do_sample: false
+  max_new_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 5
+    seed: 123
+  - name: auctions
+    num_tasks: 5
+    seed: 123
+  - name: market_making
+    num_tasks: 5
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 5
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 5
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

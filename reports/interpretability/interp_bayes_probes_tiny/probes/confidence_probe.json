@@ -1,0 +1,179 @@
+{
+  "label": "confidence_bucket",
+  "results": [
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          18
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ],
+      "label": "confidence_bucket",
+      "majority_baseline_accuracy": 0.4791666666666667,
+      "majority_class": "high",
+      "n_test": 48,
+      "n_train": 96,
+      "n_val": 48,
+      "num_classes": 3,
+      "site": "embed",
+      "test_accuracy": 0.4791666666666667,
+      "test_accuracy_above_baseline": 0.0,
+      "test_class_distribution": {
+        "high": 23,
+        "low": 7,
+        "medium": 18
+      },
+      "train_accuracy": 0.6458333333333334,
+      "val_accuracy": 0.625
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          18
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ],
+      "label": "confidence_bucket",
+      "majority_baseline_accuracy": 0.4791666666666667,
+      "majority_class": "high",
+      "n_test": 48,
+      "n_train": 96,
+      "n_val": 48,
+      "num_classes": 3,
+      "site": "blocks.0.attn_out",
+      "test_accuracy": 0.4791666666666667,
+      "test_accuracy_above_baseline": 0.0,
+      "test_class_distribution": {
+        "high": 23,
+        "low": 7,
+        "medium": 18
+      },
+      "train_accuracy": 0.6458333333333334,
+      "val_accuracy": 0.625
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          18
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ],
+      "label": "confidence_bucket",
+      "majority_baseline_accuracy": 0.4791666666666667,
+      "majority_class": "high",
+      "n_test": 48,
+      "n_train": 96,
+      "n_val": 48,
+      "num_classes": 3,
+      "site": "blocks.0.mlp_out",
+      "test_accuracy": 0.4791666666666667,
+      "test_accuracy_above_baseline": 0.0,
+      "test_class_distribution": {
+        "high": 23,
+        "low": 7,
+        "medium": 18
+      },
+      "train_accuracy": 0.6458333333333334,
+      "val_accuracy": 0.625
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          7
+        ],
+        [
+          0,
+          0,
+          18
+        ],
+        [
+          0,
+          0,
+          23
+        ]
+      ],
+      "label": "confidence_bucket",
+      "majority_baseline_accuracy": 0.4791666666666667,
+      "majority_class": "high",
+      "n_test": 48,
+      "n_train": 96,
+      "n_val": 48,
+      "num_classes": 3,
+      "site": "blocks.0.resid_post",
+      "test_accuracy": 0.4791666666666667,
+      "test_accuracy_above_baseline": 0.0,
+      "test_class_distribution": {
+        "high": 23,
+        "low": 7,
+        "medium": 18
+      },
+      "train_accuracy": 0.6458333333333334,
+      "val_accuracy": 0.625
+    }
+  ],
+  "sites": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post"
+  ]
+}

@@ -1,0 +1,26 @@
+run:
+  name: prediction_markets_reference_smoke
+  seed: 123
+  output_dir: reports/runs/prediction_markets_reference_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: prediction_markets
+    num_tasks: 50
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - fair_probability_error
+    - expected_value_error
+    - action_optimality
+    - risk_limit_violation
+    - invalid_response_rate

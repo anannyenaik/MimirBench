@@ -1,0 +1,8 @@
+# Evaluation config for the Bayesian-updating environment.
+# Run with:  mimirbench run-eval configs/eval_bayes.yaml
+environment: bayesian_games
+n_tasks: 50
+seed: 0
+agent: reference          # deterministic baseline; swap for a model agent in code
+pass_threshold: 0.95      # advisory; per-task pass uses the grader's TV threshold
+notes: "Posterior inference over hidden sources; reference agent should score ~1.0."

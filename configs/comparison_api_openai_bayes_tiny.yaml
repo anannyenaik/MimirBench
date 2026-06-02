@@ -1,0 +1,35 @@
+# Tiny real OpenAI direct-agent comparison on Bayesian-updating tasks.
+#
+# NOT run by tests. Running this makes paid API calls. First run:
+#   mimirbench check-provider openai
+#   mimirbench estimate-run-cost configs/comparison_api_openai_bayes_tiny.yaml
+run:
+  name: api_openai_bayes_tiny
+  seed: 123
+  output_dir: reports/runs/comparisons/api_openai_bayes_tiny
+  cache: true
+  max_workers: 1
+
+baseline_agent: reference
+
+agents:
+  - name: reference
+    type: reference
+  - name: direct_openai
+    type: direct
+    provider: openai
+    model: gpt-4.1-mini
+    temperature: 0
+    max_retries: 3
+    timeout_seconds: 60
+    max_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

@@ -1,0 +1,138 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": "random_valid",
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 123,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "mock"
+    },
+    "name": "mock::random_valid",
+    "type": "mock",
+    "warning": "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  },
+  "environments": [
+    {
+      "name": "market_making",
+      "num_tasks": 50,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"abstain\": false, \"ask_price\": 122.2907, \"ask_size\": 1.4213, \"bid_price\": 120.7217, \"bid_size\": 1.0285, \"confidence\": 0.3565, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"reduce_inventory\": false}",
+      "score": 0.0,
+      "task_id": "market_making-123",
+      "violations": [
+        "position_limit"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"abstain\": false, \"ask_price\": 142.587, \"ask_size\": 1.6036, \"bid_price\": 141.877, \"bid_size\": 1.3835, \"confidence\": 0.7014, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"reduce_inventory\": false}",
+      "score": 0.0,
+      "task_id": "market_making-125",
+      "violations": [
+        "position_limit"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"abstain\": false, \"ask_price\": 41.0916, \"ask_size\": 1.9114, \"bid_price\": 40.1595, \"bid_size\": 1.4279, \"confidence\": 0.8449, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"reduce_inventory\": false}",
+      "score": 0.0,
+      "task_id": "market_making-126",
+      "violations": [
+        "loss_limit",
+        "position_limit"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"abstain\": true, \"ask_price\": null, \"ask_size\": 0.0, \"bid_price\": null, \"bid_size\": 0.0, \"confidence\": 0.4419, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"reduce_inventory\": true}",
+      "score": 0.27749999999999997,
+      "task_id": "market_making-129",
+      "violations": []
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"abstain\": true, \"ask_price\": null, \"ask_size\": 0.0, \"bid_price\": null, \"bid_size\": 0.0, \"confidence\": 0.4989, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"reduce_inventory\": false}",
+      "score": 0.27749999999999997,
+      "task_id": "market_making-130",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.09953400025551673,
+        "latency_p50_ms": 0.07980000009411015,
+        "latency_p95_ms": 0.1747299989801831,
+        "mean_score": 0.5964851917310018,
+        "metric_means": {
+          "abstention_quality": 0.855,
+          "adverse_selection_penalty": 0.060505552880326434,
+          "inventory_risk_score": 0.621,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.28,
+          "spread_reasonableness": 0.7097497031148311
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.58,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.28
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.09953400025551673,
+      "latency_p50_ms": 0.07980000009411015,
+      "latency_p95_ms": 0.1747299989801831,
+      "mean_score": 0.5964851917310018,
+      "metric_means": {
+        "abstention_quality": 0.855,
+        "adverse_selection_penalty": 0.060505552880326434,
+        "inventory_risk_score": 0.621,
+        "quote_validity": 1.0,
+        "risk_limit_violation": 0.28,
+        "spread_reasonableness": 0.7097497031148311
+      },
+      "n_tasks": 50,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.58,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.28
+    }
+  },
+  "output_dir": "reports\\runs\\market_making_mock_smoke",
+  "run_id": "market_making_mock_smoke-20260602T014223",
+  "run_name": "market_making_mock_smoke",
+  "timestamp": "2026-06-02T01:42:23Z"
+}

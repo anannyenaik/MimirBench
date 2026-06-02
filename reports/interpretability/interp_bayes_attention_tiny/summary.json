@@ -1,0 +1,76 @@
+{
+  "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+  "data": {
+    "num_examples": 64,
+    "num_pairs": 32,
+    "seed": 123,
+    "source": "synthetic"
+  },
+  "experiments": {
+    "attention_analysis": {
+      "by_layer": {
+        "0": {
+          "heads": [
+            {
+              "group_mass": {
+                "evidence": 0.09170290619547233,
+                "likelihood": 0.42954713496709596,
+                "payoff_risk": 0.262557474512681,
+                "prior": 0.1839781768803301
+              },
+              "head": 0,
+              "mean_entropy": 3.5819458449063712
+            },
+            {
+              "group_mass": {
+                "evidence": 0.11392084719814927,
+                "likelihood": 0.4418579453114716,
+                "payoff_risk": 0.24605202396661388,
+                "prior": 0.17133476240794654
+              },
+              "head": 1,
+              "mean_entropy": 3.590445131774514
+            }
+          ],
+          "mean_entropy": 3.5861954883404428,
+          "mean_group_mass": {
+            "evidence": 0.1028118766968108,
+            "likelihood": 0.4357025401392838,
+            "payoff_risk": 0.25430474923964747,
+            "prior": 0.17765646964413834
+          }
+        }
+      },
+      "examples_path": "reports/interpretability/interp_bayes_attention_tiny/attention/attention_examples.jsonl",
+      "figures": [
+        "reports/interpretability/interp_bayes_attention_tiny/attention/figures/attention_entropy_by_layer.png",
+        "reports/interpretability/interp_bayes_attention_tiny/attention/figures/evidence_attention_by_layer.png",
+        "reports/interpretability/interp_bayes_attention_tiny/attention/figures/prior_attention_by_layer.png"
+      ],
+      "n_examples": 32,
+      "summary_path": "reports/interpretability/interp_bayes_attention_tiny/attention/attention_summary.json"
+    }
+  },
+  "experiments_run": [
+    "attention_analysis"
+  ],
+  "model": {
+    "architecture": "compact_transformer_encoder",
+    "d_model": 32,
+    "n_heads": 2,
+    "n_layers": 1,
+    "sites": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post"
+    ]
+  },
+  "no_frontier_claim": "These results characterise one small, fully synthetic Bayesian transformer. They are not evidence about frontier-model internals and must not be read that way.",
+  "output_dir": "reports/interpretability/interp_bayes_attention_tiny",
+  "report_path": "reports/interpretability/interp_bayes_attention_tiny/INTERPRETABILITY_REPORT.md",
+  "run_name": "interp_bayes_attention_tiny",
+  "status": "complete",
+  "timestamp": "2026-06-02T17:16:18+00:00",
+  "vocab_path": "reports/training/small_transformer_bayes_tiny/vocab.json"
+}

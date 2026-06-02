@@ -1,0 +1,27 @@
+run:
+  name: prediction_markets_mock_smoke
+  seed: 123
+  output_dir: reports/runs/prediction_markets_mock_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: mock
+  behaviour: random_valid
+  seed: 123
+
+environments:
+  - name: prediction_markets
+    num_tasks: 50
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - fair_probability_error
+    - action_optimality
+    - regret
+    - invalid_response_rate

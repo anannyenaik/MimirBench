@@ -1,0 +1,51 @@
+# Tiny direct/tool/reflective OpenAI comparison on identical Bayesian tasks.
+#
+# NOT run by tests. Running this makes paid API calls: direct uses one call per
+# task, tool may use up to tool_max_steps + 1 calls per task, and reflective uses
+# three calls per task. Run provider and cost checks first.
+run:
+  name: direct_tool_reflective_bayes_tiny
+  seed: 123
+  output_dir: reports/runs/comparisons/direct_tool_reflective_bayes_tiny
+  cache: true
+  max_workers: 1
+
+baseline_agent: direct_openai
+
+agents:
+  - name: direct_openai
+    type: direct
+    provider: openai
+    model: gpt-4.1-mini
+    temperature: 0
+    max_retries: 3
+    timeout_seconds: 60
+    max_tokens: 512
+  - name: tool_openai
+    type: tool
+    tool_policy: model
+    provider: openai
+    model: gpt-4.1-mini
+    temperature: 0
+    max_retries: 3
+    timeout_seconds: 60
+    max_tokens: 512
+    tool_max_steps: 3
+  - name: reflective_openai
+    type: reflective
+    provider: openai
+    model: gpt-4.1-mini
+    temperature: 0
+    max_retries: 3
+    timeout_seconds: 60
+    max_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

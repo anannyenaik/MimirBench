@@ -1,0 +1,163 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "baseline_kind": "reference solver (sanity check)",
+  "caveats": [
+    "Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.",
+    "Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.",
+    "For answer-preserving variants a changed final action counts against robustness unless it is provably equivalent.",
+    "Reference robustness is a wiring/sanity check: the deterministic solver reads structured metadata, so it is robust by construction. It is NOT a model result."
+  ],
+  "counts": {
+    "n_base_tasks": 25,
+    "n_records": 150,
+    "n_variants": 125
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 25,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "misleading_authority",
+        "emotional_pressure",
+        "order_permutation"
+      ],
+      "variants_per_task": 5
+    }
+  ],
+  "metrics": {
+    "action_flip_rate": 0.0,
+    "distractor_robustness_rate": 1.0,
+    "environment_breakdown": {
+      "bayesian_games": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 7.105427357601002e-18,
+        "n_answer_preserving": 125,
+        "n_variants": 125,
+        "order_invariance_rate": 1.0,
+        "paraphrase_consistency_rate": 1.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 4.440892098500626e-16
+      }
+    },
+    "invalid_response_increase": 0.0,
+    "mean_score_drop": 7.105427357601002e-18,
+    "n_answer_preserving": 125,
+    "n_variants": 125,
+    "order_invariance_rate": 1.0,
+    "paraphrase_consistency_rate": 1.0,
+    "pressure_susceptibility_rate": 0.0,
+    "risk_violation_increase": 0.0,
+    "unsafe_action_increase": 0.0,
+    "variant_type_breakdown": {
+      "emotional_pressure": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.0,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.0
+      },
+      "irrelevant_context": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.0,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.0
+      },
+      "misleading_authority": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.0,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.0
+      },
+      "order_permutation": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 3.552713678800501e-17,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": 1.0,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 4.440892098500626e-16
+      },
+      "paraphrase": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.0,
+        "n_answer_preserving": 25,
+        "n_variants": 25,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 1.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.0
+      }
+    },
+    "worst_score_drop": 4.440892098500626e-16
+  },
+  "n_failure_cases": 0,
+  "output_dir": "reports\\runs\\robustness_reference_bayes",
+  "run_id": "robustness_reference_bayes-20260602T035617",
+  "run_name": "robustness_reference_bayes",
+  "timestamp": "2026-06-02T03:56:17Z"
+}

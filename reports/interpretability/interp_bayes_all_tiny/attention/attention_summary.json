@@ -1,0 +1,42 @@
+{
+  "by_layer": {
+    "0": {
+      "heads": [
+        {
+          "group_mass": {
+            "evidence": 0.08991637202494274,
+            "likelihood": 0.43029483979227184,
+            "payoff_risk": 0.263077375350581,
+            "prior": 0.18437043002485734
+          },
+          "head": 0,
+          "mean_entropy": 3.577645470966966
+        },
+        {
+          "group_mass": {
+            "evidence": 0.11010880524778201,
+            "likelihood": 0.4435672472873633,
+            "payoff_risk": 0.24660636365723418,
+            "prior": 0.17269226105835944
+          },
+          "head": 1,
+          "mean_entropy": 3.5895616903001533
+        }
+      ],
+      "mean_entropy": 3.5836035806335595,
+      "mean_group_mass": {
+        "evidence": 0.10001258863636237,
+        "likelihood": 0.4369310435398176,
+        "payoff_risk": 0.2548418695039076,
+        "prior": 0.17853134554160838
+      }
+    }
+  },
+  "groups": [
+    "prior",
+    "likelihood",
+    "evidence",
+    "payoff_risk"
+  ],
+  "n_examples": 48
+}

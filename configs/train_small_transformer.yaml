@@ -1,0 +1,16 @@
+# Training config for the small transformer on the regime-switching task.
+# Consumed by mimirbench.training.train_small_transformer.load_config().
+# Requires the optional ML extra:  pip install -e ".[ml]"
+d_model: 64
+n_heads: 4
+n_layers: 2
+dim_feedforward: 128
+batch_size: 128
+learning_rate: 0.001
+steps: 500
+seed: 0
+device: cpu
+dataset:
+  n_sequences: 2048
+  seq_len: 32
+  seed: 0

@@ -1,0 +1,133 @@
+{
+  "feature_shapes": {
+    "blocks.0.attn_out": [
+      48,
+      32
+    ],
+    "blocks.0.mlp_out": [
+      48,
+      32
+    ],
+    "blocks.0.resid_post": [
+      48,
+      32
+    ],
+    "embed": [
+      48,
+      32
+    ]
+  },
+  "label_classes": {
+    "action": [
+      "buy",
+      "pass"
+    ],
+    "confidence_bucket": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "posterior_bucket": [
+      "0.00_0.05",
+      "0.05_0.10",
+      "0.10_0.15",
+      "0.15_0.20",
+      "0.20_0.25",
+      "0.25_0.30",
+      "0.30_0.35",
+      "0.35_0.40",
+      "0.40_0.45",
+      "0.45_0.50",
+      "0.50_0.55",
+      "0.55_0.60",
+      "0.60_0.65",
+      "0.65_0.70",
+      "0.70_0.75",
+      "0.75_0.80",
+      "0.80_0.85",
+      "0.85_0.90",
+      "0.90_0.95",
+      "0.95_1.00"
+    ],
+    "risk_flag": [
+      "safe",
+      "risky"
+    ]
+  },
+  "label_names": [
+    "posterior_bucket",
+    "action",
+    "risk_flag",
+    "confidence_bucket"
+  ],
+  "metadata": {
+    "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+    "config_path": "reports/interpretability/interp_bayes_probes_tiny/config_resolved.yaml",
+    "d_model": 32,
+    "dataset_split": "val",
+    "n_layers": 1,
+    "num_examples": 48,
+    "sites": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post"
+    ]
+  },
+  "site_names": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post"
+  ],
+  "trace_ids": [
+    "bayes-trace-val-000000-79fe17db6b15",
+    "bayes-trace-val-000001-df979b4248fe",
+    "bayes-trace-val-000002-c16013ef112b",
+    "bayes-trace-val-000003-5f3182f34e47",
+    "bayes-trace-val-000004-00d7521403a0",
+    "bayes-trace-val-000005-a9d20c946a2f",
+    "bayes-trace-val-000006-1a145c151c78",
+    "bayes-trace-val-000007-67f3572a1194",
+    "bayes-trace-val-000008-6c436945cec3",
+    "bayes-trace-val-000009-cb895ae94559",
+    "bayes-trace-val-000010-d937b3a8aff0",
+    "bayes-trace-val-000011-7db154558f65",
+    "bayes-trace-val-000012-650d9c304d22",
+    "bayes-trace-val-000013-3058e563ffc9",
+    "bayes-trace-val-000014-5b9611a580f3",
+    "bayes-trace-val-000015-a902d337a220",
+    "bayes-trace-val-000016-343db3c92d41",
+    "bayes-trace-val-000017-35e16ac4d66c",
+    "bayes-trace-val-000018-3f523d0dfe06",
+    "bayes-trace-val-000019-4685040a04ad",
+    "bayes-trace-val-000020-b34960f7087e",
+    "bayes-trace-val-000021-0b580af5926a",
+    "bayes-trace-val-000022-5b6979850263",
+    "bayes-trace-val-000023-0b6821b46683",
+    "bayes-trace-val-000024-214d60e6e20b",
+    "bayes-trace-val-000025-6656af2bd0cb",
+    "bayes-trace-val-000026-c466b9ff686e",
+    "bayes-trace-val-000027-f961eefef178",
+    "bayes-trace-val-000028-0ffda3f9e139",
+    "bayes-trace-val-000029-efc8921aae02",
+    "bayes-trace-val-000030-50ddfa6a6d7a",
+    "bayes-trace-val-000031-e92fd4c2c38c",
+    "bayes-trace-val-000032-8f3966608fd8",
+    "bayes-trace-val-000033-1b955d3349ab",
+    "bayes-trace-val-000034-b19288647ae7",
+    "bayes-trace-val-000035-6b214e08e266",
+    "bayes-trace-val-000036-a4655c320c5a",
+    "bayes-trace-val-000037-6b863dbde02d",
+    "bayes-trace-val-000038-4404cdfaab32",
+    "bayes-trace-val-000039-15f79bd389a0",
+    "bayes-trace-val-000040-bb85c994b1db",
+    "bayes-trace-val-000041-9f1a5576246b",
+    "bayes-trace-val-000042-39b76a6fb9f0",
+    "bayes-trace-val-000043-62f1de184ab3",
+    "bayes-trace-val-000044-8f271432c9f1",
+    "bayes-trace-val-000045-e50dc4e02693",
+    "bayes-trace-val-000046-51297d3b10bf",
+    "bayes-trace-val-000047-f6cddb7993e5"
+  ]
+}

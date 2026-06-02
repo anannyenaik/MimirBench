@@ -1,0 +1,19 @@
+# Plan for the "where is the belief?" interpretability experiment.
+#
+# Descriptive config for a planned study (no loader yet — see INTERPRETABILITY.md
+# and mimirbench.interpretability.circuit_experiments). Documents the intended
+# model, targets, and methods so the experiment is reproducible when wired.
+checkpoint: artifacts/small_transformer/regime_lm.pt
+source: hidden_regimes            # the generative model the LM was trained on
+
+probe:
+  target: bayes_filtered_p_regime # decode the Bayes-filtered P(regime=1)
+  layers: [0, 1]                  # residual-stream layers to probe
+  alpha: 1.0                      # ridge regularisation
+
+activation_patching:
+  metric: next_token_logit_diff   # clean vs corrupted evidence
+  hook_points: ["blocks.0.hook_resid_post", "blocks.1.hook_resid_post"]
+
+attention_analysis:
+  scores: [attention_entropy, previous_token_score]

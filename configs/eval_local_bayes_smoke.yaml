@@ -1,0 +1,31 @@
+# Tiny local-model smoke benchmark on Bayesian-updating tasks.
+#
+# Requires the 'ml' extra (pip install -e ".[ml]") and downloads the named model
+# on first use. NOT run by the test suite (tests never download models). Pick a
+# small instruct model you already have cached. Local inference has no provider
+# billing, so cost is always reported as "not estimated".
+run:
+  name: local_bayes_smoke
+  seed: 123
+  output_dir: reports/runs/local_bayes_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: local
+  # Replace with a small local instruct/causal model available on your machine.
+  model_name: Qwen/Qwen2.5-0.5B-Instruct
+  device: auto          # auto | cpu | cuda | mps
+  temperature: 0
+  do_sample: false
+  max_new_tokens: 512
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

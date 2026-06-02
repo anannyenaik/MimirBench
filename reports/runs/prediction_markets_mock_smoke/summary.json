@@ -1,0 +1,135 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "backend": null,
+      "base_url": null,
+      "behaviour": "random_valid",
+      "confidence_bias": 0.0,
+      "device": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "provider": null,
+      "risk_violation_rate": 0.0,
+      "seed": 123,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "type": "mock"
+    },
+    "name": "mock::random_valid",
+    "type": "mock",
+    "warning": "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  },
+  "environments": [
+    {
+      "name": "prediction_markets",
+      "num_tasks": 50,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\"action\": \"abstain\", \"confidence\": 0.3958, \"expected_value\": 0.499752, \"fair_probability\": 0.245178, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"target_position\": -0.2087, \"trade_size\": 0.0}",
+      "score": 0.128165320138591,
+      "task_id": "prediction_markets-123",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\"action\": \"sell\", \"confidence\": 0.5632, \"expected_value\": -0.47332, \"fair_probability\": 0.31832, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"target_position\": -16.8308, \"trade_size\": 5.5034}",
+      "score": 0.16004000000000002,
+      "task_id": "prediction_markets-124",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\"action\": \"buy\", \"confidence\": 0.4806, \"expected_value\": 0.142691, \"fair_probability\": 0.901057, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"target_position\": 8.2363, \"trade_size\": 16.1376}",
+      "score": 0.0,
+      "task_id": "prediction_markets-125",
+      "violations": [
+        "budget_limit"
+      ]
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\"action\": \"abstain\", \"confidence\": 0.8674, \"expected_value\": -0.252235, \"fair_probability\": 0.845334, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"target_position\": 0.183, \"trade_size\": 0.0}",
+      "score": 0.15031099999999997,
+      "task_id": "prediction_markets-126",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\"action\": \"sell\", \"confidence\": 0.3688, \"expected_value\": -0.041649, \"fair_probability\": 0.885981, \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\", \"target_position\": 2.0082, \"trade_size\": 0.8474}",
+      "score": 0.5073201530513697,
+      "task_id": "prediction_markets-127",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.09493799982010387,
+        "latency_p50_ms": 0.09469999895372894,
+        "latency_p95_ms": 0.13233500085334524,
+        "mean_score": 0.2446288499372275,
+        "metric_means": {
+          "abstention_quality": 0.769,
+          "action_optimality": 0.1522565928498578,
+          "calibration_proxy": 0.6810679999999998,
+          "expected_value_error": 0.29197992,
+          "fair_probability_error": 0.32036219999999993,
+          "regret": 1.8979866193133994,
+          "risk_limit_violation": 0.2
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.02,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.2
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.09493799982010387,
+      "latency_p50_ms": 0.09469999895372894,
+      "latency_p95_ms": 0.13233500085334524,
+      "mean_score": 0.2446288499372275,
+      "metric_means": {
+        "abstention_quality": 0.769,
+        "action_optimality": 0.1522565928498578,
+        "calibration_proxy": 0.6810679999999998,
+        "expected_value_error": 0.29197992,
+        "fair_probability_error": 0.32036219999999993,
+        "regret": 1.8979866193133994,
+        "risk_limit_violation": 0.2
+      },
+      "n_tasks": 50,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.02,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.2
+    }
+  },
+  "output_dir": "reports\\runs\\prediction_markets_mock_smoke",
+  "run_id": "prediction_markets_mock_smoke-20260602T014223",
+  "run_name": "prediction_markets_mock_smoke",
+  "timestamp": "2026-06-02T01:42:23Z"
+}

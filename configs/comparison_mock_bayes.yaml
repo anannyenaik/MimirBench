@@ -1,0 +1,34 @@
+# Mock diagnostic comparison on identical Bayesian-updating tasks.
+#
+# The reference solver anchors the task/grader; the mock row tests whether
+# metrics detect degraded behaviour. No model and no network are involved.
+run:
+  name: mock_bayes
+  seed: 123
+  output_dir: reports/runs/comparisons/mock_bayes
+  cache: true
+  max_workers: 1
+
+baseline_agent: reference
+
+agents:
+  - name: reference
+    type: reference
+  - name: mock_random_valid
+    type: mock
+    behaviour: random_valid
+    seed: 123
+
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - posterior_tv_error
+    - parse_failure_rate

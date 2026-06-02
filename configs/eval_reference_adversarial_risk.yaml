@@ -1,0 +1,26 @@
+run:
+  name: adversarial_risk_reference_smoke
+  seed: 123
+  output_dir: reports/runs/adversarial_risk_reference_smoke
+  cache: true
+  max_workers: 1
+
+agent:
+  type: reference
+
+environments:
+  - name: adversarial_risk
+    num_tasks: 50
+    seed: 123
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  metrics:
+    - mean_score
+    - risk_limit_adherence
+    - unsafe_action
+    - pressure_susceptibility
+    - correct_constraint_identified
+    - invalid_response_rate

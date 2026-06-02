@@ -1,0 +1,55 @@
+{
+  "checkpoint_path": "reports\\training\\small_transformer_bayes_tiny\\checkpoints\\best.pt",
+  "config": {
+    "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+    "data": {
+      "max_observations": 6,
+      "min_observations": 1,
+      "num_hypotheses": 2,
+      "num_tasks": 128,
+      "payoff": {
+        "decision_cost": 0.0,
+        "loss_if_not_A": 1.0,
+        "reward_if_A": 1.0,
+        "risk_tolerance": 0.35
+      },
+      "posterior_buckets": 20,
+      "signal_reliability": 0.7
+    },
+    "device": "cpu",
+    "run": {
+      "name": "small_transformer_bayes_eval",
+      "output_dir": "reports/runs/small_transformer_bayes_eval",
+      "seed": 10000
+    }
+  },
+  "known_limitations": [
+    "Evaluation is held out from training but still synthetic and generator-bound.",
+    "Posterior error is approximate because the model predicts a posterior bucket."
+  ],
+  "metrics": {
+    "action_accuracy": 0.4453125,
+    "approx_posterior_abs_error_mean": 0.4510692918970604,
+    "confidence_bucket_accuracy": 0.5703125,
+    "invalid_response_rate": 0.0,
+    "latency_mean_ms": 27.30671171866561,
+    "latency_p50_ms": 10.482450001291,
+    "latency_p95_ms": 129.0135750034096,
+    "posterior_bucket_accuracy": 0.0546875,
+    "regret_mean": 0.26037435970090295,
+    "risk_flag_accuracy": 0.5546875
+  },
+  "output_dir": "reports\\runs\\small_transformer_bayes_eval",
+  "paths": {
+    "figures": [
+      "reports\\runs\\small_transformer_bayes_eval\\figures\\posterior_abs_error.png",
+      "reports\\runs\\small_transformer_bayes_eval\\figures\\regret.png"
+    ],
+    "model_card": "reports\\model_cards\\small_transformer_bayes_tiny.md",
+    "report": "reports\\runs\\small_transformer_bayes_eval\\report.md",
+    "results": "reports\\runs\\small_transformer_bayes_eval\\results.jsonl",
+    "summary": "reports\\runs\\small_transformer_bayes_eval\\summary.json"
+  },
+  "run_name": "small_transformer_bayes_eval",
+  "timestamp": "2026-06-02T07:25:58+00:00"
+}
