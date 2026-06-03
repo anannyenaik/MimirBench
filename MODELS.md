@@ -113,6 +113,7 @@ pending summary/report and does not fabricate rows.
 ```bash
 mimirbench check-provider openai
 mimirbench check-provider anthropic
+mimirbench check-provider gemini
 mimirbench check-provider local
 mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml
 mimirbench summarise-leaderboard reports/runs/leaderboard/leaderboard_all_available_tiny
@@ -131,6 +132,11 @@ Leaderboard configs:
 | --- | --- | --- |
 | `configs/leaderboard/leaderboard_openai_tiny.yaml` | OpenAI | 10 tasks x 6 families, direct/tool/reflective, robustness |
 | `configs/leaderboard/leaderboard_anthropic_tiny.yaml` | Anthropic | 10 tasks x 6 families, direct/tool/reflective, robustness |
+| `configs/leaderboard/leaderboard_gemini_flash_lite_smoke.yaml` | Gemini | 6-task direct smoke |
+| `configs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0.yaml` | Gemini | 20 tasks x 6 families, direct, Flash with explicit thinking budget |
+| `configs/leaderboard/leaderboard_gemini_pro_all_envs_direct_20_retry.yaml` | Gemini | 20 tasks x 6 families, direct, Pro cache-backed retry |
+| `configs/leaderboard/leaderboard_gemini_strongest_robustness_tiny.yaml` | Gemini | Flash robustness probe |
+| `configs/leaderboard/leaderboard_gemini_pro_robustness_small.yaml` | Gemini | Pro robustness probe |
 | `configs/leaderboard/leaderboard_local_tiny.yaml` | local HF | 10 tasks x 6 families, direct/tool/reflective, robustness |
 | `configs/leaderboard/leaderboard_all_available_tiny.yaml` | OpenAI, Anthropic, local HF | all configured providers that pass checks |
 
@@ -185,4 +191,4 @@ and robustness variant ID where applicable.
   retried. Exhausted retries surface as recorded errors, not crashes.
 
 See [TOOLS.md](TOOLS.md) for the tool-using agent, and [RESULTS.md](RESULTS.md)
-for the current (pending) state of real-model results.
+for current real-model results and caveats.
