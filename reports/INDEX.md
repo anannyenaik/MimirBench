@@ -156,4 +156,4 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 - All entries are backed by files under `reports/`.
 - Do not treat reference, mock, or deterministic tool baselines as real model results.
 - Do not describe any result as evidence of trading ability, trading usefulness, or profitability.
-- Real API/local model reports remain pending unless actual run artefacts exist.
+- Additional real API/local model reports remain pending unless actual run artefacts exist.

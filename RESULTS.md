@@ -905,8 +905,9 @@ Artefacts:
 
 ## Real Model Leaderboard
 
-The real-model leaderboard pipeline is implemented and now has a preliminary
-OpenAI direct-only ladder, documented above. The tiny and paired configs live
+The real-model leaderboard pipeline is implemented and now has preliminary
+OpenAI, Claude, and Gemini direct-agent artefacts plus targeted robustness
+probes documented above. The tiny, paired, and provider-specific configs live
 under `configs/leaderboard/` and write to `reports/runs/leaderboard/`.
 
 The safe status command is:
@@ -932,13 +933,13 @@ not frontier/API model leaderboard results.
 
 ## Real Model Results
 
-The preliminary OpenAI direct-only ladder, the Claude Haiku 4.5 direct-only
-cross-provider datapoint, and the separate `gpt-5.4-mini` tool-use investigation
-documented above are the current hosted-API model results. The Stage 5
-infrastructure remains provider-agnostic and tested:
+The preliminary OpenAI direct-only ladder, Claude direct-only ladder, Gemini
+direct-only ladder, targeted robustness probes, and the separate `gpt-5.4-mini`
+tool-use investigation documented above are the current hosted-API model results.
+The Stage 5 infrastructure remains provider-agnostic and tested:
 
-- provider-agnostic `ModelClient` with OpenAI, Anthropic, generic-HTTP, and local
-  Hugging Face backends (optional deps, lazily imported);
+- provider-agnostic `ModelClient` with OpenAI, Anthropic, Gemini, generic-HTTP,
+  and local Hugging Face backends (optional deps, lazily imported);
 - deterministic response parsing/repair and environment-aware prompts;
 - a safe, audited tool-using agent;
 - token-usage, latency-percentile, and (pricing-gated) cost reporting.
@@ -954,8 +955,8 @@ mimirbench estimate-run-cost configs/eval_api_openai_bayes_smoke.yaml
 mimirbench run-eval         configs/eval_api_openai_bayes_smoke.yaml
 ```
 
-Real-model tables will be added here only after a run actually completes and
-artefacts are saved, labelled with model, provider, config, timestamp, token
+New real-model tables should be added here only after a run actually completes
+and artefacts are saved, labelled with model, provider, config, timestamp, token
 usage, and a cost estimate if pricing was configured.
 
 ## Stage 6 Research Results
@@ -971,7 +972,7 @@ Current artefact-backed result labels are:
 - **reference sanity check**
 - **mock diagnostic baseline**
 - **deterministic non-model tool baseline**
-- **real API model** (pending unless an actual provider run is saved)
+- **real API model** (only where an actual provider run is saved)
 - **real local model** (pending unless an actual local run is saved)
 
 ### Reference sanity checks
@@ -1013,8 +1014,8 @@ figures under `figures/`.
 ### Real model baselines
 
 Real model results should only be reported when they are actually run and saved.
-Stage 6 comparison configs exist for tiny OpenAI and local model checks, but no
-new real API or local model score should be added here without:
+Stage 6 comparison configs exist for tiny OpenAI and local model checks, and
+new real API or local model scores should not be added here without:
 
 - `check-provider`
 - `estimate-run-cost`
@@ -1054,8 +1055,8 @@ violations, parsed fields, and tool/robustness artefacts; no LLM judge is used.
   making model calls.
 - The first Stage 6 comparison runs preserve identical Bayesian task IDs across
   agents and write paired deltas under `paired_results.jsonl`.
-- Real direct/tool/reflective comparisons are infrastructure-ready but not yet
-  claimed without saved real-model artefacts.
+- Real direct/tool/reflective comparisons should be claimed only when backed by
+  saved real-model artefacts.
 
 ### Limitations
 
@@ -1070,24 +1071,25 @@ violations, parsed fields, and tool/robustness artefacts; no LLM judge is used.
 
 ### Next experiments
 
-- Run tiny real-model direct Bayesian baselines only after provider checks and
-  explicit config selection.
-- Optionally compare direct vs tool vs reflective OpenAI agents on the same 10
-  Bayesian tasks with cache enabled.
+- Train a larger synthetic Bayesian/risk transformer and rerun interpretability
+  to seek a causal model-organism result.
 - Add model cards only for actual saved real-model or baseline artefacts.
-- Extend comparison runs to robustness variants once a real provider run exists.
+- Extend direct/tool/reflective comparisons only with explicit provider checks,
+  cost review, cache enabled, and saved artefacts.
 
 ## Caveats
 
 - Reference scores are sanity checks, not model results.
 - Mock scores are local diagnostic baselines, not model results.
 - The tool-reference run is a deterministic non-model baseline, not a model result.
-- No hosted API or local transformer model was run for these tables.
+- No hosted API or local transformer model was run for the Stage 6 comparison
+  control tables.
 - Reference robustness is a sanity check; it is robust by construction because
   reference solvers read structured metadata.
 - Mock robustness is diagnostic only and should not be reported as model
   robustness.
-- Real model robustness runs are pending.
+- Real-model robustness runs exist only where explicitly linked above; otherwise
+  they remain pending.
 - No hidden chain-of-thought was collected.
 - Market-making, prediction-market, and adversarial-risk tasks are toy,
   synthetic, evaluation-only environments.
@@ -1097,7 +1099,7 @@ violations, parsed fields, and tool/robustness artefacts; no LLM judge is used.
 
 Stage 5 delivered real-model integration and tool-agent infrastructure:
 
-- API (OpenAI / Anthropic / generic HTTP) and local (Hugging Face) run configs
+- API (OpenAI / Anthropic / Gemini / generic HTTP) and local (Hugging Face) run configs
 - a provider-agnostic `ModelClient` with bounded retries, timeouts, and usage
 - deterministic response parsing and repair (no LLM judge)
 - a safe, sandboxed, audited tool-using agent
