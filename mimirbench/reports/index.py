@@ -33,6 +33,14 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     comparison_runs = _comparison_runs(root)
     lines.extend(_run_lines(comparison_runs, root=root, empty="No comparison runs found."))
 
+    lines.extend(["", "## Leaderboard runs", ""])
+    leaderboard_runs = _leaderboard_runs(root)
+    lines.extend(_leaderboard_lines(leaderboard_runs, root=root))
+
+    lines.extend(["", "## Standalone leaderboard analysis notes", ""])
+    leaderboard_notes = _leaderboard_notes(root)
+    lines.extend([f"- `{_rel(note, root)}`" for note in leaderboard_notes] or ["No standalone leaderboard notes found."])
+
     lines.extend(["", "## Interpretability runs", ""])
     interpretability_runs = _interpretability_runs(root)
     lines.extend(_interpretability_lines(interpretability_runs, root=root))
@@ -86,7 +94,7 @@ def _robustness_runs(root: Path) -> list[dict[str, Any]]:
     if not runs_root.exists():
         return []
     runs: list[dict[str, Any]] = []
-    for summary_path in sorted(runs_root.glob("*/robustness_summary.json")):
+    for summary_path in sorted(runs_root.rglob("robustness_summary.json")):
         data = _read_json(summary_path)
         runs.append(
             {
@@ -119,6 +127,34 @@ def _comparison_runs(root: Path) -> list[dict[str, Any]]:
     return runs
 
 
+def _leaderboard_runs(root: Path) -> list[dict[str, Any]]:
+    leaderboard_root = root / "runs" / "leaderboard"
+    if not leaderboard_root.exists():
+        return []
+    runs: list[dict[str, Any]] = []
+    for summary_path in sorted(leaderboard_root.glob("*/leaderboard_summary.json")):
+        data = _read_json(summary_path)
+        runs.append(
+            {
+                "name": data.get("leaderboard_name", summary_path.parent.name),
+                "path": summary_path.parent,
+                "models_run": len(data.get("models_run", [])),
+                "models_pending": len(data.get("models_pending", [])),
+                "tasks_per_agent": data.get("tasks_per_agent"),
+                "headlines": len(data.get("headline_candidates", [])),
+                "preliminary": data.get("preliminary"),
+            }
+        )
+    return runs
+
+
+def _leaderboard_notes(root: Path) -> list[Path]:
+    leaderboard_root = root / "runs" / "leaderboard"
+    if not leaderboard_root.exists():
+        return []
+    return sorted(leaderboard_root.glob("*.md"))
+
+
 def _interpretability_runs(root: Path) -> list[dict[str, Any]]:
     interp_root = root / "interpretability"
     if not interp_root.exists():
@@ -139,6 +175,29 @@ def _interpretability_runs(root: Path) -> list[dict[str, Any]]:
             }
         )
     return runs
+
+
+def _leaderboard_lines(runs: list[dict[str, Any]], *, root: Path) -> list[str]:
+    if not runs:
+        return ["No leaderboard runs found."]
+    lines = [
+        "| Name | Path | Models run | Pending | Tasks/agent | Headlines | Preliminary |",
+        "| --- | --- | ---: | ---: | ---: | ---: | :---: |",
+    ]
+    for run in runs:
+        lines.append(
+            "| "
+            f"{run['name']} | `{_rel(run['path'], root)}` | "
+            f"{_fmt(run.get('models_run'))} | {_fmt(run.get('models_pending'))} | "
+            f"{_fmt(run.get('tasks_per_agent'))} | {_fmt(run.get('headlines'))} | "
+            f"{'yes' if run.get('preliminary') else 'no'} |"
+        )
+    lines.append("")
+    lines.append(
+        "Leaderboard rows are real model results only when `models_run > 0` and the "
+        "saved summary contains concrete per-agent run artefacts."
+    )
+    return lines
 
 
 def _interpretability_lines(runs: list[dict[str, Any]], *, root: Path) -> list[str]:

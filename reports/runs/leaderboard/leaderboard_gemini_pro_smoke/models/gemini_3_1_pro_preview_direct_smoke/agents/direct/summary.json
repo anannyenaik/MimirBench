@@ -1,0 +1,252 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": "gemini-3.1-pro-preview",
+      "model_name": null,
+      "name": "gemini_3_1_pro_preview_direct_smoke::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 2.0,
+        "output_usd_per_1m": 12.0
+      },
+      "provider": "gemini",
+      "request_extra": {
+        "thinking_config": {
+          "thinking_budget": 0
+        },
+        "use_default_temperature": true
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 1.0,
+      "timeout_seconds": 90.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "gemini_3_1_pro_preview_direct_smoke::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 1.0,
+    "mean_latency_ms": 2329.2418333318587,
+    "n_model_tasks": 0,
+    "n_tasks": 6,
+    "p50_latency_ms": 2494.034900002589,
+    "p95_latency_ms": 2826.2990250004805,
+    "parse_failure_rate": 1.0,
+    "provider_error_rate": 1.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 1,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "auctions",
+      "error": "model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "auctions-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "hidden_regimes",
+      "error": "model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "hidden_regimes-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": "model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "market_making-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "prediction_markets",
+      "error": "model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "prediction_markets-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 2885.327600000892,
+        "latency_p50_ms": 2885.327600000892,
+        "latency_p95_ms": 2885.327600000892,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "auctions": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 1692.6989999919897,
+        "latency_p50_ms": 1692.6989999919897,
+        "latency_p95_ms": 1692.6989999919897,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 2649.2132999992464,
+        "latency_p50_ms": 2649.2132999992464,
+        "latency_p95_ms": 2649.2132999992464,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 2535.9070999984397,
+        "latency_p50_ms": 2535.9070999984397,
+        "latency_p95_ms": 2535.9070999984397,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "market_making": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 1760.1412999938475,
+        "latency_p50_ms": 1760.1412999938475,
+        "latency_p95_ms": 1760.1412999938475,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 2452.1627000067383,
+        "latency_p50_ms": 2452.1627000067383,
+        "latency_p95_ms": 2452.1627000067383,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 1,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 1.0,
+      "latency_mean_ms": 2329.2418333318587,
+      "latency_p50_ms": 2494.034900002589,
+      "latency_p95_ms": 2826.2990250004805,
+      "mean_score": 0.0,
+      "metric_means": {},
+      "n_tasks": 6,
+      "parse_failure_rate": 1.0,
+      "pass_rate": 0.0,
+      "runtime_error_rate": 1.0,
+      "violation_rate": 1.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\models\\gemini_3_1_pro_preview_direct_smoke\\agents\\direct",
+  "run_id": "leaderboard_gemini_pro_smoke__gemini_3_1_pro_preview_direct_smoke__direct-20260603T063353",
+  "run_name": "leaderboard_gemini_pro_smoke__gemini_3_1_pro_preview_direct_smoke__direct",
+  "timestamp": "2026-06-03T06:33:53Z"
+}

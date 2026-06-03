@@ -1,0 +1,42 @@
+# Clean paired direct-vs-tool comparison on bayesian_games only (gpt-5.4-mini).
+#
+# This is the methodologically sound tool test: bayesian_games has a directly
+# applicable calculator (bayes_calculator), and require_tool_first makes the tool
+# agent actually use it (verified: tool_error 0.0, used_result yes). Both agent
+# modes run identical task IDs/seeds so the direct-vs-tool delta is paired. One
+# model, two agents, one environment, fifty tasks, no robustness. PRELIMINARY
+# (single env / single model); benchmark diagnostics only - not a claim about
+# trading usefulness or broad model superiority. Makes paid API calls.
+run:
+  name: leaderboard_openai_gpt54mini_bayes_direct_tool_50
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_direct_tool_50
+  cache: true
+  max_workers: 1
+models:
+  - name: openai_gpt_5_4_mini_bayes_50
+    provider: openai
+    model: gpt-5.4-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    tool_max_steps: 3
+    require_tool_first: true
+    pricing:
+      input_usd_per_1m: 0.75
+      output_usd_per_1m: 4.50
+agents:
+  - direct
+  - tool
+environments:
+  - name: bayesian_games
+    num_tasks: 50
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

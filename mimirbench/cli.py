@@ -29,7 +29,12 @@ from mimirbench.evals.robustness_runner import (
     validate_robustness_config,
 )
 from mimirbench.evals.runner import load_eval_config, run_eval_config, validate_eval_config
-from mimirbench.evals.schemas import EnvironmentRunConfig, EvalConfig, EvalRunConfig
+from mimirbench.evals.schemas import (
+    EnvironmentRunConfig,
+    EvalConfig,
+    EvalRunConfig,
+    ReportingConfig,
+)
 from mimirbench.evals.variants import (
     ANSWER_PRESERVING_BY_TYPE,
     ENVIRONMENT_VARIANT_TYPES,
@@ -129,33 +134,31 @@ def summarise_run(
 
 @app.command("check-provider")
 def check_provider(
-    provider: str = typer.Argument(..., help="One of: openai, anthropic, local, generic_http."),
+    provider: str = typer.Argument(..., help="One of: openai, anthropic, gemini, local, generic_http."),
+    base_url: str | None = typer.Option(
+        None,
+        "--base-url",
+        help="Base URL for generic_http/OpenAI-compatible endpoints.",
+    ),
+    api_key_env: str | None = typer.Option(
+        None,
+        "--api-key-env",
+        help="Environment-variable name to check for API providers; the value is never printed.",
+    ),
 ) -> None:
     """Check whether a model provider's package and key appear usable.
 
     Confirms package availability and (for API providers) whether the key
     environment variable is set. The key value itself is never printed.
     """
-    from mimirbench.agents.providers import (
-        AnthropicClient,
-        GenericHTTPClient,
-        HFLocalClient,
-        OpenAIClient,
-    )
+    from mimirbench.agents.providers import provider_status
 
     name = provider.lower().strip()
-    if name == "openai":
-        status = OpenAIClient("probe").check_availability()
-    elif name == "anthropic":
-        status = AnthropicClient("probe").check_availability()
-    elif name == "local":
-        status = HFLocalClient("probe").check_availability()
-    elif name == "generic_http":
-        status = GenericHTTPClient("probe", base_url="http://localhost").check_availability()
-    else:
+    if name not in {"openai", "anthropic", "gemini", "local", "generic_http"}:
         console.print(f"[red]Unknown provider:[/red] {provider}")
-        console.print("Expected one of: openai, anthropic, local, generic_http.")
+        console.print("Expected one of: openai, anthropic, gemini, local, generic_http.")
         raise typer.Exit(code=2)
+    status = provider_status(name, base_url=base_url, api_key_env=api_key_env)
 
     table = Table(title=f"Provider check: {status.provider}")
     table.add_column("field", style="bold cyan")
@@ -195,10 +198,29 @@ def estimate_run_cost(
             comparison = load_comparison_config(config_path)
             validate_comparison_config(comparison)
         except (KeyError, ValueError, ValidationError) as comparison_exc:
-            console.print(f"[red]Invalid config:[/red] {config_path}")
-            console.print(str(eval_exc))
-            console.print(str(comparison_exc))
-            raise typer.Exit(code=1) from comparison_exc
+            try:
+                from mimirbench.evals.leaderboard import (
+                    load_leaderboard_config,
+                    validate_leaderboard_config,
+                )
+
+                leaderboard_config = load_leaderboard_config(config_path)
+                validate_leaderboard_config(leaderboard_config)
+            except (KeyError, ValueError, ValidationError) as leaderboard_exc:
+                try:
+                    robustness = load_robustness_config(config_path)
+                    validate_robustness_config(robustness)
+                except (KeyError, ValueError, ValidationError) as robustness_exc:
+                    console.print(f"[red]Invalid config:[/red] {config_path}")
+                    console.print(str(eval_exc))
+                    console.print(str(comparison_exc))
+                    console.print(str(leaderboard_exc))
+                    console.print(str(robustness_exc))
+                    raise typer.Exit(code=1) from robustness_exc
+                _print_cost_estimate(_estimate_robustness_cost(robustness))
+                return
+            _print_leaderboard_cost_estimate(_estimate_leaderboard_cost(leaderboard_config))
+            return
     _print_comparison_cost_estimate(_estimate_comparison_cost(comparison))
 
 
@@ -378,6 +400,62 @@ def summarise_comparison(
         console.print(f"[red]{exc}[/red]")
         raise typer.Exit(code=1) from exc
     _print_comparison_summary(summary)
+
+
+@app.command("run-leaderboard")
+def run_leaderboard_command(
+    config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to a leaderboard YAML."),
+    allow_unavailable: bool = typer.Option(
+        False,
+        "--allow-unavailable",
+        help="Allow unavailable non-model diagnostics such as reference/mock smoke runs.",
+    ),
+    allow_real_models: bool = typer.Option(
+        False,
+        "--allow-real-models",
+        help="Permit actual API/local model calls after provider checks pass.",
+    ),
+) -> None:
+    """Run a paired real-model leaderboard config.
+
+    Real API/local models require both a usable provider check and
+    ``--allow-real-models``. If no model is runnable, the run still writes a
+    summary/report marking every model as pending.
+    """
+    from mimirbench.evals.leaderboard import (
+        load_leaderboard_config,
+        run_leaderboard_config,
+        validate_leaderboard_config,
+    )
+
+    try:
+        config = load_leaderboard_config(config_path)
+        validate_leaderboard_config(config)
+    except (KeyError, ValueError, ValidationError) as exc:
+        console.print(f"[red]Invalid leaderboard config:[/red] {config_path}")
+        console.print(str(exc))
+        raise typer.Exit(code=1) from exc
+    summary = run_leaderboard_config(
+        config,
+        allow_unavailable=allow_unavailable,
+        allow_real_models=allow_real_models,
+    )
+    _print_leaderboard_summary(summary)
+
+
+@app.command("summarise-leaderboard")
+def summarise_leaderboard_command(
+    run_dir: Path = typer.Argument(..., exists=True, file_okay=False, readable=True),
+) -> None:
+    """Print a concise summary for an existing leaderboard run directory."""
+    from mimirbench.evals.leaderboard import summarise_leaderboard
+
+    try:
+        summary = summarise_leaderboard(run_dir)
+    except (FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(code=1) from exc
+    _print_leaderboard_summary(summary)
 
 
 @app.command("make-plots")
@@ -754,6 +832,87 @@ def _print_comparison_summary(summary: dict[str, Any]) -> None:
     console.print(f"artefacts: {summary['output_dir']}")
 
 
+def _print_leaderboard_summary(summary: dict[str, Any]) -> None:
+    console.print(
+        f"[bold]{summary['leaderboard_name']}[/bold] | "
+        f"run_id=[cyan]{summary['run_id']}[/cyan] | "
+        f"preliminary=[magenta]{_yesno(bool(summary.get('preliminary')))}[/magenta]"
+    )
+    availability = summary.get("provider_availability", {})
+    if availability:
+        table = Table(title="Provider availability")
+        table.add_column("model", style="bold cyan")
+        table.add_column("provider")
+        table.add_column("usable", justify="right")
+        table.add_column("detail")
+        for label, status in availability.items():
+            table.add_row(
+                str(label),
+                str(status.get("provider")),
+                _yesno(bool(status.get("usable"))),
+                escape(str(status.get("detail", ""))),
+            )
+        console.print(table)
+
+    rows = summary.get("leaderboard", [])
+    table = Table(title="Leaderboard")
+    table.add_column("model", style="bold cyan")
+    table.add_column("provider")
+    table.add_column("agent")
+    table.add_column("envs", justify="right")
+    table.add_column("tasks", justify="right")
+    table.add_column("mean score", justify="right")
+    table.add_column("robustness", justify="right")
+    table.add_column("risk viol.", justify="right")
+    table.add_column("parse fail", justify="right")
+    table.add_column("cost")
+    table.add_column("latency p50/p95", justify="right")
+    if rows:
+        for row in rows:
+            table.add_row(
+                str(row.get("model")),
+                str(row.get("provider")),
+                str(row.get("agent")),
+                _fmt(row.get("n_envs")),
+                _fmt(row.get("n_tasks")),
+                _fmt(row.get("mean_score")),
+                f"{_fmt(row.get('robustness_paraphrase_consistency'))}/"
+                f"{_fmt(row.get('robustness_mean_score_drop'))}",
+                _fmt(row.get("risk_violation_rate")),
+                _fmt(row.get("parse_failure_rate")),
+                _leaderboard_cost_cell(row),
+                f"{_fmt(row.get('latency_p50_ms'))}/{_fmt(row.get('latency_p95_ms'))}",
+            )
+    else:
+        table.add_row("no models run", "", "", "", "", "", "", "", "", "", "")
+    console.print(table)
+
+    pending = summary.get("models_pending", [])
+    if pending:
+        console.print("[yellow]No real model run was performed for pending providers.[/yellow]")
+        for model in pending:
+            console.print(
+                f"  {model.get('label')} ({model.get('provider')}): "
+                f"{escape(str(model.get('detail', '')))}"
+            )
+
+    candidates = summary.get("headline_candidates", [])
+    if candidates:
+        console.print("[bold]headline candidates[/bold]")
+        for candidate in candidates:
+            console.print(f"  - {candidate.get('text')}")
+    else:
+        console.print("headline candidates: none")
+    console.print(f"artefacts: {summary['output_dir']}")
+
+
+def _leaderboard_cost_cell(row: dict[str, Any]) -> str:
+    cost = row.get("estimated_cost_usd")
+    if row.get("cost_estimated") and cost is not None:
+        return f"${_fmt(cost)}"
+    return "not estimated"
+
+
 def _yesno(value: bool) -> str:
     return "[green]yes[/green]" if value else "[red]no[/red]"
 
@@ -865,6 +1024,102 @@ def _estimate_comparison_cost(config: ComparisonConfig) -> dict[str, Any]:
     }
 
 
+def _estimate_leaderboard_cost(config: Any) -> dict[str, Any]:
+    from mimirbench.evals.leaderboard import build_agent_config
+
+    cells: list[dict[str, Any]] = []
+    robustness_modes = {
+        mode.lower().strip() for mode in (config.robustness.agents or config.agents)
+    }
+    for model in config.models:
+        for mode in config.agents:
+            agent_config = build_agent_config(model, mode)
+            eval_config = EvalRunConfig(
+                run=config.run,
+                agent=agent_config,
+                environments=config.environments,
+                reporting=config.reporting,
+            )
+            estimate = _estimate_cost(eval_config)
+            estimate.update(
+                {
+                    "model_label": model.label,
+                    "provider": model.provider,
+                    "agent_mode": mode,
+                    "phase": "eval",
+                }
+            )
+            cells.append(estimate)
+
+            if config.robustness.enabled and mode.lower().strip() in robustness_modes:
+                variant_count = config.robustness.max_variants_per_task
+                robustness_envs = [
+                    EnvironmentRunConfig(
+                        name=env.name,
+                        num_tasks=env.num_tasks * variant_count,
+                        seed=env.seed,
+                    )
+                    for env in config.environments
+                ]
+                robustness_estimate = _estimate_cost(
+                    EvalRunConfig(
+                        run=config.run,
+                        agent=agent_config,
+                        environments=robustness_envs,
+                        reporting=config.reporting,
+                    )
+                )
+                robustness_estimate.update(
+                    {
+                        "model_label": model.label,
+                        "provider": model.provider,
+                        "agent_mode": mode,
+                        "phase": "robustness",
+                    }
+                )
+                cells.append(robustness_estimate)
+
+    return {
+        "leaderboard_name": config.run.name,
+        "cells": cells,
+        "base_tasks_per_cell": sum(env.num_tasks for env in config.environments),
+        "model_calls_total": sum(int(cell["model_calls_total"]) for cell in cells),
+        "est_total_input_tokens": sum(int(cell["est_total_input_tokens"]) for cell in cells),
+        "est_total_output_tokens_upper": sum(
+            int(cell["est_total_output_tokens_upper"]) for cell in cells
+        ),
+        "model_backed": any(bool(cell["model_backed"]) for cell in cells),
+        "est_cost_usd_upper": _sum_optional_costs(cells),
+        "robustness_enabled": config.robustness.enabled,
+    }
+
+
+def _estimate_robustness_cost(config: Any) -> dict[str, Any]:
+    robustness_envs = [
+        EnvironmentRunConfig(
+            name=env.name,
+            num_tasks=env.num_tasks
+            * (1 + min(env.variants_per_task, config.robustness.max_variants_per_task)),
+            seed=env.seed,
+        )
+        for env in config.environments
+    ]
+    estimate = _estimate_cost(
+        EvalRunConfig(
+            run=config.run,
+            agent=config.agent,
+            environments=robustness_envs,
+            reporting=ReportingConfig(),
+        )
+    )
+    estimate["robustness_base_tasks"] = sum(env.num_tasks for env in config.environments)
+    estimate["robustness_variant_tasks_upper"] = sum(
+        env.num_tasks * min(env.variants_per_task, config.robustness.max_variants_per_task)
+        for env in config.environments
+    )
+    return estimate
+
+
 def _print_cost_estimate(estimate: dict[str, Any]) -> None:
     console.print(
         f"[bold]Run estimate[/bold] | agent_type=[cyan]{estimate['agent_type']}[/cyan] | "
@@ -938,6 +1193,53 @@ def _print_comparison_cost_estimate(estimate: dict[str, Any]) -> None:
         )
     else:
         console.print(f"[yellow]Rough total cost upper bound:[/yellow] ~${estimate['est_cost_usd_upper']} USD")
+
+
+def _print_leaderboard_cost_estimate(estimate: dict[str, Any]) -> None:
+    console.print(
+        f"[bold]Leaderboard estimate[/bold] | "
+        f"name=[cyan]{estimate['leaderboard_name']}[/cyan] | "
+        f"base tasks/cell={estimate['base_tasks_per_cell']}"
+    )
+    table = Table(title="Cell estimates")
+    table.add_column("model", style="bold cyan")
+    table.add_column("agent")
+    table.add_column("phase")
+    table.add_column("tasks", justify="right")
+    table.add_column("model calls", justify="right")
+    table.add_column("input tokens", justify="right")
+    table.add_column("output upper", justify="right")
+    table.add_column("cost upper", justify="right")
+    for cell in estimate["cells"]:
+        table.add_row(
+            str(cell["model_label"]),
+            str(cell["agent_mode"]),
+            str(cell["phase"]),
+            str(cell["total_tasks"]),
+            str(cell["model_calls_total"]),
+            f"{int(cell['est_total_input_tokens']):,}",
+            f"{int(cell['est_total_output_tokens_upper']):,}",
+            "n/a" if cell["est_cost_usd_upper"] is None else f"${cell['est_cost_usd_upper']}",
+        )
+    console.print(table)
+    if not estimate["model_backed"]:
+        console.print("[green]All cells are non-model baselines: no API calls, no token cost.[/green]")
+        return
+    console.print(
+        f"total model calls={estimate['model_calls_total']} | "
+        f"est. input tokens ~{estimate['est_total_input_tokens']:,}; "
+        f"est. output tokens upper bound ~{estimate['est_total_output_tokens_upper']:,}"
+    )
+    if estimate["est_cost_usd_upper"] is None:
+        console.print(
+            "[yellow]Cost not estimated:[/yellow] no pricing configured for one or more model-backed cells."
+        )
+    else:
+        console.print(
+            f"[yellow]Rough total cost upper bound:[/yellow] ~${estimate['est_cost_usd_upper']} USD"
+        )
+    if estimate["robustness_enabled"]:
+        console.print("[dim]Robustness cells are included using max_variants_per_task as an upper bound.[/dim]")
 
 
 def _sum_optional_costs(agent_estimates: list[dict[str, Any]]) -> float | None:

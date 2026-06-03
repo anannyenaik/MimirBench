@@ -1,0 +1,34 @@
+# Verify tool-input fidelity for prediction_markets (Option A pre-check).
+# prediction_markets allows ev_calculator / risk_checker / bayes_calculator, and
+# only bayes_calculator got the tolerant-wrapper treatment - so this checks whether
+# a forced tool call here succeeds or errors like bayes originally did. Tiny: 3
+# tasks, model-backed tool agent, require_tool_first. ~cents of paid API calls.
+run:
+  name: verify_require_tool_predmkt_micro
+  seed: 123
+  output_dir: reports/runs/verify_require_tool_predmkt_micro
+  cache: true
+  max_workers: 1
+agent:
+  type: tool
+  tool_policy: model
+  provider: openai
+  model: gpt-5.4-mini
+  api_key_env: OPENAI_API_KEY
+  temperature: 0
+  max_tokens: 512
+  max_retries: 3
+  timeout_seconds: 60
+  tool_max_steps: 3
+  require_tool_first: true
+  pricing:
+    input_usd_per_1m: 0.75
+    output_usd_per_1m: 4.50
+environments:
+  - name: prediction_markets
+    num_tasks: 3
+    seed: 123
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

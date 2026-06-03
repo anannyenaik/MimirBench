@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import builtins
 import sys
 import types
+from typing import Any
 
 import pytest
 from typer.testing import CliRunner
 
 from mimirbench.agents.providers import (
     AnthropicClient,
+    GeminiClient,
     GenericHTTPClient,
     HFLocalClient,
     OpenAIClient,
@@ -20,10 +23,24 @@ runner = CliRunner()
 
 
 def test_openai_status_without_package_or_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    real_import = builtins.__import__
+
+    def fake_import(
+        name: str,
+        globals: dict[str, Any] | None = None,
+        locals: dict[str, Any] | None = None,
+        fromlist: tuple[str, ...] = (),
+        level: int = 0,
+    ) -> Any:
+        if name == "openai":
+            raise ImportError("openai intentionally hidden for test")
+        return real_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", fake_import)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     status = OpenAIClient("gpt-test").check_availability()
     assert status.provider == "openai"
-    assert status.package_available is False  # openai not installed in test env
+    assert status.package_available is False
     assert status.key_required is True
     assert status.key_present is False
     assert status.usable is False
@@ -44,6 +61,16 @@ def test_anthropic_status(monkeypatch: pytest.MonkeyPatch) -> None:
     assert status.provider == "anthropic"
     assert status.key_required is True
     assert status.usable is False
+
+
+def test_gemini_status_detects_key_without_exposing_it(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("GEMINI_API_KEY", "gemini-super-secret-value")
+    status = GeminiClient("gemini-test").check_availability()
+    assert status.provider == "gemini"
+    assert status.key_required is True
+    assert status.key_present is True
+    blob = str(status.to_dict()) + status.detail
+    assert "gemini-super-secret-value" not in blob
 
 
 def test_local_status_without_torch() -> None:

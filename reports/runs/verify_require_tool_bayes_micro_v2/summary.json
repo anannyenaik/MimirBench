@@ -1,0 +1,124 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-5.4-mini",
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.75,
+        "output_usd_per_1m": 4.5
+      },
+      "provider": "openai",
+      "require_tool_first": true,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "model",
+      "top_p": null,
+      "type": "tool"
+    },
+    "name": "tool::openai::gpt-5.4-mini",
+    "type": "tool",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 5131.185833330771,
+    "n_model_tasks": 0,
+    "n_tasks": 3,
+    "p50_latency_ms": 3436.5822999970987,
+    "p95_latency_ms": 8348.32366000046,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 3,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 5131.185833330771,
+        "latency_p50_ms": 3436.5822999970987,
+        "latency_p95_ms": 8348.32366000046,
+        "mean_score": 0.9996365568969487,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.0007268862061027143,
+          "posterior_max_error": 0.0003297023883098669,
+          "posterior_tv_error": 0.00036344310305135713
+        },
+        "n_tasks": 3,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 5131.185833330771,
+      "latency_p50_ms": 3436.5822999970987,
+      "latency_p95_ms": 8348.32366000046,
+      "mean_score": 0.9996365568969487,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.0007268862061027143,
+        "posterior_max_error": 0.0003297023883098669,
+        "posterior_tv_error": 0.00036344310305135713
+      },
+      "n_tasks": 3,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\verify_require_tool_bayes_micro_v2",
+  "run_id": "verify_require_tool_bayes_micro_v2-20260602T231157",
+  "run_name": "verify_require_tool_bayes_micro_v2",
+  "timestamp": "2026-06-02T23:11:57Z",
+  "tool_audit": {
+    "final_answer_after_tool_rate": 1.0,
+    "invalid_tool_call_rate": 0.0,
+    "mean_tool_steps": 1.0,
+    "n_tasks": 3,
+    "tool_call_rate": 1.0,
+    "tool_error_rate": 0.0,
+    "tool_result_ignored_rate": 0.0
+  }
+}

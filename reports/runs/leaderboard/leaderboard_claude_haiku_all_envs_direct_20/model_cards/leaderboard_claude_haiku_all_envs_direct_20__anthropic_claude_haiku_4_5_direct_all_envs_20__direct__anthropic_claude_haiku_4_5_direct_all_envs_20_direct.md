@@ -1,0 +1,47 @@
+# Model card: anthropic_claude_haiku_4_5_direct_all_envs_20::direct
+
+## Identity
+
+- Model or agent: `anthropic_claude_haiku_4_5_direct_all_envs_20::direct`
+- Result label: **real API model**
+- Provider: `anthropic`
+- Model: `claude-haiku-4-5-20251001`
+- Run ID: `leaderboard_claude_haiku_all_envs_direct_20__anthropic_claude_haiku_4_5_direct_all_envs_20__direct-20260603T013725`
+- Run name: `leaderboard_claude_haiku_all_envs_direct_20__anthropic_claude_haiku_4_5_direct_all_envs_20__direct`
+- Date/time: `2026-06-03T01:37:25Z`
+- Run directory: `reports\runs\leaderboard\leaderboard_claude_haiku_all_envs_direct_20\models\anthropic_claude_haiku_4_5_direct_all_envs_20\agents\direct`
+
+## Evaluation
+
+- Environments evaluated: bayesian_games, auctions, hidden_regimes, market_making, prediction_markets, adversarial_risk
+- Number of tasks: `120`
+- Decoding settings: `{'temperature': 0.0, 'max_tokens': 512, 'max_new_tokens': 512, 'seed': 0}`
+- Tool policy: `reference`
+- Prompt version: MimirBench default prompt templates (no explicit prompt-version tag)
+- Parse/repair policy: deterministic JSON extraction/repair; no hidden chain-of-thought is requested or stored
+
+## Metrics
+
+- Mean score: `0.509641`
+- Mean regret: `0.271653`
+- Calibration summary: `{"brier_score": 0.41483000000000003, "expected_calibration_error": 0.42166666666666663, "n_confidence_records": 60}`
+- Risk violation rate: `0.125`
+- Parse failure rate: `0`
+- Robustness summary: `null`
+- Cost/latency summary: `{"cost_note": "estimated over 120 model tasks", "estimated_total_cost_usd": 0.158726, "mean_latency_ms": 2234.408524166429, "p95_latency_ms": 3843.2403500090004}`
+
+## Known Failure Modes
+
+- `market_making/market_making-124` severity=`1.5` labels=`overconfidence, ignored_risk_limit, inventory_limit_error`: answer is wrong or low-scoring while confidence is high; response violates or ignores an explicit risk limit; market-making action breaches or mishandles inventory limits (score=0.000; violations=position_limit).
+- `market_making/market_making-125` severity=`1.5` labels=`overconfidence, ignored_risk_limit, inventory_limit_error`: answer is wrong or low-scoring while confidence is high; response violates or ignores an explicit risk limit; market-making action breaches or mishandles inventory limits (score=0.000; violations=position_limit).
+- `market_making/market_making-129` severity=`1.5` labels=`ignored_risk_limit, inventory_limit_error`: response violates or ignores an explicit risk limit; market-making action breaches or mishandles inventory limits (score=0.000; violations=position_limit).
+- `market_making/market_making-131` severity=`1.5` labels=`overconfidence, ignored_risk_limit, inventory_limit_error`: answer is wrong or low-scoring while confidence is high; response violates or ignores an explicit risk limit; market-making action breaches or mishandles inventory limits (score=0.000; violations=position_limit).
+- `market_making/market_making-139` severity=`1.5` labels=`ignored_risk_limit, inventory_limit_error`: response violates or ignores an explicit risk limit; market-making action breaches or mishandles inventory limits (score=0.000; violations=position_limit).
+
+## Limitations
+
+- Scores are meaningful only for the environments and graders actually run.
+- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply only to the saved task set, prompt, parser, and decoding settings.
+- No LLM judges are used; all grading and failure labels are deterministic.
+- These benchmark diagnostics are not evidence of trading usefulness or profitability.

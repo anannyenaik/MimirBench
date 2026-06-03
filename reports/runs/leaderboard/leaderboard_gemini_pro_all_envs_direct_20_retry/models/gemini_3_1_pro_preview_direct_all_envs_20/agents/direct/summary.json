@@ -1,0 +1,301 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 4096,
+      "model": "gemini-3.1-pro-preview",
+      "model_name": null,
+      "name": "gemini_3_1_pro_preview_direct_all_envs_20::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 2.0,
+        "output_usd_per_1m": 12.0
+      },
+      "provider": "gemini",
+      "request_extra": {
+        "thinking_config": {
+          "thinking_level": "low"
+        },
+        "use_default_temperature": true
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 1.0,
+      "timeout_seconds": 120.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "gemini_3_1_pro_preview_direct_all_envs_20::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 120 model tasks",
+    "estimated_total_cost_usd": 1.313882,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 16504.188314999315,
+    "n_model_tasks": 120,
+    "n_tasks": 120,
+    "p50_latency_ms": 8589.575700010755,
+    "p95_latency_ms": 51159.041509995586,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 59377,
+    "total_output_tokens": 99594,
+    "total_tokens": 158971
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"regime_posterior\": [\n    0.3756,\n    0.6244\n  ],\n  \"reasoning_summary\": \"Applied the forward algorithm for Hidden Markov Models iteratively through the sequence of observed signals to compute the filtered probabilities. The final normalized probabilities reflect the likelihood of each r",
+      "score": 0.8241032371847989,
+      "task_id": "hidden_regimes-123",
+      "violations": []
+    },
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"regime_posterior\": [\n    0.333,\n    0.333,\n    0.334\n  ],\n  \"reasoning_summary\": \"I performed the forward algorithm iteratively applying transition and emission probabilities for the sequence of signals. The final normalized probabilities represent the posterior over the three regimes a",
+      "score": 0.8576979688134163,
+      "task_id": "hidden_regimes-129",
+      "violations": []
+    },
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"regime_posterior\": [\n    0.2052,\n    0.4685,\n    0.3263\n  ],\n  \"reasoning_summary\": \"Applied the forward algorithm for Hidden Markov Models iteratively updating the belief state using the transition and emission matrices for the observed sequence of signals. The final probabilities refl",
+      "score": 0.8739908733162882,
+      "task_id": "hidden_regimes-133",
+      "violations": []
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"bid_price\": null,\n  \"ask_price\": 134.46,\n  \"bid_size\": 0,\n  \"ask_size\": 5.0,\n  \"reduce_inventory\": true,\n  \"abstain\": false,\n  \"confidence\": 0.90,\n  \"reasoning_summary\": \"Current inventory is near the position limit, making further buying risky. We skew our quotes by only offering to se",
+      "score": 0.4,
+      "task_id": "market_making-124",
+      "violations": [
+        "missing_quote"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"bid_price\": 142.15,\n  \"ask_price\": null,\n  \"bid_size\": 2.0,\n  \"ask_size\": 0.0,\n  \"reduce_inventory\": true,\n  \"abstain\": false,\n  \"confidence\": 0.9,\n  \"reasoning_summary\": \"Current short inventory is dangerously close to the position limit. I am executing a reduce_inventory action by pla",
+      "score": 0.4,
+      "task_id": "market_making-125",
+      "violations": [
+        "missing_quote"
+      ]
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 11999.88221499516,
+        "latency_p50_ms": 7018.442299988237,
+        "latency_p95_ms": 23005.021799991704,
+        "mean_score": 0.8500000000000002,
+        "metric_means": {
+          "correct_constraint_identified": 0.25,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 14621.621879998565,
+        "latency_p50_ms": 8760.049100004835,
+        "latency_p95_ms": 48754.98192499144,
+        "mean_score": 0.9999966312428488,
+        "metric_means": {
+          "expected_value_abs_error": 5.738143996964946e-06,
+          "expected_value_rel_error": 3.368757151618334e-06
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 16977.827170002274,
+        "latency_p50_ms": 8810.355050001817,
+        "latency_p95_ms": 51905.383944996,
+        "mean_score": 0.9994812827861328,
+        "metric_means": {
+          "answer_sum": 0.9999995,
+          "posterior_l1_error": 0.0010374344277346063,
+          "posterior_max_error": 0.0004803549778139949,
+          "posterior_tv_error": 0.0005187172138673031
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 26574.857464998786,
+        "latency_p50_ms": 20016.044550000515,
+        "latency_p95_ms": 52735.62215499626,
+        "mean_score": 0.9770052035492174,
+        "metric_means": {
+          "posterior_l1_error": 0.045989592901564874,
+          "posterior_tv_error": 0.022994796450782437
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.85,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 14459.66054500459,
+        "latency_p50_ms": 6901.131249993341,
+        "latency_p95_ms": 45938.25329501636,
+        "mean_score": 0.6645167021248028,
+        "metric_means": {
+          "abstention_quality": 0.9574999999999999,
+          "adverse_selection_penalty": 0.4294495694552699,
+          "inventory_risk_score": 0.9475,
+          "quote_validity": 0.7,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.19404568771546638
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.55,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.3
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 14391.280614996504,
+        "latency_p50_ms": 7846.412750004674,
+        "latency_p95_ms": 40401.78071999403,
+        "mean_score": 0.6358525989887679,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "action_optimality": 0.4482811959999619,
+          "calibration_proxy": 0.7192000000000002,
+          "expected_value_error": 0.4223289,
+          "fair_probability_error": 9.055000000001493e-05,
+          "regret": 2.047400829012651,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.3,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 16504.188314999315,
+      "latency_p50_ms": 8589.575700010755,
+      "latency_p95_ms": 51159.041509995586,
+      "mean_score": 0.8544754031152947,
+      "metric_means": {
+        "abstention_quality": 0.97875,
+        "action_optimality": 0.4482811959999619,
+        "adverse_selection_penalty": 0.4294495694552699,
+        "answer_sum": 0.9999995,
+        "calibration_proxy": 0.7192000000000002,
+        "correct_constraint_identified": 0.25,
+        "expected_value_abs_error": 5.738143996964946e-06,
+        "expected_value_error": 0.4223289,
+        "expected_value_rel_error": 3.368757151618334e-06,
+        "fair_probability_error": 9.055000000001493e-05,
+        "inventory_risk_score": 0.9475,
+        "posterior_l1_error": 0.02351351366464974,
+        "posterior_max_error": 0.0004803549778139949,
+        "posterior_tv_error": 0.01175675683232487,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 0.7,
+        "regret": 2.047400829012651,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.0,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.19404568771546638,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 120,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.7833333333333333,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.05
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_all_envs_direct_20_retry\\models\\gemini_3_1_pro_preview_direct_all_envs_20\\agents\\direct",
+  "run_id": "leaderboard_gemini_pro_all_envs_direct_20_retry__gemini_3_1_pro_preview_direct_all_envs_20__direct-20260603T193700",
+  "run_name": "leaderboard_gemini_pro_all_envs_direct_20_retry__gemini_3_1_pro_preview_direct_all_envs_20__direct",
+  "timestamp": "2026-06-03T19:37:00Z"
+}

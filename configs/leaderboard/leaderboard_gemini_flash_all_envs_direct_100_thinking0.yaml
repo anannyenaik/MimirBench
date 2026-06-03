@@ -1,0 +1,56 @@
+# Cache-backed expansion of the strongest clean Gemini direct row to 100/env.
+#
+# Uses the same gemini-3.5-flash + thinking_budget=0 settings as the clean
+# 20/env row. The model label intentionally matches that original row so cache
+# keys match; this run adds tasks 143-222 in each environment while reusing the
+# already completed 20/env responses from the shared cache.
+run:
+  name: leaderboard_gemini_flash_all_envs_direct_100_thinking0
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_100_thinking0
+  cache: true
+  cache_path: reports/runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0/models/gemini_3_5_flash_direct_all_envs_20_thinking0/agents/direct/responses_cache.jsonl
+  max_workers: 1
+models:
+  - name: gemini_3_5_flash_direct_all_envs_20_thinking0
+    provider: gemini
+    model: gemini-3.5-flash
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra:
+      use_default_temperature: true
+      thinking_config:
+        thinking_budget: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 1.50
+      output_usd_per_1m: 9.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 100
+    seed: 123
+  - name: auctions
+    num_tasks: 100
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 100
+    seed: 123
+  - name: market_making
+    num_tasks: 100
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 100
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 100
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

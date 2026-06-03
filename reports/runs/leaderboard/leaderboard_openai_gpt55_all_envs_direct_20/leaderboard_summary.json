@@ -1,0 +1,139 @@
+{
+  "agent_modes": [
+    "direct"
+  ],
+  "artefacts": {
+    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\headline_candidates.md",
+    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\leaderboard_report.md",
+    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\leaderboard_summary.json",
+    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\paired_deltas.jsonl"
+  },
+  "caveats": [
+    "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
+    "Higher mean score is better; lower posterior error, risk violations, parse failures, latency, cost, and robustness score drop are better.",
+    "Cost is reported only when pricing was configured; otherwise it is 'not estimated'.",
+    "No hidden chain-of-thought is collected or reported; graders and labels are deterministic.",
+    "These are benchmark diagnostics, not evidence of trading usefulness or profitability.",
+    "These are synthetic deterministic evaluation tasks, not live-market or deployment outcomes.",
+    "Leaderboard rows describe only the configured model, agent mode, environments, and task set; they are not frontier-model claims.",
+    "This is a PRELIMINARY tiny real-model run (<= a handful of tasks per environment); expand the evaluation before drawing strong conclusions."
+  ],
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "headline_candidates": [],
+  "leaderboard": [
+    {
+      "agent": "direct",
+      "cost_estimated": true,
+      "estimated_cost_usd": 1.878215,
+      "latency_p50_ms": 11993.38820000412,
+      "latency_p95_ms": 14242.159400002129,
+      "mean_score": 0.21315729982014398,
+      "model": "openai_gpt_5_5_direct_all_envs_20",
+      "n_envs": 6,
+      "n_tasks": 120,
+      "parse_failure_rate": 0.7416666666666667,
+      "provider": "openai",
+      "result_label": "real API model",
+      "risk_violation_rate": 0.0,
+      "robustness_mean_score_drop": null,
+      "robustness_paraphrase_consistency": null
+    }
+  ],
+  "leaderboard_name": "leaderboard_openai_gpt55_all_envs_direct_20",
+  "model_cards": [
+    "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\model_cards\\leaderboard_openai_gpt55_all_envs_direct_20__openai_gpt_5_5_direct_all_envs_20__direct__openai_gpt_5_5_direct_all_envs_20_direct.md"
+  ],
+  "models_pending": [],
+  "models_run": [
+    {
+      "agent_modes": [
+        "direct"
+      ],
+      "agents": {
+        "direct": {
+          "baseline_kind": "real API model",
+          "cost_latency": {
+            "cost_estimated": true,
+            "cost_note": "estimated over 120 model tasks",
+            "estimated_total_cost_usd": 1.878215,
+            "invalid_response_rate": 0.7416666666666667,
+            "mean_latency_ms": 10784.705446666692,
+            "n_model_tasks": 120,
+            "n_tasks": 120,
+            "p50_latency_ms": 11993.38820000412,
+            "p95_latency_ms": 14242.159400002129,
+            "parse_failure_rate": 0.7416666666666667,
+            "provider_error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "total_input_tokens": 54781,
+            "total_output_tokens": 53477,
+            "total_tokens": 108258
+          },
+          "latency_p50_ms": 11993.38820000412,
+          "latency_p95_ms": 14242.159400002129,
+          "mean_score": 0.21315729982014398,
+          "n_tasks": 120,
+          "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\models\\openai_gpt_5_5_direct_all_envs_20\\agents\\direct",
+          "parse_failure_rate": 0.7416666666666667,
+          "run_id": "leaderboard_openai_gpt55_all_envs_direct_20__openai_gpt_5_5_direct_all_envs_20__direct-20260603T001730",
+          "run_name": "leaderboard_openai_gpt55_all_envs_direct_20__openai_gpt_5_5_direct_all_envs_20__direct"
+        }
+      },
+      "label": "openai_gpt_5_5_direct_all_envs_20",
+      "model_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20\\models\\openai_gpt_5_5_direct_all_envs_20",
+      "provider": "openai",
+      "result_label": "real API model",
+      "robustness": {},
+      "usable": true
+    }
+  ],
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_all_envs_direct_20",
+  "paired_metrics": {},
+  "preliminary": true,
+  "provider_availability": {
+    "openai_gpt_5_5_direct_all_envs_20": {
+      "detail": "openai installed and OPENAI_API_KEY is set; appears usable.",
+      "key_env": "OPENAI_API_KEY",
+      "key_present": true,
+      "key_required": true,
+      "package_available": true,
+      "provider": "openai",
+      "usable": true
+    }
+  },
+  "real_execution_permitted": true,
+  "run_id": "leaderboard_openai_gpt55_all_envs_direct_20-20260603T001728",
+  "tasks_per_agent": 120,
+  "timestamp": "2026-06-03T00:17:28Z"
+}

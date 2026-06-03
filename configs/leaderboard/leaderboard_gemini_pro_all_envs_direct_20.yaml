@@ -1,0 +1,54 @@
+# Gemini 3.1 Pro Preview direct-agent 20/env row across all environments.
+#
+# The initial smoke with thinking_budget=0 was rejected because Gemini 3 Pro
+# cannot disable thinking. A six-task rescue probe with thinking_level=low and
+# max_tokens=4096 was clean, so this full row uses the same output settings.
+run:
+  name: leaderboard_gemini_pro_all_envs_direct_20
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_pro_all_envs_direct_20
+  cache: true
+  max_workers: 1
+models:
+  - name: gemini_3_1_pro_preview_direct_all_envs_20
+    provider: gemini
+    model: gemini-3.1-pro-preview
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra:
+      use_default_temperature: true
+      thinking_config:
+        thinking_level: low
+    max_tokens: 4096
+    max_retries: 3
+    timeout_seconds: 120
+    pricing:
+      input_usd_per_1m: 2.00
+      output_usd_per_1m: 12.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+  - name: auctions
+    num_tasks: 20
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 20
+    seed: 123
+  - name: market_making
+    num_tasks: 20
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 20
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 20
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

@@ -1,0 +1,105 @@
+# Tiny Claude Sonnet 4.6 direct-agent robustness run across all environments.
+#
+# Mirrors the OpenAI gpt-5.4 robustness probe
+# (configs/leaderboard/leaderboard_openai_gpt54_robustness_tiny.yaml) in shape:
+# all 6 environments, three deterministic variants per task (paraphrase,
+# irrelevant_context, risk_pressure). It runs on the strongest CLEAN Claude direct
+# row (Sonnet 4.6 at max_tokens=1536).
+#
+# SCOPE: 3 base tasks/env (not 5 as in the gpt-5.4 robustness config) => 18 base +
+# 54 variants = 72 records. The base count was reduced from 5 to 3 purely for the
+# budget gate: at max_tokens=1536 a 5/env run's UPPER estimate (~$2.95) would push
+# cumulative estimated Claude spend over the $4.50 gate. At 3/env the upper estimate
+# is ~$1.77, keeping cumulative estimate ~$4.20 (< $4.50) and worst-case remaining
+# budget > $0.50. Slightly noisier than the gpt-5.4 robustness n; documented as such.
+#
+# IMPORTANT: max_tokens=1536 (not 384 as in the gpt-5.4 robustness config) because
+# Sonnet 4.6 writes a long reasoning preamble and truncates mid-JSON at small
+# budgets (a low budget would corrupt the robustness metrics with spurious parse
+# failures); see leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536.yaml. The
+# robustness runner does not persist per-call usage/cost, so this run is bounded by
+# its manual pre-run upper estimate. The user authorized robustness on the strongest
+# clean row (Sonnet), which requires exceeding the usual $2.00 single-run estimate
+# gate; probe-measured actual (~$0.75) is far below the upper bound.
+run:
+  name: leaderboard_claude_sonnet_robustness_tiny
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: direct
+  provider: anthropic
+  model: claude-sonnet-4-6
+  api_key_env: ANTHROPIC_API_KEY
+  temperature: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 1536
+  pricing:
+    input_usd_per_1m: 3.00
+    output_usd_per_1m: 15.00
+
+environments:
+  - name: bayesian_games
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: auctions
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: hidden_regimes
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: market_making
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: prediction_markets
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: adversarial_risk
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 3
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 20
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

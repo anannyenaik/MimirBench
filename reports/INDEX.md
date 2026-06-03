@@ -20,11 +20,18 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | prediction_markets_reference_smoke | `runs/prediction_markets_reference_smoke` | reference sanity check | 50 | 1 |
 | small_transformer_bayes_eval | `runs/small_transformer_bayes_eval` | unknown | n/a | n/a |
 | tool_reference_bayes | `runs/tool_reference_bayes` | deterministic non-model tool baseline | 10 | 1 |
+| verify_require_tool_bayes_micro | `runs/verify_require_tool_bayes_micro` | real API model | 3 | 0.619711 |
+| verify_require_tool_bayes_micro_v2 | `runs/verify_require_tool_bayes_micro_v2` | real API model | 3 | 0.999637 |
+| verify_require_tool_predmkt_micro | `runs/verify_require_tool_predmkt_micro` | real API model | 3 | 0.237347 |
 
 ## Robustness runs
 
 | Name | Path | Label | Tasks | Mean score / drop |
 | --- | --- | --- | ---: | ---: |
+| leaderboard_claude_sonnet_robustness_tiny | `runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny` | real model | 18 | -0.00529801 |
+| leaderboard_gemini_pro_robustness_small | `runs/leaderboard/leaderboard_gemini_pro_robustness_small` | real model | 18 | -0.0124366 |
+| leaderboard_gemini_strongest_robustness_tiny | `runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny` | real model | 30 | 0.0280413 |
+| leaderboard_openai_gpt54_robustness_tiny | `runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny` | real model | 30 | 0.0484097 |
 | robustness_mock_all_envs | `runs/robustness_mock_all_envs` | mock agent (diagnostic baseline) | 90 | 0.00548605 |
 | robustness_mock_bayes | `runs/robustness_mock_bayes` | mock agent (diagnostic baseline) | 25 | 0.0949578 |
 | robustness_reference_all_envs | `runs/robustness_reference_all_envs` | reference solver (sanity check) | 90 | 1.32169e-18 |
@@ -37,6 +44,46 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | mock_bayes | `runs/comparisons/mock_bayes` | reference sanity check | 20 | n/a |
 | reference_bayes | `runs/comparisons/reference_bayes` | reference sanity check | 20 | n/a |
 | tool_reference_bayes | `runs/comparisons/tool_reference_bayes` | reference sanity check | 20 | n/a |
+
+## Leaderboard runs
+
+| Name | Path | Models run | Pending | Tasks/agent | Headlines | Preliminary |
+| --- | --- | ---: | ---: | ---: | ---: | :---: |
+| leaderboard_all_available_tiny | `runs/leaderboard/leaderboard_all_available_tiny` | 0 | 3 | 60 | 0 | yes |
+| leaderboard_claude_haiku_all_envs_direct_20 | `runs/leaderboard/leaderboard_claude_haiku_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_claude_sonnet_all_envs_direct_20 | `runs/leaderboard/leaderboard_claude_sonnet_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536 | `runs/leaderboard/leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_claude_sonnet_rescue_probe_1024 | `runs/leaderboard/leaderboard_claude_sonnet_rescue_probe_1024` | 1 | 0 | 30 | 0 | yes |
+| leaderboard_gemini_flash_all_envs_direct_20 | `runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_gemini_flash_all_envs_direct_20_thinking0 | `runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_gemini_flash_lite_all_envs_direct_20 | `runs/leaderboard/leaderboard_gemini_flash_lite_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_gemini_flash_lite_smoke | `runs/leaderboard/leaderboard_gemini_flash_lite_smoke` | 1 | 0 | 6 | 0 | yes |
+| leaderboard_gemini_flash_rescue_probe_thinking0 | `runs/leaderboard/leaderboard_gemini_flash_rescue_probe_thinking0` | 1 | 0 | 6 | 0 | yes |
+| leaderboard_gemini_pro_all_envs_direct_20 | `runs/leaderboard/leaderboard_gemini_pro_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_gemini_pro_all_envs_direct_20_retry | `runs/leaderboard/leaderboard_gemini_pro_all_envs_direct_20_retry` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_gemini_pro_rescue_probe_low_thinking | `runs/leaderboard/leaderboard_gemini_pro_rescue_probe_low_thinking` | 1 | 0 | 6 | 0 | yes |
+| leaderboard_gemini_pro_smoke | `runs/leaderboard/leaderboard_gemini_pro_smoke` | 1 | 0 | 6 | 0 | yes |
+| leaderboard_openai_all_envs_direct_tiny | `runs/leaderboard/leaderboard_openai_all_envs_direct_tiny` | 1 | 0 | 30 | 0 | yes |
+| leaderboard_openai_bayes_direct_20 | `runs/leaderboard/leaderboard_openai_bayes_direct_20` | 1 | 0 | 20 | 0 | yes |
+| leaderboard_openai_bayes_direct_micro | `runs/leaderboard/leaderboard_openai_bayes_direct_micro` | 1 | 0 | 5 | 0 | yes |
+| leaderboard_openai_frontier_all_envs_direct_20 | `runs/leaderboard/leaderboard_openai_frontier_all_envs_direct_20` | 2 | 0 | 120 | 0 | yes |
+| leaderboard_openai_gpt54mini_bayes_direct_tool_50 | `runs/leaderboard/leaderboard_openai_gpt54mini_bayes_direct_tool_50` | 1 | 0 | 50 | 0 | no |
+| leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25 | `runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25` | 1 | 0 | 50 | 0 | no |
+| leaderboard_openai_gpt55_all_envs_direct_20 | `runs/leaderboard/leaderboard_openai_gpt55_all_envs_direct_20` | 1 | 0 | 120 | 0 | yes |
+| leaderboard_openai_gpt55_rescue_probe | `runs/leaderboard/leaderboard_openai_gpt55_rescue_probe` | 1 | 0 | 6 | 0 | yes |
+| leaderboard_openai_minis_all_envs_direct_20 | `runs/leaderboard/leaderboard_openai_minis_all_envs_direct_20` | 2 | 0 | 120 | 0 | yes |
+| leaderboard_openai_modern_mini_all_envs_direct_tiny | `runs/leaderboard/leaderboard_openai_modern_mini_all_envs_direct_tiny` | 1 | 0 | 30 | 0 | yes |
+
+Leaderboard rows are real model results only when `models_run > 0` and the saved summary contains concrete per-agent run artefacts.
+
+## Standalone leaderboard analysis notes
+
+- `runs/leaderboard/claude_model_ladder_direct_20env_comparison.md`
+- `runs/leaderboard/cross_provider_direct_20env_comparison.md`
+- `runs/leaderboard/gemini_budget_extension_attempts.md`
+- `runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md`
+- `runs/leaderboard/gemini_strongest_robustness_comparison.md`
+- `runs/leaderboard/openai_model_ladder_20env_comparison.md`
 
 ## Interpretability runs
 

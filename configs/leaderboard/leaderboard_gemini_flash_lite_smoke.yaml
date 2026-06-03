@@ -1,0 +1,52 @@
+# Gemini Flash-Lite direct-agent smoke across all environments.
+#
+# Uses the current stable Flash-Lite model confirmed from the official Gemini
+# model docs and SDK model listing. Pricing is Gemini Developer API Standard
+# text pricing in USD per 1M tokens; output pricing includes thinking tokens.
+run:
+  name: leaderboard_gemini_flash_lite_smoke
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_flash_lite_smoke
+  cache: true
+  max_workers: 1
+models:
+  - name: gemini_3_1_flash_lite_direct_smoke
+    provider: gemini
+    model: gemini-3.1-flash-lite
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra:
+      use_default_temperature: true
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 0.25
+      output_usd_per_1m: 1.50
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 1
+    seed: 123
+  - name: auctions
+    num_tasks: 1
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 1
+    seed: 123
+  - name: market_making
+    num_tasks: 1
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 1
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 1
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

@@ -120,6 +120,7 @@ def _resolve_api(config: AgentConfig) -> APIModelAgent:
         api_key_env=config.api_key_env,
         pricing=_pricing(config),
         seed=config.seed,
+        request_extra=config.request_extra,
     )
 
 
@@ -201,6 +202,8 @@ def _resolve_tool(config: AgentConfig, *, spec: EnvironmentSpec | None) -> ToolA
             temperature=config.temperature,
             max_tokens=config.max_tokens,
             seed=config.seed,
+            require_tool_first=config.require_tool_first,
+            request_extra=config.request_extra,
         )
     raise ValueError(
         f"unknown tool_policy {config.tool_policy!r}. Expected one of: reference, model."

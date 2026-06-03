@@ -60,6 +60,7 @@ interp = [
 # Hosted-model API clients.
 api = [
     "openai>=1.0",
+    "google-genai>=2.0",
 ]
 # Experiment tracking.
 tracking = [
@@ -140,6 +141,7 @@ module = [
     "transformers.*",
     "openai.*",
     "anthropic.*",
+    "google.*",
     "sklearn.*",
 ]
 ignore_missing_imports = true

@@ -1,0 +1,294 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gemini-3.1-flash-lite",
+      "model_name": null,
+      "name": "gemini_3_1_flash_lite_direct_all_envs_20::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.25,
+        "output_usd_per_1m": 1.5
+      },
+      "provider": "gemini",
+      "request_extra": {
+        "use_default_temperature": true
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 1.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "gemini_3_1_flash_lite_direct_all_envs_20::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 120 model tasks",
+    "estimated_total_cost_usd": 0.036121,
+    "invalid_response_rate": 0.025,
+    "mean_latency_ms": 1115.1179241666493,
+    "n_model_tasks": 120,
+    "n_tasks": 120,
+    "p50_latency_ms": 736.3240999911795,
+    "p95_latency_ms": 904.6354799895197,
+    "parse_failure_rate": 0.016666666666666666,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 59377,
+    "total_output_tokens": 14179,
+    "total_tokens": 73556
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.3541529158309907, 0.11736691456942948, 0.1616788863690623, 0.3668012832305175], \"reasoning_summary\": \"Calculated the posterior probabilities using Bayes' Theorem by multiplying each source's prior probability by the likelihood of observing symbol 4, then normalizing the results.\"}",
+      "score": 0.87232078068939,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.03847683935260195, 0.046903248882042784, 0.9146199117653553], \"reasoning_summary\": \"Calculated the likelihood of the observed sequence for each source by multiplying the individual symbol probabilities and applied Bayes' theorem using the given priors. Source C dominates the posteri",
+      "score": 0.2807294964465974,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.06733226487103837, 0.5979503373468087, 0.33471739778215294], \"reasoning_summary\": \"Calculated the likelihood of the observed sequence for each source by multiplying individual symbol probabilities and applied Bayes' theorem using the given priors. The posterior distribution reflects",
+      "score": 0.7066458349979114,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.3831206869403889, 0.15858025255470198, 0.01258671853526971, 0.4457123419696395], \"reasoning_summary\": \"Calculated the likelihood for each source by multiplying the probabilities of the sequence symbols 3, 1, and 3, then applied Bayes' theorem using the provided prior probabilities. ",
+      "score": 0.6964452669867638,
+      "task_id": "bayesian_games-128",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.18370776510373855, 0.12002360580971217, 0.6962686290865493], \"reasoning_summary\": \"Calculated the likelihood for each source by multiplying the conditional probabilities of observing symbol 3 and symbol 1, then applied Bayes' theorem using the provided prior probabilities. Normalize",
+      "score": 0.9109504717850432,
+      "task_id": "bayesian_games-129",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.05,
+        "latency_mean_ms": 708.3898449978733,
+        "latency_p50_ms": 702.8082499964512,
+        "latency_p95_ms": 785.856745010824,
+        "mean_score": 0.8000000000000002,
+        "metric_means": {
+          "correct_constraint_identified": 0.21052631578947367,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.95,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.05
+      },
+      "auctions": {
+        "invalid_response_rate": 0.1,
+        "latency_mean_ms": 905.1751150014752,
+        "latency_p50_ms": 823.3611000032397,
+        "latency_p95_ms": 1271.51397999478,
+        "mean_score": 0.19718330332518322,
+        "metric_means": {
+          "expected_value_abs_error": 36.978804474584585,
+          "expected_value_rel_error": 19.927946973456255
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.1,
+        "pass_rate": 0.15,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.1
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 2892.362560001493,
+        "latency_p50_ms": 763.6473500024294,
+        "latency_p95_ms": 2961.320485002246,
+        "mean_score": 0.8068531337861211,
+        "metric_means": {
+          "answer_sum": 0.99,
+          "posterior_l1_error": 0.38629373242775783,
+          "posterior_max_error": 0.19193979911971956,
+          "posterior_tv_error": 0.19314686621387891
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.2,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 658.2360100001097,
+        "latency_p50_ms": 677.0702999929199,
+        "latency_p95_ms": 734.4400100097118,
+        "mean_score": 0.8678702343699257,
+        "metric_means": {
+          "posterior_l1_error": 0.26425953126014873,
+          "posterior_tv_error": 0.13212976563007436
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.2,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 788.0449149990454,
+        "latency_p50_ms": 797.4118000056478,
+        "latency_p95_ms": 870.4820949984424,
+        "mean_score": 0.6574965266688014,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.19918867644927268,
+          "inventory_risk_score": 0.7,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.25,
+          "spread_reasonableness": 0.5396445629949347
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.65,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.25
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 738.499099999899,
+        "latency_p50_ms": 740.6967999995686,
+        "latency_p95_ms": 796.9029649946606,
+        "mean_score": 0.5917152492729413,
+        "metric_means": {
+          "abstention_quality": 0.7525,
+          "action_optimality": 0.39344701971516227,
+          "calibration_proxy": 0.7780000000000001,
+          "expected_value_error": 0.11209050000000001,
+          "fair_probability_error": 0.043393749999999995,
+          "regret": 0.26489850727265,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.25,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.025,
+      "latency_mean_ms": 1115.1179241666493,
+      "latency_p50_ms": 736.3240999911795,
+      "latency_p95_ms": 904.6354799895197,
+      "mean_score": 0.6535197412371616,
+      "metric_means": {
+        "abstention_quality": 0.8762500000000001,
+        "action_optimality": 0.39344701971516227,
+        "adverse_selection_penalty": 0.19918867644927268,
+        "answer_sum": 0.99,
+        "calibration_proxy": 0.7780000000000001,
+        "correct_constraint_identified": 0.21052631578947367,
+        "expected_value_abs_error": 36.978804474584585,
+        "expected_value_error": 0.11209050000000001,
+        "expected_value_rel_error": 19.927946973456255,
+        "fair_probability_error": 0.043393749999999995,
+        "inventory_risk_score": 0.7,
+        "posterior_l1_error": 0.32527663184395333,
+        "posterior_max_error": 0.19193979911971956,
+        "posterior_tv_error": 0.16263831592197667,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 1.0,
+        "regret": 0.26489850727265,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.125,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.5396445629949347,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 120,
+      "parse_failure_rate": 0.016666666666666666,
+      "pass_rate": 0.4,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.06666666666666667
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_lite_all_envs_direct_20\\models\\gemini_3_1_flash_lite_direct_all_envs_20\\agents\\direct",
+  "run_id": "leaderboard_gemini_flash_lite_all_envs_direct_20__gemini_3_1_flash_lite_direct_all_envs_20__direct-20260603T052929",
+  "run_name": "leaderboard_gemini_flash_lite_all_envs_direct_20__gemini_3_1_flash_lite_direct_all_envs_20__direct",
+  "timestamp": "2026-06-03T05:29:29Z"
+}

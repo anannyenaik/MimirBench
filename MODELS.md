@@ -14,6 +14,7 @@ test; you only install model extras when you actually want to run a model.
 | --- | --- | --- | --- | --- | --- |
 | OpenAI-compatible | `api` | `openai` | `openai` (`.[api]`) | `OPENAI_API_KEY` | only if `pricing` configured |
 | Anthropic | `api` | `anthropic` | `anthropic` | `ANTHROPIC_API_KEY` | only if `pricing` configured |
+| Gemini | `api` | `gemini` | `google-genai` (`.[api]`) | `GEMINI_API_KEY` | only if `pricing` configured |
 | Generic HTTP (OpenAI-shaped) | `api` | `generic_http` | none (stdlib) | `MIMIRBENCH_LLM_API_KEY` (optional) | only if `pricing` configured |
 | Local Hugging Face | `local` | — | `torch`+`transformers` (`.[ml]`) | none | never (no provider billing) |
 
@@ -30,6 +31,7 @@ from a config file and **never** written to any run record, summary, or log.
 ```bash
 export OPENAI_API_KEY=sk-...        # OpenAI
 export ANTHROPIC_API_KEY=sk-ant-... # Anthropic (optional support)
+export GEMINI_API_KEY=...           # Gemini
 ```
 
 To use a non-default variable name, set `api_key_env` in the agent config (the
@@ -40,7 +42,9 @@ Check availability without making a call (the key value is never printed):
 ```bash
 mimirbench check-provider openai
 mimirbench check-provider anthropic
+mimirbench check-provider gemini
 mimirbench check-provider local
+mimirbench check-provider generic_http --base-url http://localhost:8000
 ```
 
 `check-provider` reports whether the package is installed, whether the key env
@@ -49,7 +53,7 @@ var is set, and whether the provider therefore *appears* usable.
 ## Optional dependencies
 
 ```bash
-pip install -e ".[api]"   # openai client
+pip install -e ".[api]"   # openai + google-genai clients
 pip install anthropic     # optional Anthropic support
 pip install -e ".[ml]"    # torch + transformers for local models
 ```
@@ -98,6 +102,42 @@ Stage 5 ships these tiny real-model configs (5–20 tasks, cache on,
 | `configs/eval_local_bayes_smoke.yaml` | local HF | 10 Bayesian tasks |
 | `configs/eval_local_all_envs_tiny.yaml` | local HF | 5 tasks × 6 families |
 | `configs/eval_tool_api_openai_bayes_smoke.yaml` | OpenAI + tools | tool loop |
+
+## Real model leaderboard
+
+The leaderboard configs pair `direct`, `tool`, and `reflective` agents on the
+same environment/task IDs and write artefacts under `reports/runs/leaderboard/`.
+Running the default command is safe when providers are unavailable: it writes a
+pending summary/report and does not fabricate rows.
+
+```bash
+mimirbench check-provider openai
+mimirbench check-provider anthropic
+mimirbench check-provider local
+mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml
+mimirbench summarise-leaderboard reports/runs/leaderboard/leaderboard_all_available_tiny
+```
+
+Real API/local execution requires explicit permission in addition to usable
+provider checks:
+
+```bash
+mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml --allow-real-models
+```
+
+Leaderboard configs:
+
+| Config | Providers | Scope |
+| --- | --- | --- |
+| `configs/leaderboard/leaderboard_openai_tiny.yaml` | OpenAI | 10 tasks x 6 families, direct/tool/reflective, robustness |
+| `configs/leaderboard/leaderboard_anthropic_tiny.yaml` | Anthropic | 10 tasks x 6 families, direct/tool/reflective, robustness |
+| `configs/leaderboard/leaderboard_local_tiny.yaml` | local HF | 10 tasks x 6 families, direct/tool/reflective, robustness |
+| `configs/leaderboard/leaderboard_all_available_tiny.yaml` | OpenAI, Anthropic, local HF | all configured providers that pass checks |
+
+The summary table includes model, provider, agent, environments, tasks, mean
+score, robustness, risk-violation rate, parse-failure rate, cost, and latency
+p50/p95. `paired_deltas.jsonl` aligns comparisons by environment, task ID, seed,
+and robustness variant ID where applicable.
 
 ## Cost and latency
 

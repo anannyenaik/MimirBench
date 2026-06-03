@@ -1,0 +1,55 @@
+# Gemini 3.1 Pro Preview direct-agent smoke across all environments.
+#
+# Official docs and the Gemini provider model listing identify the current
+# Pro/Preview text model as gemini-3.1-pro-preview. This smoke checks whether
+# direct JSON responses are clean before any full 20/env run. Standard text
+# pricing is USD per 1M tokens; output pricing includes thinking tokens.
+run:
+  name: leaderboard_gemini_pro_smoke
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_pro_smoke
+  cache: true
+  max_workers: 1
+models:
+  - name: gemini_3_1_pro_preview_direct_smoke
+    provider: gemini
+    model: gemini-3.1-pro-preview
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra:
+      use_default_temperature: true
+      thinking_config:
+        thinking_budget: 0
+    max_tokens: 1024
+    max_retries: 3
+    timeout_seconds: 90
+    pricing:
+      input_usd_per_1m: 2.00
+      output_usd_per_1m: 12.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 1
+    seed: 123
+  - name: auctions
+    num_tasks: 1
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 1
+    seed: 123
+  - name: market_making
+    num_tasks: 1
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 1
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 1
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

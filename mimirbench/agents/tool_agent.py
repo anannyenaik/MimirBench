@@ -401,6 +401,8 @@ class ModelToolAgent(ToolAgent):
         max_tokens: int = 1024,
         seed: int | None = None,
         system_prompt: str = TOOL_SYSTEM_PROMPT,
+        require_tool_first: bool = False,
+        request_extra: dict[str, Any] | None = None,
     ) -> None:
         super().__init__(
             name or f"tool::{client.provider}::{client.model}",
@@ -414,6 +416,8 @@ class ModelToolAgent(ToolAgent):
         self.max_tokens = max_tokens
         self.seed = seed
         self.system_prompt = system_prompt
+        self.require_tool_first = require_tool_first
+        self.request_extra = dict(request_extra or {})
         self._tool_block = tool_descriptions(self.allowed_tools)
         self._prompt_tokens = 0
         self._completion_tokens = 0
@@ -443,6 +447,7 @@ class ModelToolAgent(ToolAgent):
             temperature=self.temperature,
             max_tokens=self.max_tokens,
             seed=self.seed,
+            extra=dict(self.request_extra),
         )
         envelope = self.client.generate(request)
         self._n_model_calls += 1
@@ -455,10 +460,12 @@ class ModelToolAgent(ToolAgent):
         return envelope.raw_text
 
     def decide(self, task: Task, scratchpad: list[ToolCall]) -> ToolDecision:
+        require_tool = self.require_tool_first and not scratchpad and bool(self.allowed_tools)
         prompt = build_tool_step_prompt(
             task,
             tool_block=self._tool_block,
             observations=_render_observations(scratchpad),
+            require_tool=require_tool,
         )
         obj = extract_json(self._call_model(prompt)) or {}
         summary = obj.get("reasoning_summary")
@@ -472,6 +479,11 @@ class ModelToolAgent(ToolAgent):
                 arguments=arguments if isinstance(arguments, dict) else {},
                 reasoning_summary=summary,
             )
+        if require_tool:
+            # A tool call was required this turn but the model answered directly;
+            # reject it (recorded as 'no_tool_requested') so the loop re-prompts.
+            # The step budget bounds how many times this can repeat.
+            return ToolDecision(reasoning_summary=summary)
         final = obj.get("final")
         if isinstance(final, dict):
             if "reasoning_summary" not in final and summary is not None:

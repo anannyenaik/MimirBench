@@ -1,0 +1,114 @@
+{
+  "agent_modes": [
+    "direct"
+  ],
+  "artefacts": {
+    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\headline_candidates.md",
+    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\leaderboard_report.md",
+    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\leaderboard_summary.json",
+    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\paired_deltas.jsonl"
+  },
+  "caveats": [
+    "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
+    "Higher mean score is better; lower posterior error, risk violations, parse failures, latency, cost, and robustness score drop are better.",
+    "Cost is reported only when pricing was configured; otherwise it is 'not estimated'.",
+    "No hidden chain-of-thought is collected or reported; graders and labels are deterministic.",
+    "These are benchmark diagnostics, not evidence of trading usefulness or profitability.",
+    "These are synthetic deterministic evaluation tasks, not live-market or deployment outcomes.",
+    "Leaderboard rows describe only the configured model, agent mode, environments, and task set; they are not frontier-model claims.",
+    "This is a PRELIMINARY tiny real-model run (<= a handful of tasks per environment); expand the evaluation before drawing strong conclusions."
+  ],
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "headline_candidates": [],
+  "leaderboard": [
+    {
+      "agent": "direct",
+      "cost_estimated": true,
+      "estimated_cost_usd": 0.005604,
+      "latency_p50_ms": 1221.6724499958218,
+      "latency_p95_ms": 2328.1200350116724,
+      "mean_score": 0.7806153332920294,
+      "model": "openai_gpt_4_1_mini_direct_micro",
+      "n_envs": 1,
+      "n_tasks": 20,
+      "parse_failure_rate": 0.0,
+      "provider": "openai",
+      "result_label": "real API model",
+      "risk_violation_rate": 0.0,
+      "robustness_mean_score_drop": null,
+      "robustness_paraphrase_consistency": null
+    }
+  ],
+  "leaderboard_name": "leaderboard_openai_bayes_direct_20",
+  "model_cards": [
+    "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\model_cards\\leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct__openai_gpt_4_1_mini_direct_micro_direct.md"
+  ],
+  "models_pending": [],
+  "models_run": [
+    {
+      "agent_modes": [
+        "direct"
+      ],
+      "agents": {
+        "direct": {
+          "baseline_kind": "real API model",
+          "cost_latency": {
+            "cost_estimated": true,
+            "cost_note": "estimated over 20 model tasks",
+            "estimated_total_cost_usd": 0.005604,
+            "invalid_response_rate": 0.0,
+            "mean_latency_ms": 1467.404370001168,
+            "n_model_tasks": 20,
+            "n_tasks": 20,
+            "p50_latency_ms": 1221.6724499958218,
+            "p95_latency_ms": 2328.1200350116724,
+            "parse_failure_rate": 0.0,
+            "provider_error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "total_input_tokens": 9637,
+            "total_output_tokens": 1093,
+            "total_tokens": 10730
+          },
+          "latency_p50_ms": 1221.6724499958218,
+          "latency_p95_ms": 2328.1200350116724,
+          "mean_score": 0.7806153332920294,
+          "n_tasks": 20,
+          "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\models\\openai_gpt_4_1_mini_direct_micro\\agents\\direct",
+          "parse_failure_rate": 0.0,
+          "run_id": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct-20260602T200423",
+          "run_name": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct"
+        }
+      },
+      "label": "openai_gpt_4_1_mini_direct_micro",
+      "model_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\models\\openai_gpt_4_1_mini_direct_micro",
+      "provider": "openai",
+      "result_label": "real API model",
+      "robustness": {},
+      "usable": true
+    }
+  ],
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20",
+  "paired_metrics": {},
+  "preliminary": true,
+  "provider_availability": {
+    "openai_gpt_4_1_mini_direct_micro": {
+      "detail": "openai installed and OPENAI_API_KEY is set; appears usable.",
+      "key_env": "OPENAI_API_KEY",
+      "key_present": true,
+      "key_required": true,
+      "package_available": true,
+      "provider": "openai",
+      "usable": true
+    }
+  },
+  "real_execution_permitted": true,
+  "run_id": "leaderboard_openai_bayes_direct_20-20260602T200422",
+  "tasks_per_agent": 20,
+  "timestamp": "2026-06-02T20:04:22Z"
+}

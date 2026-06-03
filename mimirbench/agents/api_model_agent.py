@@ -1,8 +1,8 @@
 """Hosted-API model agent.
 
 A :class:`~mimirbench.agents.direct_agent.DirectAgent` backed by a hosted-API
-:class:`~mimirbench.agents.model_client.ModelClient` (OpenAI, Anthropic, or a
-generic OpenAI-compatible HTTP endpoint). The provider SDKs are optional and
+:class:`~mimirbench.agents.model_client.ModelClient` (OpenAI, Anthropic, Gemini,
+or a generic OpenAI-compatible HTTP endpoint). The provider SDKs are optional and
 imported lazily by the underlying client, so the core harness and tests never
 require them.
 
@@ -11,6 +11,8 @@ through configs or stored in run records.
 """
 
 from __future__ import annotations
+
+from typing import Any
 
 from mimirbench.agents.direct_agent import DirectAgent
 from mimirbench.agents.model_client import Pricing, RetryConfig
@@ -39,6 +41,7 @@ class APIModelAgent(DirectAgent):
         pricing: Pricing | None = None,
         seed: int | None = None,
         top_p: float | None = None,
+        request_extra: dict[str, Any] | None = None,
     ) -> None:
         client = build_api_client(
             provider,
@@ -57,6 +60,7 @@ class APIModelAgent(DirectAgent):
             max_tokens=max_tokens,
             seed=seed,
             top_p=top_p,
+            request_extra=request_extra,
         )
         # Convenience attributes for resolvers/tests; the client owns the SDK.
         self.model = model

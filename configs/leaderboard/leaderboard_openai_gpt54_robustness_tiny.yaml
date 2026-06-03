@@ -1,0 +1,87 @@
+# Tiny gpt-5.4 direct-agent robustness run across all environments.
+#
+# This is a small synthetic robustness/failure-mode probe for the strongest
+# completed OpenAI direct row. It uses direct model calls only: no tools, no
+# reflective agent, and no leaderboard reruns.
+run:
+  name: leaderboard_openai_gpt54_robustness_tiny
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: direct
+  provider: openai
+  model: gpt-5.4
+  api_key_env: OPENAI_API_KEY
+  temperature: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 384
+  pricing:
+    input_usd_per_1m: 2.50
+    output_usd_per_1m: 15.00
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: auctions
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: hidden_regimes
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: market_making
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: prediction_markets
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: adversarial_risk
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 3
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 20
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

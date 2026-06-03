@@ -19,6 +19,7 @@ environment; the agent loop validates every request against it.
 
 from __future__ import annotations
 
+import math
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -52,11 +53,71 @@ class ToolSpec:
 # --------------------------------------------------------------------------- #
 # Tool implementations (thin, validating wrappers around the shared primitives).
 # --------------------------------------------------------------------------- #
+# Small, principled tolerances so an agent that copies prompt-rounded
+# probabilities (shown to 3 decimals) or 1-indexed symbol labels still produces a
+# usable tool call. These never mask genuinely malformed input: a vector that is
+# not already close to a distribution, or observations out of range under both 0-
+# and 1-indexed readings, are passed through untouched for the strict primitive to
+# reject.
+_RENORM_TOL = 1e-2
+
+
+def _coerce_distribution(values: Any) -> Any:
+    """Renormalise a near-valid probability vector to sum to exactly 1.
+
+    Returns ``values`` unchanged unless it is a finite, non-negative numeric
+    vector that already sums to within ``_RENORM_TOL`` of 1.
+    """
+    if not isinstance(values, (list, tuple)) or not values:
+        return values
+    try:
+        floats = [float(v) for v in values]
+    except (TypeError, ValueError):
+        return values
+    if any(not math.isfinite(v) or v < 0 for v in floats):
+        return values
+    total = math.fsum(floats)
+    if total <= 0.0 or not math.isclose(total, 1.0, abs_tol=_RENORM_TOL):
+        return values
+    return [v / total for v in floats]
+
+
+def _normalize_observations(observations: Any, likelihood: Any) -> Any:
+    """Coerce 1-indexed observations to 0-indexed signal indices when unambiguous.
+
+    The prompt labels signals ``symbol 1 .. symbol m``, so an agent often passes
+    1-indexed values. If the observations fall outside the 0-indexed range
+    ``[0, m)`` but every value fits a 1-indexed reading ``[1, m]``, shift them down
+    by one. Valid 0-indexed observations are returned unchanged.
+    """
+    if not isinstance(observations, (list, tuple)) or not observations:
+        return observations
+    try:
+        obs = [int(s) for s in observations]
+    except (TypeError, ValueError):
+        return observations
+    try:
+        n_signals = len(likelihood[0])
+    except (TypeError, IndexError, KeyError):
+        return obs
+    if n_signals <= 0:
+        return obs
+    if all(0 <= s < n_signals for s in obs):
+        return obs
+    if all(1 <= s <= n_signals for s in obs):
+        return [s - 1 for s in obs]
+    return obs
+
+
 def _bayes_calculator(
     priors: list[float],
     likelihood: list[list[float]],
     observations: list[int],
 ) -> dict[str, Any]:
+    priors = _coerce_distribution(priors)
+    if isinstance(likelihood, (list, tuple)):
+        likelihood = [_coerce_distribution(row) for row in likelihood]
+    observations = _normalize_observations(observations, likelihood)
     return {"posterior": posterior(priors, likelihood, observations)}
 
 
@@ -133,8 +194,16 @@ def _market_simulator(
 _TOOL_SPECS: tuple[ToolSpec, ...] = (
     ToolSpec(
         name="bayes_calculator",
-        description="Exact discrete Bayesian posterior over hypotheses given a likelihood table and observations.",
-        args_hint='{"priors": [..], "likelihood": [[..]], "observations": [int, ..]}',
+        description=(
+            "Exact discrete Bayesian posterior over hypotheses given a likelihood table and "
+            "observations. Priors and each likelihood row should sum to 1 (minor rounding is "
+            "tolerated and renormalised)."
+        ),
+        args_hint=(
+            '{"priors": [..], "likelihood": [[..]], "observations": [j, ..]} '
+            "where observations are 0-indexed signal positions (the first symbol shown is 0); "
+            "1-indexed symbol numbers are also accepted."
+        ),
         fn=_bayes_calculator,
     ),
     ToolSpec(

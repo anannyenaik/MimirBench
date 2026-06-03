@@ -1,0 +1,50 @@
+# Preliminary direct-agent Claude Haiku 4.5 run across all environments.
+#
+# This makes paid Anthropic API calls only after an explicit cost estimate gate.
+# It mirrors the OpenAI all-env direct 20 task IDs/seeds, with no tools,
+# reflective agent, or robustness variants.
+run:
+  name: leaderboard_claude_haiku_all_envs_direct_20
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_claude_haiku_all_envs_direct_20
+  cache: true
+  max_workers: 1
+models:
+  - name: anthropic_claude_haiku_4_5_direct_all_envs_20
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    api_key_env: ANTHROPIC_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 1.00
+      output_usd_per_1m: 5.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+  - name: auctions
+    num_tasks: 20
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 20
+    seed: 123
+  - name: market_making
+    num_tasks: 20
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 20
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 20
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

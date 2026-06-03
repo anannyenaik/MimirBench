@@ -1,0 +1,246 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-5.5",
+      "model_name": null,
+      "name": "openai_gpt_5_5_direct_all_envs_20::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 5.0,
+        "output_usd_per_1m": 30.0
+      },
+      "provider": "openai",
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "openai_gpt_5_5_direct_all_envs_20::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 1.0,
+    "mean_latency_ms": 238.76384333319342,
+    "n_model_tasks": 0,
+    "n_tasks": 120,
+    "p50_latency_ms": 161.29955000360496,
+    "p95_latency_ms": 869.6929699952307,
+    "parse_failure_rate": 1.0,
+    "provider_error_rate": 1.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': \"Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.\", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': \"Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.\", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-124",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': \"Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.\", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-125",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': \"Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.\", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-126",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "bayesian_games",
+      "error": "model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': \"Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.\", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}",
+      "response_excerpt": "",
+      "score": 0.0,
+      "task_id": "bayesian_games-127",
+      "violations": [
+        "no_valid_answer"
+      ]
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 287.1430649982358,
+        "latency_p50_ms": 171.44145000202116,
+        "latency_p95_ms": 702.9501250020994,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "auctions": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 303.50393499975326,
+        "latency_p50_ms": 157.13025000150083,
+        "latency_p95_ms": 1538.4101800009375,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 221.50258500114433,
+        "latency_p50_ms": 158.47945000132313,
+        "latency_p95_ms": 277.06308000997603,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 196.35892000005697,
+        "latency_p50_ms": 159.11749999941094,
+        "latency_p95_ms": 220.47418000293013,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "market_making": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 217.11151999988942,
+        "latency_p50_ms": 161.29955000360496,
+        "latency_p95_ms": 387.67333999203436,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 1.0,
+        "latency_mean_ms": 206.9630350000807,
+        "latency_p50_ms": 166.04864999681013,
+        "latency_p95_ms": 321.5542199941414,
+        "mean_score": 0.0,
+        "metric_means": {},
+        "n_tasks": 20,
+        "parse_failure_rate": 1.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 1.0,
+        "violation_rate": 1.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 1.0,
+      "latency_mean_ms": 238.76384333319342,
+      "latency_p50_ms": 161.29955000360496,
+      "latency_p95_ms": 869.6929699952307,
+      "mean_score": 0.0,
+      "metric_means": {},
+      "n_tasks": 120,
+      "parse_failure_rate": 1.0,
+      "pass_rate": 0.0,
+      "runtime_error_rate": 1.0,
+      "violation_rate": 1.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_frontier_all_envs_direct_20\\models\\openai_gpt_5_5_direct_all_envs_20\\agents\\direct",
+  "run_id": "leaderboard_openai_frontier_all_envs_direct_20__openai_gpt_5_5_direct_all_envs_20__direct-20260602T235703",
+  "run_name": "leaderboard_openai_frontier_all_envs_direct_20__openai_gpt_5_5_direct_all_envs_20__direct",
+  "timestamp": "2026-06-02T23:57:03Z"
+}

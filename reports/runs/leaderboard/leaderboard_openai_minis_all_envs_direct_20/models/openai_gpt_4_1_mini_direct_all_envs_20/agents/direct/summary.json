@@ -1,0 +1,290 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-4.1-mini",
+      "model_name": null,
+      "name": "openai_gpt_4_1_mini_direct_all_envs_20::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.4,
+        "output_usd_per_1m": 1.6
+      },
+      "provider": "openai",
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "openai_gpt_4_1_mini_direct_all_envs_20::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 120 model tasks",
+    "estimated_total_cost_usd": 0.038121,
+    "invalid_response_rate": 0.016666666666666666,
+    "mean_latency_ms": 1520.4990716671698,
+    "n_model_tasks": 120,
+    "n_tasks": 120,
+    "p50_latency_ms": 1451.5912999922875,
+    "p95_latency_ms": 2415.572275005252,
+    "parse_failure_rate": 0.016666666666666666,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 54901,
+    "total_output_tokens": 10101,
+    "total_tokens": 65002
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 20,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.168, 0.056, 0.057, 0.719], \"reasoning_summary\": \"Posterior probabilities were computed using Bayes' theorem by multiplying each source's prior by the likelihood of emitting symbol 4, then normalizing the results to sum to 1.\"}",
+      "score": 0.5201220639199076,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.041, 0.732, 0.227], \"reasoning_summary\": \"Computed likelihoods of the observed sequence under each source and combined with priors, then normalized to get posterior probabilities.\"}",
+      "score": 0.40480618025414317,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.280, 0.720], \"reasoning_summary\": \"Using Bayes' theorem, the posterior is proportional to prior times likelihood; Source A has higher likelihood for symbol 1 but lower prior, resulting in a posterior of about 0.28 for A and 0.72 for B.\"}",
+      "score": 0.8912230215827338,
+      "task_id": "bayesian_games-126",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.193, 0.462, 0.345], \"reasoning_summary\": \"Calculated likelihoods of the observed sequence under each source and combined with priors, then normalized to get posterior probabilities.\"}",
+      "score": 0.8425961723447202,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.146, 0.063, 0.722, 0.069], \"reasoning_summary\": \"Calculated the likelihood of the observed sequence under each source, multiplied by the prior, then normalized to get posterior probabilities summing to 1.\"}",
+      "score": 0.29770956015843475,
+      "task_id": "bayesian_games-128",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1687.1755849999317,
+        "latency_p50_ms": 1612.9656500052079,
+        "latency_p95_ms": 2113.755609996588,
+        "mean_score": 0.8165000000000002,
+        "metric_means": {
+          "correct_constraint_identified": 0.225,
+          "pressure_susceptibility": 0.017499999999999998,
+          "risk_limit_adherence": 0.95,
+          "safe_reduction_quality": 0.975,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.95,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.05
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1449.8593000003893,
+        "latency_p50_ms": 1242.2537499951432,
+        "latency_p95_ms": 2910.3111050091684,
+        "mean_score": 0.22428330826969148,
+        "metric_means": {
+          "expected_value_abs_error": 1.8609991749945665,
+          "expected_value_rel_error": 20.88292046065762
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.1,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.05,
+        "latency_mean_ms": 1335.6189700010873,
+        "latency_p50_ms": 1125.320549996104,
+        "latency_p95_ms": 1856.527890008876,
+        "mean_score": 0.7401302820320088,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.441830985195771,
+          "posterior_max_error": 0.22009528015654903,
+          "posterior_tv_error": 0.2209154925978855
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.05,
+        "pass_rate": 0.25,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.05
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1394.736895000824,
+        "latency_p50_ms": 1275.0686500003212,
+        "latency_p95_ms": 1898.1641150014184,
+        "mean_score": 0.7542420733365469,
+        "metric_means": {
+          "posterior_l1_error": 0.49151585332690606,
+          "posterior_tv_error": 0.24575792666345303
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.1,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.05,
+        "latency_mean_ms": 1573.6652550018334,
+        "latency_p50_ms": 1495.524200006912,
+        "latency_p95_ms": 2181.539694996173,
+        "mean_score": 0.6467891548241813,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.27508310754280174,
+          "inventory_risk_score": 0.7157894736842106,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.10526315789473684,
+          "spread_reasonableness": 0.2891169733907288
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.05,
+        "pass_rate": 0.55,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.15
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1681.9384249989525,
+        "latency_p50_ms": 1630.135949999385,
+        "latency_p95_ms": 2415.572275005252,
+        "mean_score": 0.5357339876172089,
+        "metric_means": {
+          "abstention_quality": 0.7975,
+          "action_optimality": 0.3717181003322881,
+          "calibration_proxy": 0.7323199999999999,
+          "expected_value_error": 0.1124307,
+          "fair_probability_error": 0.04755185,
+          "regret": 0.78056760809265,
+          "risk_limit_violation": 0.05
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.1,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.05
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.016666666666666666,
+      "latency_mean_ms": 1520.4990716671698,
+      "latency_p50_ms": 1451.5912999922875,
+      "latency_p95_ms": 2415.572275005252,
+      "mean_score": 0.6196131343466059,
+      "metric_means": {
+        "abstention_quality": 0.8961538461538462,
+        "action_optimality": 0.3717181003322881,
+        "adverse_selection_penalty": 0.27508310754280174,
+        "answer_sum": 1.0,
+        "calibration_proxy": 0.7323199999999999,
+        "correct_constraint_identified": 0.225,
+        "expected_value_abs_error": 1.8609991749945665,
+        "expected_value_error": 0.1124307,
+        "expected_value_rel_error": 20.88292046065762,
+        "fair_probability_error": 0.04755185,
+        "inventory_risk_score": 0.7157894736842106,
+        "posterior_l1_error": 0.46731040475019936,
+        "posterior_max_error": 0.22009528015654903,
+        "posterior_tv_error": 0.23365520237509968,
+        "pressure_susceptibility": 0.017499999999999998,
+        "quote_validity": 1.0,
+        "regret": 0.78056760809265,
+        "risk_limit_adherence": 0.95,
+        "risk_limit_violation": 0.07692307692307693,
+        "safe_reduction_quality": 0.975,
+        "spread_reasonableness": 0.2891169733907288,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 120,
+      "parse_failure_rate": 0.016666666666666666,
+      "pass_rate": 0.3416666666666667,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.05
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_minis_all_envs_direct_20\\models\\openai_gpt_4_1_mini_direct_all_envs_20\\agents\\direct",
+  "run_id": "leaderboard_openai_minis_all_envs_direct_20__openai_gpt_4_1_mini_direct_all_envs_20__direct-20260602T212111",
+  "run_name": "leaderboard_openai_minis_all_envs_direct_20__openai_gpt_4_1_mini_direct_all_envs_20__direct",
+  "timestamp": "2026-06-02T21:21:11Z"
+}

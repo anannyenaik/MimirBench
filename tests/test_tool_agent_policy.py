@@ -199,3 +199,125 @@ def test_model_tool_agent_family_alignment() -> None:
     )
     assert agent.allowed_tools == ENVIRONMENT_TOOL_ALLOWLIST["auctions"]
     assert agent.family == spec.family
+
+
+def test_require_tool_first_reprompts_until_a_tool_is_used() -> None:
+    spec = get("bayesian_games")
+    instance = spec.generator(1)
+    meta = instance.task.metadata
+    # Step 1: model answers directly (no tool) -> rejected. Step 2: it calls the
+    # allowed tool. Step 3: it finalizes from the tool output.
+    client = ScriptedClient(
+        [
+            json.dumps({"posterior": [0.5, 0.5], "reasoning_summary": "tried direct"}),
+            json.dumps(
+                {
+                    "tool": "bayes_calculator",
+                    "arguments": {
+                        "priors": meta["priors"],
+                        "likelihood": meta["likelihood"],
+                        "observations": meta["observations"],
+                    },
+                }
+            ),
+            json.dumps({"final": {"posterior": instance.key.payload["posterior"]}}),
+        ]
+    )
+    agent = ModelToolAgent(
+        client,
+        environment="bayesian_games",
+        family=spec.family,
+        max_steps=3,
+        require_tool_first=True,
+    )
+    response = agent.act(instance.task)
+    steps = response.metadata["tool_audit_steps"]
+    # The premature direct answer is recorded as a no-tool step...
+    assert any(s["validation_status"] == "no_tool_requested" for s in steps)
+    # ...and the model then actually used the allowed tool.
+    assert any(
+        s["validation_status"] == "allowed" and s["requested_tool"] == "bayes_calculator"
+        for s in steps
+    )
+
+
+def test_require_tool_first_terminates_safely_if_model_never_uses_a_tool() -> None:
+    spec = get("bayesian_games")
+    instance = spec.generator(1)
+    # The model answers directly on every turn and never calls a tool.
+    client = ScriptedClient(
+        [json.dumps({"posterior": [0.5, 0.5], "reasoning_summary": "x"})] * 10
+    )
+    agent = ModelToolAgent(
+        client,
+        environment="bayesian_games",
+        family=spec.family,
+        max_steps=3,
+        require_tool_first=True,
+    )
+    response = agent.act(instance.task)
+    steps = response.metadata["tool_audit_steps"]
+    # Every in-loop step rejected the premature answer; bounded by max_steps.
+    assert len(steps) == 3
+    assert all(s["validation_status"] == "no_tool_requested" for s in steps)
+    # finalize() still returns the model's direct answer -> no hard failure.
+    assert response.error is None
+    assert response.parsed_answer is not None
+    assert response.parsed_answer.get("posterior") == [0.5, 0.5]
+
+
+def test_require_tool_first_default_off_accepts_direct_answer() -> None:
+    # With the flag off (default), a direct answer on step 1 is accepted as the
+    # final answer and no tool is used -- the pre-existing behaviour is preserved.
+    spec = get("bayesian_games")
+    instance = spec.generator(1)
+    client = ScriptedClient([json.dumps({"posterior": [0.5, 0.5], "reasoning_summary": "x"})])
+    agent = ModelToolAgent(client, environment="bayesian_games", family=spec.family)
+    response = agent.act(instance.task)
+    assert agent.require_tool_first is False
+    assert response.metadata["tool_audit_steps"] == []
+    assert response.parsed_answer == {"posterior": [0.5, 0.5], "reasoning_summary": "x"}
+
+
+def test_bayes_tool_renormalises_prompt_rounded_rows() -> None:
+    # Rows copied from prompt values rounded to 3 dp (e.g. sum 0.999) still work.
+    fn = default_tools()["bayes_calculator"].fn
+    out = fn(
+        priors=[0.333, 0.333, 0.334],
+        likelihood=[[0.333, 0.333, 0.333], [0.5, 0.25, 0.25], [0.1, 0.1, 0.8]],
+        observations=[0, 1],
+    )
+    post = out["posterior"]
+    assert len(post) == 3
+    assert abs(sum(post) - 1.0) < 1e-9
+
+
+def test_bayes_tool_accepts_one_indexed_observations() -> None:
+    from mimirbench.tools.bayes_calculator import posterior
+
+    fn = default_tools()["bayes_calculator"].fn
+    priors = [0.5, 0.5]
+    likelihood = [[0.2, 0.3, 0.5], [0.6, 0.3, 0.1]]  # m = 3 signals
+    # 1..3 are out of the 0-indexed range [0, 3) but valid as 1-indexed labels.
+    one_indexed = fn(priors=priors, likelihood=likelihood, observations=[1, 3])
+    assert one_indexed["posterior"] == posterior(priors, likelihood, [0, 2])
+
+
+def test_bayes_tool_leaves_valid_zero_indexed_observations() -> None:
+    from mimirbench.tools.bayes_calculator import posterior
+
+    fn = default_tools()["bayes_calculator"].fn
+    priors = [0.5, 0.5]
+    likelihood = [[0.2, 0.3, 0.5], [0.6, 0.3, 0.1]]  # m = 3 signals
+    # [1, 2] is valid as 0-indexed (in [0, 3)); it must NOT be shifted to [0, 1].
+    out = fn(priors=priors, likelihood=likelihood, observations=[1, 2])
+    assert out["posterior"] == posterior(priors, likelihood, [1, 2])
+
+
+def test_bayes_tool_still_rejects_genuinely_malformed_input() -> None:
+    from mimirbench.tools.bayes_calculator import BayesError
+
+    fn = default_tools()["bayes_calculator"].fn
+    # A likelihood row nowhere near a distribution (sum 0.4) is not renormalised.
+    with pytest.raises(BayesError):
+        fn(priors=[0.5, 0.5], likelihood=[[0.2, 0.2], [0.5, 0.5]], observations=[0])
