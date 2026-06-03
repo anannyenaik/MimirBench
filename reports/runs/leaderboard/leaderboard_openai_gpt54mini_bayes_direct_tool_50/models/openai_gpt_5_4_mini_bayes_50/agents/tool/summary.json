@@ -1,0 +1,165 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-5.4-mini",
+      "model_name": null,
+      "name": "openai_gpt_5_4_mini_bayes_50::tool",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.75,
+        "output_usd_per_1m": 4.5
+      },
+      "provider": "openai",
+      "require_tool_first": true,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "model",
+      "top_p": null,
+      "type": "tool"
+    },
+    "name": "openai_gpt_5_4_mini_bayes_50::tool",
+    "type": "tool",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 3242.5640359995305,
+    "n_model_tasks": 0,
+    "n_tasks": 50,
+    "p50_latency_ms": 3050.2099500008626,
+    "p95_latency_ms": 4409.553530006813,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 50,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.025583299222267708, 0.9744167007777322], \"reasoning_summary\": \"Applied Bayes\\u2019 rule using the provided priors and symbol likelihoods for the observed symbol 1. The posterior is normalized and sums to 1.\"}",
+      "score": 0.8543602776395339,
+      "task_id": "bayesian_games-126",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.251572073889737, 0.033409777700852634, 0.5660371662519081, 0.14898098215750222], \"reasoning_summary\": \"Applied Bayes\\u2019 rule using the given priors and the likelihood of observing symbol 2 under each source. The resulting posterior probabilities are normalized and sum to 1.\"}",
+      "score": 0.5840164243161519,
+      "task_id": "bayesian_games-130",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.4328174389584519, 0.24888503791474798, 0.17843926783853206, 0.1398582552882681], \"reasoning_summary\": \"Used exact Bayesian updating with the provided priors, emission probabilities, and observed sequence (1,2). The resulting posterior probabilities are normalized and sum to 1.\"}",
+      "score": 0.7292986040262285,
+      "task_id": "bayesian_games-134",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.32393125791397953, 0.5460561149286977, 0.13001262715732279], \"reasoning_summary\": \"Applied Bayes\\u2019 rule using the given priors and the likelihood of observing symbol 1 under each source. The resulting posterior probabilities are normalized to sum to 1.\"}",
+      "score": 0.9134884106331063,
+      "task_id": "bayesian_games-138",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.06607121711108874, 0.07061959942843903, 0.8633091834604721], \"reasoning_summary\": \"Used the provided exact Bayesian calculation for the observed sequence under the three sources. The resulting posterior probabilities sum to 1.\"}",
+      "score": 0.29491524440788197,
+      "task_id": "bayesian_games-140",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 3242.5640359995305,
+        "latency_p50_ms": 3050.2099500008626,
+        "latency_p95_ms": 4409.553530006813,
+        "mean_score": 0.8401875364520531,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.31962492709589385,
+          "posterior_max_error": 0.1581944518335467,
+          "posterior_tv_error": 0.15981246354794693
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.64,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 3242.5640359995305,
+      "latency_p50_ms": 3050.2099500008626,
+      "latency_p95_ms": 4409.553530006813,
+      "mean_score": 0.8401875364520531,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.31962492709589385,
+        "posterior_max_error": 0.1581944518335467,
+        "posterior_tv_error": 0.15981246354794693
+      },
+      "n_tasks": 50,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.64,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_direct_tool_50\\models\\openai_gpt_5_4_mini_bayes_50\\agents\\tool",
+  "run_id": "leaderboard_openai_gpt54mini_bayes_direct_tool_50__openai_gpt_5_4_mini_bayes_50__tool-20260602T233048",
+  "run_name": "leaderboard_openai_gpt54mini_bayes_direct_tool_50__openai_gpt_5_4_mini_bayes_50__tool",
+  "timestamp": "2026-06-02T23:30:48Z",
+  "tool_audit": {
+    "final_answer_after_tool_rate": 1.0,
+    "invalid_tool_call_rate": 0.0,
+    "mean_tool_steps": 1.0,
+    "n_tasks": 50,
+    "tool_call_rate": 1.0,
+    "tool_error_rate": 0.0,
+    "tool_result_ignored_rate": 0.0
+  }
+}

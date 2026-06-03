@@ -1,0 +1,189 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 2048,
+      "model": "gpt-5.5",
+      "model_name": null,
+      "name": "openai_gpt_5_5_rescue_probe::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 5.0,
+        "output_usd_per_1m": 30.0
+      },
+      "provider": "openai",
+      "request_extra": {
+        "reasoning_effort": "low"
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "openai_gpt_5_5_rescue_probe::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 6 model tasks",
+    "estimated_total_cost_usd": 0.13181,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 17042.60026666695,
+    "n_model_tasks": 6,
+    "n_tasks": 6,
+    "p50_latency_ms": 16756.18914999359,
+    "p95_latency_ms": 26872.332574999746,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 3082,
+    "total_output_tokens": 3880,
+    "total_tokens": 6962
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 2,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 2,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 2,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\"bid_price\":121.75,\"ask_price\":null,\"bid_size\":1.2,\"ask_size\":0,\"reduce_inventory\":true,\"abstain\":false,\"confidence\":0.72,\"reasoning_summary\":\"Inventory is close to the short position limit, so the safer action is to reduce the short by quoting only on the bid side within size limits. High adverse-",
+      "score": 0.4,
+      "task_id": "market_making-123",
+      "violations": [
+        "missing_quote"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\n  \"bid_price\": 133.88,\n  \"ask_price\": 134.43,\n  \"bid_size\": 1.0,\n  \"ask_size\": 5.0,\n  \"reduce_inventory\": true,\n  \"abstain\": false,\n  \"confidence\": 0.78,\n  \"reasoning_summary\": \"Inventory is close to the long position limit, so the quote is skewed to favor selling while keeping any bid size safely",
+      "score": 0.7491520043370306,
+      "task_id": "market_making-124",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 16756.18914999359,
+        "latency_p50_ms": 16756.18914999359,
+        "latency_p95_ms": 17773.22825499432,
+        "mean_score": 0.9996300541754595,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.0007398916490809482,
+          "posterior_max_error": 0.000306768981125069,
+          "posterior_tv_error": 0.0003699458245404741
+        },
+        "n_tasks": 2,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 26446.66275000054,
+        "latency_p50_ms": 26446.66275000054,
+        "latency_p95_ms": 27212.86843499911,
+        "mean_score": 0.9996136928928581,
+        "metric_means": {
+          "posterior_l1_error": 0.0007726142142838455,
+          "posterior_tv_error": 0.00038630710714192273
+        },
+        "n_tasks": 2,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 7924.9489000067115,
+        "latency_p50_ms": 7924.9489000067115,
+        "latency_p95_ms": 8572.566850006115,
+        "mean_score": 0.5745760021685153,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.5891920185526314,
+          "inventory_risk_score": 0.75,
+          "quote_validity": 0.5,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.25227402475704974
+        },
+        "n_tasks": 2,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.5
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 17042.60026666695,
+      "latency_p50_ms": 16756.18914999359,
+      "latency_p95_ms": 26872.332574999746,
+      "mean_score": 0.8579399164122776,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "adverse_selection_penalty": 0.5891920185526314,
+        "answer_sum": 1.0,
+        "inventory_risk_score": 0.75,
+        "posterior_l1_error": 0.0007562529316823968,
+        "posterior_max_error": 0.000306768981125069,
+        "posterior_tv_error": 0.0003781264658411984,
+        "quote_validity": 0.5,
+        "risk_limit_violation": 0.0,
+        "spread_reasonableness": 0.25227402475704974
+      },
+      "n_tasks": 6,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.6666666666666666,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.16666666666666666
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt55_rescue_probe\\models\\openai_gpt_5_5_rescue_probe\\agents\\direct",
+  "run_id": "leaderboard_openai_gpt55_rescue_probe__openai_gpt_5_5_rescue_probe__direct-20260603T005912",
+  "run_name": "leaderboard_openai_gpt55_rescue_probe__openai_gpt_5_5_rescue_probe__direct",
+  "timestamp": "2026-06-03T00:59:12Z"
+}

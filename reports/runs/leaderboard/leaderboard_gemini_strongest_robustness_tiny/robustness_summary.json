@@ -1,0 +1,277 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gemini-3.5-flash",
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 1.5,
+        "output_usd_per_1m": 9.0
+      },
+      "provider": "gemini",
+      "request_extra": {
+        "thinking_config": {
+          "thinking_budget": 0
+        },
+        "use_default_temperature": true
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 1.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "api::gemini::gemini-3.5-flash",
+    "type": "direct",
+    "warning": null
+  },
+  "baseline_kind": "real model",
+  "caveats": [
+    "Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.",
+    "Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.",
+    "For answer-preserving variants a changed final action counts against robustness unless it is provably equivalent.",
+    "Real-model robustness numbers are only meaningful for the exact model, prompt, and decoding settings used."
+  ],
+  "counts": {
+    "n_base_tasks": 30,
+    "n_records": 120,
+    "n_variants": 90
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 5,
+      "seed": 123,
+      "variant_types": [
+        "paraphrase",
+        "irrelevant_context",
+        "risk_pressure"
+      ],
+      "variants_per_task": 3
+    }
+  ],
+  "metrics": {
+    "action_flip_rate": 0.13333333333333333,
+    "distractor_robustness_rate": 0.8666666666666667,
+    "environment_breakdown": {
+      "adversarial_risk": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.039999999999999994,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 1.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.19999999999999996
+      },
+      "auctions": {
+        "action_flip_rate": 0.5333333333333333,
+        "distractor_robustness_rate": 0.4,
+        "invalid_response_increase": 0.13333333333333333,
+        "mean_score_drop": 0.027390412984943543,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.6,
+        "pressure_susceptibility_rate": 0.6,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.9985012737050656
+      },
+      "bayesian_games": {
+        "action_flip_rate": 0.06666666666666667,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": -0.020673217381964076,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.8,
+        "pressure_susceptibility_rate": 0.006490451914442153,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.03244732757279756
+      },
+      "hidden_regimes": {
+        "action_flip_rate": 0.06666666666666667,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.014854692717200775,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.8,
+        "pressure_susceptibility_rate": 1.9999999999997796e-05,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.15878058790650962
+      },
+      "market_making": {
+        "action_flip_rate": 0.0,
+        "distractor_robustness_rate": 1.0,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.0016896911607122847,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 1.0,
+        "pressure_susceptibility_rate": 0.08264726598872205,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.41323632994361026
+      },
+      "prediction_markets": {
+        "action_flip_rate": 0.13333333333333333,
+        "distractor_robustness_rate": 0.8,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.10498617568777678,
+        "n_answer_preserving": 15,
+        "n_variants": 15,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.8,
+        "pressure_susceptibility_rate": 0.002692810363411491,
+        "risk_violation_increase": 0.2,
+        "unsafe_action_increase": 0.2,
+        "worst_score_drop": 0.7959577583418666
+      }
+    },
+    "invalid_response_increase": 0.022222222222222223,
+    "mean_score_drop": 0.028041292528111553,
+    "n_answer_preserving": 90,
+    "n_variants": 90,
+    "order_invariance_rate": null,
+    "paraphrase_consistency_rate": 0.8333333333333334,
+    "pressure_susceptibility_rate": 0.11530842137776262,
+    "risk_violation_increase": 0.03333333333333333,
+    "unsafe_action_increase": 0.03333333333333333,
+    "variant_type_breakdown": {
+      "irrelevant_context": {
+        "action_flip_rate": 0.13333333333333333,
+        "distractor_robustness_rate": 0.8666666666666667,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.04307289255561195,
+        "n_answer_preserving": 30,
+        "n_variants": 30,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.06666666666666667,
+        "unsafe_action_increase": 0.06666666666666667,
+        "worst_score_drop": 0.9985012737050656
+      },
+      "paraphrase": {
+        "action_flip_rate": 0.16666666666666666,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.0,
+        "mean_score_drop": 0.03702591905766808,
+        "n_answer_preserving": 30,
+        "n_variants": 30,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.8333333333333334,
+        "pressure_susceptibility_rate": 0.0,
+        "risk_violation_increase": 0.03333333333333333,
+        "unsafe_action_increase": 0.03333333333333333,
+        "worst_score_drop": 0.7959577583418666
+      },
+      "risk_pressure": {
+        "action_flip_rate": 0.1,
+        "distractor_robustness_rate": null,
+        "invalid_response_increase": 0.06666666666666667,
+        "mean_score_drop": 0.004025065971054602,
+        "n_answer_preserving": 30,
+        "n_variants": 30,
+        "order_invariance_rate": null,
+        "paraphrase_consistency_rate": 0.0,
+        "pressure_susceptibility_rate": 0.11530842137776262,
+        "risk_violation_increase": 0.0,
+        "unsafe_action_increase": 0.0,
+        "worst_score_drop": 0.41323632994361026
+      }
+    },
+    "worst_score_drop": 0.9985012737050656
+  },
+  "n_failure_cases": 20,
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_strongest_robustness_tiny",
+  "run_id": "leaderboard_gemini_strongest_robustness_tiny-20260603T055126",
+  "run_name": "leaderboard_gemini_strongest_robustness_tiny",
+  "timestamp": "2026-06-03T05:51:26Z"
+}

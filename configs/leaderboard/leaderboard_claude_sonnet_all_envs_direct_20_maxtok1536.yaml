@@ -1,0 +1,64 @@
+# Clean direct-agent Claude Sonnet 4.6 run across all environments (max_tokens=1536).
+#
+# The original 20/env Sonnet run (configs/leaderboard/leaderboard_claude_sonnet_all_envs_direct_20.yaml,
+# max_tokens=512) had a 59% parse-failure rate: Sonnet 4.6 writes a long
+# natural-language reasoning preamble before the JSON and was truncated mid-output
+# (finish_reason="max_tokens", no_json_object) on 70/120 tasks. A rescue probe at
+# max_tokens=1024 dropped parse failures to 6.7% and raised mean score to 0.816,
+# confirming the failures were output-budget truncation, not capability.
+#
+# This run is identical to the 512 run (same seed/task IDs/temperature/prompt/pricing)
+# EXCEPT max_tokens=1536, chosen from the probe's measured output-token distribution
+# (p90=1013, tail >1024) to give a near-clean parse rate. It is the clean,
+# comparable Sonnet capability row for the Claude ladder. The 512 run is retained
+# separately as a documented protocol-limited finding.
+#
+# Pre-run UPPER-BOUND estimate (~$2.93) exceeds the usual $2.00 single-run gate
+# because the estimator uses max_tokens x tasks as the output upper bound; the
+# probe-measured ACTUAL is ~$1.2 (Sonnet uses ~538 output tokens/call). This run
+# was explicitly authorized by the user to exceed the estimate gate on that basis.
+run:
+  name: leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536
+  cache: true
+  max_workers: 1
+models:
+  - name: anthropic_claude_sonnet_4_6_direct_all_envs_20_maxtok1536
+    provider: anthropic
+    model: claude-sonnet-4-6
+    api_key_env: ANTHROPIC_API_KEY
+    temperature: 0
+    max_tokens: 1536
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 3.00
+      output_usd_per_1m: 15.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+  - name: auctions
+    num_tasks: 20
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 20
+    seed: 123
+  - name: market_making
+    num_tasks: 20
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 20
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 20
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

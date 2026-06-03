@@ -185,12 +185,15 @@ def build_tool_step_prompt(
     tool_block: str,
     observations: str,
     must_finalize: bool = False,
+    require_tool: bool = False,
 ) -> str:
     """Build the per-step user prompt for a tool-using agent.
 
     ``tool_block`` lists the allowed tools; ``observations`` renders prior tool
     results. When ``must_finalize`` is set, the agent is told to stop calling
-    tools and return the final answer now.
+    tools and return the final answer now. When ``require_tool`` is set (and the
+    step is not a forced finalize), the agent is told it must call a tool this
+    turn rather than answer directly. ``must_finalize`` takes precedence.
     """
     instruction = _FAMILY_INSTRUCTIONS.get(task.family, _GENERIC_INSTRUCTION)
     parts = [
@@ -206,6 +209,11 @@ def build_tool_step_prompt(
     if must_finalize:
         parts.append(
             "You have used your tool budget. Output ONLY the final answer JSON now (no more tool calls)."
+        )
+    elif require_tool:
+        parts.append(
+            "You have not consulted any tool yet. You MUST call exactly one of the available tools "
+            "now with {\"tool\": .., \"arguments\": ..}; do not return a final answer on this turn."
         )
     else:
         parts.append(

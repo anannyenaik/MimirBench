@@ -7,11 +7,13 @@ from __future__ import annotations
 
 import sys
 import types
+from typing import Any, cast
 
 import pytest
 
 from mimirbench.agents.model_client import (
     ModelClientError,
+    ModelRequest,
     ModelUsage,
     Pricing,
     RetryConfig,
@@ -24,8 +26,17 @@ from mimirbench.agents.model_client import (
 
 def test_module_imports_without_optional_deps() -> None:
     # Importing the interface and provider clients must not require any SDK.
-    import mimirbench.agents.providers  # noqa: F401
-    from mimirbench.agents.providers import AnthropicClient, OpenAIClient  # noqa: F401
+    from mimirbench.agents import providers
+    from mimirbench.agents.providers import (
+        AnthropicClient,
+        GeminiClient,
+        OpenAIClient,
+    )
+
+    assert providers is not None
+    assert AnthropicClient is not None
+    assert GeminiClient is not None
+    assert OpenAIClient is not None
 
 
 def test_estimate_cost_is_none_without_pricing() -> None:
@@ -135,7 +146,6 @@ def test_openai_client_missing_package_raises_clear_error() -> None:
 
 
 def test_openai_client_missing_key_raises_clear_error(monkeypatch: pytest.MonkeyPatch) -> None:
-    from mimirbench.agents.model_client import ModelRequest
     from mimirbench.agents.providers import OpenAIClient
 
     # Inject a stand-in 'openai' module so the import succeeds but the key is absent.
@@ -147,3 +157,222 @@ def test_openai_client_missing_key_raises_clear_error(monkeypatch: pytest.Monkey
     client = OpenAIClient("gpt-test")
     with pytest.raises(ModelClientError, match="API key"):
         client.generate(ModelRequest(system_prompt="s", user_prompt="u"))
+
+
+class _FakeCompletions:
+    def __init__(self) -> None:
+        self.create_kwargs: dict[str, object] | None = None
+
+    def create(self, **kwargs: object) -> types.SimpleNamespace:
+        self.create_kwargs = kwargs
+        return types.SimpleNamespace(
+            choices=[
+                types.SimpleNamespace(
+                    message=types.SimpleNamespace(content='{"ok": true}'),
+                    finish_reason="stop",
+                )
+            ],
+            usage=types.SimpleNamespace(
+                prompt_tokens=1,
+                completion_tokens=2,
+                total_tokens=3,
+            ),
+            id="response-test",
+        )
+
+
+def test_openai_client_uses_max_tokens_for_legacy_chat_models() -> None:
+    from mimirbench.agents.providers import OpenAIClient
+
+    completions = _FakeCompletions()
+    client = OpenAIClient("gpt-4.1-mini", api_key="unused")
+    client._client = types.SimpleNamespace(chat=types.SimpleNamespace(completions=completions))
+
+    client.generate(ModelRequest(system_prompt="s", user_prompt="u", temperature=0.2, max_tokens=7))
+
+    assert completions.create_kwargs is not None
+    assert completions.create_kwargs["temperature"] == pytest.approx(0.2)
+    assert completions.create_kwargs["max_tokens"] == 7
+    assert "max_completion_tokens" not in completions.create_kwargs
+
+
+@pytest.mark.parametrize("model", ["gpt-5.4-mini", "gpt-5.4"])
+def test_openai_client_uses_max_completion_tokens_for_gpt5_chat_models(model: str) -> None:
+    from mimirbench.agents.providers import OpenAIClient
+
+    completions = _FakeCompletions()
+    client = OpenAIClient(model, api_key="unused")
+    client._client = types.SimpleNamespace(chat=types.SimpleNamespace(completions=completions))
+
+    client.generate(ModelRequest(system_prompt="s", user_prompt="u", temperature=0.3, max_tokens=7))
+
+    assert completions.create_kwargs is not None
+    assert completions.create_kwargs["temperature"] == pytest.approx(0.3)
+    assert completions.create_kwargs["max_completion_tokens"] == 7
+    assert "max_tokens" not in completions.create_kwargs
+
+
+def test_openai_client_omits_temperature_for_gpt55_default_temperature_model() -> None:
+    from mimirbench.agents.providers import OpenAIClient
+
+    completions = _FakeCompletions()
+    client = OpenAIClient("gpt-5.5", api_key="unused")
+    client._client = types.SimpleNamespace(chat=types.SimpleNamespace(completions=completions))
+
+    client.generate(
+        ModelRequest(
+            system_prompt="s",
+            user_prompt="u",
+            temperature=0.0,
+            max_tokens=7,
+            extra={"temperature": 0.7},
+        )
+    )
+
+    assert completions.create_kwargs is not None
+    assert "temperature" not in completions.create_kwargs
+    assert completions.create_kwargs["max_completion_tokens"] == 7
+    assert "max_tokens" not in completions.create_kwargs
+
+
+def test_openai_client_passes_reasoning_effort_from_request_extra() -> None:
+    from mimirbench.agents.providers import OpenAIClient
+
+    completions = _FakeCompletions()
+    client = OpenAIClient("gpt-5.5", api_key="unused")
+    client._client = types.SimpleNamespace(chat=types.SimpleNamespace(completions=completions))
+
+    client.generate(
+        ModelRequest(
+            system_prompt="s",
+            user_prompt="u",
+            max_tokens=11,
+            extra={"reasoning_effort": "low"},
+        )
+    )
+
+    assert completions.create_kwargs is not None
+    assert completions.create_kwargs["reasoning_effort"] == "low"
+    assert completions.create_kwargs["max_completion_tokens"] == 11
+    assert "temperature" not in completions.create_kwargs
+    assert "max_tokens" not in completions.create_kwargs
+
+
+def test_openai_client_uses_max_completion_tokens_for_o_series_chat_models() -> None:
+    from mimirbench.agents.providers import OpenAIClient
+
+    completions = _FakeCompletions()
+    client = OpenAIClient("o4-mini", api_key="unused")
+    client._client = types.SimpleNamespace(chat=types.SimpleNamespace(completions=completions))
+
+    client.generate(ModelRequest(system_prompt="s", user_prompt="u", max_tokens=7))
+
+    assert completions.create_kwargs is not None
+    assert completions.create_kwargs["max_completion_tokens"] == 7
+    assert "max_tokens" not in completions.create_kwargs
+
+
+def test_gemini_client_missing_package_raises_clear_error(monkeypatch: pytest.MonkeyPatch) -> None:
+    from mimirbench.agents.providers import GeminiClient
+
+    real_import = __import__
+
+    def fake_import(
+        name: str,
+        globals: dict[str, object] | None = None,
+        locals: dict[str, object] | None = None,
+        fromlist: tuple[str, ...] = (),
+        level: int = 0,
+    ) -> object:
+        if (name == "google" and "genai" in fromlist) or name.startswith("google.genai"):
+            raise ImportError("google-genai intentionally hidden for test")
+        return real_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr("builtins.__import__", fake_import)
+    client = GeminiClient("gemini-test", api_key="unused")
+    with pytest.raises(ModelClientError, match="google-genai"):
+        client.generate(ModelRequest(system_prompt="s", user_prompt="u"))
+
+
+class _FakeGeminiModels:
+    def __init__(self) -> None:
+        self.generate_kwargs: dict[str, object] | None = None
+
+    def generate_content(self, **kwargs: object) -> types.SimpleNamespace:
+        self.generate_kwargs = kwargs
+        return types.SimpleNamespace(
+            text='{"ok": true}',
+            candidates=[
+                types.SimpleNamespace(
+                    finish_reason="STOP",
+                    finish_message="finished",
+                )
+            ],
+            usage_metadata=types.SimpleNamespace(
+                prompt_token_count=5,
+                candidates_token_count=7,
+                thoughts_token_count=11,
+                total_token_count=23,
+            ),
+            response_id="gemini-response",
+            model_version="gemini-version",
+        )
+
+
+def test_gemini_client_request_response_usage_and_cost() -> None:
+    from mimirbench.agents.providers import GeminiClient
+
+    models = _FakeGeminiModels()
+    client = GeminiClient(
+        "gemini-3.1-flash-lite",
+        api_key="unused",
+        pricing=Pricing(input_usd_per_1k=1.0, output_usd_per_1k=2.0),
+    )
+    client._client = types.SimpleNamespace(models=models)
+
+    envelope = client.generate(
+        ModelRequest(
+            system_prompt="s",
+            user_prompt="u",
+            temperature=0.0,
+            max_tokens=9,
+            seed=4,
+            extra={
+                "use_default_temperature": True,
+                "response_mime_type": "application/json",
+                "thinking_config": {"thinking_budget": 0},
+            },
+        )
+    )
+
+    assert models.generate_kwargs is not None
+    assert models.generate_kwargs["model"] == "gemini-3.1-flash-lite"
+    assert models.generate_kwargs["contents"] == "u"
+    config = cast(Any, models.generate_kwargs["config"])
+    assert config.system_instruction == "s"
+    assert config.max_output_tokens == 9
+    assert config.temperature is None
+    assert config.seed == 4
+    assert config.response_mime_type == "application/json"
+    assert config.thinking_config.thinking_budget == 0
+
+    assert envelope.provider == "gemini"
+    assert envelope.raw_text == '{"ok": true}'
+    assert envelope.parsed_json == {"ok": True}
+    assert envelope.finish_reason == "STOP"
+    assert envelope.usage.input_tokens == 5
+    # Gemini bills output including thinking tokens.
+    assert envelope.usage.output_tokens == 18
+    assert envelope.usage.total_tokens == 23
+    assert envelope.usage.estimated_cost_usd == pytest.approx(0.041)
+    assert envelope.metadata["visible_output_tokens"] == 7
+    assert envelope.metadata["thinking_tokens"] == 11
+
+
+def test_gemini_provider_registration() -> None:
+    from mimirbench.agents.providers import GeminiClient, build_api_client
+
+    client = build_api_client("gemini", "gemini-test")
+
+    assert isinstance(client, GeminiClient)
+    assert client.model == "gemini-test"

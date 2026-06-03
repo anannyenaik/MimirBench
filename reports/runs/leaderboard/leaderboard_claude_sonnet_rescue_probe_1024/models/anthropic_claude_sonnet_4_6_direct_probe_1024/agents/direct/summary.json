@@ -1,0 +1,296 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": "claude-sonnet-4-6",
+      "model_name": null,
+      "name": "anthropic_claude_sonnet_4_6_direct_probe_1024::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 3.0,
+        "output_usd_per_1m": 15.0
+      },
+      "provider": "anthropic",
+      "request_extra": {},
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "anthropic_claude_sonnet_4_6_direct_probe_1024::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 30 model tasks",
+    "estimated_total_cost_usd": 0.286554,
+    "invalid_response_rate": 0.06666666666666667,
+    "mean_latency_ms": 9561.28732666742,
+    "n_model_tasks": 30,
+    "n_tasks": 30,
+    "p50_latency_ms": 9017.797900007281,
+    "p95_latency_ms": 16032.14778500696,
+    "parse_failure_rate": 0.06666666666666667,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 14868,
+    "total_output_tokens": 16130,
+    "total_tokens": 30998
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 5,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 5,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 5,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 5,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 5,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 5,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "I'll run the forward algorithm (filtering) through each time step.\n\n**Initial:** calm=0.857, stressed=0.143\n\n**Step 1: signal 1**\n- calm: 0.857 × 0.222 = 0.190254\n- stressed: 0.143 × 0.227 = 0.032461\n- Sum = 0.222715\n- calm: 0.85415, stressed: 0.14585\n\n**Step 2: signal 1**\nPredict:\n- calm: 0.85415×0",
+      "score": 0.0,
+      "task_id": "hidden_regimes-123",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "I'll run the forward algorithm (filtering) through each time step.\n\n**Initial:** calm=0.364, stressed=0.364, trending=0.273\n\n**Step 1: signal 4**\n- Emission P(signal4|regime): calm=0.174, stressed=0.143, trending=0.333\n- Unnormalized: calm=0.364×0.174=0.06334, stressed=0.364×0.143=0.05205, trending=",
+      "score": 0.0,
+      "task_id": "hidden_regimes-124",
+      "violations": [
+        "no_valid_answer"
+      ]
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "```json\n{\n  \"bid_price\": 134.00,\n  \"ask_price\": 134.46,\n  \"bid_size\": 1.0,\n  \"ask_size\": 5.0,\n  \"reduce_inventory\": true,\n  \"abstain\": false,\n  \"confidence\": 0.72,\n  \"reasoning_summary\": \"Current inventory of 17.83 is near the +20 position limit, so I skew heavily toward selling (max ask size 5.0) a",
+      "score": 0.7121551807979098,
+      "task_id": "market_making-124",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "I need to calculate the fair probability after incorporating the private signal, then determine if there's sufficient edge to trade.\n\n**Bayesian Update:**\n- Prior: 0.609\n- Signal reliability: 0.578 (probability signal is correct)\n\nUsing Bayesian updating with a positive signal:\n- P(signal=positive |",
+      "score": 0.7303010163823822,
+      "task_id": "prediction_markets-123",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "I need to calculate the fair probability given the prior, private signal, and market price.\n\n**Prior probability:** 0.671\n**Private signal:** neutral with reliability 0.827\n\nA neutral signal doesn't update the probability in either direction. With a neutral signal, the posterior stays at the prior: ",
+      "score": 0.5370322359276244,
+      "task_id": "prediction_markets-124",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 4460.253259999445,
+        "latency_p50_ms": 3994.0602999995463,
+        "latency_p95_ms": 7076.596999997854,
+        "mean_score": 0.8400000000000001,
+        "metric_means": {
+          "correct_constraint_identified": 0.2,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 9101.351459999569,
+        "latency_p50_ms": 9802.74690000806,
+        "latency_p95_ms": 11643.723460001638,
+        "mean_score": 0.9999137060049627,
+        "metric_means": {
+          "expected_value_abs_error": 0.0002116024865860747,
+          "expected_value_rel_error": 8.629399503737726e-05
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 7531.613019996439,
+        "latency_p50_ms": 7732.314799999585,
+        "latency_p95_ms": 10744.756460000644,
+        "mean_score": 0.9997004687164148,
+        "metric_means": {
+          "answer_sum": 1.00004,
+          "posterior_l1_error": 0.0005990625671701708,
+          "posterior_max_error": 0.00028070956621893407,
+          "posterior_tv_error": 0.0002995312835850854
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.4,
+        "latency_mean_ms": 12939.570140003343,
+        "latency_p50_ms": 13556.755700003123,
+        "latency_p95_ms": 14814.59928000695,
+        "mean_score": 0.59976116731888,
+        "metric_means": {
+          "posterior_l1_error": 0.00079610893706659,
+          "posterior_tv_error": 0.000398054468533295
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.4,
+        "pass_rate": 0.6,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.4
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 10183.619540004293,
+        "latency_p50_ms": 5939.501500004553,
+        "latency_p95_ms": 18553.023360003135,
+        "mean_score": 0.8093950244863555,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.14384385358129162,
+          "inventory_risk_score": 0.7,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.5298580126177465
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.8,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 13151.316540001426,
+        "latency_p50_ms": 14072.816600004444,
+        "latency_p95_ms": 15251.141440003994,
+        "mean_score": 0.6499106605155222,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "action_optimality": 0.527402918856005,
+          "calibration_proxy": 0.8507199999999999,
+          "expected_value_error": 0.18559100000000003,
+          "fair_probability_error": 0.00013980000000002324,
+          "regret": 0.5001416103366,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 5,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.2,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.06666666666666667,
+      "latency_mean_ms": 9561.28732666742,
+      "latency_p50_ms": 9017.797900007281,
+      "latency_p95_ms": 16032.14778500696,
+      "mean_score": 0.816446837840356,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "action_optimality": 0.527402918856005,
+        "adverse_selection_penalty": 0.14384385358129162,
+        "answer_sum": 1.00004,
+        "calibration_proxy": 0.8507199999999999,
+        "correct_constraint_identified": 0.2,
+        "expected_value_abs_error": 0.0002116024865860747,
+        "expected_value_error": 0.18559100000000003,
+        "expected_value_rel_error": 8.629399503737726e-05,
+        "fair_probability_error": 0.00013980000000002324,
+        "inventory_risk_score": 0.7,
+        "posterior_l1_error": 0.000672954955881328,
+        "posterior_max_error": 0.00028070956621893407,
+        "posterior_tv_error": 0.000336477477940664,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 1.0,
+        "regret": 0.5001416103366,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.0,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.5298580126177465,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 30,
+      "parse_failure_rate": 0.06666666666666667,
+      "pass_rate": 0.7666666666666667,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.06666666666666667
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_claude_sonnet_rescue_probe_1024\\models\\anthropic_claude_sonnet_4_6_direct_probe_1024\\agents\\direct",
+  "run_id": "leaderboard_claude_sonnet_rescue_probe_1024__anthropic_claude_sonnet_4_6_direct_probe_1024__direct-20260603T030735",
+  "run_name": "leaderboard_claude_sonnet_rescue_probe_1024__anthropic_claude_sonnet_4_6_direct_probe_1024__direct",
+  "timestamp": "2026-06-03T03:07:35Z"
+}

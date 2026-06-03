@@ -1,0 +1,156 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-5.4-mini",
+      "model_name": null,
+      "name": "openai_gpt_5_4_mini_bayes_50::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.75,
+        "output_usd_per_1m": 4.5
+      },
+      "provider": "openai",
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "openai_gpt_5_4_mini_bayes_50::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 50 model tasks",
+    "estimated_total_cost_usd": 0.036419,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 1725.8093760014162,
+    "n_model_tasks": 50,
+    "n_tasks": 50,
+    "p50_latency_ms": 1363.2337999952142,
+    "p95_latency_ms": 2312.5692250032434,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 23886,
+    "total_output_tokens": 4112,
+    "total_tokens": 27998
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 50,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\":[0.2553191489361702,0.0851063829787234,0.1276595744680851,0.5319148936170213],\"reasoning_summary\":\"Computed unnormalized posteriors by multiplying each source prior by its probability of emitting symbol 4, then normalized across sources. Source D has the highest posterior because it ass",
+      "score": 0.7072071703028863,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\":[0.001948,0.001948,0.996104],\"reasoning_summary\":\"I computed each source's prior times the likelihood of the observed sequence under its emission probabilities, then normalized across the three sources. The sequence is overwhelmingly more likely under Source C, so its posterior dominate",
+      "score": 0.19924540821195258,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\":[0.45454545454545453,0.18181818181818182,0.36363636363636365],\"reasoning_summary\":\"Computed each source's likelihood for the observed sequence and multiplied by the given priors. After normalizing, the posterior probabilities are proportional to A:B:C = 0.4545:0.1818:0.3636.\"}",
+      "score": 0.781211522386513,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\":[0.28600000000000003,0.28800000000000003,0.18000000000000002,0.246],\"reasoning_summary\":\"Computed each source's prior times the likelihood of observing 3,1,3, then normalized across sources. The resulting posterior probabilities sum to 1.\"}",
+      "score": 0.735867169114838,
+      "task_id": "bayesian_games-128",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\":[0.23809523809523808,0.07142857142857142,0.2857142857142857,0.40476190476190477],\"reasoning_summary\":\"Updated each source’s prior by the likelihood of observing symbol 2, then normalized the results. Source D has the highest posterior because it assigns the greatest probability to symbo",
+      "score": 0.8643393048537743,
+      "task_id": "bayesian_games-130",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1725.8093760014162,
+        "latency_p50_ms": 1363.2337999952142,
+        "latency_p95_ms": 2312.5692250032434,
+        "mean_score": 0.8372071298862093,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.3255857402275811,
+          "posterior_max_error": 0.15837324037377176,
+          "posterior_tv_error": 0.16279287011379054
+        },
+        "n_tasks": 50,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.32,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 1725.8093760014162,
+      "latency_p50_ms": 1363.2337999952142,
+      "latency_p95_ms": 2312.5692250032434,
+      "mean_score": 0.8372071298862093,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.3255857402275811,
+        "posterior_max_error": 0.15837324037377176,
+        "posterior_tv_error": 0.16279287011379054
+      },
+      "n_tasks": 50,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.32,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_direct_tool_50\\models\\openai_gpt_5_4_mini_bayes_50\\agents\\direct",
+  "run_id": "leaderboard_openai_gpt54mini_bayes_direct_tool_50__openai_gpt_5_4_mini_bayes_50__direct-20260602T232920",
+  "run_name": "leaderboard_openai_gpt54mini_bayes_direct_tool_50__openai_gpt_5_4_mini_bayes_50__direct",
+  "timestamp": "2026-06-02T23:29:20Z"
+}

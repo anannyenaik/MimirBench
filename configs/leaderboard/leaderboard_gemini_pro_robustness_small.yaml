@@ -1,0 +1,91 @@
+# Small Gemini 3.1 Pro Preview direct-agent robustness run.
+#
+# Uses the clean Pro retry settings from the direct 20/env row. Shape is the
+# requested first Pro robustness gate: 3 base tasks/env and three deterministic
+# variants per base task (18 base + 54 variants = 72 direct model calls).
+run:
+  name: leaderboard_gemini_pro_robustness_small
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_pro_robustness_small
+  cache: true
+  max_workers: 1
+
+agent:
+  type: direct
+  provider: gemini
+  model: gemini-3.1-pro-preview
+  api_key_env: GEMINI_API_KEY
+  temperature: 1
+  request_extra:
+    use_default_temperature: true
+    thinking_config:
+      thinking_level: low
+  max_retries: 3
+  timeout_seconds: 120
+  max_tokens: 4096
+  pricing:
+    input_usd_per_1m: 2.00
+    output_usd_per_1m: 12.00
+
+environments:
+  - name: bayesian_games
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: auctions
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: hidden_regimes
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: market_making
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: prediction_markets
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: adversarial_risk
+    num_tasks: 3
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 3
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 20
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

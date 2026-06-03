@@ -111,3 +111,16 @@ def test_direct_agent_sends_environment_aware_prompt() -> None:
     assert client.requests
     assert "posterior" in client.requests[0].user_prompt
     assert "hidden chain-of-thought" in client.requests[0].system_prompt.lower()
+
+
+def test_direct_agent_passes_request_extra_to_client() -> None:
+    client = FakeClient('{"posterior": [1.0]}')
+    agent = DirectAgent(
+        client,
+        name="fake-direct",
+        request_extra={"reasoning_effort": "low"},
+    )
+    agent.act(_bayes_task().task)
+
+    assert client.requests
+    assert client.requests[0].extra == {"reasoning_effort": "low"}

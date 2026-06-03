@@ -1,0 +1,51 @@
+# gpt-5.5-only OpenAI direct-agent rerun across all environments.
+#
+# Running this makes paid API calls. It completes the OpenAI model ladder without
+# rerunning the completed gpt-4.1-mini, gpt-5.4-mini, or gpt-5.4 cells. The
+# OpenAI client omits the temperature request field for gpt-5.5 because this
+# model accepts only the API default temperature.
+run:
+  name: leaderboard_openai_gpt55_all_envs_direct_20
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_openai_gpt55_all_envs_direct_20
+  cache: true
+  max_workers: 1
+models:
+  - name: openai_gpt_5_5_direct_all_envs_20
+    provider: openai
+    model: gpt-5.5
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 5.00
+      output_usd_per_1m: 30.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+  - name: auctions
+    num_tasks: 20
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 20
+    seed: 123
+  - name: market_making
+    num_tasks: 20
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 20
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 20
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

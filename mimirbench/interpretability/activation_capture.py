@@ -24,7 +24,7 @@ import json
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 import numpy.typing as npt
@@ -141,7 +141,7 @@ class CapturedActivations:
             arrays[f"feat::{site}"] = matrix
         for name, codes in self.labels.items():
             arrays[f"label::{name}"] = codes
-        np.savez(npz_path, **arrays)
+        np.savez(npz_path, **cast(Any, arrays))
         sidecar = {
             "trace_ids": self.trace_ids,
             "site_names": self.site_names,

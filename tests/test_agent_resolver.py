@@ -28,6 +28,34 @@ def test_resolves_api_without_importing_optional_client() -> None:
     assert agent.model == "test-model"
 
 
+def test_resolves_api_request_extra_without_importing_optional_client() -> None:
+    agent = resolve_agent(
+        {
+            "type": "api",
+            "provider": "openai",
+            "model": "test-model",
+            "request_extra": {"reasoning_effort": "low"},
+        }
+    )
+    assert isinstance(agent, APIModelAgent)
+    assert agent.request_extra == {"reasoning_effort": "low"}
+
+
+def test_resolves_gemini_api_without_importing_optional_client() -> None:
+    agent = resolve_agent(
+        {
+            "type": "api",
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite",
+            "request_extra": {"use_default_temperature": True},
+        }
+    )
+    assert isinstance(agent, APIModelAgent)
+    assert agent.provider == "gemini"
+    assert agent.model == "gemini-3.1-flash-lite"
+    assert agent.request_extra == {"use_default_temperature": True}
+
+
 def test_resolves_local_without_loading_model() -> None:
     agent = resolve_agent({"type": "local", "model_name": "local-test", "device": "auto"})
     assert isinstance(agent, LocalModelAgent)
@@ -57,3 +85,21 @@ def test_resolves_model_tool_agent_without_importing_client() -> None:
     )
     assert isinstance(agent, ModelToolAgent)
     assert agent.client.model == "test-model"
+    assert agent.require_tool_first is False
+
+
+def test_resolves_model_tool_agent_with_require_tool_first() -> None:
+    from mimirbench.agents.tool_agent import ModelToolAgent
+
+    agent = resolve_agent(
+        {
+            "type": "tool",
+            "tool_policy": "model",
+            "provider": "openai",
+            "model": "test-model",
+            "require_tool_first": True,
+        },
+        spec=get("bayesian_games"),
+    )
+    assert isinstance(agent, ModelToolAgent)
+    assert agent.require_tool_first is True

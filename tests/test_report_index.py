@@ -33,6 +33,36 @@ def test_report_index_includes_expected_directories(tmp_path) -> None:  # type: 
         ),
         encoding="utf-8",
     )
+    robustness_dir = reports / "runs" / "leaderboard" / "robustness_cell"
+    robustness_dir.mkdir(parents=True)
+    (robustness_dir / "robustness_summary.json").write_text(
+        json.dumps(
+            {
+                "run_name": "nested_robustness",
+                "baseline_kind": "real model",
+                "counts": {"n_base_tasks": 2},
+                "metrics": {"mean_score_drop": 0.1},
+            }
+        ),
+        encoding="utf-8",
+    )
+    leaderboard_dir = reports / "runs" / "leaderboard" / "pending"
+    leaderboard_dir.mkdir(parents=True)
+    (leaderboard_dir / "leaderboard_summary.json").write_text(
+        json.dumps(
+            {
+                "leaderboard_name": "pending",
+                "models_run": [],
+                "models_pending": [{"label": "configured_model"}],
+                "tasks_per_agent": 10,
+                "headline_candidates": [],
+                "preliminary": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+    notes_path = reports / "runs" / "leaderboard" / "model_ladder_note.md"
+    notes_path.write_text("# note\n", encoding="utf-8")
     figures = comparison_dir / "figures"
     figures.mkdir()
     (figures / "score_by_environment.png").write_bytes(b"png")
@@ -44,5 +74,9 @@ def test_report_index_includes_expected_directories(tmp_path) -> None:  # type: 
     text = index_path.read_text(encoding="utf-8")
     assert "baseline" in text
     assert "mock_bayes" in text
+    assert "nested_robustness" in text
+    assert "pending" in text
+    assert "Leaderboard rows are real model results only" in text
+    assert "model_ladder_note.md" in text
     assert "score_by_environment.png" in text
     assert "baseline.md" in text

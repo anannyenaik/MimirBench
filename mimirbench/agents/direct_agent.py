@@ -16,6 +16,7 @@ never hidden chain-of-thought.
 from __future__ import annotations
 
 import time
+from typing import Any
 
 from mimirbench.agents.base import BaseAgent
 from mimirbench.agents.model_client import ModelClient, ModelClientError, ModelRequest
@@ -44,6 +45,7 @@ class DirectAgent(BaseAgent):
         max_tokens: int = 1024,
         seed: int | None = None,
         top_p: float | None = None,
+        request_extra: dict[str, Any] | None = None,
     ) -> None:
         super().__init__(name or f"{client.provider}::{client.model}")
         self.client = client
@@ -52,6 +54,7 @@ class DirectAgent(BaseAgent):
         self.max_tokens = max_tokens
         self.seed = seed
         self.top_p = top_p
+        self.request_extra = dict(request_extra or {})
 
     def build_user_prompt(self, task: Task) -> str:
         """Assemble the environment-aware user prompt for a task."""
@@ -70,6 +73,7 @@ class DirectAgent(BaseAgent):
             max_tokens=self.max_tokens,
             seed=self.seed,
             top_p=self.top_p,
+            extra=dict(self.request_extra),
         )
         return self.client.generate(request).raw_text
 
@@ -82,6 +86,7 @@ class DirectAgent(BaseAgent):
             max_tokens=self.max_tokens,
             seed=self.seed,
             top_p=self.top_p,
+            extra=dict(self.request_extra),
         )
 
         start = time.perf_counter()

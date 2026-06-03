@@ -190,6 +190,7 @@ class AgentConfig(BaseModel):
     device: str | None = None
     temperature: float = 0.0
     top_p: float | None = None
+    request_extra: dict[str, Any] = Field(default_factory=dict)
     do_sample: bool | None = None
     max_retries: int = Field(default=3, ge=1)
     timeout_seconds: float | None = Field(default=60.0, gt=0)
@@ -206,6 +207,7 @@ class AgentConfig(BaseModel):
     tool_policy: str = "reference"
     tool_max_steps: int = Field(default=3, ge=1)
     allowed_tools: list[str] | None = None
+    require_tool_first: bool = False
     posterior_noise: float = Field(default=0.0, ge=0.0)
     action_error_rate: float = Field(default=0.0, ge=0.0, le=1.0)
     confidence_bias: float = 0.0
@@ -317,6 +319,7 @@ class RobustnessRecord(BaseModel):
     run_id: str
     timestamp: str
     environment: str
+    seed: int | None = None
     parent_task_id: str
     variant_id: str | None = None
     variant_type: str | None = None

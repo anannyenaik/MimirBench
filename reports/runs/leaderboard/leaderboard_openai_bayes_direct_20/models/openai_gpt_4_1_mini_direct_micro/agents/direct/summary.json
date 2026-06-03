@@ -1,0 +1,155 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "OPENAI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gpt-4.1-mini",
+      "model_name": null,
+      "name": "openai_gpt_4_1_mini_direct_micro::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 0.4,
+        "output_usd_per_1m": 1.6
+      },
+      "provider": "openai",
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "openai_gpt_4_1_mini_direct_micro::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 20 model tasks",
+    "estimated_total_cost_usd": 0.005604,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 1467.404370001168,
+    "n_model_tasks": 20,
+    "n_tasks": 20,
+    "p50_latency_ms": 1221.6724499958218,
+    "p95_latency_ms": 2328.1200350116724,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 9637,
+    "total_output_tokens": 1093,
+    "total_tokens": 10730
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 20,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.176, 0.058, 0.070, 0.696], \"reasoning_summary\": \"Posterior probabilities were computed using Bayes' theorem by multiplying each source's prior by the likelihood of emitting symbol 4, then normalizing the results to sum to 1.\"}",
+      "score": 0.5431220639199076,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.034, 0.732, 0.234], \"reasoning_summary\": \"Computed likelihoods of the observed sequence under each source and combined with priors, then normalized to get posterior probabilities.\"}",
+      "score": 0.39780618025414327,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.282, 0.718], \"reasoning_summary\": \"Using Bayes' theorem, the posterior is proportional to prior times likelihood; Source A has higher likelihood for symbol 1 but lower prior, resulting in posterior probabilities of approximately 0.282 for A and 0.718 for B.\"}",
+      "score": 0.8892230215827338,
+      "task_id": "bayesian_games-126",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.192, 0.496, 0.312], \"reasoning_summary\": \"Calculated likelihoods of the observed sequence under each source and combined with priors, then normalized to get posterior probabilities.\"}",
+      "score": 0.8085961723447201,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.168, 0.086, 0.615, 0.131], \"reasoning_summary\": \"Calculated the likelihood of the observed sequence under each source, multiplied by the prior, and normalized to get posterior probabilities.\"}",
+      "score": 0.40470956015843473,
+      "task_id": "bayesian_games-128",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1467.404370001168,
+        "latency_p50_ms": 1221.6724499958218,
+        "latency_p95_ms": 2328.1200350116724,
+        "mean_score": 0.7806153332920294,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.43876933341594115,
+          "posterior_max_error": 0.2175059052313652,
+          "posterior_tv_error": 0.21938466670797058
+        },
+        "n_tasks": 20,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.2,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 1467.404370001168,
+      "latency_p50_ms": 1221.6724499958218,
+      "latency_p95_ms": 2328.1200350116724,
+      "mean_score": 0.7806153332920294,
+      "metric_means": {
+        "answer_sum": 1.0,
+        "posterior_l1_error": 0.43876933341594115,
+        "posterior_max_error": 0.2175059052313652,
+        "posterior_tv_error": 0.21938466670797058
+      },
+      "n_tasks": 20,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.2,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\models\\openai_gpt_4_1_mini_direct_micro\\agents\\direct",
+  "run_id": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct-20260602T200423",
+  "run_name": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct",
+  "timestamp": "2026-06-02T20:04:23Z"
+}

@@ -2,7 +2,7 @@
 
 The model backends (``local``/``api``/``tool``) import their heavy optional
 dependencies lazily, so importing this package never requires ``torch``,
-``openai``, or ``anthropic``.
+``openai``, ``anthropic``, or ``google-genai``.
 """
 
 from mimirbench.agents.api_model_agent import APIModelAgent

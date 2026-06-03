@@ -1,0 +1,139 @@
+{
+  "agent_modes": [
+    "direct"
+  ],
+  "artefacts": {
+    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\headline_candidates.md",
+    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\leaderboard_report.md",
+    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\leaderboard_summary.json",
+    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\paired_deltas.jsonl"
+  },
+  "caveats": [
+    "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
+    "Higher mean score is better; lower posterior error, risk violations, parse failures, latency, cost, and robustness score drop are better.",
+    "Cost is reported only when pricing was configured; otherwise it is 'not estimated'.",
+    "No hidden chain-of-thought is collected or reported; graders and labels are deterministic.",
+    "These are benchmark diagnostics, not evidence of trading usefulness or profitability.",
+    "These are synthetic deterministic evaluation tasks, not live-market or deployment outcomes.",
+    "Leaderboard rows describe only the configured model, agent mode, environments, and task set; they are not frontier-model claims.",
+    "This is a PRELIMINARY tiny real-model run (<= a handful of tasks per environment); expand the evaluation before drawing strong conclusions."
+  ],
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 1,
+      "seed": 123
+    }
+  ],
+  "headline_candidates": [],
+  "leaderboard": [
+    {
+      "agent": "direct",
+      "cost_estimated": true,
+      "estimated_cost_usd": 0.011357,
+      "latency_p50_ms": 1729.1720999928657,
+      "latency_p95_ms": 2640.784025006724,
+      "mean_score": 0.8287536816739335,
+      "model": "gemini_3_5_flash_direct_probe_thinking0",
+      "n_envs": 6,
+      "n_tasks": 6,
+      "parse_failure_rate": 0.0,
+      "provider": "gemini",
+      "result_label": "real API model",
+      "risk_violation_rate": 0.0,
+      "robustness_mean_score_drop": null,
+      "robustness_paraphrase_consistency": null
+    }
+  ],
+  "leaderboard_name": "leaderboard_gemini_flash_rescue_probe_thinking0",
+  "model_cards": [
+    "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\model_cards\\leaderboard_gemini_flash_rescue_probe_thinking0__gemini_3_5_flash_direct_probe_thinking0__direct__gemini_3_5_flash_direct_probe_thinking0_direct.md"
+  ],
+  "models_pending": [],
+  "models_run": [
+    {
+      "agent_modes": [
+        "direct"
+      ],
+      "agents": {
+        "direct": {
+          "baseline_kind": "real API model",
+          "cost_latency": {
+            "cost_estimated": true,
+            "cost_note": "estimated over 6 model tasks",
+            "estimated_total_cost_usd": 0.011357,
+            "invalid_response_rate": 0.0,
+            "mean_latency_ms": 1829.8137500023586,
+            "n_model_tasks": 6,
+            "n_tasks": 6,
+            "p50_latency_ms": 1729.1720999928657,
+            "p95_latency_ms": 2640.784025006724,
+            "parse_failure_rate": 0.0,
+            "provider_error_rate": 0.0,
+            "timeout_rate": 0.0,
+            "total_input_tokens": 2915,
+            "total_output_tokens": 776,
+            "total_tokens": 3691
+          },
+          "latency_p50_ms": 1729.1720999928657,
+          "latency_p95_ms": 2640.784025006724,
+          "mean_score": 0.8287536816739335,
+          "n_tasks": 6,
+          "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\models\\gemini_3_5_flash_direct_probe_thinking0\\agents\\direct",
+          "parse_failure_rate": 0.0,
+          "run_id": "leaderboard_gemini_flash_rescue_probe_thinking0__gemini_3_5_flash_direct_probe_thinking0__direct-20260603T054140",
+          "run_name": "leaderboard_gemini_flash_rescue_probe_thinking0__gemini_3_5_flash_direct_probe_thinking0__direct"
+        }
+      },
+      "label": "gemini_3_5_flash_direct_probe_thinking0",
+      "model_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\models\\gemini_3_5_flash_direct_probe_thinking0",
+      "provider": "gemini",
+      "result_label": "real API model",
+      "robustness": {},
+      "usable": true
+    }
+  ],
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0",
+  "paired_metrics": {},
+  "preliminary": true,
+  "provider_availability": {
+    "gemini_3_5_flash_direct_probe_thinking0": {
+      "detail": "google-genai installed and GEMINI_API_KEY is set; appears usable.",
+      "key_env": "GEMINI_API_KEY",
+      "key_present": true,
+      "key_required": true,
+      "package_available": true,
+      "provider": "gemini",
+      "usable": true
+    }
+  },
+  "real_execution_permitted": true,
+  "run_id": "leaderboard_gemini_flash_rescue_probe_thinking0-20260603T054137",
+  "tasks_per_agent": 6,
+  "timestamp": "2026-06-03T05:41:37Z"
+}

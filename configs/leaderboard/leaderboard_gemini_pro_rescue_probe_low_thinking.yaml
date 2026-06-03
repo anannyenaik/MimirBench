@@ -1,0 +1,54 @@
+# Gemini 3.1 Pro Preview rescue probe after thinking_budget=0 was rejected.
+#
+# Gemini 3 Pro cannot disable thinking. This probe follows the official Gemini
+# thinking guide by using thinking_level=low, while increasing max output tokens
+# enough to leave room for hidden thinking plus visible JSON.
+run:
+  name: leaderboard_gemini_pro_rescue_probe_low_thinking
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_pro_rescue_probe_low_thinking
+  cache: true
+  max_workers: 1
+models:
+  - name: gemini_3_1_pro_preview_direct_probe_low_thinking
+    provider: gemini
+    model: gemini-3.1-pro-preview
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra:
+      use_default_temperature: true
+      thinking_config:
+        thinking_level: low
+    max_tokens: 4096
+    max_retries: 3
+    timeout_seconds: 120
+    pricing:
+      input_usd_per_1m: 2.00
+      output_usd_per_1m: 12.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 1
+    seed: 123
+  - name: auctions
+    num_tasks: 1
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 1
+    seed: 123
+  - name: market_making
+    num_tasks: 1
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 1
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 1
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

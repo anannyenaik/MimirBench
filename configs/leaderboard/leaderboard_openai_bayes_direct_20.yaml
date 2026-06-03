@@ -1,0 +1,35 @@
+# Small real OpenAI leaderboard on Bayesian-updating tasks only.
+#
+# Running this makes paid API calls. It is intentionally scoped as a preliminary
+# artefact: one cheap OpenAI model, one direct agent, one environment, 20 tasks,
+# no robustness.
+run:
+  name: leaderboard_openai_bayes_direct_20
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_openai_bayes_direct_20
+  cache: true
+  max_workers: 1
+models:
+  - name: openai_gpt_4_1_mini_direct_micro
+    provider: openai
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing:
+      input_usd_per_1m: 0.40
+      output_usd_per_1m: 1.60
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 20
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

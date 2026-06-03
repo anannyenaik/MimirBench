@@ -35,6 +35,19 @@ __all__ = ["OpenAIClient"]
 _DEFAULT_KEY_ENV = "OPENAI_API_KEY"
 
 
+def _uses_max_completion_tokens(model: str) -> bool:
+    """Return whether Chat Completions expects ``max_completion_tokens``."""
+    normalised = model.lower().strip()
+    return normalised.startswith("gpt-5") or (
+        normalised.startswith("o") and len(normalised) > 1 and normalised[1].isdigit()
+    )
+
+
+def _uses_api_default_temperature(model: str) -> bool:
+    """Return whether Chat Completions rejects explicit ``temperature`` values."""
+    return model.lower().strip() == "gpt-5.5"
+
+
 class OpenAIClient(ModelClient):
     """Call an OpenAI-compatible chat model with bounded retries."""
 
@@ -118,13 +131,17 @@ class OpenAIClient(ModelClient):
         client = self._ensure_client()
         kwargs: dict[str, Any] = {
             "model": self.model,
-            "temperature": request.temperature,
-            "max_tokens": request.max_tokens,
             "messages": [
                 {"role": "system", "content": request.system_prompt},
                 {"role": "user", "content": request.user_prompt},
             ],
         }
+        if not _uses_api_default_temperature(self.model):
+            kwargs["temperature"] = request.temperature
+        token_limit_key = (
+            "max_completion_tokens" if _uses_max_completion_tokens(self.model) else "max_tokens"
+        )
+        kwargs[token_limit_key] = request.max_tokens
         if request.seed is not None:
             kwargs["seed"] = request.seed
         if request.top_p is not None:
@@ -134,6 +151,8 @@ class OpenAIClient(ModelClient):
         if self.timeout_s is not None:
             kwargs["timeout"] = self.timeout_s
         kwargs.update(request.extra)
+        if _uses_api_default_temperature(self.model):
+            kwargs.pop("temperature", None)
 
         start = time.perf_counter()
         response = run_with_retries(

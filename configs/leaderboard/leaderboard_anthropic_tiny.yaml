@@ -1,0 +1,50 @@
+# Tiny paired leaderboard for one configured Anthropic model.
+# This makes real API calls only when `mimirbench check-provider anthropic` reports usable.
+run:
+  name: leaderboard_anthropic_tiny
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_anthropic_tiny
+  cache: true
+  max_workers: 1
+models:
+  - name: anthropic_configured_tiny
+    provider: anthropic
+    model: claude-3-5-haiku-latest
+    api_key_env: ANTHROPIC_API_KEY
+    temperature: 0
+    max_tokens: 512
+agents:
+  - direct
+  - tool
+  - reflective
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+  - name: auctions
+    num_tasks: 10
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 10
+    seed: 123
+  - name: market_making
+    num_tasks: 10
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 10
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 10
+    seed: 123
+robustness:
+  enabled: true
+  agents:
+    - direct
+    - tool
+    - reflective
+  variants_per_task: 4
+  max_variants_per_task: 4
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

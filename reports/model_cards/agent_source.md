@@ -4,7 +4,7 @@
 
 - Model name: `agent_source`
 - Model type: compact synthetic Bayesian trace transformer
-- Training run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_agent_a0\training`
+- Training run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_agent_a0\training`
 - Created from actual training artefacts: `yes`
 
 ## Architecture
@@ -24,7 +24,7 @@
 ## Training Config
 
 - Optimisation config: `{"batch_size": 4, "device": "cpu", "early_stopping_patience": null, "epochs": 1, "grad_clip": 1.0, "learning_rate": 0.001, "weight_decay": 0.01}`
-- Full resolved config: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_agent_a0\training\config_resolved.yaml`
+- Full resolved config: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_agent_a0\training\config_resolved.yaml`
 
 ## Validation Metrics
 
@@ -43,9 +43,9 @@
 
 ## Checkpoints
 
-- Best checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_agent_a0\training\checkpoints\best.pt`
-- Final checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_agent_a0\training\checkpoints\final.pt`
-- Tokenizer vocabulary: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_agent_a0\training\vocab.json`
+- Best checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_agent_a0\training\checkpoints\best.pt`
+- Final checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_agent_a0\training\checkpoints\final.pt`
+- Tokenizer vocabulary: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_agent_a0\training\vocab.json`
 
 ## Known Limitations
 

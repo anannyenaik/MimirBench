@@ -1,0 +1,289 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 512,
+      "model": "gemini-3.5-flash",
+      "model_name": null,
+      "name": "gemini_3_5_flash_direct_probe_thinking0::direct",
+      "posterior_noise": 0.0,
+      "pricing": {
+        "input_usd_per_1m": 1.5,
+        "output_usd_per_1m": 9.0
+      },
+      "provider": "gemini",
+      "request_extra": {
+        "thinking_config": {
+          "thinking_budget": 0
+        },
+        "use_default_temperature": true
+      },
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 1.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "direct"
+    },
+    "name": "gemini_3_5_flash_direct_probe_thinking0::direct",
+    "type": "direct",
+    "warning": null
+  },
+  "cost_latency": {
+    "cost_estimated": true,
+    "cost_note": "estimated over 6 model tasks",
+    "estimated_total_cost_usd": 0.011357,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 1829.8137500023586,
+    "n_model_tasks": 6,
+    "n_tasks": 6,
+    "p50_latency_ms": 1729.1720999928657,
+    "p95_latency_ms": 2640.784025006724,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": 2915,
+    "total_output_tokens": 776,
+    "total_tokens": 3691
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 1,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 1,
+      "seed": 123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\n  \"posterior\": [\n    0.8354743275727976,\n    0.1645256724272024\n  ],\n  \"reasoning_summary\": \"To find the posterior probabilities, the likelihood of the observed sequence 'symbol 1, 3, 4, 1, 1' was computed for each source and multiplied by their respective prior probabilities. These joint probabil",
+      "score": 0.8769817774975812,
+      "task_id": "bayesian_games-123",
+      "violations": []
+    },
+    {
+      "environment": "hidden_regimes",
+      "error": null,
+      "response_excerpt": "{\n  \"regime_posterior\": [\n    0.6946,\n    0.3054\n  ],\n  \"reasoning_summary\": \"The posterior probabilities for the hidden regimes at the final step were calculated using the forward algorithm of the Hidden Markov Model, recursively updating the belief state with each observed signal.\"\n}",
+      "score": 0.8568967628152011,
+      "task_id": "hidden_regimes-123",
+      "violations": []
+    },
+    {
+      "environment": "market_making",
+      "error": null,
+      "response_excerpt": "{\n  \"bid_price\": 121.62,\n  \"ask_price\": 122.25,\n  \"bid_size\": 2.00,\n  \"ask_size\": 0.50,\n  \"reduce_inventory\": true,\n  \"abstain\": false,\n  \"confidence\": 0.90,\n  \"reasoning_summary\": \"Given the significant short inventory position of -10.80 approaching the position limit of -12.00, the quoting strateg",
+      "score": 0.6426919963518065,
+      "task_id": "market_making-123",
+      "violations": []
+    },
+    {
+      "environment": "prediction_markets",
+      "error": null,
+      "response_excerpt": "{\n  \"action\": \"buy\",\n  \"target_position\": 1.05,\n  \"trade_size\": 1.94,\n  \"fair_probability\": 0.681,\n  \"expected_value\": 0.189,\n  \"confidence\": 0.75,\n  \"reasoning_summary\": \"Integrating the positive private signal with the prior probability yields a fair value of approximately 0.681. Since this is sig",
+      "score": 0.7959577583418666,
+      "task_id": "prediction_markets-123",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1717.1246999932919,
+        "latency_p50_ms": 1717.1246999932919,
+        "latency_p95_ms": 1717.1246999932919,
+        "mean_score": 0.8,
+        "metric_means": {
+          "correct_constraint_identified": 0.0,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 2937.221900006989,
+        "latency_p50_ms": 2937.221900006989,
+        "latency_p95_ms": 2937.221900006989,
+        "mean_score": 0.9999937950371458,
+        "metric_means": {
+          "expected_value_abs_error": 6.8360500000697044e-06,
+          "expected_value_rel_error": 6.204962854160318e-06
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1481.1883000074886,
+        "latency_p50_ms": 1481.1883000074886,
+        "latency_p95_ms": 1481.1883000074886,
+        "mean_score": 0.8769817774975812,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.24603644500483746,
+          "posterior_max_error": 0.12301822250241878,
+          "posterior_tv_error": 0.12301822250241873
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1350.6577000080142,
+        "latency_p50_ms": 1350.6577000080142,
+        "latency_p95_ms": 1350.6577000080142,
+        "mean_score": 0.8568967628152011,
+        "metric_means": {
+          "posterior_l1_error": 0.2862064743695978,
+          "posterior_tv_error": 0.1431032371847989
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1741.2194999924395,
+        "latency_p50_ms": 1741.2194999924395,
+        "latency_p95_ms": 1741.2194999924395,
+        "mean_score": 0.6426919963518065,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.4396336464968181,
+          "inventory_risk_score": 0.5,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.16818521663164598
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 1751.4704000059282,
+        "latency_p50_ms": 1751.4704000059282,
+        "latency_p95_ms": 1751.4704000059282,
+        "mean_score": 0.7959577583418666,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "action_optimality": 0.7352427608284425,
+          "calibration_proxy": 0.8153999999999999,
+          "expected_value_error": 0.200347,
+          "fair_probability_error": 0.0001500000000000945,
+          "regret": 0.10916593887599996,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 1,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 1829.8137500023586,
+      "latency_p50_ms": 1729.1720999928657,
+      "latency_p95_ms": 2640.784025006724,
+      "mean_score": 0.8287536816739335,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "action_optimality": 0.7352427608284425,
+        "adverse_selection_penalty": 0.4396336464968181,
+        "answer_sum": 1.0,
+        "calibration_proxy": 0.8153999999999999,
+        "correct_constraint_identified": 0.0,
+        "expected_value_abs_error": 6.8360500000697044e-06,
+        "expected_value_error": 0.200347,
+        "expected_value_rel_error": 6.204962854160318e-06,
+        "fair_probability_error": 0.0001500000000000945,
+        "inventory_risk_score": 0.5,
+        "posterior_l1_error": 0.2661214596872176,
+        "posterior_max_error": 0.12301822250241878,
+        "posterior_tv_error": 0.1330607298436088,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 1.0,
+        "regret": 0.10916593887599996,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.0,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.16818521663164598,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 6,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.3333333333333333,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_flash_rescue_probe_thinking0\\models\\gemini_3_5_flash_direct_probe_thinking0\\agents\\direct",
+  "run_id": "leaderboard_gemini_flash_rescue_probe_thinking0__gemini_3_5_flash_direct_probe_thinking0__direct-20260603T054140",
+  "run_name": "leaderboard_gemini_flash_rescue_probe_thinking0__gemini_3_5_flash_direct_probe_thinking0__direct",
+  "timestamp": "2026-06-03T05:41:40Z"
+}

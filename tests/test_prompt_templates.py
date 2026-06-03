@@ -94,6 +94,30 @@ def test_build_tool_step_prompt_contains_tools_and_finalize_flag() -> None:
     assert "final answer" in final.lower()
 
 
+def test_build_tool_step_prompt_require_tool_mandates_a_call() -> None:
+    task = get("bayesian_games").generator(1).task
+    step = build_tool_step_prompt(
+        task,
+        tool_block="- bayes_calculator: ...",
+        observations="(none yet)",
+        require_tool=True,
+    )
+    lowered = step.lower()
+    assert "must call" in lowered
+    # On a required-tool turn the immediate final-answer exit must not be offered.
+    assert "if ready, return" not in lowered
+    # A forced finalize still takes precedence over require_tool.
+    final = build_tool_step_prompt(
+        task,
+        tool_block="- bayes_calculator: ...",
+        observations="x",
+        must_finalize=True,
+        require_tool=True,
+    )
+    assert "final answer" in final.lower()
+    assert "must call" not in final.lower()
+
+
 def test_distribution_envs_request_probability_vector() -> None:
     for name in ("bayesian_games", "hidden_regimes"):
         task = get(name).generator(2).task

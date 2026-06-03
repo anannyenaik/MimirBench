@@ -1,0 +1,32 @@
+# One-off verification: does require_tool_first make gpt-5.4-mini actually call a
+# tool? Tiny by design (bayesian_games, 3 tasks, model-backed tool agent). Makes a
+# handful of paid API calls (~cents). Not a benchmark result - purely a wiring check.
+run:
+  name: verify_require_tool_bayes_micro
+  seed: 123
+  output_dir: reports/runs/verify_require_tool_bayes_micro
+  cache: true
+  max_workers: 1
+agent:
+  type: tool
+  tool_policy: model
+  provider: openai
+  model: gpt-5.4-mini
+  api_key_env: OPENAI_API_KEY
+  temperature: 0
+  max_tokens: 512
+  max_retries: 3
+  timeout_seconds: 60
+  tool_max_steps: 3
+  require_tool_first: true
+  pricing:
+    input_usd_per_1m: 0.75
+    output_usd_per_1m: 4.50
+environments:
+  - name: bayesian_games
+    num_tasks: 3
+    seed: 123
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

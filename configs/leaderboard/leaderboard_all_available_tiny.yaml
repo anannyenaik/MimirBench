@@ -1,0 +1,63 @@
+# Tiny paired leaderboard over all configured real providers.
+# Providers that fail availability checks are recorded as pending; no fake rows are written.
+run:
+  name: leaderboard_all_available_tiny
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_all_available_tiny
+  cache: true
+  max_workers: 1
+models:
+  - name: openai_configured_tiny
+    provider: openai
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+  - name: anthropic_configured_tiny
+    provider: anthropic
+    model: claude-3-5-haiku-latest
+    api_key_env: ANTHROPIC_API_KEY
+    temperature: 0
+    max_tokens: 512
+  - name: local_configured_tiny
+    provider: local
+    model_name: Qwen/Qwen2.5-0.5B-Instruct
+    device: auto
+    temperature: 0
+    do_sample: false
+    max_new_tokens: 512
+agents:
+  - direct
+  - tool
+  - reflective
+environments:
+  - name: bayesian_games
+    num_tasks: 10
+    seed: 123
+  - name: auctions
+    num_tasks: 10
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 10
+    seed: 123
+  - name: market_making
+    num_tasks: 10
+    seed: 123
+  - name: prediction_markets
+    num_tasks: 10
+    seed: 123
+  - name: adversarial_risk
+    num_tasks: 10
+    seed: 123
+robustness:
+  enabled: true
+  agents:
+    - direct
+    - tool
+    - reflective
+  variants_per_task: 4
+  max_variants_per_task: 4
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

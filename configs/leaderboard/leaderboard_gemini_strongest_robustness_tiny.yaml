@@ -1,0 +1,98 @@
+# Tiny Gemini Flash direct-agent robustness run across all environments.
+#
+# Runs on the strongest clean Gemini direct row selected from the ladder:
+# gemini-3.5-flash with thinking_budget=0. Shape matches the OpenAI gpt-5.4
+# robustness probe: 5 base tasks/env and three deterministic variants per base
+# task (30 base + 90 variants = 120 direct model calls).
+#
+# Manual pre-run cost upper bound: about $0.75 USD. This pads prompt/input tokens
+# above the 20/env estimator and assumes every call uses the full 512 output-token
+# cap at Gemini Flash Standard text pricing ($1.50/M input, $9.00/M output).
+# The robustness runner does not persist per-call usage/cost, so report cost as
+# this upper bound rather than an observed total.
+run:
+  name: leaderboard_gemini_strongest_robustness_tiny
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny
+  cache: true
+  max_workers: 1
+
+agent:
+  type: direct
+  provider: gemini
+  model: gemini-3.5-flash
+  api_key_env: GEMINI_API_KEY
+  temperature: 1
+  request_extra:
+    use_default_temperature: true
+    thinking_config:
+      thinking_budget: 0
+  max_retries: 3
+  timeout_seconds: 60
+  max_tokens: 512
+  pricing:
+    input_usd_per_1m: 1.50
+    output_usd_per_1m: 9.00
+
+environments:
+  - name: bayesian_games
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: auctions
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: hidden_regimes
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: market_making
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: prediction_markets
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+  - name: adversarial_risk
+    num_tasks: 5
+    seed: 123
+    variants_per_task: 3
+    variant_types:
+      - paraphrase
+      - irrelevant_context
+      - risk_pressure
+
+robustness:
+  answer_preserving_only: false
+  max_variants_per_task: 3
+  include_base_records: true
+  extract_failure_cases: true
+  max_failure_cases: 20
+
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true
+  write_failure_cases: true

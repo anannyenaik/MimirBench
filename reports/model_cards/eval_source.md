@@ -4,7 +4,7 @@
 
 - Model name: `eval_source`
 - Model type: compact synthetic Bayesian trace transformer
-- Training run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\training`
+- Training run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\training`
 - Created from actual training artefacts: `yes`
 
 ## Architecture
@@ -24,7 +24,7 @@
 ## Training Config
 
 - Optimisation config: `{"batch_size": 4, "device": "cpu", "early_stopping_patience": null, "epochs": 1, "grad_clip": 1.0, "learning_rate": 0.001, "weight_decay": 0.01}`
-- Full resolved config: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\training\config_resolved.yaml`
+- Full resolved config: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\training\config_resolved.yaml`
 
 ## Validation Metrics
 
@@ -33,8 +33,8 @@
 
 ## Held-Out MimirBench Metrics
 
-- Held-out evaluation summary: `{"action_accuracy": 0.5, "approx_posterior_abs_error_mean": 0.3907249880901354, "confidence_bucket_accuracy": 0.75, "invalid_response_rate": 0.0, "latency_mean_ms": 85.72639999329112, "latency_p50_ms": 87.4149499941268, "latency_p95_ms": 101.09588999621337, "posterior_bucket_accuracy": 0.0, "regret_mean": 0.3111261872455902, "risk_flag_accuracy": 0.5}`
-- Evaluation run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\eval`
+- Held-out evaluation summary: `{"action_accuracy": 0.5, "approx_posterior_abs_error_mean": 0.3907249880901354, "confidence_bucket_accuracy": 0.75, "invalid_response_rate": 0.0, "latency_mean_ms": 53.720200005045626, "latency_p50_ms": 54.8022500006482, "latency_p95_ms": 59.1817550099222, "posterior_bucket_accuracy": 0.0, "regret_mean": 0.3111261872455902, "risk_flag_accuracy": 0.5}`
+- Evaluation run directory: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\eval`
 
 ## Interpretability Readiness
 
@@ -44,9 +44,9 @@
 
 ## Checkpoints
 
-- Best checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\training\checkpoints\best.pt`
-- Final checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\training\checkpoints\final.pt`
-- Tokenizer vocabulary: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-361\test_small_transformer_eval_sm0\training\vocab.json`
+- Best checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\training\checkpoints\best.pt`
+- Final checkpoint: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\training\checkpoints\final.pt`
+- Tokenizer vocabulary: `C:\Users\Lenovo\AppData\Local\Temp\pytest-of-AN\pytest-366\test_small_transformer_eval_sm0\training\vocab.json`
 
 ## Known Limitations
 

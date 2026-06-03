@@ -1,0 +1,44 @@
+# Tiny gpt-5.5 rescue probe for the prior length-limited empty-output row.
+#
+# This deliberately uses only six paid calls. It keeps the same direct-agent
+# protocol but gives gpt-5.5 a larger completion budget and lower reasoning
+# effort through the Chat Completions `reasoning_effort` parameter. The OpenAI
+# client omits the temperature request field for gpt-5.5.
+run:
+  name: leaderboard_openai_gpt55_rescue_probe
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_openai_gpt55_rescue_probe
+  cache: true
+  max_workers: 1
+models:
+  - name: openai_gpt_5_5_rescue_probe
+    provider: openai
+    model: gpt-5.5
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 2048
+    max_retries: 3
+    timeout_seconds: 60
+    request_extra:
+      reasoning_effort: low
+    pricing:
+      input_usd_per_1m: 5.00
+      output_usd_per_1m: 30.00
+agents:
+  - direct
+environments:
+  - name: bayesian_games
+    num_tasks: 2
+    seed: 123
+  - name: hidden_regimes
+    num_tasks: 2
+    seed: 123
+  - name: market_making
+    num_tasks: 2
+    seed: 123
+robustness:
+  enabled: false
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

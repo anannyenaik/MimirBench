@@ -1,0 +1,33 @@
+# Re-verification after the tolerant-wrapper + arg-guidance fix (Option C).
+# Same 3 bayesian_games tasks/seed as verify_require_tool_bayes_micro, fresh
+# output dir to preserve the before/after. Expectation: tool_error_rate drops from
+# 1.0 toward 0 and tool use is actually exercised. ~cents of paid API calls.
+run:
+  name: verify_require_tool_bayes_micro_v2
+  seed: 123
+  output_dir: reports/runs/verify_require_tool_bayes_micro_v2
+  cache: true
+  max_workers: 1
+agent:
+  type: tool
+  tool_policy: model
+  provider: openai
+  model: gpt-5.4-mini
+  api_key_env: OPENAI_API_KEY
+  temperature: 0
+  max_tokens: 512
+  max_retries: 3
+  timeout_seconds: 60
+  tool_max_steps: 3
+  require_tool_first: true
+  pricing:
+    input_usd_per_1m: 0.75
+    output_usd_per_1m: 4.50
+environments:
+  - name: bayesian_games
+    num_tasks: 3
+    seed: 123
+reporting:
+  write_jsonl: true
+  write_summary: true
+  write_markdown: true

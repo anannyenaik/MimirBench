@@ -24,8 +24,10 @@ from mimirbench.agents.base import BaseAgent
 from mimirbench.agents.resolver import resolve_agent
 from mimirbench.analysis.robustness import PRESSURE_VARIANT_TYPES, compute_robustness_metrics
 from mimirbench.evals import registry
+from mimirbench.evals.cache import ResponseCache, make_cache_key
 from mimirbench.evals.registry import EnvironmentSpec
 from mimirbench.evals.schemas import (
+    AgentConfig,
     GraderResult,
     ModelResponse,
     RobustnessRecord,
@@ -94,6 +96,11 @@ def run_robustness_config(config: RobustnessRunConfig) -> dict[str, Any]:
 
     timestamp = _utc_timestamp()
     run_id = _make_run_id(config.run.name, timestamp)
+    cache = ResponseCache(
+        _cache_path(config, output_dir),
+        enabled=config.run.cache,
+        bypass=config.run.cache_bypass,
+    )
 
     records: list[RobustnessRecord] = []
     n_base_tasks = 0
@@ -110,7 +117,13 @@ def run_robustness_config(config: RobustnessRunConfig) -> dict[str, Any]:
         for i in range(env.num_tasks):
             instance = spec.generator(env_seed + i)
             n_base_tasks += 1
-            base = _BaseOutcome.build(agent, spec, instance)
+            base = _BaseOutcome.build(
+                agent,
+                spec,
+                instance,
+                agent_config=config.agent,
+                cache=cache,
+            )
 
             if config.robustness.include_base_records:
                 records.append(_base_record(run_id, timestamp, env.name, base))
@@ -130,6 +143,8 @@ def run_robustness_config(config: RobustnessRunConfig) -> dict[str, Any]:
                         spec=spec,
                         base=base,
                         variant=variant,
+                        agent_config=config.agent,
+                        cache=cache,
                     )
                 )
 
@@ -178,6 +193,7 @@ class _BaseOutcome:
 
     __slots__ = (
         "action",
+        "cache_hit",
         "instance",
         "invalid",
         "response",
@@ -191,6 +207,8 @@ class _BaseOutcome:
         instance: TaskInstance,
         response: ModelResponse,
         result: GraderResult,
+        *,
+        cache_hit: bool,
     ) -> None:
         self.instance = instance
         self.response = response
@@ -199,12 +217,27 @@ class _BaseOutcome:
         self.invalid = is_invalid(result)
         self.unsafe = is_unsafe(result)
         self.risk_violation = is_risk_violation(result)
+        self.cache_hit = cache_hit
 
     @classmethod
-    def build(cls, agent: BaseAgent, spec: EnvironmentSpec, instance: TaskInstance) -> _BaseOutcome:
-        response = _run_agent(agent, instance)
+    def build(
+        cls,
+        agent: BaseAgent,
+        spec: EnvironmentSpec,
+        instance: TaskInstance,
+        *,
+        agent_config: AgentConfig,
+        cache: ResponseCache,
+    ) -> _BaseOutcome:
+        response, cache_hit = _run_agent_cached(
+            agent,
+            instance,
+            agent_config=agent_config,
+            environment=spec.name,
+            cache=cache,
+        )
         result = _grade(spec, instance, response)
-        return cls(instance, response, result)
+        return cls(instance, response, result, cache_hit=cache_hit)
 
 
 def _variant_record(
@@ -215,10 +248,18 @@ def _variant_record(
     spec: EnvironmentSpec,
     base: _BaseOutcome,
     variant: Any,
+    agent_config: AgentConfig,
+    cache: ResponseCache,
 ) -> RobustnessRecord:
     instance = variant.instance
     spec_meta = variant.spec
-    response = _run_agent(agent, instance)
+    response, cache_hit = _run_agent_cached(
+        agent,
+        instance,
+        agent_config=agent_config,
+        environment=spec.name,
+        cache=cache,
+    )
     result = _grade(spec, instance, response)
 
     action = canonical_action(instance.task.family, response.parsed_answer)
@@ -251,6 +292,7 @@ def _variant_record(
         run_id=run_id,
         timestamp=timestamp,
         environment=spec.name,
+        seed=base.instance.task.seed,
         parent_task_id=spec_meta.parent_task_id,
         variant_id=spec_meta.variant_id,
         variant_type=spec_meta.variant_type.value,
@@ -281,6 +323,10 @@ def _variant_record(
             "variant_metrics": dict(result.metrics),
             "variant_confidence": _confidence(response.parsed_answer),
             "variant_tool_calls": len(response.tool_calls),
+            "base_cache_hit": base.cache_hit,
+            "variant_cache_hit": cache_hit,
+            "base_response_metadata": dict(base.response.metadata),
+            "variant_response_metadata": dict(response.metadata),
         },
     )
 
@@ -295,6 +341,7 @@ def _base_record(
         run_id=run_id,
         timestamp=timestamp,
         environment=environment,
+        seed=base.instance.task.seed,
         parent_task_id=base.instance.task.task_id,
         variant_id=None,
         variant_type=None,
@@ -315,7 +362,11 @@ def _base_record(
         base_response=base.response.raw_text[:600],
         variant_response=base.response.raw_text[:600],
         notes=["base task"],
-        metadata={"is_base": True},
+        metadata={
+            "is_base": True,
+            "cache_hit": base.cache_hit,
+            "response_metadata": dict(base.response.metadata),
+        },
     )
 
 
@@ -386,6 +437,37 @@ def _run_agent(agent: BaseAgent, instance: TaskInstance) -> ModelResponse:
         )
 
 
+def _run_agent_cached(
+    agent: BaseAgent,
+    instance: TaskInstance,
+    *,
+    agent_config: AgentConfig,
+    environment: str,
+    cache: ResponseCache,
+) -> tuple[ModelResponse, bool]:
+    cache_key = make_cache_key(
+        agent_config=agent_config,
+        environment=environment,
+        task=instance.task,
+    )
+    cache_entry = cache.get(cache_key)
+    if cache_entry is not None:
+        return cache_entry.model_response, True
+
+    response = _run_agent(agent, instance)
+    if response.error is None:
+        cache.set(
+            cache_key,
+            response,
+            metadata={
+                "environment": environment,
+                "task_id": instance.task.task_id,
+                "agent_name": agent.name,
+            },
+        )
+    return response, False
+
+
 def _grade(spec: EnvironmentSpec, instance: TaskInstance, response: ModelResponse) -> GraderResult:
     try:
         return spec.grader(instance.task, response, instance.key)
@@ -414,6 +496,12 @@ def _output_dir(config: RobustnessRunConfig) -> Path:
     if config.run.output_dir:
         return Path(config.run.output_dir)
     return Path("reports") / "runs" / config.run.name
+
+
+def _cache_path(config: RobustnessRunConfig, output_dir: Path) -> Path:
+    if config.run.cache_path:
+        return Path(config.run.cache_path)
+    return output_dir / "responses_cache.jsonl"
 
 
 def _utc_timestamp() -> str:
