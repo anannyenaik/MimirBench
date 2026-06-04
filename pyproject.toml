@@ -60,6 +60,7 @@ interp = [
 # Hosted-model API clients.
 api = [
     "openai>=1.0",
+    "anthropic>=0.40",
     "google-genai>=2.0",
 ]
 # Experiment tracking.
@@ -75,9 +76,10 @@ all = [
 mimirbench = "mimirbench.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/your-org/mimirbench"
-Documentation = "https://github.com/your-org/mimirbench#readme"
-Issues = "https://github.com/your-org/mimirbench/issues"
+Homepage = "https://github.com/anannyenaik/MimirBench"
+Repository = "https://github.com/anannyenaik/MimirBench"
+Documentation = "https://github.com/anannyenaik/MimirBench#readme"
+Issues = "https://github.com/anannyenaik/MimirBench/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["mimirbench"]

@@ -13,7 +13,7 @@ test; you only install model extras when you actually want to run a model.
 | Backend | `agent.type` | `agent.provider` | Package | Key env var | Cost estimate |
 | --- | --- | --- | --- | --- | --- |
 | OpenAI-compatible | `api` | `openai` | `openai` (`.[api]`) | `OPENAI_API_KEY` | only if `pricing` configured |
-| Anthropic | `api` | `anthropic` | `anthropic` | `ANTHROPIC_API_KEY` | only if `pricing` configured |
+| Anthropic | `api` | `anthropic` | `anthropic` (`.[api]`) | `ANTHROPIC_API_KEY` | only if `pricing` configured |
 | Gemini | `api` | `gemini` | `google-genai` (`.[api]`) | `GEMINI_API_KEY` | only if `pricing` configured |
 | Generic HTTP (OpenAI-shaped) | `api` | `generic_http` | none (stdlib) | `MIMIRBENCH_LLM_API_KEY` (optional) | only if `pricing` configured |
 | Local Hugging Face | `local` | — | `torch`+`transformers` (`.[ml]`) | none | never (no provider billing) |
@@ -30,7 +30,7 @@ from a config file and **never** written to any run record, summary, or log.
 
 ```bash
 export OPENAI_API_KEY=sk-...        # OpenAI
-export ANTHROPIC_API_KEY=sk-ant-... # Anthropic (optional support)
+export ANTHROPIC_API_KEY=sk-ant-... # Anthropic / Claude
 export GEMINI_API_KEY=...           # Gemini
 ```
 
@@ -53,8 +53,7 @@ var is set, and whether the provider therefore *appears* usable.
 ## Optional dependencies
 
 ```bash
-pip install -e ".[api]"   # openai + google-genai clients
-pip install anthropic     # optional Anthropic support
+pip install -e ".[api]"   # openai + anthropic + google-genai clients
 pip install -e ".[ml]"    # torch + transformers for local models
 ```
 

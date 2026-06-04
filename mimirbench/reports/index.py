@@ -39,7 +39,7 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
 
     lines.extend(["", "## Standalone leaderboard analysis notes", ""])
     leaderboard_notes = _leaderboard_notes(root)
-    lines.extend([f"- `{_rel(note, root)}`" for note in leaderboard_notes] or ["No standalone leaderboard notes found."])
+    lines.extend([f"- {_link(note, root)}" for note in leaderboard_notes] or ["No standalone leaderboard notes found."])
 
     lines.extend(["", "## Interpretability runs", ""])
     interpretability_runs = _interpretability_runs(root)
@@ -48,11 +48,11 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     lines.extend(["", "## Model cards", ""])
     cards = sorted((root / "model_cards").glob("*.md")) if (root / "model_cards").exists() else []
     cards = [card for card in cards if card.name.lower() != "readme.md"]
-    lines.extend([f"- `{_rel(card, root)}`" for card in cards] or ["No model cards found."])
+    lines.extend([f"- {_link(card, root)}" for card in cards] or ["No model cards found."])
 
     lines.extend(["", "## Generated figures", ""])
     figures = sorted(root.rglob("figures/*.png"))
-    lines.extend([f"- `{_rel(figure, root)}`" for figure in figures] or ["No generated figures found."])
+    lines.extend([f"- {_link(figure, root)}" for figure in figures] or ["No generated figures found."])
 
     lines.extend(
         [
@@ -187,7 +187,7 @@ def _leaderboard_lines(runs: list[dict[str, Any]], *, root: Path) -> list[str]:
     for run in runs:
         lines.append(
             "| "
-            f"{run['name']} | `{_rel(run['path'], root)}` | "
+            f"{run['name']} | {_link(run['path'], root)} | "
             f"{_fmt(run.get('models_run'))} | {_fmt(run.get('models_pending'))} | "
             f"{_fmt(run.get('tasks_per_agent'))} | {_fmt(run.get('headlines'))} | "
             f"{'yes' if run.get('preliminary') else 'no'} |"
@@ -210,7 +210,7 @@ def _interpretability_lines(runs: list[dict[str, Any]], *, root: Path) -> list[s
     for run in runs:
         lines.append(
             "| "
-            f"{run['name']} | `{_rel(run['path'], root)}` | {run['status']} | "
+            f"{run['name']} | {_link(run['path'], root)} | {run['status']} | "
             f"{run['experiments']} | {_fmt(run.get('action_probe'))} |"
         )
     lines.append("")
@@ -231,7 +231,7 @@ def _run_lines(runs: list[dict[str, Any]], *, root: Path, empty: str) -> list[st
     for run in runs:
         lines.append(
             "| "
-            f"{run['name']} | `{_rel(run['path'], root)}` | "
+            f"{run['name']} | {_link(run['path'], root)} | "
             f"{run.get('label') or 'n/a'} | {_fmt(run.get('n_tasks'))} | "
             f"{_fmt(run.get('mean_score'))} |"
         )
@@ -267,6 +267,12 @@ def _rel(path: Path, root: Path) -> str:
         return path.relative_to(root).as_posix()
     except ValueError:
         return path.as_posix()
+
+
+def _link(path: Path, root: Path) -> str:
+    """Clickable Markdown link (relative to ``reports/INDEX.md``) with code-styled text."""
+    rel = _rel(path, root)
+    return f"[`{rel}`]({rel})"
 
 
 def _fmt(value: Any) -> str:

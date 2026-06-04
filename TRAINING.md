@@ -132,11 +132,12 @@ mimirbench eval-small-transformer  configs/eval_small_transformer_bayes_medium.y
 ```
 
 The medium model is 2 layers, `d_model=128`, 4 heads (321,455 parameters),
-trained on 12,000 deterministic traces (2–10 observations each) for up to 30
-epochs with early stopping, CPU-only and dropout-free. It reaches near-perfect
-held-out action/risk accuracy, a 20-way posterior bucket accuracy of ~0.99, and
-~0.016 mean posterior error on 2,000 unseen tasks (eval seed 20000, disjoint from
-the training seed). A single data-size ablation
+trained on a deterministic split of 12,000 training / 2,000 validation / 2,000
+test traces (2–10 observations each) for up to 30 epochs with early stopping
+(best epoch 25), CPU-only and dropout-free. It reaches near-perfect held-out
+action/risk accuracy (1.000 / 1.000), a 20-way posterior bucket accuracy of
+~0.990, and ~0.0162 mean posterior error on the 2,000 unseen test tasks (eval
+seed 20000, disjoint from the training seed). A single data-size ablation
 (`configs/train_small_transformer_bayes_medium_ablation_data2k.yaml`, 2,000
 traces, identical architecture, identical validation split) shows the binary
 action/risk heads saturate from little data while the 20-way posterior bucket is
@@ -146,6 +147,17 @@ the data-hungry head. Exact numbers and the comparison table live in
 This medium checkpoint is the one the Stage 8 medium interpretability run
 analyses, and the one that yields a (narrow, synthetic) positive causal patching
 result.
+
+### Checkpoints and reproducibility
+
+The binary `.pt` checkpoint files (`checkpoints/best.pt`, `checkpoints/final.pt`)
+are **gitignored** (see `.gitignore`); they are not committed. Everything needed
+to regenerate them bit-for-bit is committed: the training config, the resolved
+config, the deterministic trace generator, `vocab.json`, and a fixed seed (123,
+CPU, dropout 0). Re-running `train-small-transformer` on the same config
+reproduces the checkpoint, and the committed `summary.json`, `metrics.jsonl`,
+figures, and model card under `reports/training/small_transformer_bayes_medium/`
+record the numbers without needing the weights.
 
 ## Interpretability (Stage 8)
 

@@ -2,7 +2,7 @@
 
 **Evaluating and interpreting strategic reasoning in language-model agents under uncertainty.**
 
-[![CI](https://github.com/your-org/mimirbench/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/mimirbench/actions/workflows/ci.yml)
+[![CI](https://github.com/anannyenaik/MimirBench/actions/workflows/ci.yml/badge.svg)](https://github.com/anannyenaik/MimirBench/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-pre--alpha-orange)
@@ -77,13 +77,19 @@ mimirbench summarise-leaderboard reports/runs/leaderboard/leaderboard_all_availa
 ```
 
 Stage 7 adds the synthetic small-transformer training pipeline (see
-[TRAINING.md](TRAINING.md)):
+[TRAINING.md](TRAINING.md)). The `tiny` config is a CPU smoke test; the `medium`
+config is the model organism that actually learns the task and yields the causal
+interpretability result:
 
 ```bash
+# Tiny smoke artefact (fast, does not learn the task):
 mimirbench generate-traces configs/train_small_transformer_bayes_tiny.yaml
 mimirbench train-small-transformer configs/train_small_transformer_bayes_tiny.yaml
-mimirbench eval-small-transformer configs/eval_small_transformer_bayes.yaml
-mimirbench inspect-training reports/training/small_transformer_bayes_tiny
+
+# Medium model organism (the headline checkpoint):
+mimirbench train-small-transformer configs/train_small_transformer_bayes_medium.yaml
+mimirbench eval-small-transformer configs/eval_small_transformer_bayes_medium.yaml
+mimirbench inspect-training reports/training/small_transformer_bayes_medium
 ```
 
 Eval configs write these artefacts under the configured output directory:
@@ -201,22 +207,45 @@ transformer/interp track now checked in:
 - Claude and Gemini forced-tool runs were deliberately skipped.
 - Responses are parsed and repaired deterministically, with no LLM judge and no
   hidden chain-of-thought collection.
-- Stage 7/8 synthetic transformer and interpretability artefacts are implemented,
-  but the checkpoint is tiny, task learning is modest, and the interpretability
-  results are mostly negative. They are not frontier-model evidence.
+- A medium synthetic Bayesian/risk transformer is trained and analysed end to
+  end (Stage 7/8): 321,455 parameters, 12,000 train / 2,000 val / 2,000 test
+  traces. On 2,000 held-out tasks it reaches a posterior-bucket accuracy of about
+  0.990, action accuracy 1.000, risk accuracy 1.000, and a mean posterior error
+  of about 0.0162.
+- Mechanistic interpretability on that checkpoint yields a narrow causal
+  model-organism result: corruption flipped the action on 122/128 clean/corrupted
+  pairs, layer-0 attention patching restored the correct action on 118/122 flipped
+  pairs, layer-0 MLP patching restored 0/122, and layer-1 attention restored
+  119/122. This is specific to the medium synthetic checkpoint and does not
+  transfer to frontier models.
+- The earlier tiny checkpoint is kept only as the original CPU smoke artefact
+  (undertrained, near-zero/negative interpretability) — not as a current result.
 - All results are preliminary, synthetic, direct-agent unless labelled otherwise,
   and not statistically conclusive.
-- This is not a trading bot, live trading system, market-beating claim, or solved
-  AI-safety benchmark.
+- Main model comparisons use a single seed/schedule; the interpretability result
+  uses one checkpoint/seed with full-sequence patching, not head-level or
+  SAE-level circuit analysis.
+- Small-model interpretability findings do not transfer to frontier-model
+  internals.
+- This is not a trading bot, live trading system, market-beating claim, trading-
+  usefulness claim, or solved AI-safety benchmark.
 
 ## Headline Findings
 
-Across 20 tasks per environment, results were environment-specific rather than
-uniformly monotonic by model tier. Stronger/newer models did not dominate every
-environment. Protocol choices mattered: Claude Sonnet required a larger output
-budget for clean JSON, and Gemini Flash/Pro required explicit thinking/output
-settings. Robustness probes surfaced paraphrase and risk-pressure sensitivity
-concentrated in market-making, auctions, and prediction-market tasks.
+MimirBench surfaces environment-specific differences rather than a single
+uniformly dominant model. Across 20 tasks per environment, stronger/newer models
+did not dominate every environment. Protocol choices mattered: Claude Sonnet
+required a larger output budget for clean JSON, and Gemini models required
+explicit thinking/output settings. Robustness probes surfaced paraphrase and
+risk-pressure sensitivity concentrated in market-making, auctions, and
+prediction-market tasks.
+
+In the trained medium synthetic transformer, patching attention activations from
+clean into corrupted prompts restored the correct action on 118/122 flipped
+pairs, providing a narrow causal model-organism result specific to that
+checkpoint. These are synthetic, deterministic tasks; the comparisons are not
+statistically conclusive, carry no trading-usefulness claim, and the
+small-model interpretability does not transfer to frontier models.
 
 ## Where To Look
 
@@ -257,8 +286,12 @@ concentrated in market-making, auctions, and prediction-market tasks.
 5. ~~Real-model provider phase: OpenAI, Claude, and Gemini direct leaderboard
    artefacts plus targeted robustness probes.~~ Done. Provider-specific protocol
    settings and caveats remain part of the reported result.
-6. Next research milestone: train a larger synthetic Bayesian/risk transformer
-   and rerun interpretability to seek a causal model-organism result.
+6. ~~Train a larger synthetic Bayesian/risk transformer and rerun
+   interpretability to seek a causal model-organism result.~~ Done - the medium
+   checkpoint (321,455 params) learns the task and yields a narrow causal
+   patching result; see [INTERPRETABILITY.md](INTERPRETABILITY.md) and
+   [RESULTS.md](RESULTS.md). The finding is specific to that synthetic
+   checkpoint and makes no frontier-model claim.
 7. Stage 9: a paper-style report consolidating evals, robustness, training, and
    interpretability, with polished figures, tables, and limitations.
 

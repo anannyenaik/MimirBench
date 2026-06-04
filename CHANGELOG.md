@@ -25,12 +25,34 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **Configs** — tiny API/local/tool smoke configs and a tiny API robustness probe.
 - **Docs** — `MODELS.md`, `TOOLS.md`; README/EVALS/RESULTS/ROBUSTNESS updated.
 
+### Added — real-model provider phase
+- Direct-agent leaderboard artefacts for OpenAI, Claude, and Gemini on the
+  synthetic 20-tasks-per-environment protocol, plus targeted robustness probes.
+  Strongest clean rows: OpenAI `gpt-5.4`, Claude Sonnet 4.6 (`max_tokens=1536`),
+  Gemini `gemini-3.1-pro-preview` (`thinking_level=low`), and Gemini
+  `gemini-3.5-flash` (`thinking_budget=0`) for the non-Pro tier.
+- A forced Bayesian tool-use run was kept as a diagnostic only; it showed
+  negligible gain over direct answering at higher latency. Results are
+  preliminary, synthetic, and not statistically conclusive.
+
+### Added — Stage 6/7/8 (reporting, synthetic transformer, interpretability)
+- Comparison runner, plots, model cards, report index, and failure taxonomy.
+- Synthetic Bayesian trace generation, a compact transformer, held-out
+  evaluation, and a medium model organism (321,455 params; 12,000 / 2,000 /
+  2,000 traces) reaching ~0.990 held-out posterior-bucket accuracy with 1.000
+  action/risk accuracy.
+- Mechanistic interpretability (activation capture, linear probes,
+  clean/corrupted activation patching, attention analysis). On the medium
+  checkpoint, layer-0 attention patching restored the clean action on 118/122
+  flipped pairs while layer-0 MLP restored 0/122 — a narrow causal
+  model-organism result specific to that synthetic checkpoint, with no
+  frontier-model transfer claim.
+
 ### Planned
-- First artefact-backed tiny real-model baselines (Stage 6) when keys/weights exist.
+- Stage 9: a paper-style report consolidating evals, robustness, training, and
+  interpretability with polished figures, tables, and limitations.
 - Natural-language task generators for `market_making`, `prediction_markets`, and
   `adversarial_risk`.
-- Small-transformer checkpoints and the belief-probe / activation-patching
-  experiments.
 
 ## [0.1.0] — 2026-06-02
 
@@ -59,5 +81,5 @@ Initial repository foundation. No benchmark results are claimed.
   GitHub Actions CI workflow (ruff + mypy + pytest).
 - **Docs** — README, DESIGN, EVALS, INTERPRETABILITY, RESULTS, CONTRIBUTING.
 
-[Unreleased]: https://github.com/your-org/mimirbench/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/your-org/mimirbench/releases/tag/v0.1.0
+[Unreleased]: https://github.com/anannyenaik/MimirBench/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/anannyenaik/MimirBench/releases/tag/v0.1.0
