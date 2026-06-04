@@ -162,11 +162,26 @@ Robustness configs live under `configs/robustness_*.yaml`.
   structured metadata. Treat it as a sanity check, not a model result.
 - Mock robustness is diagnostic only. The random-valid mock is keyed on task id,
   so action flips under variants are expected.
-- Real-model robustness runs are pending. The Stage 5 infrastructure to run them
-  is ready — `configs/eval_api_openai_robustness_bayes_tiny.yaml` is a tiny
-  OpenAI-backed robustness probe (not run by the test suite; requires a key) — but
-  no API or local model robustness numbers should be claimed until artefacts
-  exist. See [MODELS.md](MODELS.md).
+- The deterministic robustness infrastructure is implemented and exercised end to
+  end. Historical reference and mock robustness remain sanity-check/diagnostic
+  only (see the two bullets above), not model results.
+- Real-model robustness probes have now been run and saved for OpenAI `gpt-5.4`,
+  Claude Sonnet 4.6, Gemini Flash, and Gemini Pro. These are preliminary
+  synthetic robustness probes, not statistically conclusive. Robustness sample
+  sizes differ by provider/config where documented, so rows are not always
+  directly comparable. Read them through [RESULTS.md](RESULTS.md) and
+  [reports/INDEX.md](reports/INDEX.md), alongside the saved comparison and run
+  reports:
+  - [OpenAI `gpt-5.4` robustness](reports/runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny/robustness_report.md)
+  - [Claude Sonnet 4.6 robustness](reports/runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny/robustness_report.md)
+  - [Gemini strongest-row robustness comparison](reports/runs/leaderboard/gemini_strongest_robustness_comparison.md)
+    (Flash and Pro), with per-run reports under
+    [`leaderboard_gemini_strongest_robustness_tiny/`](reports/runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny/robustness_report.md)
+    and [`leaderboard_gemini_pro_robustness_small/`](reports/runs/leaderboard/leaderboard_gemini_pro_robustness_small/robustness_report.md).
+
+  Protocol-limited or provider-failed rows must not be treated as capability
+  rows, and nothing here is a trading-usefulness or broad provider-superiority
+  claim. See [MODELS.md](MODELS.md) for provider setup and caveats.
 - The benchmark does not use LLM judges, so it cannot score free-form rationale
   quality beyond deterministic parseable outputs and grader metrics.
 - Tasks are synthetic and evaluation-only. They do not use live market data and
