@@ -228,6 +228,179 @@ head emerges in this 1-layer model.
 - Near-zero patching effects and negative probe results are reported as-is.
 - Nothing here transfers to larger or frontier models.
 
+## Larger Small-Transformer Model Organism (Medium)
+
+Added 2026-06-04. The tiny checkpoint above was an undertrained smoke artefact
+(1 layer, 128 traces, 2 epochs) that never learned an evidence-to-decision
+computation, so its Stage 8 patching had nothing to localise. This milestone
+trains a **stronger but still small, fully synthetic, CPU-only** model organism
+and re-runs the same Stage 8 interpretability pipeline on it. **It remains a
+narrow synthetic model. No frontier-model claim is made, and decodability is not
+causation.**
+
+Configs and artefacts:
+
+- training: `configs/train_small_transformer_bayes_medium.yaml`,
+  `reports/training/small_transformer_bayes_medium/`
+- held-out eval: `configs/eval_small_transformer_bayes_medium.yaml`,
+  `reports/runs/small_transformer_bayes_medium_eval/`
+- data-size ablation (2k vs 12k): `configs/train_small_transformer_bayes_medium_ablation_data2k.yaml`,
+  `reports/training/small_transformer_bayes_medium_ablation_data2k/`
+- interpretability: `configs/interp_bayes_all_medium.yaml`,
+  `reports/interpretability/interp_bayes_all_medium/`
+- model card: `reports/model_cards/small_transformer_bayes_medium.md`
+
+### Architecture and data
+
+| Property | Tiny | Medium |
+| --- | ---: | ---: |
+| layers | 1 | 2 |
+| heads | 2 | 4 |
+| hidden size (`d_model`) | 32 | 128 |
+| feed-forward | 64 | 256 |
+| parameters | 22,669 | 321,455 |
+| train / val / test traces | 128 / 32 / 32 | 12,000 / 2,000 / 2,000 |
+| observations per task | 1–6 | 2–10 |
+| signal reliability | 0.70 | 0.75 |
+| epochs (early stop) | 2 | 30 (best @ 25) |
+
+Determinism: dropout 0, fixed seed 123, CPU. The eval split uses a disjoint seed
+(20000) and the `test`-split generator, so held-out tasks were never trained on.
+
+### Best validation metrics (from saved `summary.json`)
+
+| Metric | Tiny (val) | Medium (val) |
+| --- | ---: | ---: |
+| validation loss | 8.594668 | 0.031979 |
+| action accuracy | 0.250000 | 1.000000 |
+| risk flag accuracy | 0.750000 | 1.000000 |
+| posterior bucket accuracy (20-way) | 0.156250 | 0.993500 |
+| confidence bucket accuracy | 0.593750 | 0.998000 |
+| EV bucket accuracy | 0.156250 | 0.998500 |
+| rationale class accuracy | 0.281250 | 1.000000 |
+
+### Held-out evaluation (2,000 unseen tasks, seed 20000)
+
+| Metric | Tiny held-out | Medium held-out |
+| --- | ---: | ---: |
+| posterior bucket accuracy | 0.054688 | 0.990000 |
+| action accuracy | 0.445312 | 1.000000 |
+| risk flag accuracy | 0.554688 | 1.000000 |
+| confidence bucket accuracy | 0.570312 | 0.997500 |
+| approx. posterior absolute error | 0.451069 | 0.016200 |
+| mean regret | 0.260374 | 0.005700 |
+| invalid response rate | 0.000000 | 0.000000 |
+
+The medium model genuinely learned the Bayesian posterior-to-decision mapping:
+near-perfect action/risk, a 20-way posterior bucket at 0.99, ~0.016 mean
+posterior error, and ~0.006 mean regret on held-out tasks, with zero invalid
+responses. This is the prerequisite the tiny model lacked.
+
+### Data-size ablation (one clean comparison)
+
+Identical architecture trained on 2,000 traces instead of 12,000, scored on the
+**same** 2,000-trace validation split (only the training-set size changes):
+
+| Metric (val) | 2k train | 12k train |
+| --- | ---: | ---: |
+| validation loss | 0.222200 | 0.031979 |
+| action accuracy | 0.998500 | 1.000000 |
+| risk flag accuracy | 0.998000 | 1.000000 |
+| posterior bucket accuracy (20-way) | 0.962000 | 0.993500 |
+
+Reading: the binary action/risk decisions are learnable from little data
+(≈0.998 at 2k), but the 20-way posterior bucketing is the data-hungry part — it
+loses ~3 points and validation loss is ~7x higher at 2k. The 2k run never
+triggered early stopping (best at the final epoch 30), i.e. it was still
+data-limited, whereas the 12k run peaked at epoch 25.
+
+### Interpretability on the medium checkpoint
+
+Stage 8 was re-run with `configs/interp_bayes_all_medium.yaml` on 256 synthetic
+traces per split and 128 clean/corrupted counterfactual pairs (seed 123). Full
+artefacts: `reports/interpretability/interp_bayes_all_medium/`.
+
+**Linear probes (best site per label; read against the majority baseline):**
+
+| Label | Best site | Test acc | Baseline | Above baseline |
+| --- | --- | ---: | ---: | ---: |
+| posterior_bucket (20-way) | `blocks.1.resid_post` | 0.984 | 0.297 | +0.688 |
+| action | `blocks.1.mlp_out` | 1.000 | 0.594 | +0.406 |
+| risk_flag | `blocks.1.mlp_out` | 1.000 | 0.594 | +0.406 |
+| confidence_bucket | `blocks.1.resid_post` | 1.000 | 0.852 | +0.148 |
+
+Unlike the tiny model (posterior only +0.083 above chance, confidence at
+baseline), every label is now strongly decodable, and the posterior bucket — the
+hard 20-way target — is decodable far above chance and best read from the deeper
+residual stream.
+
+**Activation patching (clean → corrupted, 128 pairs).** The corruption flips the
+model's action on **122/128** pairs and its posterior bucket on **128/128**, so
+recovery rates are meaningful (the tiny model had zero flips). Recovery is over
+flipped pairs; the action head is the headline decision:
+
+| Site | Action causal effect | Action recovery | Posterior recovery |
+| --- | ---: | ---: | ---: |
+| `embed` (sanity) | +0.953 | 122/122 (1.000) | 128/128 (1.000) |
+| `blocks.0.attn_out` | +0.926 | **118/122 (0.967)** | 116/128 (0.906) |
+| `blocks.0.mlp_out` | −0.000 | **0/122 (0.000)** | 0/128 (0.000) |
+| `blocks.0.resid_post` (sanity) | +0.953 | 122/122 (1.000) | 128/128 (1.000) |
+| `blocks.1.attn_out` | +0.927 | 119/122 (0.975) | 118/128 (0.922) |
+| `blocks.1.mlp_out` | +0.686 | 88/122 (0.721) | 111/128 (0.867) |
+| `blocks.1.resid_post` (sanity) | +0.953 | 122/122 (1.000) | 128/128 (1.000) |
+
+`causal_effect = P(clean action | patched) − P(clean action | corrupted)`. The
+`embed` and `*.resid_post` rows recover 100% as **expected sanity checks**: a
+full-sequence patch of the input embedding or of any whole block's residual
+output reproduces the clean forward pass downstream, so it is restoration, not
+localisation. The informative comparison is among the *sub-block* sites
+(`attn_out` / `mlp_out`), which replace only one sub-block's additive
+contribution while the rest of the residual stays corrupted.
+
+**Attention analysis (64 examples):**
+
+| Layer | Mean entropy | Prior mass | Evidence mass | Payoff/risk mass |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 2.093 | 0.077 | 0.485 | 0.222 |
+| 1 | 2.370 | 0.415 | 0.104 | 0.167 |
+
+Layer 0 concentrates attention on the **evidence** tokens (0.485 mass vs 0.077 on
+the prior); layer 1 shifts toward the **prior** tokens (0.415). Entropy is well
+below the tiny model's near-uniform 3.58.
+
+### Is there a causal interpretability win? (narrow, honest)
+
+Yes, narrowly. On this medium synthetic Bayesian checkpoint, patching the
+**layer-0 attention sub-block output** from the clean run into the corrupted run
+restored the model's clean action on **118/122** pairs whose action the
+corruption had flipped (0.967) and the clean posterior bucket on 116/128 (0.906),
+while patching the **layer-0 MLP sub-block output** restored **0/122** actions
+and **0/128** posteriors. Layer-1 attention behaves the same way (119/122);
+layer-1 MLP only partially (88/122). Because the effect is concentrated at the
+attention sub-blocks and is essentially absent at the layer-0 MLP — and because
+the attention analysis independently shows layer-0 heads reading the evidence
+tokens — this is evidence that **the attention sub-blocks (layer-0 attention in
+particular) causally carry this model's learned evidence-to-decision
+computation**, not the MLP sub-blocks. The result is specific to this synthetic
+checkpoint and seed.
+
+This is a positive but deliberately small claim. What it is **not**: it is not
+position-resolved (patching is full-sequence per site); it does not isolate
+individual heads or neurons; it uses no sparse autoencoder; and it says nothing
+about larger or frontier models. The trivial full-residual restorations confirm
+the patching harness is correct, not that anything is localised.
+
+### Limitations
+
+- One checkpoint, one seed, a single narrow synthetic Bayesian/risk generator.
+- The encoder mean-pools before the heads, so patching is at the sub-block level,
+  not per token or per head; finer localisation is future work.
+- Strong held-out metrics show the model learned the generator, not open-ended or
+  real-world strategic reasoning.
+- No hidden chain-of-thought is generated, requested, or stored; all labels are
+  deterministic outputs of the public task data.
+- Nothing here transfers to frontier-model internals and must not be read that way.
+
 ## Reference Solver Sanity Checks
 
 Reference solvers are deterministic baselines, not model runs.

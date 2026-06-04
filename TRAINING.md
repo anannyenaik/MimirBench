@@ -121,6 +121,32 @@ mimirbench inspect-training reports/training/small_transformer_bayes_tiny
 The command prints dataset size, model size, best validation metrics, checkpoint
 paths, figure paths, and model-card path.
 
+## Medium Model Organism
+
+The tiny config is a smoke test; it does not learn the task. To produce a model
+whose internals are worth probing, train the medium config:
+
+```bash
+mimirbench train-small-transformer configs/train_small_transformer_bayes_medium.yaml
+mimirbench eval-small-transformer  configs/eval_small_transformer_bayes_medium.yaml
+```
+
+The medium model is 2 layers, `d_model=128`, 4 heads (321,455 parameters),
+trained on 12,000 deterministic traces (2–10 observations each) for up to 30
+epochs with early stopping, CPU-only and dropout-free. It reaches near-perfect
+held-out action/risk accuracy, a 20-way posterior bucket accuracy of ~0.99, and
+~0.016 mean posterior error on 2,000 unseen tasks (eval seed 20000, disjoint from
+the training seed). A single data-size ablation
+(`configs/train_small_transformer_bayes_medium_ablation_data2k.yaml`, 2,000
+traces, identical architecture, identical validation split) shows the binary
+action/risk heads saturate from little data while the 20-way posterior bucket is
+the data-hungry head. Exact numbers and the comparison table live in
+`RESULTS.md` ("Larger Small-Transformer Model Organism").
+
+This medium checkpoint is the one the Stage 8 medium interpretability run
+analyses, and the one that yields a (narrow, synthetic) positive causal patching
+result.
+
 ## Interpretability (Stage 8)
 
 Checkpoints include the model config, label vocabularies, tokenizer payload, and

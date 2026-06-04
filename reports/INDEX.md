@@ -19,6 +19,7 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | prediction_markets_mock_smoke | `runs/prediction_markets_mock_smoke` | mock diagnostic baseline | 50 | 0.244629 |
 | prediction_markets_reference_smoke | `runs/prediction_markets_reference_smoke` | reference sanity check | 50 | 1 |
 | small_transformer_bayes_eval | `runs/small_transformer_bayes_eval` | unknown | n/a | n/a |
+| small_transformer_bayes_medium_eval | `runs/small_transformer_bayes_medium_eval` | unknown | n/a | n/a |
 | tool_reference_bayes | `runs/tool_reference_bayes` | deterministic non-model tool baseline | 10 | 1 |
 | verify_require_tool_bayes_micro | `runs/verify_require_tool_bayes_micro` | real API model | 3 | 0.619711 |
 | verify_require_tool_bayes_micro_v2 | `runs/verify_require_tool_bayes_micro_v2` | real API model | 3 | 0.999637 |
@@ -89,6 +90,7 @@ Leaderboard rows are real model results only when `models_run > 0` and the saved
 
 | Name | Path | Status | Experiments | Action probe acc |
 | --- | --- | --- | --- | ---: |
+| interp_bayes_all_medium | `interpretability/interp_bayes_all_medium` | complete | probes, activation_patching, attention_analysis | 1 |
 | interp_bayes_all_tiny | `interpretability/interp_bayes_all_tiny` | complete | probes, activation_patching, attention_analysis | 0.916667 |
 | interp_bayes_attention_tiny | `interpretability/interp_bayes_attention_tiny` | complete | attention_analysis | n/a |
 | interp_bayes_patching_tiny | `interpretability/interp_bayes_patching_tiny` | complete | activation_patching | n/a |
@@ -103,12 +105,24 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 - `model_cards/eval_source.md`
 - `model_cards/mock_bayes_mock_random_valid__mock_random_valid.md`
 - `model_cards/reference_bayes_reference__reference.md`
+- `model_cards/small_transformer_bayes_medium.md`
+- `model_cards/small_transformer_bayes_medium_ablation_data2k.md`
 - `model_cards/small_transformer_bayes_tiny.md`
 - `model_cards/test_tiny.md`
 - `model_cards/tool_reference_bayes_tool_reference__tool_reference.md`
 
 ## Generated figures
 
+- `interpretability/interp_bayes_all_medium/activation_patching/figures/action_recovery_by_layer.png`
+- `interpretability/interp_bayes_all_medium/activation_patching/figures/causal_effect_by_layer.png`
+- `interpretability/interp_bayes_all_medium/activation_patching/figures/label_recovery_by_layer.png`
+- `interpretability/interp_bayes_all_medium/attention/figures/attention_entropy_by_layer.png`
+- `interpretability/interp_bayes_all_medium/attention/figures/evidence_attention_by_layer.png`
+- `interpretability/interp_bayes_all_medium/attention/figures/prior_attention_by_layer.png`
+- `interpretability/interp_bayes_all_medium/probes/figures/action_probe_accuracy_by_layer.png`
+- `interpretability/interp_bayes_all_medium/probes/figures/confidence_probe_accuracy_by_layer.png`
+- `interpretability/interp_bayes_all_medium/probes/figures/posterior_probe_accuracy_by_layer.png`
+- `interpretability/interp_bayes_all_medium/probes/figures/risk_probe_accuracy_by_layer.png`
 - `interpretability/interp_bayes_all_tiny/activation_patching/figures/action_recovery_by_layer.png`
 - `interpretability/interp_bayes_all_tiny/activation_patching/figures/causal_effect_by_layer.png`
 - `interpretability/interp_bayes_all_tiny/activation_patching/figures/label_recovery_by_layer.png`
@@ -146,6 +160,16 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 - `runs/comparisons/tool_reference_bayes/figures/score_by_environment.png`
 - `runs/small_transformer_bayes_eval/figures/posterior_abs_error.png`
 - `runs/small_transformer_bayes_eval/figures/regret.png`
+- `runs/small_transformer_bayes_medium_eval/figures/posterior_abs_error.png`
+- `runs/small_transformer_bayes_medium_eval/figures/regret.png`
+- `training/small_transformer_bayes_medium/figures/training_loss.png`
+- `training/small_transformer_bayes_medium/figures/validation_accuracy.png`
+- `training/small_transformer_bayes_medium/figures/validation_posterior_bucket_accuracy.png`
+- `training/small_transformer_bayes_medium/figures/validation_risk_accuracy.png`
+- `training/small_transformer_bayes_medium_ablation_data2k/figures/training_loss.png`
+- `training/small_transformer_bayes_medium_ablation_data2k/figures/validation_accuracy.png`
+- `training/small_transformer_bayes_medium_ablation_data2k/figures/validation_posterior_bucket_accuracy.png`
+- `training/small_transformer_bayes_medium_ablation_data2k/figures/validation_risk_accuracy.png`
 - `training/small_transformer_bayes_tiny/figures/training_loss.png`
 - `training/small_transformer_bayes_tiny/figures/validation_accuracy.png`
 - `training/small_transformer_bayes_tiny/figures/validation_posterior_bucket_accuracy.png`
@@ -156,4 +180,4 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 - All entries are backed by files under `reports/`.
 - Do not treat reference, mock, or deterministic tool baselines as real model results.
 - Do not describe any result as evidence of trading ability, trading usefulness, or profitability.
-- Additional real API/local model reports remain pending unless actual run artefacts exist.
+- Real API/local model reports remain pending unless actual run artefacts exist.

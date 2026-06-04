@@ -3,8 +3,9 @@
 > **Status:** Stage 8 is implemented. Activation capture, linear probes,
 > clean/corrupted activation patching, and attention analysis run end to end on a
 > trained small Bayesian transformer and write inspectable artefacts and figures.
-> All findings are about that one tiny synthetic model. **No claim is made about
-> frontier models, and no result here transfers to them.**
+> All findings are about small, fully synthetic model organisms (a tiny smoke
+> checkpoint and a stronger medium one). **No claim is made about frontier models,
+> and no result here transfers to them.**
 
 ## What is analysed
 
@@ -140,12 +141,50 @@ Exact numbers are in `RESULTS.md` and in each run's
 patching results together: the representation encodes the decision above chance,
 but on this underpowered model the decision is only weakly evidence-driven.
 
+## Findings on the medium checkpoint (a narrow causal result)
+
+The tiny checkpoint was undertrained, so there was no learned computation to
+localise. A stronger **medium** model organism (2 layers, `d_model=128`, 4 heads,
+321,455 parameters, trained on 12,000 traces) was therefore trained and analysed
+with `configs/interp_bayes_all_medium.yaml` (256 traces/split, 128 counterfactual
+pairs). Full numbers are in `RESULTS.md`; the honest summary:
+
+- **Probes:** every label is now strongly decodable. The 20-way posterior bucket
+  reaches 0.984 test accuracy (baseline 0.297) at `blocks.1.resid_post`; action
+  and risk hit 1.000; confidence 1.000. Decodability has clearly improved over the
+  tiny model — but it is still only decodability.
+- **Patching — the causal part.** Corrupting the evidence now actually flips the
+  model's action on 122/128 pairs (the tiny model had zero flips), so recovery
+  rates mean something. Patching the **layer-0 attention sub-block output** from
+  the clean run into the corrupted run restores the clean action on **118/122**
+  flipped pairs (0.967) and the clean posterior bucket on 116/128 (0.906), whereas
+  patching the **layer-0 MLP sub-block output** restores **0/122** and **0/128**.
+  Layer-1 attention behaves the same (119/122); layer-1 MLP only partially
+  (88/122). The `embed` and full `resid_post` sites recover 100% as the expected
+  sanity checks (a full-stream patch reproduces the clean forward), not as
+  localisation.
+- **Attention:** layer 0 puts 0.485 attention mass on the evidence tokens (vs
+  0.077 on the prior) and layer 1 shifts to the prior (0.415), independently
+  consistent with the patching result.
+
+Read together, the sub-block patching contrast (attention recovers the decision,
+the layer-0 MLP does not) plus the evidence-reading attention is evidence that
+**the attention sub-blocks — layer-0 attention especially — causally carry this
+model's learned evidence-to-decision computation**. This is a positive causal
+result, but a deliberately narrow one: it is full-sequence (not per-token or
+per-head) patching on a single synthetic checkpoint and seed, with mean pooling
+before the heads, no SAE, and no transfer to frontier models.
+
 ## Running it
 
 ```bash
 pip install -e ".[ml]"               # torch is required for the model paths
 mimirbench run-interpretability configs/interp_bayes_all_tiny.yaml
 mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_tiny
+
+# The medium model organism (the one with the causal patching result):
+mimirbench run-interpretability configs/interp_bayes_all_medium.yaml
+mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_medium
 ```
 
 Single-experiment configs also exist: `interp_bayes_probes_tiny.yaml`,
