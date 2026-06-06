@@ -81,7 +81,11 @@ accuracy 1.000, posterior-bucket accuracy 0.9935, confidence 0.998, EV 0.9985.
 
 ## Limitations
 
-- One checkpoint, one seed, one narrow synthetic Bayesian/risk generator.
+- This card documents one checkpoint (seed 123). The interpretability *result* it
+  supports is **replicated across six independently trained checkpoints (seeds
+  123–128)** — see
+  [`reports/interpretability/interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md).
+  It remains one narrow synthetic Bayesian/risk generator.
 - The encoder mean-pools before the heads, so whole-site patching localises at the
   sub-block level; position-resolved (token-group) patching shows the
   evidence→decision signal is **distributed across positions**, not isolated to the

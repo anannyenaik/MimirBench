@@ -1,0 +1,404 @@
+{
+  "checkpoint_path": "reports/training/small_transformer_bayes_medium_seed_126/checkpoints/best.pt",
+  "data": {
+    "num_pairs": 128,
+    "seed": 126
+  },
+  "label_shuffle_control": {
+    "interpretation": "A genuine signal collapses to ~baseline when labels are shuffled; a large real-minus-shuffled gap indicates the probe reads structure, not noise.",
+    "label": "action",
+    "majority_baseline_accuracy": 0.5625,
+    "real_test_accuracy": 1.0,
+    "shuffled_test_accuracy": 0.4296875,
+    "site": "blocks.1.mlp_out"
+  },
+  "mismatched_donor_control": {
+    "by_head": {
+      "action": {
+        "matched_recovery_rate": 0.9743589743589743,
+        "mismatched_recovery_rate": 0.4358974358974359,
+        "n_flipped": 117,
+        "n_with_mismatched_donor": 117
+      },
+      "posterior_bucket": {
+        "matched_recovery_rate": 0.875,
+        "mismatched_recovery_rate": 0.1640625,
+        "n_flipped": 128,
+        "n_with_mismatched_donor": 128
+      }
+    },
+    "heads": [
+      "action",
+      "posterior_bucket"
+    ],
+    "site": "blocks.0.attn_out"
+  },
+  "model": {
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2
+  },
+  "no_frontier_claim": "These results characterise one small, fully synthetic Bayesian transformer. They are not evidence about frontier-model internals and must not be read that way.",
+  "output_dir": "reports/interpretability/interp_bayes_medium_extended_seed_126",
+  "report_path": "reports/interpretability/interp_bayes_medium_extended_seed_126/EXTENDED_INTERPRETABILITY_REPORT.md",
+  "run_name": "interp_bayes_medium_extended_seed_126",
+  "status": "complete",
+  "timestamp": "2026-06-06T21:14:53+00:00",
+  "token_group_patching": {
+    "by_site": {
+      "blocks.0.attn_out": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 4.098070306033257e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 4.081008056770124e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 4.098070306033257e-06
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.008547008547008548,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0092669423926219,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.008547008547008548
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 9.777116799797493e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0092669423926219
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 9.821197396837047e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 8.817384929934297e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 9.821197396837047e-06
+        }
+      },
+      "blocks.0.mlp_out": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": -1.3248170931526214e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 1.2240040978112988e-07,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": -1.3248170931526214e-06
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": -1.5095953828124015e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 2.391133223907395e-07,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": -1.5095953828124015e-06
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": -9.854474339161889e-07,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 5.42606265640153e-08,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": -9.854474339161889e-07
+        }
+      },
+      "blocks.0.resid_post": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 4.466735872973465e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 9.74133007544767e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 4.466735872973465e-06
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.008547008547008548,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0092669423926219,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.008547008547008548
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 9.777116799797493e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0092669423926219
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 9.821197396837047e-06,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 8.817384929934297e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 9.821197396837047e-06
+        }
+      },
+      "blocks.1.attn_out": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0007592054037029648,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 1.861399693112433e-05,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0007592054037029648
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.004405119802471908,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 0.0011894939685827863,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.004405119802471908
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0004599908084531239,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 0.00011437561377573438,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0004599908084531239
+        }
+      },
+      "blocks.1.mlp_out": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.00026510127370001535,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 1.2690298173124995e-05,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.00026510127370001535
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0006550552566684613,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 0.0004946196154593898,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0006550552566684613
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.00012289092600201748,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 5.60271970794501e-05,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.00012289092600201748
+        }
+      },
+      "blocks.1.resid_post": {
+        "evidence": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.0008544551479953537,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 1.9233736023832184e-05,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.0008544551479953537
+        },
+        "payoff_risk": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.005005869251631167,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 0.001382671817454888,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.005005869251631167
+        },
+        "prior": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_causal_effect": 0.00050110489354899,
+              "n": 128,
+              "n_flipped": 117,
+              "recovery_rate": 0.0
+            },
+            "posterior_bucket": {
+              "mean_causal_effect": 0.0001242081883657128,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            }
+          },
+          "mean_causal_effect_action": 0.00050110489354899
+        }
+      }
+    },
+    "groups": [
+      "evidence",
+      "prior",
+      "payoff_risk"
+    ],
+    "heads": [
+      "action",
+      "posterior_bucket"
+    ],
+    "site_order": [
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post",
+      "blocks.1.attn_out",
+      "blocks.1.mlp_out",
+      "blocks.1.resid_post"
+    ]
+  }
+}

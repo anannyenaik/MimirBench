@@ -1,0 +1,55 @@
+{
+  "checkpoint_path": "reports\\training\\small_transformer_bayes_medium_seed_128\\checkpoints\\best.pt",
+  "config": {
+    "checkpoint_path": "reports/training/small_transformer_bayes_medium_seed_128/checkpoints/best.pt",
+    "data": {
+      "max_observations": 10,
+      "min_observations": 2,
+      "num_hypotheses": 2,
+      "num_tasks": 2000,
+      "payoff": {
+        "decision_cost": 0.0,
+        "loss_if_not_A": 1.0,
+        "reward_if_A": 1.0,
+        "risk_tolerance": 0.35
+      },
+      "posterior_buckets": 20,
+      "signal_reliability": 0.75
+    },
+    "device": "cpu",
+    "run": {
+      "name": "small_transformer_bayes_medium_heldout_seed_128",
+      "output_dir": "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_128",
+      "seed": 900128
+    }
+  },
+  "known_limitations": [
+    "Evaluation is held out from training but still synthetic and generator-bound.",
+    "Posterior error is approximate because the model predicts a posterior bucket."
+  ],
+  "metrics": {
+    "action_accuracy": 0.9995,
+    "approx_posterior_abs_error_mean": 0.015465894369907838,
+    "confidence_bucket_accuracy": 0.9945,
+    "invalid_response_rate": 0.0,
+    "latency_mean_ms": 4.150210549923941,
+    "latency_p50_ms": 3.511099988827482,
+    "latency_p95_ms": 13.230989988369402,
+    "posterior_bucket_accuracy": 0.9915,
+    "regret_mean": 0.005599737362740459,
+    "risk_flag_accuracy": 0.9995
+  },
+  "output_dir": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128",
+  "paths": {
+    "figures": [
+      "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128\\figures\\posterior_abs_error.png",
+      "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128\\figures\\regret.png"
+    ],
+    "model_card": "tmp\\model_cards\\small_transformer_bayes_medium_seed_128.md",
+    "report": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128\\report.md",
+    "results": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128\\results.jsonl",
+    "summary": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_128\\summary.json"
+  },
+  "run_name": "small_transformer_bayes_medium_heldout_seed_128",
+  "timestamp": "2026-06-06T22:07:16+00:00"
+}

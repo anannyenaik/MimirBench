@@ -1,0 +1,16 @@
+# SHA256 checksums for the multi-seed medium Bayesian transformer checkpoints.
+#
+# The checkpoints themselves are gitignored (regenerate from configs + seeds with
+#   mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
+# ). These hashes document the artefacts produced on the original CPU run.
+# Bitwise reproducibility across platforms/BLAS builds is not guaranteed; treat
+# these as integrity references for the local artefacts, not a cross-machine claim.
+# The vocab is identical across seeds (the token set is deterministic).
+
+3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546  small_transformer_bayes_medium/checkpoints/best.pt          (seed 123)
+a4fb76d3f5edb49307454b9071ea69b3d6c62a0787ff55087d3ea596eb3fb295  small_transformer_bayes_medium_seed_124/checkpoints/best.pt (seed 124)
+f803d0e24fddacf54f7e8004adfc18fe411e95e999f4d7aff548635d9d99ec9a  small_transformer_bayes_medium_seed_125/checkpoints/best.pt (seed 125)
+641f2ea78afd4327715b7ce239f3546ec7a56437494c887dcec9678033b2c068  small_transformer_bayes_medium_seed_126/checkpoints/best.pt (seed 126)
+888e6d96f0f70ce5ccbf1dcaba53d443caece8ef948323742a1b024e83764ed5  small_transformer_bayes_medium_seed_127/checkpoints/best.pt (seed 127)
+5ea75a153ab15a9127e55c3d5232817cf2fdb2e1fecb5f1cc28e5cc0dedf35b0  small_transformer_bayes_medium_seed_128/checkpoints/best.pt (seed 128)
+d7a994c5a616d4326250483528ff0cd06f933b05c41cf7d735f428d64ba2ecfa  small_transformer_bayes_medium_seed_*/vocab.json            (shared vocab, seeds 124-128)

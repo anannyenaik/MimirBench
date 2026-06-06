@@ -1,0 +1,245 @@
+{
+  "label": "risk_flag",
+  "results": [
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          1
+        ],
+        [
+          1,
+          65
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "embed",
+      "test_accuracy": 0.984375,
+      "test_accuracy_above_baseline": 0.46875,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 0.96484375,
+      "val_accuracy": 0.9375
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          1
+        ],
+        [
+          1,
+          65
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.attn_out",
+      "test_accuracy": 0.984375,
+      "test_accuracy_above_baseline": 0.46875,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 0.984375,
+      "val_accuracy": 0.953125
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          1
+        ],
+        [
+          1,
+          65
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.mlp_out",
+      "test_accuracy": 0.984375,
+      "test_accuracy_above_baseline": 0.46875,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 0.9765625,
+      "val_accuracy": 0.96875
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          62,
+          0
+        ],
+        [
+          0,
+          66
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.resid_post",
+      "test_accuracy": 1.0,
+      "test_accuracy_above_baseline": 0.484375,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 0.9921875,
+      "val_accuracy": 0.9921875
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          1
+        ],
+        [
+          1,
+          65
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.attn_out",
+      "test_accuracy": 0.984375,
+      "test_accuracy_above_baseline": 0.46875,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 0.9921875,
+      "val_accuracy": 0.9453125
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          62,
+          0
+        ],
+        [
+          0,
+          66
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.mlp_out",
+      "test_accuracy": 1.0,
+      "test_accuracy_above_baseline": 0.484375,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "safe",
+        "risky"
+      ],
+      "confusion_matrix": [
+        [
+          62,
+          0
+        ],
+        [
+          0,
+          66
+        ]
+      ],
+      "label": "risk_flag",
+      "majority_baseline_accuracy": 0.515625,
+      "majority_class": "risky",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.resid_post",
+      "test_accuracy": 1.0,
+      "test_accuracy_above_baseline": 0.484375,
+      "test_class_distribution": {
+        "risky": 66,
+        "safe": 62
+      },
+      "train_accuracy": 1.0,
+      "val_accuracy": 1.0
+    }
+  ],
+  "sites": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post",
+    "blocks.1.attn_out",
+    "blocks.1.mlp_out",
+    "blocks.1.resid_post"
+  ]
+}

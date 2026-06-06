@@ -203,9 +203,21 @@ calls). Artefacts:
   **1.000** on real labels and **0.484** (below the 0.594 majority baseline) on
   shuffled labels, confirming the probe reads genuine structure, not noise.
 
-All extended findings are **single-seed (123)**; the multi-seed configuration is
-reproducibility-ready but not executed (see
-`reports/interpretability/interp_bayes_multiseed_summary.md`).
+**Multi-seed replication.** The extended findings above — attention-concentrated
+whole-site recovery, ≤~2% token-group recovery, the mismatched-donor gap, and the
+label-shuffle collapse — are **replicated across six independently trained
+synthetic checkpoints (seeds 123–128)**. Each seed independently resamples the
+training data, the weight initialisation, and the probe/patch set. Across the six
+seeds the layer-0 *MLP* action recovery is **0.000 on every seed** while layer-0/
+layer-1 *attention* recovery is 0.96/0.99 (mean); single-token-group recovery
+stays ≤2.6%; the mismatched-donor action gap averages 0.96 (matched) vs 0.50
+(mismatched); and the shuffled-label probe collapses to ≤ baseline on every seed.
+The seed-123 numbers quoted above are the worked example; the per-seed table and
+mean/range are in
+[`reports/interpretability/interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md).
+Regenerate with
+`mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml`
+(local-only, CPU, no API calls).
 
 ## Running it
 
@@ -220,6 +232,11 @@ mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_me
 
 # Extended, position-resolved patching plus negative controls (local-only):
 mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml
+
+# Multi-seed replication across seeds 123-128 (local-only, no API calls):
+# trains any missing per-seed checkpoint, reruns the whole-site + extended
+# pipeline and a held-out eval per seed, and writes an honest mean/range aggregate.
+mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
 ```
 
 Single-experiment configs also exist: `interp_bayes_probes_tiny.yaml`,

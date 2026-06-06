@@ -46,6 +46,18 @@ wandb/
 results/
 *.parquet
 
+# Multi-seed interpretability replication (seeds 124+): keep the curated
+# summaries / patching summaries / reports / figures, but ignore the bulky
+# regenerable artefacts (synthetic traces, activation dumps, per-row patching
+# logs, held-out eval rows). Regenerate with:
+#   mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
+reports/training/small_transformer_bayes_medium_seed_*/*_traces.jsonl
+reports/interpretability/interp_bayes_all_medium_seed_*/activations/
+reports/interpretability/interp_bayes_all_medium_seed_*/activation_patching/patching_results.jsonl
+reports/interpretability/interp_bayes_all_medium_seed_*/attention/attention_examples.jsonl
+reports/interpretability/interp_bayes_medium_extended_seed_*/*.jsonl
+reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_*/results.jsonl
+
 # OS / editor
 .DS_Store
 Thumbs.db

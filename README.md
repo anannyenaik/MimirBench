@@ -237,18 +237,21 @@ transformer/interp track now checked in:
   model-organism result: corruption flipped the action on 122/128 clean/corrupted
   pairs, layer-0 attention patching restored the correct action on 118/122 flipped
   pairs, layer-0 MLP patching restored 0/122, and layer-1 attention restored
-  119/122. This is specific to the medium synthetic checkpoint and does not
-  transfer to frontier models.
+  119/122. This pattern is **replicated across six independently trained synthetic
+  checkpoints (seeds 123–128)**: layer-0 MLP action recovery is 0.000 on all six
+  seeds while layer-0/1 attention recovery is 0.96/0.99 (mean). It is specific to
+  this synthetic model organism and does not transfer to frontier models.
 - The earlier tiny checkpoint is kept only as the original CPU smoke artefact
   (undertrained, near-zero/negative interpretability) — not as a current result.
 - All results are preliminary, synthetic, direct-agent unless labelled otherwise,
   and not statistically conclusive.
-- Main model comparisons use a single seed/schedule; the interpretability result
-  uses one checkpoint/seed. Whole-site patching is complemented by
-  position-resolved (token-group) patching and negative controls
-  ([extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md)),
-  but there is still no per-head or SAE-level circuit analysis, and findings are
-  single-seed (123).
+- Main model comparisons use a single seed/schedule. The interpretability result
+  is **replicated across six independently trained synthetic checkpoints (seeds
+  123–128)** ([multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md));
+  whole-site patching is complemented by position-resolved (token-group) patching
+  and negative controls
+  ([extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md)).
+  There is still no per-head or SAE-level circuit analysis.
 - Small-model interpretability findings do not transfer to frontier-model
   internals.
 - This is not a trading bot, live trading system, market-beating claim, trading-
@@ -266,10 +269,12 @@ prediction-market tasks.
 
 In the trained medium synthetic transformer, patching attention activations from
 clean into corrupted prompts restored the correct action on 118/122 flipped
-pairs, providing a narrow causal model-organism result specific to that
-checkpoint. These are synthetic, deterministic tasks; the comparisons are not
-statistically conclusive, carry no trading-usefulness claim, and the
-small-model interpretability does not transfer to frontier models.
+pairs, providing a narrow causal model-organism result; the same pattern
+replicates across six independently trained checkpoints (seeds 123–128, with
+layer-0 MLP action recovery 0.000 on every seed). These are synthetic,
+deterministic tasks; the comparisons are not statistically conclusive, carry no
+trading-usefulness claim, and the small-model interpretability does not transfer
+to frontier models.
 
 ## Where To Look
 

@@ -1,0 +1,1152 @@
+{
+  "checkpoint_path": "reports/training/small_transformer_bayes_medium_seed_125/checkpoints/best.pt",
+  "data": {
+    "num_examples": 256,
+    "num_pairs": 128,
+    "seed": 125,
+    "source": "synthetic"
+  },
+  "experiments": {
+    "activation_patching": {
+      "best_action_recovery_site": "embed",
+      "by_site": {
+        "blocks.0.attn_out": {
+          "action_recovery_rate": 0.9841269841269841,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.9695416279047517,
+              "mean_causal_effect": 0.9695416279047517,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.9851704138786057,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.9841269841269841
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.14822485335008972,
+              "mean_causal_effect": 0.11841751377693374,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.9777982665385065,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 0.9444444444444444
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.8923203620168537,
+              "mean_causal_effect": 0.8923203620168537,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.8923206723083928,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.90625
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.9694047917199233,
+              "mean_causal_effect": 0.9694047917199233,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.9850343592561854,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.9841269841269841
+            }
+          },
+          "label_recovery_rate": 0.9547371031746033,
+          "mean_causal_effect_action": 0.9695416279047517,
+          "posterior_bucket_recovery_rate": 0.90625
+        },
+        "blocks.0.mlp_out": {
+          "action_recovery_rate": 0.0,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 3.008103820175532e-06,
+              "mean_causal_effect": -3.089749007294163e-07,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.015628476998953297,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.0
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.007835244501486002,
+              "mean_causal_effect": 0.007799588164877513,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.8671803409264502,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 0.05555555555555555
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 1.2757353423139528e-06,
+              "mean_causal_effect": 1.2061129759509354e-06,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 1.5164045150023534e-06,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.0
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 3.2573180965286978e-06,
+              "mean_causal_effect": -9.103667633644419e-07,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.015628657169498617,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.0
+            }
+          },
+          "label_recovery_rate": 0.013888888888888888,
+          "mean_causal_effect_action": -3.089749007294163e-07,
+          "posterior_bucket_recovery_rate": 0.0
+        },
+        "blocks.0.resid_post": {
+          "action_recovery_rate": 1.0,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.9843565755394728,
+              "mean_causal_effect": 0.9843565534559586,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.9999853394298126,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.14059329471963844,
+              "mean_causal_effect": 0.1405804961106613,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.999961248872234,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 1.0
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.9896208916889134,
+              "mean_causal_effect": 0.9896208916889134,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.9896212019804524,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 1.0
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.9843549109252134,
+              "mean_causal_effect": 0.9843548909864028,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.9999844585226649,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            }
+          },
+          "label_recovery_rate": 1.0,
+          "mean_causal_effect_action": 0.9843565534559586,
+          "posterior_bucket_recovery_rate": 1.0
+        },
+        "blocks.1.attn_out": {
+          "action_recovery_rate": 0.9920634920634921,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.9741805029082324,
+              "mean_causal_effect": 0.9741805029082324,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.9898092888820864,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.9920634920634921
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.13176251929955546,
+              "mean_causal_effect": 0.13111498006148942,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.990495732823062,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 0.8888888888888888
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.968088666144995,
+              "mean_causal_effect": 0.968088666144995,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.968088976436534,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.9765625
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.9732250679920555,
+              "mean_causal_effect": 0.9732250679920555,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.9888546355283176,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.9920634920634921
+            }
+          },
+          "label_recovery_rate": 0.9623945932539683,
+          "mean_causal_effect_action": 0.9741805029082324,
+          "posterior_bucket_recovery_rate": 0.9765625
+        },
+        "blocks.1.mlp_out": {
+          "action_recovery_rate": 0.7619047619047619,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.7443546945933065,
+              "mean_causal_effect": 0.7443540959858186,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.7599828819596726,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.7619047619047619
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.0930377746472068,
+              "mean_causal_effect": 0.0930346471317546,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.9524153998933274,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 0.7222222222222222
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.8357321289528966,
+              "mean_causal_effect": 0.8357321289528966,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.8357324392444356,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 0.84375
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.7454907249649821,
+              "mean_causal_effect": 0.745489963168691,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.761119530704953,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 0.7619047619047619
+            }
+          },
+          "label_recovery_rate": 0.7724454365079365,
+          "mean_causal_effect_action": 0.7443540959858186,
+          "posterior_bucket_recovery_rate": 0.84375
+        },
+        "blocks.1.resid_post": {
+          "action_recovery_rate": 1.0,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.9843565755394728,
+              "mean_causal_effect": 0.9843565534559586,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.9999853394298126,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.14059329471963844,
+              "mean_causal_effect": 0.1405804961106613,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.999961248872234,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 1.0
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.9896208916889134,
+              "mean_causal_effect": 0.9896208916889134,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.9896212019804524,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 1.0
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.9843549109252134,
+              "mean_causal_effect": 0.9843548909864028,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.9999844585226649,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            }
+          },
+          "label_recovery_rate": 1.0,
+          "mean_causal_effect_action": 0.9843565534559586,
+          "posterior_bucket_recovery_rate": 1.0
+        },
+        "embed": {
+          "action_recovery_rate": 1.0,
+          "heads": {
+            "action": {
+              "mean_abs_causal_effect": 0.9843565755394728,
+              "mean_causal_effect": 0.9843565534559586,
+              "mean_clean_target_prob": 0.9999853394298126,
+              "mean_corrupted_target_prob": 0.015628785973854024,
+              "mean_patched_target_prob": 0.9999853394298126,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            },
+            "confidence_bucket": {
+              "mean_abs_causal_effect": 0.14059329471963844,
+              "mean_causal_effect": 0.1405804961106613,
+              "mean_clean_target_prob": 0.999961248872234,
+              "mean_corrupted_target_prob": 0.8593807527615728,
+              "mean_patched_target_prob": 0.999961248872234,
+              "n": 128,
+              "n_flipped": 18,
+              "recovery_rate": 1.0
+            },
+            "posterior_bucket": {
+              "mean_abs_causal_effect": 0.9896208916889134,
+              "mean_causal_effect": 0.9896208916889134,
+              "mean_clean_target_prob": 0.9896212019804524,
+              "mean_corrupted_target_prob": 3.10291539051418e-07,
+              "mean_patched_target_prob": 0.9896212019804524,
+              "n": 128,
+              "n_flipped": 128,
+              "recovery_rate": 1.0
+            },
+            "risk_flag": {
+              "mean_abs_causal_effect": 0.9843549109252134,
+              "mean_causal_effect": 0.9843548909864028,
+              "mean_clean_target_prob": 0.9999844585226649,
+              "mean_corrupted_target_prob": 0.015629567536261987,
+              "mean_patched_target_prob": 0.9999844585226649,
+              "n": 128,
+              "n_flipped": 126,
+              "recovery_rate": 1.0
+            }
+          },
+          "label_recovery_rate": 1.0,
+          "mean_causal_effect_action": 0.9843565534559586,
+          "posterior_bucket_recovery_rate": 1.0
+        }
+      },
+      "figures": [
+        "reports/interpretability/interp_bayes_all_medium_seed_125/activation_patching/figures/causal_effect_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/activation_patching/figures/label_recovery_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/activation_patching/figures/action_recovery_by_layer.png"
+      ],
+      "heads": [
+        "action",
+        "posterior_bucket",
+        "risk_flag",
+        "confidence_bucket"
+      ],
+      "num_pairs": 128,
+      "results_path": "reports/interpretability/interp_bayes_all_medium_seed_125/activation_patching/patching_results.jsonl",
+      "sites": [
+        "embed",
+        "blocks.0.attn_out",
+        "blocks.0.mlp_out",
+        "blocks.0.resid_post",
+        "blocks.1.attn_out",
+        "blocks.1.mlp_out",
+        "blocks.1.resid_post"
+      ],
+      "summary_path": "reports/interpretability/interp_bayes_all_medium_seed_125/activation_patching/patching_summary.json"
+    },
+    "attention_analysis": {
+      "by_layer": {
+        "0": {
+          "heads": [
+            {
+              "group_mass": {
+                "evidence": 0.29484269747137415,
+                "likelihood": 0.2012067444887703,
+                "payoff_risk": 0.23054491391411516,
+                "prior": 0.2445476179933883
+              },
+              "head": 0,
+              "mean_entropy": 2.3170006366746563
+            },
+            {
+              "group_mass": {
+                "evidence": 0.26464953913127576,
+                "likelihood": 0.3615023051155888,
+                "payoff_risk": 0.2218438040057566,
+                "prior": 0.11759367906002169
+              },
+              "head": 1,
+              "mean_entropy": 3.779602734822322
+            },
+            {
+              "group_mass": {
+                "evidence": 0.40731470071355735,
+                "likelihood": 0.2763797109487123,
+                "payoff_risk": 0.1897167408340478,
+                "prior": 0.09847740563005351
+              },
+              "head": 2,
+              "mean_entropy": 2.9464758038711123
+            },
+            {
+              "group_mass": {
+                "evidence": 0.32855753249007735,
+                "likelihood": 0.36377611986803016,
+                "payoff_risk": 0.17370060194105763,
+                "prior": 0.11091221495836655
+              },
+              "head": 3,
+              "mean_entropy": 2.702414156158739
+            }
+          ],
+          "mean_entropy": 2.936373332881707,
+          "mean_group_mass": {
+            "evidence": 0.3238411174515712,
+            "likelihood": 0.3007162201052754,
+            "payoff_risk": 0.2039515151737443,
+            "prior": 0.14288272941045752
+          }
+        },
+        "1": {
+          "heads": [
+            {
+              "group_mass": {
+                "evidence": 0.22192362734570945,
+                "likelihood": 0.3909256667404725,
+                "payoff_risk": 0.21047921931715297,
+                "prior": 0.1364147680099846
+              },
+              "head": 0,
+              "mean_entropy": 3.8232520479624847
+            },
+            {
+              "group_mass": {
+                "evidence": 0.047221212246911226,
+                "likelihood": 0.12827318804702115,
+                "payoff_risk": 0.14492659346429337,
+                "prior": 0.6760404478827384
+              },
+              "head": 1,
+              "mean_entropy": 0.8654447224975372
+            },
+            {
+              "group_mass": {
+                "evidence": 0.26284993425747893,
+                "likelihood": 0.2996230156343432,
+                "payoff_risk": 0.2543833524982538,
+                "prior": 0.13694614175037842
+              },
+              "head": 2,
+              "mean_entropy": 2.0482054419165423
+            },
+            {
+              "group_mass": {
+                "evidence": 0.19074502769922969,
+                "likelihood": 0.40366229188205893,
+                "payoff_risk": 0.22090739991412564,
+                "prior": 0.14493050679264063
+              },
+              "head": 3,
+              "mean_entropy": 3.88912739646546
+            }
+          ],
+          "mean_entropy": 2.656507402210506,
+          "mean_group_mass": {
+            "evidence": 0.18068495038733234,
+            "likelihood": 0.30562104057597395,
+            "payoff_risk": 0.20767414129845643,
+            "prior": 0.2735829661089355
+          }
+        }
+      },
+      "examples_path": "reports/interpretability/interp_bayes_all_medium_seed_125/attention/attention_examples.jsonl",
+      "figures": [
+        "reports/interpretability/interp_bayes_all_medium_seed_125/attention/figures/attention_entropy_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/attention/figures/evidence_attention_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/attention/figures/prior_attention_by_layer.png"
+      ],
+      "n_examples": 64,
+      "summary_path": "reports/interpretability/interp_bayes_all_medium_seed_125/attention/attention_summary.json"
+    },
+    "probes": {
+      "activations_dir": "reports/interpretability/interp_bayes_all_medium_seed_125/activations",
+      "figures": [
+        "reports/interpretability/interp_bayes_all_medium_seed_125/probes/figures/posterior_probe_accuracy_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/probes/figures/action_probe_accuracy_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/probes/figures/risk_probe_accuracy_by_layer.png",
+        "reports/interpretability/interp_bayes_all_medium_seed_125/probes/figures/confidence_probe_accuracy_by_layer.png"
+      ],
+      "files": {
+        "action": "reports/interpretability/interp_bayes_all_medium_seed_125/probes/action_probe.json",
+        "confidence_bucket": "reports/interpretability/interp_bayes_all_medium_seed_125/probes/confidence_probe.json",
+        "posterior_bucket": "reports/interpretability/interp_bayes_all_medium_seed_125/probes/posterior_probe.json",
+        "risk_flag": "reports/interpretability/interp_bayes_all_medium_seed_125/probes/risk_probe.json"
+      },
+      "headline": {
+        "action": {
+          "backend": "sklearn_ridge",
+          "class_names": [
+            "buy",
+            "pass"
+          ],
+          "confusion_matrix": [
+            [
+              61,
+              0
+            ],
+            [
+              0,
+              67
+            ]
+          ],
+          "label": "action",
+          "majority_baseline_accuracy": 0.4765625,
+          "majority_class": "buy",
+          "n_test": 128,
+          "n_train": 256,
+          "n_val": 128,
+          "num_classes": 2,
+          "site": "blocks.1.mlp_out",
+          "test_accuracy": 1.0,
+          "test_accuracy_above_baseline": 0.5234375,
+          "test_class_distribution": {
+            "buy": 61,
+            "pass": 67
+          },
+          "train_accuracy": 1.0,
+          "val_accuracy": 1.0
+        },
+        "confidence_bucket": {
+          "backend": "sklearn_ridge",
+          "class_names": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0
+            ],
+            [
+              0,
+              11,
+              0
+            ],
+            [
+              0,
+              0,
+              112
+            ]
+          ],
+          "label": "confidence_bucket",
+          "majority_baseline_accuracy": 0.875,
+          "majority_class": "high",
+          "n_test": 128,
+          "n_train": 256,
+          "n_val": 128,
+          "num_classes": 3,
+          "site": "blocks.1.mlp_out",
+          "test_accuracy": 1.0,
+          "test_accuracy_above_baseline": 0.125,
+          "test_class_distribution": {
+            "high": 112,
+            "low": 5,
+            "medium": 11
+          },
+          "train_accuracy": 1.0,
+          "val_accuracy": 1.0
+        },
+        "posterior_bucket": {
+          "backend": "sklearn_ridge",
+          "class_names": [
+            "0.00_0.05",
+            "0.05_0.10",
+            "0.10_0.15",
+            "0.15_0.20",
+            "0.20_0.25",
+            "0.25_0.30",
+            "0.30_0.35",
+            "0.35_0.40",
+            "0.40_0.45",
+            "0.45_0.50",
+            "0.50_0.55",
+            "0.55_0.60",
+            "0.60_0.65",
+            "0.65_0.70",
+            "0.70_0.75",
+            "0.75_0.80",
+            "0.80_0.85",
+            "0.85_0.90",
+            "0.90_0.95",
+            "0.95_1.00"
+          ],
+          "confusion_matrix": [
+            [
+              38,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              10,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              4,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              35
+            ]
+          ],
+          "label": "posterior_bucket",
+          "majority_baseline_accuracy": 0.296875,
+          "majority_class": "0.00_0.05",
+          "n_test": 128,
+          "n_train": 256,
+          "n_val": 128,
+          "num_classes": 20,
+          "site": "blocks.1.mlp_out",
+          "test_accuracy": 0.9921875,
+          "test_accuracy_above_baseline": 0.6953125,
+          "test_class_distribution": {
+            "0.00_0.05": 38,
+            "0.05_0.10": 10,
+            "0.10_0.15": 5,
+            "0.15_0.20": 1,
+            "0.20_0.25": 2,
+            "0.30_0.35": 2,
+            "0.35_0.40": 1,
+            "0.50_0.55": 5,
+            "0.60_0.65": 3,
+            "0.65_0.70": 5,
+            "0.75_0.80": 2,
+            "0.80_0.85": 3,
+            "0.85_0.90": 8,
+            "0.90_0.95": 8,
+            "0.95_1.00": 35
+          },
+          "train_accuracy": 1.0,
+          "val_accuracy": 0.9609375
+        },
+        "risk_flag": {
+          "backend": "sklearn_ridge",
+          "class_names": [
+            "safe",
+            "risky"
+          ],
+          "confusion_matrix": [
+            [
+              61,
+              0
+            ],
+            [
+              0,
+              67
+            ]
+          ],
+          "label": "risk_flag",
+          "majority_baseline_accuracy": 0.4765625,
+          "majority_class": "safe",
+          "n_test": 128,
+          "n_train": 256,
+          "n_val": 128,
+          "num_classes": 2,
+          "site": "blocks.1.mlp_out",
+          "test_accuracy": 1.0,
+          "test_accuracy_above_baseline": 0.5234375,
+          "test_class_distribution": {
+            "risky": 67,
+            "safe": 61
+          },
+          "train_accuracy": 1.0,
+          "val_accuracy": 1.0
+        }
+      },
+      "labels": [
+        "posterior_bucket",
+        "action",
+        "risk_flag",
+        "confidence_bucket"
+      ],
+      "sites": [
+        "embed",
+        "blocks.0.attn_out",
+        "blocks.0.mlp_out",
+        "blocks.0.resid_post",
+        "blocks.1.attn_out",
+        "blocks.1.mlp_out",
+        "blocks.1.resid_post"
+      ]
+    }
+  },
+  "experiments_run": [
+    "probes",
+    "activation_patching",
+    "attention_analysis"
+  ],
+  "model": {
+    "architecture": "compact_transformer_encoder",
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "sites": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post",
+      "blocks.1.attn_out",
+      "blocks.1.mlp_out",
+      "blocks.1.resid_post"
+    ]
+  },
+  "no_frontier_claim": "These results characterise one small, fully synthetic Bayesian transformer. They are not evidence about frontier-model internals and must not be read that way.",
+  "output_dir": "reports/interpretability/interp_bayes_all_medium_seed_125",
+  "report_path": "reports/interpretability/interp_bayes_all_medium_seed_125/INTERPRETABILITY_REPORT.md",
+  "run_name": "interp_bayes_all_medium_seed_125",
+  "status": "complete",
+  "timestamp": "2026-06-06T20:52:17+00:00",
+  "vocab_path": "reports/training/small_transformer_bayes_medium_seed_125/vocab.json"
+}

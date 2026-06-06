@@ -1,0 +1,374 @@
+{
+  "heads": [
+    "action",
+    "posterior_bucket",
+    "risk_flag",
+    "confidence_bucket"
+  ],
+  "num_pairs": 128,
+  "sites": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post",
+    "blocks.1.attn_out",
+    "blocks.1.mlp_out",
+    "blocks.1.resid_post"
+  ],
+  "summary": {
+    "best_action_recovery_site": "embed",
+    "by_site": {
+      "blocks.0.attn_out": {
+        "action_recovery_rate": 0.9743589743589743,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.8879808421721298,
+            "mean_causal_effect": 0.8879781629058413,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.9739289059778583,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.9743589743589743
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.2227052659541184,
+            "mean_causal_effect": 0.17386686698554843,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9472314639444699,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 0.896551724137931
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.8704271657955951,
+            "mean_causal_effect": 0.8704271657955951,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.8704293683927631,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 0.875
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.887728899329921,
+            "mean_causal_effect": 0.8877263956375334,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.9736783434907981,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.9743589743589743
+          }
+        },
+        "label_recovery_rate": 0.93006741821397,
+        "mean_causal_effect_action": 0.8879781629058413,
+        "posterior_bucket_recovery_rate": 0.875
+      },
+      "blocks.0.mlp_out": {
+        "action_recovery_rate": 0.0,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 8.017872644276448e-06,
+            "mean_causal_effect": -3.2934808395038215e-06,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.08594744959117745,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.0
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 5.459753461871325e-05,
+            "mean_causal_effect": 3.60678085904562e-05,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.7734006647675119,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 0.0
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 2.6695015763502666e-06,
+            "mean_causal_effect": 2.3748725789296697e-06,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 4.577469746843076e-06,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 0.0
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 8.369703590360977e-06,
+            "mean_causal_effect": -3.101186635558813e-06,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.08594884666662907,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.0
+          }
+        },
+        "label_recovery_rate": 0.0,
+        "mean_causal_effect_action": -3.2934808395038215e-06,
+        "posterior_bucket_recovery_rate": 0.0
+      },
+      "blocks.0.resid_post": {
+        "action_recovery_rate": 1.0,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.9140914429640279,
+            "mean_causal_effect": 0.9139388871688945,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.9998896302409115,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.22694059604103176,
+            "mean_causal_effect": 0.22581020628617715,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9991748032450986,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 1.0
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.9897775438113621,
+            "mean_causal_effect": 0.9897775438113621,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.9897797464085301,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 1.0
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.9141012933938447,
+            "mean_causal_effect": 0.913940946192849,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.9998928940461136,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          }
+        },
+        "label_recovery_rate": 1.0,
+        "mean_causal_effect_action": 0.9139388871688945,
+        "posterior_bucket_recovery_rate": 1.0
+      },
+      "blocks.1.attn_out": {
+        "action_recovery_rate": 1.0,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.9041320515539686,
+            "mean_causal_effect": 0.9041287329735955,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.9900794760456125,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.22123605437720895,
+            "mean_causal_effect": 0.19274654039211697,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9661111373510385,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 0.9310344827586207
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.9505635709629239,
+            "mean_causal_effect": 0.9505635709629239,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.9505657735600916,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 0.96875
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.9069125292967868,
+            "mean_causal_effect": 0.9069092233668632,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.9928611712201277,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          }
+        },
+        "label_recovery_rate": 0.9749461206896551,
+        "mean_causal_effect_action": 0.9041287329735955,
+        "posterior_bucket_recovery_rate": 0.96875
+      },
+      "blocks.1.mlp_out": {
+        "action_recovery_rate": 0.6495726495726496,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.5904591094359146,
+            "mean_causal_effect": 0.5904545349391153,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.676405278011132,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.6495726495726496
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.19065965452096933,
+            "mean_causal_effect": 0.19061616284645527,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9639807598053767,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 0.896551724137931
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.772545685610097,
+            "mean_causal_effect": 0.772545685610097,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.7725478882072648,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 0.7890625
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.5926342469941428,
+            "mean_causal_effect": 0.5926297795544313,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.6785817274076958,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 0.6495726495726496
+          }
+        },
+        "label_recovery_rate": 0.7461898808208075,
+        "mean_causal_effect_action": 0.5904545349391153,
+        "posterior_bucket_recovery_rate": 0.7890625
+      },
+      "blocks.1.resid_post": {
+        "action_recovery_rate": 1.0,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.9140914429640279,
+            "mean_causal_effect": 0.9139388871688945,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.9998896302409115,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.22694059604103176,
+            "mean_causal_effect": 0.22581020628617715,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9991748032450986,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 1.0
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.9897775438113621,
+            "mean_causal_effect": 0.9897775438113621,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.9897797464085301,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 1.0
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.9141012933938447,
+            "mean_causal_effect": 0.913940946192849,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.9998928940461136,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          }
+        },
+        "label_recovery_rate": 1.0,
+        "mean_causal_effect_action": 0.9139388871688945,
+        "posterior_bucket_recovery_rate": 1.0
+      },
+      "embed": {
+        "action_recovery_rate": 1.0,
+        "heads": {
+          "action": {
+            "mean_abs_causal_effect": 0.9140914429640279,
+            "mean_causal_effect": 0.9139388871688945,
+            "mean_clean_target_prob": 0.9998896302409115,
+            "mean_corrupted_target_prob": 0.08595074307201697,
+            "mean_patched_target_prob": 0.9998896302409115,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          },
+          "confidence_bucket": {
+            "mean_abs_causal_effect": 0.22694059604103176,
+            "mean_causal_effect": 0.22581020628617715,
+            "mean_clean_target_prob": 0.9991748032450986,
+            "mean_corrupted_target_prob": 0.7733645969589215,
+            "mean_patched_target_prob": 0.9991748032450986,
+            "n": 128,
+            "n_flipped": 29,
+            "recovery_rate": 1.0
+          },
+          "posterior_bucket": {
+            "mean_abs_causal_effect": 0.9897775438113621,
+            "mean_causal_effect": 0.9897775438113621,
+            "mean_clean_target_prob": 0.9897797464085301,
+            "mean_corrupted_target_prob": 2.2025971679134068e-06,
+            "mean_patched_target_prob": 0.9897797464085301,
+            "n": 128,
+            "n_flipped": 128,
+            "recovery_rate": 1.0
+          },
+          "risk_flag": {
+            "mean_abs_causal_effect": 0.9141012933938447,
+            "mean_causal_effect": 0.913940946192849,
+            "mean_clean_target_prob": 0.9998928940461136,
+            "mean_corrupted_target_prob": 0.08595194785326463,
+            "mean_patched_target_prob": 0.9998928940461136,
+            "n": 128,
+            "n_flipped": 117,
+            "recovery_rate": 1.0
+          }
+        },
+        "label_recovery_rate": 1.0,
+        "mean_causal_effect_action": 0.9139388871688945,
+        "posterior_bucket_recovery_rate": 1.0
+      }
+    },
+    "heads": [
+      "action",
+      "posterior_bucket",
+      "risk_flag",
+      "confidence_bucket"
+    ],
+    "site_order": [
+      "embed",
+      "blocks.0.attn_out",
+      "blocks.0.mlp_out",
+      "blocks.0.resid_post",
+      "blocks.1.attn_out",
+      "blocks.1.mlp_out",
+      "blocks.1.resid_post"
+    ]
+  }
+}

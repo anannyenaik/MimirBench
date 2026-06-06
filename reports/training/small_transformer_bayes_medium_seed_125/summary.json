@@ -1,0 +1,126 @@
+{
+  "best_epoch": 21,
+  "best_metrics": {
+    "epoch": 21,
+    "train_loss": 0.07541718506254255,
+    "val_action_accuracy": 1.0,
+    "val_confidence_bucket_accuracy": 1.0,
+    "val_ev_bucket_accuracy": 0.998,
+    "val_loss": 0.02686969355493784,
+    "val_posterior_bucket_accuracy": 0.9925,
+    "val_rationale_class_accuracy": 1.0,
+    "val_risk_flag_accuracy": 1.0
+  },
+  "config": {
+    "data": {
+      "max_observations": 10,
+      "min_observations": 2,
+      "num_hypotheses": 2,
+      "num_test": 2000,
+      "num_train": 12000,
+      "num_val": 2000,
+      "payoff": {
+        "decision_cost": 0.0,
+        "loss_if_not_A": 1.0,
+        "reward_if_A": 1.0,
+        "risk_tolerance": 0.35
+      },
+      "posterior_buckets": 20,
+      "seed": 125,
+      "signal_reliability": 0.75
+    },
+    "model": {
+      "d_model": 128,
+      "dim_feedforward": 256,
+      "dropout": 0.0,
+      "lm_loss_weight": 0.0,
+      "max_seq_len": 128,
+      "n_heads": 4,
+      "n_layers": 2
+    },
+    "run": {
+      "name": "small_transformer_bayes_medium_seed_125",
+      "output_dir": "reports/training/small_transformer_bayes_medium_seed_125",
+      "seed": 125
+    },
+    "training": {
+      "batch_size": 64,
+      "device": "cpu",
+      "early_stopping_patience": 5,
+      "epochs": 30,
+      "grad_clip": 1.0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.01
+    }
+  },
+  "counts": {
+    "test": 2000,
+    "train": 12000,
+    "val": 2000
+  },
+  "final_metrics": {
+    "epoch": 26,
+    "train_loss": 0.04202240547320495,
+    "val_action_accuracy": 1.0,
+    "val_confidence_bucket_accuracy": 0.9975,
+    "val_ev_bucket_accuracy": 0.9985,
+    "val_loss": 0.05854914999008179,
+    "val_posterior_bucket_accuracy": 0.982,
+    "val_rationale_class_accuracy": 1.0,
+    "val_risk_flag_accuracy": 1.0
+  },
+  "known_limitations": [
+    "The model is trained only on deterministic synthetic Bayesian traces.",
+    "Targets are final labels and concise rationale classes, not hidden chain-of-thought.",
+    "Results do not establish frontier-model behaviour or real-world decision quality."
+  ],
+  "model": {
+    "architecture": "compact_transformer_encoder",
+    "config": {
+      "d_model": 128,
+      "dim_feedforward": 256,
+      "dropout": 0.0,
+      "lm_loss_weight": 0.0,
+      "max_seq_len": 128,
+      "n_heads": 4,
+      "n_layers": 2,
+      "num_actions": 2,
+      "num_confidence_buckets": 3,
+      "num_ev_buckets": 7,
+      "num_posterior_buckets": 20,
+      "num_rationale_classes": 4,
+      "num_risk_flags": 2,
+      "pad_token_id": 0,
+      "vocab_size": 137
+    },
+    "parameter_count": 321455,
+    "target_heads": [
+      "posterior_bucket",
+      "action",
+      "ev_bucket",
+      "risk_flag",
+      "confidence_bucket",
+      "rationale_class"
+    ]
+  },
+  "output_dir": "reports\\training\\small_transformer_bayes_medium_seed_125",
+  "paths": {
+    "best_checkpoint": "reports\\training\\small_transformer_bayes_medium_seed_125\\checkpoints\\best.pt",
+    "config": "reports\\training\\small_transformer_bayes_medium_seed_125\\config_resolved.yaml",
+    "figures": [
+      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\training_loss.png",
+      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_accuracy.png",
+      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_posterior_bucket_accuracy.png",
+      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_risk_accuracy.png"
+    ],
+    "final_checkpoint": "reports\\training\\small_transformer_bayes_medium_seed_125\\checkpoints\\final.pt",
+    "metrics": "reports\\training\\small_transformer_bayes_medium_seed_125\\metrics.jsonl",
+    "model_card": "tmp\\model_cards\\small_transformer_bayes_medium_seed_125.md",
+    "test_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\test_traces.jsonl",
+    "train_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\train_traces.jsonl",
+    "val_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\val_traces.jsonl",
+    "vocab": "reports\\training\\small_transformer_bayes_medium_seed_125\\vocab.json"
+  },
+  "run_name": "small_transformer_bayes_medium_seed_125",
+  "timestamp": "2026-06-06T20:52:16+00:00"
+}

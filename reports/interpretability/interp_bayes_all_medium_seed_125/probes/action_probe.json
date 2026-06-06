@@ -1,0 +1,245 @@
+{
+  "label": "action",
+  "results": [
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          60,
+          1
+        ],
+        [
+          8,
+          59
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "embed",
+      "test_accuracy": 0.9296875,
+      "test_accuracy_above_baseline": 0.453125,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 0.98046875,
+      "val_accuracy": 0.921875
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          59,
+          2
+        ],
+        [
+          8,
+          59
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.attn_out",
+      "test_accuracy": 0.921875,
+      "test_accuracy_above_baseline": 0.4453125,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 0.97265625,
+      "val_accuracy": 0.90625
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          60,
+          1
+        ],
+        [
+          5,
+          62
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.mlp_out",
+      "test_accuracy": 0.953125,
+      "test_accuracy_above_baseline": 0.4765625,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 0.98046875,
+      "val_accuracy": 0.9609375
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          0
+        ],
+        [
+          3,
+          64
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.0.resid_post",
+      "test_accuracy": 0.9765625,
+      "test_accuracy_above_baseline": 0.5,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 0.9921875,
+      "val_accuracy": 0.984375
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          0
+        ],
+        [
+          5,
+          62
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.attn_out",
+      "test_accuracy": 0.9609375,
+      "test_accuracy_above_baseline": 0.484375,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.984375
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          0
+        ],
+        [
+          0,
+          67
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.mlp_out",
+      "test_accuracy": 1.0,
+      "test_accuracy_above_baseline": 0.5234375,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "backend": "sklearn_ridge",
+      "class_names": [
+        "buy",
+        "pass"
+      ],
+      "confusion_matrix": [
+        [
+          61,
+          0
+        ],
+        [
+          0,
+          67
+        ]
+      ],
+      "label": "action",
+      "majority_baseline_accuracy": 0.4765625,
+      "majority_class": "buy",
+      "n_test": 128,
+      "n_train": 256,
+      "n_val": 128,
+      "num_classes": 2,
+      "site": "blocks.1.resid_post",
+      "test_accuracy": 1.0,
+      "test_accuracy_above_baseline": 0.5234375,
+      "test_class_distribution": {
+        "buy": 61,
+        "pass": 67
+      },
+      "train_accuracy": 1.0,
+      "val_accuracy": 1.0
+    }
+  ],
+  "sites": [
+    "embed",
+    "blocks.0.attn_out",
+    "blocks.0.mlp_out",
+    "blocks.0.resid_post",
+    "blocks.1.attn_out",
+    "blocks.1.mlp_out",
+    "blocks.1.resid_post"
+  ]
+}

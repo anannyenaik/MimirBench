@@ -1,0 +1,31 @@
+run:
+  name: interp_bayes_all_medium_seed_125
+  seed: 125
+  output_dir: reports/interpretability/interp_bayes_all_medium_seed_125
+model:
+  checkpoint_path: reports/training/small_transformer_bayes_medium_seed_125/checkpoints/best.pt
+  vocab_path: reports/training/small_transformer_bayes_medium_seed_125/vocab.json
+  device: cpu
+data:
+  source: synthetic
+  num_examples: 256
+  num_pairs: 128
+  seed: 125
+  num_hypotheses: 2
+  min_observations: 2
+  max_observations: 10
+  signal_reliability: 0.75
+  posterior_buckets: 20
+  payoff:
+    reward_if_A: 1.0
+    loss_if_not_A: 1.0
+    decision_cost: 0.0
+    risk_tolerance: 0.35
+experiments:
+  probes: true
+  activation_patching: true
+  attention_analysis: true
+sites: null
+batch_size: 32
+max_examples: 64
+alpha: 1.0

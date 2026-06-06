@@ -1,0 +1,790 @@
+{
+  "aggregate_metrics": {
+    "heldout_action_accuracy": {
+      "max": 1.0,
+      "mean": 0.9999166666666667,
+      "min": 0.9995,
+      "n": 6
+    },
+    "heldout_posterior_bucket_accuracy": {
+      "max": 0.993,
+      "mean": 0.9905833333333334,
+      "min": 0.989,
+      "n": 6
+    },
+    "heldout_risk_flag_accuracy": {
+      "max": 1.0,
+      "mean": 0.9999166666666667,
+      "min": 0.9995,
+      "n": 6
+    },
+    "label_shuffle_real_accuracy": {
+      "max": 1.0,
+      "mean": 1.0,
+      "min": 1.0,
+      "n": 6
+    },
+    "label_shuffle_shuffled_accuracy": {
+      "max": 0.5625,
+      "mean": 0.4713541666666667,
+      "min": 0.375,
+      "n": 6
+    },
+    "layer0_attn_action_recovery": {
+      "max": 1.0,
+      "mean": 0.9635017380919021,
+      "min": 0.8809523809523809,
+      "n": 6
+    },
+    "layer0_attn_posterior_recovery": {
+      "max": 0.9375,
+      "mean": 0.8502604166666666,
+      "min": 0.6328125,
+      "n": 6
+    },
+    "layer0_mlp_action_recovery": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0,
+      "n": 6
+    },
+    "layer1_attn_action_recovery": {
+      "max": 1.0,
+      "mean": 0.9890843825270054,
+      "min": 0.9754098360655737,
+      "n": 6
+    },
+    "mismatched_action_matched_recovery": {
+      "max": 1.0,
+      "mean": 0.9635017380919021,
+      "min": 0.8809523809523809,
+      "n": 6
+    },
+    "mismatched_action_mismatched_recovery": {
+      "max": 0.5555555555555556,
+      "mean": 0.4955380078330898,
+      "min": 0.4358974358974359,
+      "n": 6
+    },
+    "mismatched_posterior_matched_recovery": {
+      "max": 0.9375,
+      "mean": 0.8502604166666666,
+      "min": 0.6328125,
+      "n": 6
+    },
+    "mismatched_posterior_mismatched_recovery": {
+      "max": 0.234375,
+      "mean": 0.18229166666666666,
+      "min": 0.1328125,
+      "n": 6
+    },
+    "token_group_max_action_recovery": {
+      "max": 0.02564102564102564,
+      "mean": 0.011075748780666814,
+      "min": 0.0,
+      "n": 6
+    },
+    "validation_action_accuracy": {
+      "max": 1.0,
+      "mean": 0.9998333333333335,
+      "min": 0.9995,
+      "n": 6
+    },
+    "validation_posterior_bucket_accuracy": {
+      "max": 0.9935,
+      "mean": 0.9914166666666667,
+      "min": 0.9865,
+      "n": 6
+    },
+    "validation_risk_flag_accuracy": {
+      "max": 1.0,
+      "mean": 0.99975,
+      "min": 0.999,
+      "n": 6
+    }
+  },
+  "architecture": {
+    "architecture": "compact_transformer_encoder",
+    "d_model": 128,
+    "n_heads": 4,
+    "n_layers": 2,
+    "parameter_count": 321455
+  },
+  "causal_story_replicated_all_completed": true,
+  "config": {
+    "extended_template": "configs/interp_bayes_medium_extended.yaml",
+    "interp_template": "configs/interp_bayes_all_medium.yaml",
+    "seeds": [
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+    ],
+    "skip_existing": true,
+    "train_template": "configs/train_small_transformer_bayes_medium.yaml"
+  },
+  "dataset_sizes": {
+    "num_test": 2000,
+    "num_train": 12000,
+    "num_val": 2000
+  },
+  "headline": "Extended medium-model interpretability is replicated across 6 independently trained synthetic checkpoints (seeds [123, 124, 125, 126, 127, 128]). The evidence-to-decision mechanism remains concentrated in attention-mediated activations, token-group-only interventions show distributed positional dependence, and negative controls reduce recovery substantially.",
+  "limitations": [
+    "One narrow synthetic Bayesian/risk generator; deterministic, CPU-only.",
+    "Each seed independently resamples training data, weight init, and the interpretability probe/patch set, so seeds are genuinely independent draws.",
+    "Position-resolved patching is at the token-group level only; it does not isolate individual heads or neurons and uses no sparse autoencoder.",
+    "Nothing here transfers to frontier-model internals."
+  ],
+  "n_attempted": 6,
+  "n_completed": 6,
+  "no_frontier_claim": "These results characterise small, fully synthetic Bayesian transformers. They are not evidence about frontier-model internals and must not be read that way.",
+  "per_seed": [
+    {
+      "checkpoint_sha256": "3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546",
+      "error": null,
+      "metrics": {
+        "best_epoch": 25,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.9985,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.993,
+          "risk_flag_accuracy": 1.0
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.59375,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.484375,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 0.9672131147540983,
+            "mismatched_recovery_rate": 0.5327868852459017
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.90625,
+            "mismatched_recovery_rate": 0.2109375
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.59375,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.296875,
+            "site": "blocks.1.resid_post",
+            "test_accuracy": 0.984375
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.59375,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.01639344262295082,
+          "per_group_max_action_recovery": {
+            "evidence": 0.00819672131147541,
+            "payoff_risk": 0.01639344262295082,
+            "prior": 0.00819672131147541
+          }
+        },
+        "validation": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.998,
+          "loss": 0.03195839201286435,
+          "posterior_bucket_accuracy": 0.9935,
+          "risk_flag_accuracy": 1.0
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 0.9672131147540983,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9754098360655737,
+          "blocks.1.mlp_out": 0.7213114754098361,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.90625,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.921875,
+          "blocks.1.mlp_out": 0.8671875,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 123,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "reused",
+        "full_interp": "reused",
+        "heldout_eval": "ran",
+        "training": "reused"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": null
+    },
+    {
+      "checkpoint_sha256": "a4fb76d3f5edb49307454b9071ea69b3d6c62a0787ff55087d3ea596eb3fb295",
+      "error": null,
+      "metrics": {
+        "best_epoch": 11,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.9995,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.9895,
+          "risk_flag_accuracy": 1.0
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.515625,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.4375,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 0.9743589743589743,
+            "mismatched_recovery_rate": 0.5299145299145299
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.84375,
+            "mismatched_recovery_rate": 0.1328125
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.515625,
+            "site": "blocks.0.resid_post",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.2578125,
+            "site": "blocks.1.resid_post",
+            "test_accuracy": 0.984375
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.515625,
+            "site": "blocks.0.resid_post",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.02564102564102564,
+          "per_group_max_action_recovery": {
+            "evidence": 0.008547008547008548,
+            "payoff_risk": 0.02564102564102564,
+            "prior": 0.017094017094017096
+          }
+        },
+        "validation": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 1.0,
+          "loss": 0.037137822069227694,
+          "posterior_bucket_accuracy": 0.9925,
+          "risk_flag_accuracy": 1.0
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 0.9743589743589743,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9829059829059829,
+          "blocks.1.mlp_out": 0.5726495726495726,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.84375,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.90625,
+          "blocks.1.mlp_out": 0.6796875,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 124,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "ran",
+        "full_interp": "ran",
+        "heldout_eval": "ran",
+        "training": "reused"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": null
+    },
+    {
+      "checkpoint_sha256": "f803d0e24fddacf54f7e8004adfc18fe411e95e999f4d7aff548635d9d99ec9a",
+      "error": null,
+      "metrics": {
+        "best_epoch": 21,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.9995,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.9895,
+          "risk_flag_accuracy": 1.0
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.4765625,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.375,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 0.9841269841269841,
+            "mismatched_recovery_rate": 0.5555555555555556
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.90625,
+            "mismatched_recovery_rate": 0.234375
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.4765625,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.296875,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 0.9921875
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.4765625,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.0,
+          "per_group_max_action_recovery": {
+            "evidence": 0.0,
+            "payoff_risk": 0.0,
+            "prior": 0.0
+          }
+        },
+        "validation": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 1.0,
+          "loss": 0.02686969355493784,
+          "posterior_bucket_accuracy": 0.9925,
+          "risk_flag_accuracy": 1.0
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 0.9841269841269841,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9920634920634921,
+          "blocks.1.mlp_out": 0.7619047619047619,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.90625,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9765625,
+          "blocks.1.mlp_out": 0.84375,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 125,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "ran",
+        "full_interp": "ran",
+        "heldout_eval": "ran",
+        "training": "trained"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": 1768.4
+    },
+    {
+      "checkpoint_sha256": "641f2ea78afd4327715b7ce239f3546ec7a56437494c887dcec9678033b2c068",
+      "error": null,
+      "metrics": {
+        "best_epoch": 15,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.9985,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.989,
+          "risk_flag_accuracy": 1.0
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.5625,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.4296875,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 0.9743589743589743,
+            "mismatched_recovery_rate": 0.4358974358974359
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.875,
+            "mismatched_recovery_rate": 0.1640625
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.5625,
+            "site": "blocks.1.attn_out",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.2890625,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 0.90625
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.5625,
+            "site": "blocks.1.attn_out",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.008547008547008548,
+          "per_group_max_action_recovery": {
+            "evidence": 0.0,
+            "payoff_risk": 0.008547008547008548,
+            "prior": 0.0
+          }
+        },
+        "validation": {
+          "action_accuracy": 0.9995,
+          "confidence_bucket_accuracy": 0.9995,
+          "loss": 0.06629860876500607,
+          "posterior_bucket_accuracy": 0.9865,
+          "risk_flag_accuracy": 0.999
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 0.9743589743589743,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 1.0,
+          "blocks.1.mlp_out": 0.6495726495726496,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.875,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.96875,
+          "blocks.1.mlp_out": 0.7890625,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 126,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "ran",
+        "full_interp": "ran",
+        "heldout_eval": "ran",
+        "training": "trained"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": 1301.9
+    },
+    {
+      "checkpoint_sha256": "888e6d96f0f70ce5ccbf1dcaba53d443caece8ef948323742a1b024e83764ed5",
+      "error": null,
+      "metrics": {
+        "best_epoch": 21,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.993,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.991,
+          "risk_flag_accuracy": 1.0
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.546875,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.5390625,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 1.0,
+            "mismatched_recovery_rate": 0.45081967213114754
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.9375,
+            "mismatched_recovery_rate": 0.1796875
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.546875,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.265625,
+            "site": "blocks.1.resid_post",
+            "test_accuracy": 0.9609375
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.546875,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.0,
+          "per_group_max_action_recovery": {
+            "evidence": 0.0,
+            "payoff_risk": 0.0,
+            "prior": 0.0
+          }
+        },
+        "validation": {
+          "action_accuracy": 1.0,
+          "confidence_bucket_accuracy": 0.9975,
+          "loss": 0.0407862820958253,
+          "posterior_bucket_accuracy": 0.993,
+          "risk_flag_accuracy": 1.0
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 1.0,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 1.0,
+          "blocks.1.mlp_out": 0.7213114754098361,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.9375,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9921875,
+          "blocks.1.mlp_out": 0.84375,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 127,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "ran",
+        "full_interp": "ran",
+        "heldout_eval": "ran",
+        "training": "trained"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": 1566.6
+    },
+    {
+      "checkpoint_sha256": "5ea75a153ab15a9127e55c3d5232817cf2fdb2e1fecb5f1cc28e5cc0dedf35b0",
+      "error": null,
+      "metrics": {
+        "best_epoch": 17,
+        "dataset": {
+          "num_test": 2000,
+          "num_train": 12000,
+          "num_val": 2000
+        },
+        "heldout_test": {
+          "action_accuracy": 0.9995,
+          "confidence_bucket_accuracy": 0.9945,
+          "num_tasks": 2000,
+          "posterior_bucket_accuracy": 0.9915,
+          "risk_flag_accuracy": 0.9995
+        },
+        "label_shuffle": {
+          "majority_baseline_accuracy": 0.6328125,
+          "real_test_accuracy": 1.0,
+          "shuffled_test_accuracy": 0.5625,
+          "site": "blocks.1.mlp_out"
+        },
+        "mismatched_donor": {
+          "action": {
+            "matched_recovery_rate": 0.8809523809523809,
+            "mismatched_recovery_rate": 0.46825396825396826
+          },
+          "posterior_bucket": {
+            "matched_recovery_rate": 0.6328125,
+            "mismatched_recovery_rate": 0.171875
+          },
+          "site": "blocks.0.attn_out"
+        },
+        "parameter_count": 321455,
+        "probes": {
+          "action": {
+            "majority_baseline_accuracy": 0.6328125,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          },
+          "posterior_bucket": {
+            "majority_baseline_accuracy": 0.2890625,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 0.96875
+          },
+          "risk_flag": {
+            "majority_baseline_accuracy": 0.6328125,
+            "site": "blocks.1.mlp_out",
+            "test_accuracy": 1.0
+          }
+        },
+        "token_group": {
+          "max_action_recovery": 0.015873015873015872,
+          "per_group_max_action_recovery": {
+            "evidence": 0.007936507936507936,
+            "payoff_risk": 0.015873015873015872,
+            "prior": 0.007936507936507936
+          }
+        },
+        "validation": {
+          "action_accuracy": 0.9995,
+          "confidence_bucket_accuracy": 0.9975,
+          "loss": 0.052812368333339695,
+          "posterior_bucket_accuracy": 0.9905,
+          "risk_flag_accuracy": 0.9995
+        },
+        "whole_site_action_recovery": {
+          "blocks.0.attn_out": 0.8809523809523809,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9841269841269841,
+          "blocks.1.mlp_out": 0.6111111111111112,
+          "blocks.1.resid_post": 1.0
+        },
+        "whole_site_posterior_recovery": {
+          "blocks.0.attn_out": 0.6328125,
+          "blocks.0.mlp_out": 0.0,
+          "blocks.0.resid_post": 1.0,
+          "blocks.1.attn_out": 0.9375,
+          "blocks.1.mlp_out": 0.8203125,
+          "blocks.1.resid_post": 1.0
+        }
+      },
+      "seed": 128,
+      "status": "complete",
+      "steps": {
+        "extended_interp": "ran",
+        "full_interp": "ran",
+        "heldout_eval": "ran",
+        "training": "trained"
+      },
+      "story": {
+        "checks": {
+          "attention_concentration": true,
+          "label_shuffle_collapses": true,
+          "mismatched_donor_specific": true,
+          "token_group_distributed": true
+        },
+        "replicated": true
+      },
+      "training_runtime_s": 1501.0
+    }
+  ],
+  "run_name": "interp_bayes_medium_multiseed",
+  "seeds_attempted": [
+    123,
+    124,
+    125,
+    126,
+    127,
+    128
+  ],
+  "seeds_completed": [
+    123,
+    124,
+    125,
+    126,
+    127,
+    128
+  ],
+  "seeds_failed": [],
+  "seeds_replicated": [
+    123,
+    124,
+    125,
+    126,
+    127,
+    128
+  ],
+  "timestamp": "2026-06-06T22:07:17+00:00"
+}

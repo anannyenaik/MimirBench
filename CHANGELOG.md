@@ -9,11 +9,25 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Planned
 - Stage 9: a paper-style report consolidating evals, robustness, training, and
   interpretability with polished figures, tables, and limitations.
-- Multi-seed interpretability replication (seeds 124–128): the config is
-  reproducibility-ready but not executed; all current interpretability findings
-  are single-seed (123). See `reports/interpretability/interp_bayes_multiseed_summary.md`.
 - Natural-language task generators for `market_making`, `prediction_markets`, and
   `adversarial_risk`.
+
+### Added — multi-seed interpretability replication (local-only, no API calls)
+- **`mimirbench run-multiseed-interpretability`** + `configs/interp_bayes_medium_multiseed.yaml`
+  — trains per-seed medium checkpoints, reruns whole-site + extended interpretability
+  and a held-out evaluation per seed, and writes an honest mean/range aggregate with a
+  per-seed replication verdict (`mimirbench/interpretability/multiseed.py`).
+- **Six-seed replication (seeds 123–128).** The medium-model causal result now
+  replicates across six independently trained synthetic checkpoints: layer-0 MLP
+  action recovery is 0.000 on every seed while layer-0/1 attention recovery is
+  0.96/0.99 (mean); single token-group recovery ≤2.6%; the mismatched-donor action
+  gap is 0.96 (matched) vs 0.50 (mismatched); the label-shuffle probe is 1.000 on
+  real vs ≤baseline on shuffled labels. Held-out test action accuracy 1.000 and
+  posterior 0.991 (mean) across the six checkpoints. Aggregate:
+  `reports/interpretability/interp_bayes_multiseed_summary.md` (and `.json`).
+- Heavy per-seed artefacts (traces, activation dumps, eval rows) are gitignored; the
+  per-seed summaries, patching summaries, reports, figures, and checkpoint SHA256s
+  are kept.
 
 ## [0.2.0] — 2026-06-06
 

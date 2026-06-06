@@ -620,6 +620,31 @@ def run_extended_interpretability_command(
     )
 
 
+@app.command("run-multiseed-interpretability")
+def run_multiseed_interpretability_command(
+    config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to a multiseed YAML."),
+) -> None:
+    """Replicate medium-model interpretability across seeds (local-only, no API calls).
+
+    Trains any missing per-seed checkpoints, runs whole-site and extended
+    interpretability per seed, evaluates held-out metrics, and writes an honest
+    mean/range aggregate. Per-seed failures are fail-soft.
+    """
+    from mimirbench.interpretability.multiseed import (
+        load_multiseed_config,
+        run_multiseed_interpretability,
+    )
+
+    try:
+        config = load_multiseed_config(config_path)
+    except (KeyError, ValueError) as exc:
+        console.print(f"[red]Invalid multiseed config:[/red] {config_path}")
+        console.print(str(exc))
+        raise typer.Exit(code=1) from exc
+    summary = run_multiseed_interpretability(config)
+    _print_multiseed_summary(summary)
+
+
 @app.command("inspect-interpretability")
 def inspect_interpretability_command(
     run_dir: Path = typer.Argument(..., exists=True, file_okay=False, readable=True),
@@ -752,6 +777,82 @@ def _print_interpretability_summary(summary: dict[str, Any], *, inspect: bool = 
         "no frontier-model claim is made.[/dim]"
     )
     console.print(f"report: {summary.get('output_dir')}/INTERPRETABILITY_REPORT.md")
+
+
+def _print_multiseed_summary(summary: dict[str, Any]) -> None:
+    console.print(
+        f"[bold]{summary.get('run_name')}[/bold] | "
+        f"completed=[green]{summary.get('n_completed')}[/green]/{summary.get('n_attempted')} | "
+        f"replicated_all=[magenta]{_yesno(bool(summary.get('causal_story_replicated_all_completed')))}[/magenta]"
+    )
+    console.print(f"seeds completed: {summary.get('seeds_completed')}")
+    failed = summary.get("seeds_failed", [])
+    if failed:
+        console.print("[yellow]failed/skipped seeds:[/yellow]")
+        for item in failed:
+            console.print(f"  - seed {item.get('seed')}: {escape(str(item.get('reason')))}")
+
+    table = Table(title="Per-seed headline metrics")
+    table.add_column("seed", style="bold cyan")
+    table.add_column("status")
+    table.add_column("val action", justify="right")
+    table.add_column("L0 attn rec", justify="right")
+    table.add_column("L0 mlp rec", justify="right")
+    table.add_column("tok-grp max", justify="right")
+    table.add_column("story")
+    for seed in summary.get("per_seed", []):
+        metrics = seed.get("metrics") or {}
+        action_recovery = metrics.get("whole_site_action_recovery", {})
+        table.add_row(
+            str(seed.get("seed")),
+            str(seed.get("status")),
+            _fmt(_dig_cli(metrics, "validation", "action_accuracy")),
+            _fmt(action_recovery.get("blocks.0.attn_out")),
+            _fmt(action_recovery.get("blocks.0.mlp_out")),
+            _fmt(_dig_cli(metrics, "token_group", "max_action_recovery")),
+            _yesno(bool(_dig_cli(seed, "story", "replicated"))),
+        )
+    console.print(table)
+
+    aggregate = summary.get("aggregate_metrics", {})
+    if summary.get("n_completed", 0) >= 2:
+        agg_table = Table(title="Aggregate across completed seeds (mean [min, max])")
+        agg_table.add_column("metric", style="bold cyan")
+        agg_table.add_column("mean", justify="right")
+        agg_table.add_column("range", justify="right")
+        agg_table.add_column("n", justify="right")
+        for key in (
+            "validation_action_accuracy",
+            "heldout_action_accuracy",
+            "layer0_attn_action_recovery",
+            "layer0_mlp_action_recovery",
+            "layer1_attn_action_recovery",
+            "token_group_max_action_recovery",
+            "mismatched_action_matched_recovery",
+            "mismatched_action_mismatched_recovery",
+            "label_shuffle_real_accuracy",
+            "label_shuffle_shuffled_accuracy",
+        ):
+            stat = aggregate.get(key, {})
+            agg_table.add_row(
+                key,
+                _fmt(stat.get("mean")),
+                f"[{_fmt(stat.get('min'))}, {_fmt(stat.get('max'))}]",
+                str(stat.get("n", 0)),
+            )
+        console.print(agg_table)
+
+    console.print(f"[dim]{summary.get('headline')}[/dim]")
+    console.print(f"summary: {summary.get('summary_path')}")
+
+
+def _dig_cli(data: Any, *keys: str) -> Any:
+    current = data
+    for key in keys:
+        if not isinstance(current, dict):
+            return None
+        current = current.get(key)
+    return current
 
 
 def _collect_interpretability_figures(experiments: dict[str, Any]) -> list[str]:

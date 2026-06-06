@@ -16,8 +16,14 @@ are regenerated from configs + seeds**, because they are deterministic.
 - **Training/eval summaries and figures** for the tiny and medium model organisms
   (`reports/training/...`, `reports/runs/small_transformer_bayes_*_eval/`).
 - **Interpretability artefacts** — probe/patching/attention JSON, the Stage 8
-  reports, and the extended report
-  (`reports/interpretability/interp_bayes_medium_extended/`).
+  reports, the extended report
+  (`reports/interpretability/interp_bayes_medium_extended/`), and the **multi-seed
+  replication** (seeds 123–128): per-seed summaries/figures under
+  `reports/interpretability/interp_bayes_all_medium_seed_*/` and `..._extended_seed_*/`,
+  the aggregate
+  [`interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md)
+  (+ `.json`), and per-seed checkpoint SHA256s
+  (`reports/interpretability/interp_bayes_multiseed/checkpoints_sha256.txt`).
 - **Model cards** under `reports/model_cards/` (auto-generated for real runs) and
   the curated [MODEL_CARD_medium.md](MODEL_CARD_medium.md).
 
@@ -30,7 +36,11 @@ Per [.gitignore](.gitignore):
 - response caches and raw run scratch (`*.log`, large `responses_cache.jsonl` are
   byproducts);
 - `.env` and `.env.*` (secrets) — only `.env.example` is tracked;
-- virtualenvs, tool caches, build artefacts.
+- virtualenvs, tool caches, build artefacts;
+- **multi-seed replication bulk** (seeds 124+) — per-seed synthetic traces,
+  activation dumps, per-row patching logs, and held-out eval rows are regenerable
+  and gitignored; the per-seed summaries, patching summaries, reports, and figures
+  are kept.
 
 This means the medium checkpoint exists locally but is **not in git**. The training
 is deterministic (fixed seed, dropout 0, CPU), so anyone can regenerate a
@@ -76,8 +86,12 @@ sha256sum reports/training/small_transformer_bayes_medium/checkpoints/best.pt
 ## Running medium interpretability
 
 ```bash
-mimirbench run-interpretability          configs/interp_bayes_all_medium.yaml
-mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml
+mimirbench run-interpretability            configs/interp_bayes_all_medium.yaml
+mimirbench run-extended-interpretability   configs/interp_bayes_medium_extended.yaml
+# Multi-seed replication across seeds 123-128 (trains missing checkpoints, reruns
+# the whole-site + extended pipeline and a held-out eval per seed, writes the
+# aggregate interp_bayes_multiseed_summary.json):
+mimirbench run-multiseed-interpretability  configs/interp_bayes_medium_multiseed.yaml
 ```
 
 The extended command runs position-resolved patching and negative controls; it is

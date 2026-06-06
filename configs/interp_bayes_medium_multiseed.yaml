@@ -1,0 +1,49 @@
+# Multi-seed interpretability replication for the medium Bayesian transformer.
+#
+# Local-only, CPU, deterministic, no downloads and NO API calls. Counters the
+# "interpretability is single-seed" criticism by retraining the medium checkpoint
+# under several seeds and re-running the SAME Stage 8 + extended pipeline on each.
+#
+# Each seed independently resamples the training data, the weight initialisation,
+# and the interpretability probe/patch set, so the seeds are genuinely independent
+# draws — not the same data re-analysed.
+#
+# Run:
+#   mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
+#
+# Seed 123 reuses the already-curated single-seed artefacts (it is not retrained);
+# skip_existing also lets the batch resume after an interruption without redoing
+# completed seeds.
+run:
+  name: interp_bayes_medium_multiseed
+  summary_dir: reports/interpretability
+
+seeds: [123, 124, 125, 126, 127, 128]
+
+train_template: configs/train_small_transformer_bayes_medium.yaml
+interp_template: configs/interp_bayes_all_medium.yaml
+extended_template: configs/interp_bayes_medium_extended.yaml
+
+training_output_template: reports/training/small_transformer_bayes_medium_seed_{seed}
+interp_output_template: reports/interpretability/interp_bayes_all_medium_seed_{seed}
+extended_output_template: reports/interpretability/interp_bayes_medium_extended_seed_{seed}
+eval_output_template: reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_{seed}
+
+# Reuse the existing single-seed (123) artefacts instead of retraining/re-analysing.
+seed_overrides:
+  123:
+    training_dir: reports/training/small_transformer_bayes_medium
+    interp_dir: reports/interpretability/interp_bayes_all_medium
+    extended_dir: reports/interpretability/interp_bayes_medium_extended
+
+skip_existing: true
+run_full_interpretability: true
+run_extended_interpretability: true
+run_heldout_eval: true
+heldout_num_tasks: 2000
+heldout_seed_base: 900000
+
+# Generated model cards for the throwaway per-seed checkpoints go to a gitignored
+# tmp dir so the curated model cards are never clobbered.
+model_card_dir: tmp/model_cards
+device: cpu
