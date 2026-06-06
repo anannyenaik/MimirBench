@@ -79,8 +79,12 @@ training:
 """,
         encoding="utf-8",
     )
+    cards_dir = tmp_path / "model_cards"
     runner = CliRunner()
-    train_result = runner.invoke(app, ["train-small-transformer", str(train_config)])
+    train_result = runner.invoke(
+        app,
+        ["train-small-transformer", str(train_config), "--model-card-dir", str(cards_dir)],
+    )
     assert train_result.exit_code == 0, train_result.output
     assert (training_dir / "summary.json").exists()
 
@@ -106,6 +110,9 @@ data:
 """,
         encoding="utf-8",
     )
-    eval_result = runner.invoke(app, ["eval-small-transformer", str(eval_config)])
+    eval_result = runner.invoke(
+        app,
+        ["eval-small-transformer", str(eval_config), "--model-card-dir", str(cards_dir)],
+    )
     assert eval_result.exit_code == 0, eval_result.output
     assert (eval_dir / "summary.json").exists()

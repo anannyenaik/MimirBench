@@ -515,12 +515,15 @@ def generate_traces_command(
 @app.command("train-small-transformer")
 def train_small_transformer_command(
     config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to training YAML."),
+    model_card_dir: Path = typer.Option(
+        Path("reports") / "model_cards", help="Where to write the generated model card."
+    ),
 ) -> None:
     """Train the Stage 7 compact transformer on synthetic Bayesian traces."""
     from mimirbench.training.train_small_transformer import train
 
     try:
-        summary = train(config_path)
+        summary = train(config_path, model_card_dir=model_card_dir)
     except Exception as exc:
         console.print(f"[red]Training failed:[/red] {exc}")
         raise typer.Exit(code=1) from exc
@@ -530,12 +533,15 @@ def train_small_transformer_command(
 @app.command("eval-small-transformer")
 def eval_small_transformer_command(
     config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to eval YAML."),
+    model_card_dir: Path = typer.Option(
+        Path("reports") / "model_cards", help="Where to write the generated model card."
+    ),
 ) -> None:
     """Evaluate a trained small-transformer checkpoint on held-out Bayesian traces."""
     from mimirbench.training.evaluate_small_transformer import evaluate_checkpoint
 
     try:
-        summary = evaluate_checkpoint(config_path)
+        summary = evaluate_checkpoint(config_path, model_card_dir=model_card_dir)
     except Exception as exc:
         console.print(f"[red]Evaluation failed:[/red] {exc}")
         raise typer.Exit(code=1) from exc
@@ -591,6 +597,29 @@ def run_interpretability_command(
     _print_interpretability_summary(summary)
 
 
+@app.command("run-extended-interpretability")
+def run_extended_interpretability_command(
+    config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to interp YAML."),
+) -> None:
+    """Run position-resolved patching and negative controls (local-only, no API calls)."""
+    from mimirbench.interpretability.extended_interpretability import run_extended_interpretability
+
+    summary = run_extended_interpretability(config_path)
+    if summary.get("status") == "pending":
+        console.print(f"[yellow]{summary.get('run_name')}: extended experiments pending[/yellow]")
+        for blocker in summary.get("blockers", []):
+            console.print(f"  - {blocker}")
+        return
+    console.print(f"[green]Extended interpretability complete:[/green] {summary['output_dir']}")
+    shuffle = summary.get("label_shuffle_control", {})
+    console.print(
+        "label-shuffle control: "
+        f"real={_fmt(shuffle.get('real_test_accuracy'))} "
+        f"shuffled={_fmt(shuffle.get('shuffled_test_accuracy'))} "
+        f"baseline={_fmt(shuffle.get('majority_baseline_accuracy'))}"
+    )
+
+
 @app.command("inspect-interpretability")
 def inspect_interpretability_command(
     run_dir: Path = typer.Argument(..., exists=True, file_okay=False, readable=True),
@@ -613,6 +642,27 @@ def build_report_index_command(
 
     path = build_report_index(reports_dir)
     console.print(f"[green]Report index written:[/green] {path}")
+
+
+@app.command("statistical-validity")
+def statistical_validity_command(
+    base_dir: Path = typer.Option(
+        Path("reports") / "runs" / "leaderboard",
+        help="Leaderboard run directory holding saved real-model artefacts.",
+    ),
+    output_path: Path | None = typer.Option(
+        None, help="Destination markdown file (defaults inside base-dir)."
+    ),
+) -> None:
+    """Compute bootstrap CIs and paired deltas over saved artefacts only (no model runs)."""
+    from mimirbench.analysis.statistical_validity import write_statistical_validity_report
+
+    path = write_statistical_validity_report(base_dir, output_path=output_path)
+    console.print(f"[green]Statistical validity report written:[/green] {path}")
+    console.print(
+        "[dim]Pilot CIs over the saved synthetic sample, not population-level "
+        "benchmark claims. No model was run.[/dim]"
+    )
 
 
 def _print_interpretability_summary(summary: dict[str, Any], *, inspect: bool = False) -> None:

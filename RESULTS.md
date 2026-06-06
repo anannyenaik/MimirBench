@@ -1,5 +1,15 @@
 # Results
 
+> **Read this with the protocol and statistics docs.** Every real-model row is
+> classified by track in [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md) (strict-512
+> vs best-valid; protocol-limited rows are documented findings, not capability
+> scores). Bootstrap 95% CIs and task-aligned paired deltas over these same saved
+> artefacts are in [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md) and the
+> generated table
+> [`reports/runs/leaderboard/statistical_validity_existing_artifacts.md`](reports/runs/leaderboard/statistical_validity_existing_artifacts.md).
+> These are pilot CIs over the saved synthetic sample, not population-level
+> benchmark claims.
+
 ## Current Status
 
 A preliminary Claude Haiku 4.5 direct-agent run was added on 2026-06-03 as the

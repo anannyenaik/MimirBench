@@ -27,7 +27,8 @@ def test_small_transformer_agent_answers_bayesian_task_and_rejects_unsupported(t
             data=BayesianTraceDatasetConfig(num_train=8, num_val=4, num_test=4, seed=4),
             model=ModelConfig(d_model=16, n_layers=1, n_heads=2, dim_feedforward=32, max_seq_len=96),
             training=TrainingConfig(batch_size=4, epochs=1, device="cpu"),
-        )
+        ),
+        model_card_dir=tmp_path / "model_cards",
     )
     agent = SmallTransformerAgent(summary["paths"]["best_checkpoint"], device="cpu")
     response = agent.act(generate_bayes_task(1).task)

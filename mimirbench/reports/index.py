@@ -8,6 +8,43 @@ from typing import Any
 
 __all__ = ["build_report_index"]
 
+# Curated track classification for the saved real-model leaderboard rows, keyed by
+# leaderboard run-directory name. Tracks follow BENCHMARK_PROTOCOL.md. This is the
+# single source of truth for "is this row a clean comparison or a protocol/probe
+# artefact?" and is emitted into INDEX.md so the distinction survives regeneration.
+_ROW_CLASSIFICATION: dict[str, str] = {
+    "leaderboard_openai_minis_all_envs_direct_20": "strict-track clean (gpt-4.1-mini, gpt-5.4-mini)",
+    "leaderboard_openai_frontier_all_envs_direct_20": (
+        "strict-track clean (gpt-5.4); protocol-limited (gpt-5.5)"
+    ),
+    "leaderboard_openai_gpt55_all_envs_direct_20": "protocol-limited (default temp, 512 budget)",
+    "leaderboard_openai_gpt55_rescue_probe": "rescue probe (6 tasks, raised budget)",
+    "leaderboard_claude_haiku_all_envs_direct_20": "strict-track clean",
+    "leaderboard_claude_sonnet_all_envs_direct_20": "protocol-limited (max_tokens=512 truncation)",
+    "leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536": "best-valid clean (max_tokens=1536)",
+    "leaderboard_claude_sonnet_rescue_probe_1024": "rescue probe (30 tasks, max_tokens=1024)",
+    "leaderboard_claude_sonnet_robustness_tiny": "real-model robustness probe (best-valid row)",
+    "leaderboard_gemini_flash_lite_all_envs_direct_20": "strict-track clean",
+    "leaderboard_gemini_flash_lite_smoke": "smoke run (6 tasks)",
+    "leaderboard_gemini_flash_all_envs_direct_20": "protocol-limited (default thinking, 512 budget)",
+    "leaderboard_gemini_flash_all_envs_direct_20_thinking0": "best-valid clean (thinking_budget=0)",
+    "leaderboard_gemini_flash_rescue_probe_thinking0": "rescue probe (6 tasks, thinking disabled)",
+    "leaderboard_gemini_pro_all_envs_direct_20": "provider-failed diagnostic (14/120 503/504)",
+    "leaderboard_gemini_pro_all_envs_direct_20_retry": "best-valid clean (cache-backed; provider-load caveat)",
+    "leaderboard_gemini_pro_rescue_probe_low_thinking": "rescue probe (6 tasks, thinking_level=low)",
+    "leaderboard_gemini_pro_smoke": "smoke run (request rejected, no model usage)",
+    "leaderboard_gemini_pro_robustness_small": "real-model robustness probe (best-valid row)",
+    "leaderboard_gemini_strongest_robustness_tiny": "real-model robustness probe (best-valid row)",
+    "leaderboard_openai_gpt54_robustness_tiny": "real-model robustness probe (strict-track row)",
+    "leaderboard_openai_gpt54mini_bayes_direct_tool_50": "diagnostic forced-tool run (direct vs tool)",
+    "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25": "diagnostic forced-tool run (direct vs tool)",
+    "leaderboard_openai_all_envs_direct_tiny": "smoke run (30 tasks)",
+    "leaderboard_openai_modern_mini_all_envs_direct_tiny": "smoke run (30 tasks)",
+    "leaderboard_openai_bayes_direct_20": "smoke run (single-environment)",
+    "leaderboard_openai_bayes_direct_micro": "smoke run (5 tasks)",
+    "leaderboard_all_available_tiny": "reference/mock/non-model status check (no model run)",
+}
+
 
 def build_report_index(reports_dir: str | Path = "reports") -> Path:
     """Scan ``reports/`` and write ``reports/INDEX.md``."""
@@ -36,6 +73,9 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     lines.extend(["", "## Leaderboard runs", ""])
     leaderboard_runs = _leaderboard_runs(root)
     lines.extend(_leaderboard_lines(leaderboard_runs, root=root))
+
+    lines.extend(["", "## Real-model row classification (tracks)", ""])
+    lines.extend(_classification_lines(leaderboard_runs))
 
     lines.extend(["", "## Standalone leaderboard analysis notes", ""])
     leaderboard_notes = _leaderboard_notes(root)
@@ -146,6 +186,27 @@ def _leaderboard_runs(root: Path) -> list[dict[str, Any]]:
             }
         )
     return runs
+
+
+def _classification_lines(runs: list[dict[str, Any]]) -> list[str]:
+    """Emit the curated track classification for each saved leaderboard run."""
+    if not runs:
+        return ["No leaderboard runs to classify."]
+    lines = [
+        "Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only "
+        "`strict-track clean` and `best-valid clean` rows are headline comparisons; "
+        "everything else is a documented protocol/probe/diagnostic artefact.",
+        "",
+        "| Leaderboard run | Track / classification |",
+        "| --- | --- |",
+    ]
+    for run in runs:
+        name = str(run["name"])
+        classification = _ROW_CLASSIFICATION.get(
+            name, "unclassified (treat as diagnostic until reviewed)"
+        )
+        lines.append(f"| `{name}` | {classification} |")
+    return lines
 
 
 def _leaderboard_notes(root: Path) -> list[Path]:

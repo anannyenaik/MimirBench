@@ -77,6 +77,37 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 
 Leaderboard rows are real model results only when `models_run > 0` and the saved summary contains concrete per-agent run artefacts.
 
+## Real-model row classification (tracks)
+
+Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-track clean` and `best-valid clean` rows are headline comparisons; everything else is a documented protocol/probe/diagnostic artefact.
+
+| Leaderboard run | Track / classification |
+| --- | --- |
+| `leaderboard_all_available_tiny` | reference/mock/non-model status check (no model run) |
+| `leaderboard_claude_haiku_all_envs_direct_20` | strict-track clean |
+| `leaderboard_claude_sonnet_all_envs_direct_20` | protocol-limited (max_tokens=512 truncation) |
+| `leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536` | best-valid clean (max_tokens=1536) |
+| `leaderboard_claude_sonnet_rescue_probe_1024` | rescue probe (30 tasks, max_tokens=1024) |
+| `leaderboard_gemini_flash_all_envs_direct_20` | protocol-limited (default thinking, 512 budget) |
+| `leaderboard_gemini_flash_all_envs_direct_20_thinking0` | best-valid clean (thinking_budget=0) |
+| `leaderboard_gemini_flash_lite_all_envs_direct_20` | strict-track clean |
+| `leaderboard_gemini_flash_lite_smoke` | smoke run (6 tasks) |
+| `leaderboard_gemini_flash_rescue_probe_thinking0` | rescue probe (6 tasks, thinking disabled) |
+| `leaderboard_gemini_pro_all_envs_direct_20` | provider-failed diagnostic (14/120 503/504) |
+| `leaderboard_gemini_pro_all_envs_direct_20_retry` | best-valid clean (cache-backed; provider-load caveat) |
+| `leaderboard_gemini_pro_rescue_probe_low_thinking` | rescue probe (6 tasks, thinking_level=low) |
+| `leaderboard_gemini_pro_smoke` | smoke run (request rejected, no model usage) |
+| `leaderboard_openai_all_envs_direct_tiny` | smoke run (30 tasks) |
+| `leaderboard_openai_bayes_direct_20` | smoke run (single-environment) |
+| `leaderboard_openai_bayes_direct_micro` | smoke run (5 tasks) |
+| `leaderboard_openai_frontier_all_envs_direct_20` | strict-track clean (gpt-5.4); protocol-limited (gpt-5.5) |
+| `leaderboard_openai_gpt54mini_bayes_direct_tool_50` | diagnostic forced-tool run (direct vs tool) |
+| `leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25` | diagnostic forced-tool run (direct vs tool) |
+| `leaderboard_openai_gpt55_all_envs_direct_20` | protocol-limited (default temp, 512 budget) |
+| `leaderboard_openai_gpt55_rescue_probe` | rescue probe (6 tasks, raised budget) |
+| `leaderboard_openai_minis_all_envs_direct_20` | strict-track clean (gpt-4.1-mini, gpt-5.4-mini) |
+| `leaderboard_openai_modern_mini_all_envs_direct_tiny` | smoke run (30 tasks) |
+
 ## Standalone leaderboard analysis notes
 
 - [`runs/leaderboard/claude_model_ladder_direct_20env_comparison.md`](runs/leaderboard/claude_model_ladder_direct_20env_comparison.md)
@@ -85,6 +116,7 @@ Leaderboard rows are real model results only when `models_run > 0` and the saved
 - [`runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md`](runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md)
 - [`runs/leaderboard/gemini_strongest_robustness_comparison.md`](runs/leaderboard/gemini_strongest_robustness_comparison.md)
 - [`runs/leaderboard/openai_model_ladder_20env_comparison.md`](runs/leaderboard/openai_model_ladder_20env_comparison.md)
+- [`runs/leaderboard/statistical_validity_existing_artifacts.md`](runs/leaderboard/statistical_validity_existing_artifacts.md)
 
 ## Interpretability runs
 
@@ -93,6 +125,7 @@ Leaderboard rows are real model results only when `models_run > 0` and the saved
 | interp_bayes_all_medium | [`interpretability/interp_bayes_all_medium`](interpretability/interp_bayes_all_medium) | complete | probes, activation_patching, attention_analysis | 1 |
 | interp_bayes_all_tiny | [`interpretability/interp_bayes_all_tiny`](interpretability/interp_bayes_all_tiny) | complete | probes, activation_patching, attention_analysis | 0.916667 |
 | interp_bayes_attention_tiny | [`interpretability/interp_bayes_attention_tiny`](interpretability/interp_bayes_attention_tiny) | complete | attention_analysis | n/a |
+| interp_bayes_medium_extended | [`interpretability/interp_bayes_medium_extended`](interpretability/interp_bayes_medium_extended) | complete | n/a | n/a |
 | interp_bayes_patching_tiny | [`interpretability/interp_bayes_patching_tiny`](interpretability/interp_bayes_patching_tiny) | complete | activation_patching | n/a |
 | interp_bayes_probes_tiny | [`interpretability/interp_bayes_probes_tiny`](interpretability/interp_bayes_probes_tiny) | complete | probes | 0.916667 |
 
@@ -100,15 +133,11 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 
 ## Model cards
 
-- [`model_cards/agent_source.md`](model_cards/agent_source.md)
-- [`model_cards/cli_train.md`](model_cards/cli_train.md)
-- [`model_cards/eval_source.md`](model_cards/eval_source.md)
 - [`model_cards/mock_bayes_mock_random_valid__mock_random_valid.md`](model_cards/mock_bayes_mock_random_valid__mock_random_valid.md)
 - [`model_cards/reference_bayes_reference__reference.md`](model_cards/reference_bayes_reference__reference.md)
 - [`model_cards/small_transformer_bayes_medium.md`](model_cards/small_transformer_bayes_medium.md)
 - [`model_cards/small_transformer_bayes_medium_ablation_data2k.md`](model_cards/small_transformer_bayes_medium_ablation_data2k.md)
 - [`model_cards/small_transformer_bayes_tiny.md`](model_cards/small_transformer_bayes_tiny.md)
-- [`model_cards/test_tiny.md`](model_cards/test_tiny.md)
 - [`model_cards/tool_reference_bayes_tool_reference__tool_reference.md`](model_cards/tool_reference_bayes_tool_reference__tool_reference.md)
 
 ## Generated figures

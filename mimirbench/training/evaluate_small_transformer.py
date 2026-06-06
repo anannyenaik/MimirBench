@@ -91,8 +91,15 @@ def load_eval_config(path: str | Path) -> SmallTransformerEvalConfig:
 
 def evaluate_checkpoint(
     config: SmallTransformerEvalConfig | str | Path,
+    *,
+    model_card_dir: str | Path = Path("reports") / "model_cards",
 ) -> dict[str, Any]:  # pragma: no cover - torch-dependent path covered when available.
-    """Evaluate a saved checkpoint and write JSONL, summary, report, and figures."""
+    """Evaluate a saved checkpoint and write JSONL, summary, report, and figures.
+
+    ``model_card_dir`` defaults to the curated ``reports/model_cards`` for
+    production runs; tests pass an isolated ``tmp_path`` so the suite never
+    rewrites tracked cards with machine-specific paths.
+    """
     torch_mod, _, _ = require_torch()
     cfg = load_eval_config(config) if isinstance(config, (str, Path)) else config
     if cfg.data.num_tasks <= 0:
@@ -194,7 +201,9 @@ def evaluate_checkpoint(
 
     training_dir = _training_dir_from_payload(payload)
     if training_dir is not None and training_dir.exists():
-        card_path = generate_small_transformer_model_card(training_dir, eval_dir=output_dir)
+        card_path = generate_small_transformer_model_card(
+            training_dir, eval_dir=output_dir, output_dir=model_card_dir
+        )
         summary["paths"]["model_card"] = str(card_path)
         (output_dir / "summary.json").write_text(
             json.dumps(summary, indent=2, sort_keys=True),

@@ -175,6 +175,38 @@ result, but a deliberately narrow one: it is full-sequence (not per-token or
 per-head) patching on a single synthetic checkpoint and seed, with mean pooling
 before the heads, no SAE, and no transfer to frontier models.
 
+## Extended analysis: position-resolved patching and negative controls
+
+`mimirbench/interpretability/{token_group_patching,extended_interpretability}.py`
+
+The whole-site result above cannot say *which token positions* carry the signal,
+so `mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml`
+adds three local-only, deterministic experiments on the medium checkpoint (no API
+calls). Artefacts:
+`reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md`.
+
+- **Token-group (position-resolved) patching.** Each sub-block site is patched
+  *only* at the positions of one token group (prior / evidence / payoff-risk).
+  Because the corruption changes only the evidence tokens, prior/payoff-risk are
+  honest negative controls. **Result (honest):** patching any single token group's
+  positions recovers the flipped action on ≤2% of pairs — including the evidence
+  group. The evidence→decision signal is therefore **distributed across positions**
+  (the encoder mean-pools, and attention spreads the evidence everywhere), not
+  localised to the evidence token positions. This is reported as a negative result
+  and refines the whole-site claim rather than overturning it.
+- **Mismatched-donor negative control.** At `blocks.0.attn_out`, a matched
+  whole-site patch recovers the action on **0.967** of flipped pairs, while a clean
+  donor from an unrelated same-length example recovers only **0.533** (posterior
+  bucket: 0.906 matched vs 0.211 mismatched). The patch restores the *specific*
+  clean computation, not a generic activation shift.
+- **Label-shuffle probe control.** The action probe at `blocks.1.mlp_out` scores
+  **1.000** on real labels and **0.484** (below the 0.594 majority baseline) on
+  shuffled labels, confirming the probe reads genuine structure, not noise.
+
+All extended findings are **single-seed (123)**; the multi-seed configuration is
+reproducibility-ready but not executed (see
+`reports/interpretability/interp_bayes_multiseed_summary.md`).
+
 ## Running it
 
 ```bash
@@ -185,6 +217,9 @@ mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_ti
 # The medium model organism (the one with the causal patching result):
 mimirbench run-interpretability configs/interp_bayes_all_medium.yaml
 mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_medium
+
+# Extended, position-resolved patching plus negative controls (local-only):
+mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml
 ```
 
 Single-experiment configs also exist: `interp_bayes_probes_tiny.yaml`,

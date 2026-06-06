@@ -133,8 +133,16 @@ def generate_traces_from_config(
 
 def train(
     config: SmallTransformerTrainConfig | str | Path | None = None,
+    *,
+    model_card_dir: str | Path = Path("reports") / "model_cards",
 ) -> dict[str, Any]:  # pragma: no cover - torch-dependent path covered when available.
-    """Train a compact transformer and write reproducible artefacts."""
+    """Train a compact transformer and write reproducible artefacts.
+
+    ``model_card_dir`` is where the generated model card is written; production
+    runs use the default ``reports/model_cards`` (the curated, committed location),
+    while tests pass an isolated ``tmp_path`` so the suite never rewrites tracked
+    cards with machine-specific paths.
+    """
     torch_mod, _, _ = require_torch()
     cfg = _coerce_config(config) if config is not None else SmallTransformerTrainConfig()
     _validate_training_config(cfg)
@@ -299,7 +307,7 @@ def train(
     }
     summary_path = output_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
-    card_path = generate_small_transformer_model_card(output_dir)
+    card_path = generate_small_transformer_model_card(output_dir, output_dir=model_card_dir)
     summary["paths"]["model_card"] = str(card_path)
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
     return summary

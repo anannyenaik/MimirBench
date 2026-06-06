@@ -13,6 +13,21 @@ pairs deterministic synthetic environments with deterministic graders, reference
 solvers, configurable agent backends, response caching, structured result
 writers, and honest reports.
 
+> **Current stable review target: v0.2.0.** This is a synthetic-evals /
+> research-engineering project, not a trading system. All real-model statistics are
+> computed from saved artefacts; see [RELEASE_NOTES_v0.2.0.md](RELEASE_NOTES_v0.2.0.md).
+
+**Documentation map:**
+[BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md) ·
+[STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md) ·
+[RESULTS.md](RESULTS.md) ·
+[ROBUSTNESS.md](ROBUSTNESS.md) ·
+[INTERPRETABILITY.md](INTERPRETABILITY.md) ·
+[TRAINING.md](TRAINING.md) ·
+[ARTIFACTS.md](ARTIFACTS.md) ·
+[MODEL_CARD_medium.md](MODEL_CARD_medium.md) ·
+[reports/INDEX.md](reports/INDEX.md)
+
 ## Environments
 
 | Family | Question it probes | Status |
@@ -192,14 +207,20 @@ transformer/interp track now checked in:
 - Real-model provider support exists for OpenAI, Anthropic/Claude, Gemini,
   generic HTTP, and optional local Hugging Face models.
 - Real-model leaderboard artefacts have been generated for OpenAI, Claude, and
-  Gemini.
-- Strongest completed comparable OpenAI direct row: `gpt-5.4`.
-- Strongest completed clean Claude direct row: Claude Sonnet 4.6 at
+  Gemini. Every row is classified by track (strict-512 / best-valid) or as a
+  protocol/probe/diagnostic artefact — see [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md)
+  and the classification table in [reports/INDEX.md](reports/INDEX.md). Bootstrap
+  CIs over the saved sample are in
+  [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md).
+- Strongest comparable OpenAI **strict-512** direct row: `gpt-5.4`.
+- Strongest **best-valid** Claude direct row: Claude Sonnet 4.6 at
   `max_tokens=1536`.
-- Strongest completed clean Gemini direct row: `gemini-3.1-pro-preview` with
-  `thinking_level=low`.
-- Gemini `gemini-3.5-flash` with `thinking_budget=0` remains the strongest clean
+- Strongest **best-valid** Gemini direct row: `gemini-3.1-pro-preview` with
+  `thinking_level=low` (cache-backed retry; provider-load caveat).
+- Gemini `gemini-3.5-flash` with `thinking_budget=0` is the strongest best-valid
   non-Pro Gemini row.
+- Best-valid rows are not identical-decoding; cross-provider differences mix
+  capability with each provider's documented protocol.
 - Robustness probes exist for OpenAI `gpt-5.4`, Claude Sonnet 4.6, Gemini Flash,
   and Gemini Pro.
 - OpenAI forced Bayesian tool-use was run as a diagnostic and gave negligible
@@ -223,8 +244,11 @@ transformer/interp track now checked in:
 - All results are preliminary, synthetic, direct-agent unless labelled otherwise,
   and not statistically conclusive.
 - Main model comparisons use a single seed/schedule; the interpretability result
-  uses one checkpoint/seed with full-sequence patching, not head-level or
-  SAE-level circuit analysis.
+  uses one checkpoint/seed. Whole-site patching is complemented by
+  position-resolved (token-group) patching and negative controls
+  ([extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md)),
+  but there is still no per-head or SAE-level circuit analysis, and findings are
+  single-seed (123).
 - Small-model interpretability findings do not transfer to frontier-model
   internals.
 - This is not a trading bot, live trading system, market-beating claim, trading-
@@ -249,14 +273,19 @@ small-model interpretability does not transfer to frontier models.
 
 ## Where To Look
 
-- [RESULTS.md](RESULTS.md)
-- [reports/INDEX.md](reports/INDEX.md)
+- Protocol & statistics: [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md),
+  [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md), and the generated
+  [statistical validity table](reports/runs/leaderboard/statistical_validity_existing_artifacts.md)
+- [RESULTS.md](RESULTS.md) · [reports/INDEX.md](reports/INDEX.md)
 - [OpenAI model ladder comparison](reports/runs/leaderboard/openai_model_ladder_20env_comparison.md)
 - [Claude model ladder comparison](reports/runs/leaderboard/claude_model_ladder_direct_20env_comparison.md)
 - [Gemini model ladder comparison](reports/runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md)
 - [Gemini robustness comparison](reports/runs/leaderboard/gemini_strongest_robustness_comparison.md)
-- [INTERPRETABILITY.md](INTERPRETABILITY.md)
-- [TRAINING.md](TRAINING.md)
+- Interpretability: [INTERPRETABILITY.md](INTERPRETABILITY.md), the
+  [extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md),
+  and the [multi-seed status](reports/interpretability/interp_bayes_multiseed_summary.md)
+- Artifacts & reproduction: [ARTIFACTS.md](ARTIFACTS.md),
+  [MODEL_CARD_medium.md](MODEL_CARD_medium.md), [TRAINING.md](TRAINING.md)
 
 ## Avoiding Overclaiming
 

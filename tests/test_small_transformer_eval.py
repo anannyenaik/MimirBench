@@ -23,13 +23,15 @@ from mimirbench.training.train_small_transformer import (
 def test_small_transformer_eval_smoke(tmp_path) -> None:  # type: ignore[no-untyped-def]
     pytest.importorskip("torch")
     training_dir = tmp_path / "training"
+    cards_dir = tmp_path / "model_cards"
     train_summary = train(
         SmallTransformerTrainConfig(
             run=RunConfig(name="eval_source", seed=2, output_dir=str(training_dir)),
             data=BayesianTraceDatasetConfig(num_train=8, num_val=4, num_test=4, seed=2),
             model=ModelConfig(d_model=16, n_layers=1, n_heads=2, dim_feedforward=32, max_seq_len=96),
             training=TrainingConfig(batch_size=4, epochs=1, device="cpu"),
-        )
+        ),
+        model_card_dir=cards_dir,
     )
     eval_dir = tmp_path / "eval"
     summary = evaluate_checkpoint(
@@ -37,7 +39,8 @@ def test_small_transformer_eval_smoke(tmp_path) -> None:  # type: ignore[no-unty
             run=EvalRunConfig(name="eval_smoke", seed=3, output_dir=str(eval_dir)),
             checkpoint_path=train_summary["paths"]["best_checkpoint"],
             data=EvalDataConfig(num_tasks=4),
-        )
+        ),
+        model_card_dir=cards_dir,
     )
     assert (eval_dir / "results.jsonl").exists()
     assert (eval_dir / "summary.json").exists()
