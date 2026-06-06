@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mimirbench"
-version = "0.1.0"
+version = "0.2.0"
 description = "Evaluating and interpreting strategic reasoning in language-model agents under uncertainty."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -19,7 +19,7 @@ keywords = [
     "decision-making",
 ]
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.11",

@@ -645,6 +645,21 @@ def run_multiseed_interpretability_command(
     _print_multiseed_summary(summary)
 
 
+@app.command("run-head-token-interpretability")
+def run_head_token_interpretability_command(
+    config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to a multiseed YAML."),
+) -> None:
+    """Run local per-head and individual-token causal analysis across saved checkpoints."""
+    from mimirbench.interpretability.head_token_analysis import run_head_token_multiseed
+
+    summary = run_head_token_multiseed(config_path)
+    console.print(
+        f"[green]Head/token interpretability complete:[/green] "
+        f"{summary['n_completed']}/{summary['n_attempted']} seeds"
+    )
+    console.print(summary["interpretation"])
+
+
 @app.command("inspect-interpretability")
 def inspect_interpretability_command(
     run_dir: Path = typer.Argument(..., exists=True, file_okay=False, readable=True),

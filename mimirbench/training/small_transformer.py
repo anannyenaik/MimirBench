@@ -26,6 +26,8 @@ __all__ = [
     "HEAD_NAMES",
     "SmallTransformerConfig",
     "SmallTransformerForTracePrediction",
+    "attention_head_site_names",
+    "attn_head_out_site",
     "attn_out_site",
     "interpretability_site_names",
     "mlp_out_site",
@@ -52,6 +54,20 @@ EMBED_SITE = "embed"
 def attn_out_site(layer: int) -> str:
     """Name of the attention sub-block output of ``layer`` (pre-residual-add)."""
     return f"blocks.{layer}.attn_out"
+
+
+def attn_head_out_site(layer: int, head: int) -> str:
+    """Name of one head's projected contribution to an attention sub-block."""
+    return f"blocks.{layer}.attn_heads.{head}.out"
+
+
+def attention_head_site_names(n_layers: int, n_heads: int) -> tuple[str, ...]:
+    """Ordered per-head attention-output patch/capture site names."""
+    return tuple(
+        attn_head_out_site(layer, head)
+        for layer in range(n_layers)
+        for head in range(n_heads)
+    )
 
 
 def mlp_out_site(layer: int) -> str:
@@ -229,7 +245,7 @@ class SmallTransformerForTracePrediction(_TORCH_BASE):  # type: ignore[misc]
         kernels), this path computes each encoder block explicitly so it can:
 
         * return the residual stream after every block and the embedding output;
-        * return per-head attention weights;
+        * return per-head attention weights and projected per-head outputs;
         * optionally *patch* a named activation site with externally supplied
           values (the substrate for activation-patching experiments).
 
@@ -257,17 +273,35 @@ class SmallTransformerForTracePrediction(_TORCH_BASE):  # type: ignore[misc]
         sites: dict[str, Any] = {EMBED_SITE: hidden}
         hidden_states: list[Any] = [hidden]
         attentions: list[Any] = []
+        attention_head_outputs: list[Any] = []
 
         x = hidden
         for layer_index, layer in enumerate(self.encoder.layers):
-            attn_out, attn_weights = layer.self_attn(
-                x,
-                x,
-                x,
-                key_padding_mask=key_padding_mask,
-                need_weights=capture_attention,
-                average_attn_weights=False,
+            attn_input = layer.norm1(x) if layer.norm_first else x
+            head_outputs, attn_weights = _projected_attention_head_outputs(
+                torch_mod,
+                layer.self_attn,
+                attn_input,
+                key_padding_mask,
+                capture_attention=capture_attention,
             )
+            patched_head_outputs: list[Any] = []
+            for head_index in range(self.config.n_heads):
+                site = attn_head_out_site(layer_index, head_index)
+                head_output = _apply_site_patch(
+                    torch_mod,
+                    head_outputs[:, head_index, :, :],
+                    site,
+                    patch,
+                    patch_positions,
+                )
+                sites[site] = head_output
+                patched_head_outputs.append(head_output)
+            stacked_head_outputs = torch_mod.stack(patched_head_outputs, dim=1)
+            attention_head_outputs.append(stacked_head_outputs)
+            attn_out = stacked_head_outputs.sum(dim=1)
+            if layer.self_attn.out_proj.bias is not None:
+                attn_out = attn_out + layer.self_attn.out_proj.bias
             attn_out = _apply_site_patch(
                 torch_mod, attn_out, attn_out_site(layer_index), patch, patch_positions
             )
@@ -305,6 +339,7 @@ class SmallTransformerForTracePrediction(_TORCH_BASE):  # type: ignore[misc]
             "pooled": pooled,
             "hidden_states": tuple(hidden_states),
             "attentions": tuple(attentions),
+            "attention_head_outputs": tuple(attention_head_outputs),
             "sites": sites,
             "attention_mask": attention_mask,
         }
@@ -399,6 +434,47 @@ def _masked_mean(encoded: Any, attention_mask: Any) -> Any:
     summed = (encoded * mask).sum(dim=1)
     counts = mask.sum(dim=1).clamp(min=1.0)
     return summed / counts
+
+
+def _projected_attention_head_outputs(
+    torch_mod: Any,
+    attention: Any,
+    hidden: Any,
+    key_padding_mask: Any,
+    *,
+    capture_attention: bool,
+) -> tuple[Any, Any | None]:
+    """Return each head's projected contribution and optional attention weights."""
+    _, _, functional = require_torch()
+    if attention.in_proj_weight is None:
+        raise ValueError("instrumented attention requires a combined in_proj_weight.")
+    batch_size, seq_len, embed_dim = hidden.shape
+    n_heads = int(attention.num_heads)
+    head_dim = embed_dim // n_heads
+    qkv = functional.linear(hidden, attention.in_proj_weight, attention.in_proj_bias)
+    query, key, value = qkv.chunk(3, dim=-1)
+
+    def split_heads(tensor: Any) -> Any:
+        return tensor.reshape(batch_size, seq_len, n_heads, head_dim).transpose(1, 2)
+
+    query = split_heads(query) * (head_dim**-0.5)
+    key = split_heads(key)
+    value = split_heads(value)
+    scores = torch_mod.matmul(query, key.transpose(-2, -1))
+    scores = scores.masked_fill(key_padding_mask[:, None, None, :], float("-inf"))
+    weights = functional.softmax(scores, dim=-1)
+    if attention.dropout > 0.0:
+        weights = functional.dropout(weights, p=float(attention.dropout), training=attention.training)
+    values = torch_mod.matmul(weights, value)
+
+    projected: list[Any] = []
+    for head in range(n_heads):
+        start = head * head_dim
+        stop = start + head_dim
+        projected.append(
+            functional.linear(values[:, head, :, :], attention.out_proj.weight[:, start:stop])
+        )
+    return torch_mod.stack(projected, dim=1), weights if capture_attention else None
 
 
 def _apply_site_patch(

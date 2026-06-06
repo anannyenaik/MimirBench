@@ -1,37 +1,35 @@
 # MimirBench v0.2.0
 
-**Current stable review target.** This release makes MimirBench's real-model
-evidence honest and inspectable: an official benchmark protocol, statistical
-validity over saved artefacts, deepened local-only interpretability, and
-release/artifact hygiene. **No paid API calls are made by anything in this
-release** — all real-model statistics are computed from saved artefacts.
+**Current stable review target.** This alpha-stage research release makes
+MimirBench's real-model evidence honest and inspectable: an official benchmark
+protocol, statistical validity over saved artefacts, replicated local-only
+interpretability, and release/artifact hygiene. **No paid model API calls are made
+by anything in this release**; all real-model statistics are computed from saved
+artefacts.
 
 ## Highlights
 
 - **Official benchmark protocol** ([BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md)):
-  two tracks — *strict-512* (identical-decoding) and *best-valid* (each provider's
-  documented minimum-valid settings) — plus explicit rules classifying every saved
-  row as clean / protocol-limited / provider-failed / rescue probe / smoke /
-  diagnostic / non-model.
+  strict-512 and best-valid tracks, plus explicit classification of every saved
+  row as clean, protocol-limited, provider-failed, rescue probe, smoke,
+  diagnostic, or non-model.
 - **Statistical validity** ([STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md)):
-  `mimirbench statistical-validity` computes seeded 95% bootstrap CIs (mean score,
-  pass, parse-fail, risk-violation), task-aligned paired deltas, n, and latency from
-  saved `results.jsonl` only, writing
-  `reports/runs/leaderboard/statistical_validity_existing_artifacts.md`. **No model
-  is run.**
-- **Row reclassification**: curated track labels are emitted into
-  [reports/INDEX.md](reports/INDEX.md), so protocol/probe artefacts are never read as
-  capability.
-- **Deepened interpretability** (local-only):
-  `mimirbench run-extended-interpretability` adds position-resolved (token-group)
-  patching, a mismatched-donor negative control, and a label-shuffle probe control
-  on the medium checkpoint.
+  seeded 95% bootstrap CIs and task-aligned paired deltas computed from saved
+  `results.jsonl` only. No model is run.
+- **Six-seed interpretability replication**: independently trained synthetic
+  checkpoints for seeds 123-128 reproduce the attention-sub-block result and its
+  negative controls.
+- **Per-head and individual-token causal analysis**: projected head outputs are
+  patchable and ablatable, and attention-site positions are patched one at a time
+  before semantic aggregation.
 - **Artifact inspectability**: [ARTIFACTS.md](ARTIFACTS.md) and
-  [MODEL_CARD_medium.md](MODEL_CARD_medium.md) document committed vs gitignored
-  artefacts, SHA256 checksums, and exact reproduce commands.
-- **Hygiene fix**: pytest no longer rewrites tracked `reports/model_cards/` files.
+  [MODEL_CARD_medium.md](MODEL_CARD_medium.md) document release assets,
+  gitignored weights, SHA256 checksums, and exact reproduction commands.
 
-## Headline real-model rows (synthetic, 20/env, single seed)
+## Headline real-model rows
+
+These are synthetic, pilot 20-tasks-per-environment rows from saved artefacts.
+They do not establish broad provider superiority.
 
 | Row | Track | Mean (95% CI) |
 | --- | --- | --- |
@@ -40,39 +38,48 @@ release** — all real-model statistics are computed from saved artefacts.
 | Claude Sonnet 4.6 (`max_tokens=1536`) | best-valid clean | 0.8567 [0.8173, 0.8930] |
 | Gemini Pro Preview (`thinking_level=low`) | best-valid clean | 0.8545 [0.8178, 0.8884] |
 
-Protocol-limited rows (gpt-5.5 at default temp/512, Claude Sonnet at 512, Gemini
-Flash default-thinking at 512) are retained as documented findings, not capability
-scores. Full table and paired deltas:
+Full classification and paired deltas:
 [statistical_validity_existing_artifacts.md](reports/runs/leaderboard/statistical_validity_existing_artifacts.md).
 
-## Interpretability result (single seed 123, synthetic model organism)
+## Replicated interpretability result
 
-- Whole-site patching localises the causal evidence→decision signal to the
-  **attention sub-blocks** (layer-0 attention restores the action on 118/122 flipped
-  pairs; layer-0 MLP restores 0/122).
-- Extended controls: matched whole-site patch recovers 0.967 of flipped actions vs
-  0.533 for an unrelated donor; single token-group patches recover ≤2% (the signal
-  is distributed across positions); the action probe scores 1.000 real vs 0.484
-  shuffled. Single-seed only — see
-  [reports/interpretability/interp_bayes_multiseed_summary.md](reports/interpretability/interp_bayes_multiseed_summary.md).
+Seeds **123-128 all completed** on the same narrow synthetic Bayesian/risk model
+organism setup:
+
+- layer-0 attention mean action recovery: **0.964**;
+- layer-0 MLP action recovery: **0.000 on every seed**;
+- layer-1 attention mean action recovery: **0.989**;
+- matched/mismatched donor action recovery: **0.964 / 0.496**;
+- real/shuffled-label action-probe accuracy: **1.000 / 0.471**.
+
+Per-head and individual-position analysis refines rather than overturns that
+result. No head dominates consistently across seeds; the best mean single-head
+action recovery is **0.141**, while the largest mean zero-ablation degradation is
+**0.051 action accuracy** and **0.314 posterior-bucket accuracy**. Individual
+token-position action recovery is effectively zero. The evidence-to-decision
+computation is attention-mediated but distributed across heads and positions; the
+evidence does **not** support a clean circuit claim.
+
+Reports:
+[multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md) and
+[per-head/token summary](reports/interpretability/interp_bayes_head_token_summary.md).
+
+## Convenience release assets
+
+The [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0)
+includes the medium `best.pt` checkpoint and `vocab.json` as convenience assets.
+The `.pt` checkpoint remains gitignored in the repository and is reproducible
+from the committed config.
+
+| Asset | SHA256 |
+| --- | --- |
+| `best.pt` | `3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546` |
+| `vocab.json` | `d7a994c5a616d4326250483528ff0cd06f933b05c41cf7d735f428d64ba2ecfa` |
 
 ## Caveats
 
-- Synthetic deterministic tasks; pilot 20/env, single seed/schedule; pilot CIs only.
-- No trading claim, no broad provider-superiority claim, no statistical-significance
-  claim, no frontier-model interpretability transfer.
-- The medium checkpoint is gitignored; regenerate it deterministically (see
-  [ARTIFACTS.md](ARTIFACTS.md)).
-
-## Creating the release (run by a maintainer)
-
-No GitHub release currently exists. To create v0.2.0 after validation passes:
-
-```bash
-git tag -a v0.2.0 -m "MimirBench v0.2.0"
-git push origin v0.2.0
-gh release create v0.2.0 --title "MimirBench v0.2.0" --notes-file RELEASE_NOTES_v0.2.0.md
-```
-
-Optionally attach the medium checkpoint as a release asset (see ARTIFACTS.md);
-do not commit `.pt` weights to the tree.
+- Synthetic deterministic tasks and a pilot model leaderboard.
+- No trading claim or claim of trading usefulness.
+- No broad provider-superiority claim.
+- No frontier-model interpretability transfer.
+- Per-head patching/ablation is not SAE- or neuron-level analysis.

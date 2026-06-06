@@ -61,8 +61,9 @@ whole point.
 
 The instrumented forward (`SmallTransformerForTracePrediction.forward_instrumented`)
 reproduces the default forward to ~1e-7 at every un-padded position; it exists so
-we can expose the residual stream, per-head attention weights, and clean patch
-sites without disturbing the default training path.
+we can expose the residual stream, per-head attention weights, projected
+per-head outputs, token-position activations, and clean patch sites without
+disturbing the default training path.
 
 ## Linear probes
 
@@ -171,9 +172,10 @@ Read together, the sub-block patching contrast (attention recovers the decision,
 the layer-0 MLP does not) plus the evidence-reading attention is evidence that
 **the attention sub-blocks — layer-0 attention especially — causally carry this
 model's learned evidence-to-decision computation**. This is a positive causal
-result, but a deliberately narrow one: it is full-sequence (not per-token or
-per-head) patching on a single synthetic checkpoint and seed, with mean pooling
-before the heads, no SAE, and no transfer to frontier models.
+result, but a deliberately narrow one. The six-seed per-head and
+individual-position analysis below shows that the result does not localise to a
+single stable head or token position. There is no SAE-level analysis and no
+transfer to frontier models.
 
 ## Extended analysis: position-resolved patching and negative controls
 
@@ -219,6 +221,35 @@ Regenerate with
 `mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml`
 (local-only, CPU, no API calls).
 
+## Per-head and individual-token analysis
+
+`mimirbench/interpretability/head_token_analysis.py`
+
+`mimirbench run-head-token-interpretability configs/interp_bayes_medium_multiseed.yaml`
+uses the saved seed 123–128 checkpoints and runs:
+
+- matched and mismatched-donor patching of one projected attention-head output
+  at a time;
+- zero-ablation of each head, with a random-position ablation control;
+- one-position-at-a-time patching at both attention sub-block outputs, followed
+  only then by semantic token-group aggregation.
+
+All six seeds completed. The result **confirms but refines** the attention
+sub-block story:
+
+- no head is strongest on more than one seed; the best mean single-head action
+  recovery is 0.141;
+- per-head mismatched-donor recovery is lower but still substantial for some
+  heads, so the per-head control does not isolate a clean donor-specific circuit;
+- zero-ablation shows distributed necessity, with the largest mean degradation
+  0.051 action accuracy and 0.314 posterior-bucket accuracy;
+- individual token-position action recovery is effectively zero, confirming that
+  no isolated position explains the whole-site result.
+
+This supports an attention-mediated but distributed computation. It does not
+support a clean circuit claim. Full tables and seed ranges:
+[`reports/interpretability/interp_bayes_head_token_summary.md`](reports/interpretability/interp_bayes_head_token_summary.md).
+
 ## Running it
 
 ```bash
@@ -237,6 +268,9 @@ mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.ya
 # trains any missing per-seed checkpoint, reruns the whole-site + extended
 # pipeline and a held-out eval per seed, and writes an honest mean/range aggregate.
 mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
+
+# Per-head patching/ablation and individual-position patching across saved seeds:
+mimirbench run-head-token-interpretability configs/interp_bayes_medium_multiseed.yaml
 ```
 
 Single-experiment configs also exist: `interp_bayes_probes_tiny.yaml`,
@@ -248,10 +282,13 @@ than failing, and the infrastructure remains fully tested.
 
 - The model is tiny, fully synthetic, and trained on a narrow Bayesian generator;
   mean pooling dilutes individual-token effects.
-- Probe and patching numbers are specific to this checkpoint and seed.
+- The worked seed-123 numbers are checkpoint-specific; the headline
+  interpretability claims are aggregated across seeds 123–128.
 - Near-zero and negative results are expected for an underpowered model organism
   and are reported without spin.
 - Sparse autoencoders remain optional future work (`sae_features.py` is a config
   scaffold only).
+- Per-head patching and ablation do not isolate neurons or SAE features; zero
+  ablation can also move activations off distribution.
 - These experiments characterise one small model. They are not evidence about
   frontier-model internals.

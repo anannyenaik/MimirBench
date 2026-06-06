@@ -141,6 +141,14 @@ Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-tr
 
 Interpretability runs analyse a small synthetic Bayesian transformer. Probe accuracy is decodability, not causation; no frontier-model claim is made.
 
+Curated aggregate reports:
+
+- [`interpretability/interp_bayes_multiseed_summary.md`](interpretability/interp_bayes_multiseed_summary.md)
+  - six-seed whole-site/token-group replication and negative controls.
+- [`interpretability/interp_bayes_head_token_summary.md`](interpretability/interp_bayes_head_token_summary.md)
+  - six-seed per-head patching, per-head ablation, and individual token-position
+    patching. No consistently dominant head or position was found.
+
 ## Model cards
 
 - [`model_cards/mock_bayes_mock_random_valid__mock_random_valid.md`](model_cards/mock_bayes_mock_random_valid__mock_random_valid.md)

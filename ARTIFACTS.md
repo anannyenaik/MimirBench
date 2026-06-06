@@ -22,6 +22,8 @@ are regenerated from configs + seeds**, because they are deterministic.
   `reports/interpretability/interp_bayes_all_medium_seed_*/` and `..._extended_seed_*/`,
   the aggregate
   [`interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md)
+  (+ `.json`), the per-head/individual-token aggregate
+  [`interp_bayes_head_token_summary.md`](reports/interpretability/interp_bayes_head_token_summary.md)
   (+ `.json`), and per-seed checkpoint SHA256s
   (`reports/interpretability/interp_bayes_multiseed/checkpoints_sha256.txt`).
 - **Model cards** under `reports/model_cards/` (auto-generated for real runs) and
@@ -45,6 +47,32 @@ Per [.gitignore](.gitignore):
 This means the medium checkpoint exists locally but is **not in git**. The training
 is deterministic (fixed seed, dropout 0, CPU), so anyone can regenerate a
 bit-identical checkpoint from the committed config.
+
+## Convenience release assets
+
+The [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0)
+includes the medium `best.pt` checkpoint and `vocab.json` as downloadable
+convenience assets. The release asset does not change repository policy:
+checkpoints remain gitignored and the checkpoint is reproducible from the
+committed config.
+
+Download and verify them exactly:
+
+```powershell
+gh release download v0.2.0 --pattern best.pt --pattern vocab.json --dir release-assets\v0.2.0
+Get-FileHash release-assets\v0.2.0\best.pt -Algorithm SHA256
+Get-FileHash release-assets\v0.2.0\vocab.json -Algorithm SHA256
+```
+
+```bash
+gh release download v0.2.0 --pattern best.pt --pattern vocab.json --dir release-assets/v0.2.0
+sha256sum release-assets/v0.2.0/best.pt release-assets/v0.2.0/vocab.json
+```
+
+Expected SHA256 values:
+
+- `best.pt`: `3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546`
+- `vocab.json`: `d7a994c5a616d4326250483528ff0cd06f933b05c41cf7d735f428d64ba2ecfa`
 
 ## Regenerating the medium checkpoint
 
@@ -92,6 +120,7 @@ mimirbench run-extended-interpretability   configs/interp_bayes_medium_extended.
 # the whole-site + extended pipeline and a held-out eval per seed, writes the
 # aggregate interp_bayes_multiseed_summary.json):
 mimirbench run-multiseed-interpretability  configs/interp_bayes_medium_multiseed.yaml
+mimirbench run-head-token-interpretability configs/interp_bayes_medium_multiseed.yaml
 ```
 
 The extended command runs position-resolved patching and negative controls; it is
@@ -105,18 +134,3 @@ commands write a `status="pending"` report rather than failing.
 - Binary weights do not diff or review well.
 - The curated metrics, figures, and model card capture everything a reader needs;
   the weights can be regenerated on demand.
-
-## Attaching a checkpoint as a release asset (optional, later)
-
-If a fixed binary is wanted for convenience, attach it to a GitHub release rather
-than committing it to the tree:
-
-```bash
-# After creating the v0.2.0 release (see RELEASE_NOTES_v0.2.0.md):
-gh release upload v0.2.0 \
-  reports/training/small_transformer_bayes_medium/checkpoints/best.pt \
-  reports/training/small_transformer_bayes_medium/vocab.json
-```
-
-No release URLs are invented here; create the release first, then upload. Record the
-asset's SHA256 alongside the ones above when you do.

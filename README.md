@@ -5,7 +5,7 @@
 [![CI](https://github.com/anannyenaik/MimirBench/actions/workflows/ci.yml/badge.svg)](https://github.com/anannyenaik/MimirBench/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-pre--alpha-orange)
+![Status](https://img.shields.io/badge/status-research--alpha-orange)
 
 MimirBench is a reproducible evaluation harness for agents that must update
 beliefs, estimate expected value, and respect constraints under uncertainty. It
@@ -16,6 +16,9 @@ writers, and honest reports.
 > **Current stable review target: v0.2.0.** This is a synthetic-evals /
 > research-engineering project, not a trading system. All real-model statistics are
 > computed from saved artefacts; see [RELEASE_NOTES_v0.2.0.md](RELEASE_NOTES_v0.2.0.md).
+> The medium `best.pt` checkpoint and `vocab.json` are available as convenience
+> assets on the [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0);
+> `.pt` files remain gitignored in the repository.
 
 **Documentation map:**
 [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md) ·
@@ -197,7 +200,7 @@ use answers must be labelled as reference or mock baselines, never model runs.
 
 ## Current Status
 
-MimirBench is pre-alpha, with deterministic synthetic environments, real-model
+MimirBench is a research-alpha project, with deterministic synthetic environments, real-model
 provider integrations, preliminary hosted-model artefacts, and a small synthetic
 transformer/interp track now checked in:
 
@@ -248,10 +251,11 @@ transformer/interp track now checked in:
 - Main model comparisons use a single seed/schedule. The interpretability result
   is **replicated across six independently trained synthetic checkpoints (seeds
   123–128)** ([multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md));
-  whole-site patching is complemented by position-resolved (token-group) patching
-  and negative controls
-  ([extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md)).
-  There is still no per-head or SAE-level circuit analysis.
+  whole-site patching is complemented by per-head patching/ablation, individual
+  token-position patching, and negative controls
+  ([head/token summary](reports/interpretability/interp_bayes_head_token_summary.md)).
+  No single head or token position dominates consistently across seeds; there is
+  still no SAE-level circuit analysis.
 - Small-model interpretability findings do not transfer to frontier-model
   internals.
 - This is not a trading bot, live trading system, market-beating claim, trading-
@@ -288,7 +292,8 @@ to frontier models.
 - [Gemini robustness comparison](reports/runs/leaderboard/gemini_strongest_robustness_comparison.md)
 - Interpretability: [INTERPRETABILITY.md](INTERPRETABILITY.md), the
   [extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md),
-  and the [multi-seed status](reports/interpretability/interp_bayes_multiseed_summary.md)
+  the [multi-seed status](reports/interpretability/interp_bayes_multiseed_summary.md),
+  and the [per-head/token summary](reports/interpretability/interp_bayes_head_token_summary.md)
 - Artifacts & reproduction: [ARTIFACTS.md](ARTIFACTS.md),
   [MODEL_CARD_medium.md](MODEL_CARD_medium.md), [TRAINING.md](TRAINING.md)
 

@@ -78,6 +78,10 @@ accuracy 1.000, posterior-bucket accuracy 0.9935, confidence 0.998, EV 0.9985.
   position-resolved extensions in
   [`reports/interpretability/interp_bayes_medium_extended/`](reports/interpretability/interp_bayes_medium_extended/).
 - A CPU-friendly checkpoint for reproducing the narrow causal patching result.
+- A convenience copy of `best.pt` and its `vocab.json` is attached to the
+  [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0).
+  The release asset is optional: the checkpoint remains reproducible from the
+  committed training config.
 
 ## Limitations
 
@@ -87,19 +91,21 @@ accuracy 1.000, posterior-bucket accuracy 0.9935, confidence 0.998, EV 0.9985.
   [`reports/interpretability/interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md).
   It remains one narrow synthetic Bayesian/risk generator.
 - The encoder mean-pools before the heads, so whole-site patching localises at the
-  sub-block level; position-resolved (token-group) patching shows the
-  evidence→decision signal is **distributed across positions**, not isolated to the
-  evidence tokens.
+  sub-block level. Per-head patching/ablation and individual-position patching
+  refine the result: no head dominates consistently across seeds, and isolated
+  token-position patches have effectively zero action recovery. See
+  [`interp_bayes_head_token_summary.md`](reports/interpretability/interp_bayes_head_token_summary.md).
 - Strong held-out metrics show the model learned the generator, not open-ended or
   real-world strategic reasoning.
 - No hidden chain-of-thought; all labels are deterministic outputs of public task
   data.
 - **Nothing here transfers to frontier-model internals.**
 
-## Checksums (locally generated; checkpoint not committed)
+## Checksums (release assets and locally generated copy; checkpoint not committed)
 
 `.pt` files are gitignored (see [ARTIFACTS.md](ARTIFACTS.md)); these SHA256 hashes
-record the locally generated artefacts.
+record the locally generated artefacts. The v0.2.0 release assets for `best.pt`
+and `vocab.json` have the same hashes.
 
 | File | SHA256 | Bytes |
 | --- | --- | ---: |
@@ -118,4 +124,5 @@ mimirbench train-small-transformer configs/train_small_transformer_bayes_medium.
 mimirbench eval-small-transformer  configs/eval_small_transformer_bayes_medium.yaml
 mimirbench run-interpretability          configs/interp_bayes_all_medium.yaml
 mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml
+mimirbench run-head-token-interpretability configs/interp_bayes_medium_multiseed.yaml
 ```

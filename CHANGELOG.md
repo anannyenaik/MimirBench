@@ -12,26 +12,9 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Natural-language task generators for `market_making`, `prediction_markets`, and
   `adversarial_risk`.
 
-### Added — multi-seed interpretability replication (local-only, no API calls)
-- **`mimirbench run-multiseed-interpretability`** + `configs/interp_bayes_medium_multiseed.yaml`
-  — trains per-seed medium checkpoints, reruns whole-site + extended interpretability
-  and a held-out evaluation per seed, and writes an honest mean/range aggregate with a
-  per-seed replication verdict (`mimirbench/interpretability/multiseed.py`).
-- **Six-seed replication (seeds 123–128).** The medium-model causal result now
-  replicates across six independently trained synthetic checkpoints: layer-0 MLP
-  action recovery is 0.000 on every seed while layer-0/1 attention recovery is
-  0.96/0.99 (mean); single token-group recovery ≤2.6%; the mismatched-donor action
-  gap is 0.96 (matched) vs 0.50 (mismatched); the label-shuffle probe is 1.000 on
-  real vs ≤baseline on shuffled labels. Held-out test action accuracy 1.000 and
-  posterior 0.991 (mean) across the six checkpoints. Aggregate:
-  `reports/interpretability/interp_bayes_multiseed_summary.md` (and `.json`).
-- Heavy per-seed artefacts (traces, activation dumps, eval rows) are gitignored; the
-  per-seed summaries, patching summaries, reports, figures, and checkpoint SHA256s
-  are kept.
-
 ## [0.2.0] — 2026-06-06
 
-The review target for the public repository. Adds real-model provider artefacts,
+The alpha-stage stable review target for the public repository. Adds real-model provider artefacts,
 robustness probes, the medium transformer model organism and its interpretability
 result, and — new in this release — an official benchmark protocol, statistical
 validity over saved artefacts, deepened (position-resolved) interpretability, and
@@ -58,15 +41,27 @@ real-model statistics are computed from saved artefacts.**
   unrelated donor; single token-group patches recover ≤2%, showing the
   evidence→decision signal is distributed across positions; the action probe scores
   1.000 on real vs 0.484 on shuffled labels.
-- Artefacts: `reports/interpretability/interp_bayes_medium_extended/` and
-  `reports/interpretability/interp_bayes_multiseed_summary.md` (single-seed; rest
-  reproducibility-ready, not executed).
+- **Six-seed replication (seeds 123–128).** Layer-0 MLP action recovery is 0.000
+  on every seed while layer-0/1 attention recovery is 0.964/0.989 (mean);
+  matched/mismatched donor action recovery is 0.964/0.496; the real/shuffled
+  action probe is 1.000/0.471.
+- **Per-head and individual-token analysis.** Projected per-head outputs are now
+  patchable and ablatable. Across six seeds, no head dominates consistently; the
+  best mean single-head action recovery is 0.141, the largest mean zero-ablation
+  degradation is 0.051 action accuracy / 0.314 posterior accuracy, and
+  individual-position action recovery is effectively zero.
+- Artefacts: `reports/interpretability/interp_bayes_medium_extended/`,
+  `reports/interpretability/interp_bayes_multiseed_summary.md`, and
+  `reports/interpretability/interp_bayes_head_token_summary.md` (plus JSON).
 
 ### Added — artifact inspectability and release hygiene
 - **`ARTIFACTS.md`** and curated **`MODEL_CARD_medium.md`** — what is committed vs
   gitignored, SHA256 checksums for the medium checkpoint, and exact reproduce
   commands.
 - **`RELEASE_NOTES_v0.2.0.md`** and this `[0.2.0]` entry.
+- Package metadata bumped to `0.2.0` with Alpha development status.
+- The medium `best.pt` checkpoint and `vocab.json` are attached to the v0.2.0
+  GitHub release as convenience assets while `.pt` files remain gitignored.
 
 ### Fixed
 - pytest no longer rewrites tracked `reports/model_cards/` files with
@@ -125,10 +120,6 @@ Initial repository foundation. No benchmark results are claimed.
 - **Tooling** — `pyproject.toml` (hatchling), ruff, mypy, pytest, pre-commit, and a
   GitHub Actions CI workflow (ruff + mypy + pytest).
 - **Docs** — README, DESIGN, EVALS, INTERPRETABILITY, RESULTS, CONTRIBUTING.
-
-Release tags/links below are placeholders until the tags are actually created
-(see `RELEASE_NOTES_v0.2.0.md` for the exact `git tag` / `gh release` commands).
-No release currently exists on GitHub.
 
 [Unreleased]: https://github.com/anannyenaik/MimirBench/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0
