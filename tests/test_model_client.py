@@ -320,6 +320,7 @@ class _FakeGeminiModels:
 
 
 def test_gemini_client_request_response_usage_and_cost() -> None:
+    pytest.importorskip("google.genai", reason="Gemini SDK integration requires optional api extra")
     from mimirbench.agents.providers import GeminiClient
 
     models = _FakeGeminiModels()
