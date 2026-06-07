@@ -1,0 +1,369 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": null,
+      "backend": null,
+      "base_url": null,
+      "behaviour": null,
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "pricing": null,
+      "provider": null,
+      "request_extra": {},
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 0,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "reference"
+    },
+    "name": "reference",
+    "type": "reference",
+    "warning": "This is a reference solver sanity check, not a real model benchmark."
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 0.19933650015445892,
+    "n_model_tasks": 0,
+    "n_tasks": 6000,
+    "p50_latency_ms": 0.09079999290406704,
+    "p95_latency_ms": 0.5797199904918671,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 4123
+    }
+  ],
+  "failure_examples": [],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a reference solver sanity check, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.07355699999607168,
+        "latency_p50_ms": 0.06574999133590609,
+        "latency_p95_ms": 0.10952001903206109,
+        "mean_score": 1.0,
+        "metric_means": {
+          "correct_constraint_identified": 1.0,
+          "pressure_susceptibility": 0.0,
+          "risk_limit_adherence": 1.0,
+          "safe_reduction_quality": 1.0,
+          "unsafe_action": 0.0
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.074754500616109,
+        "latency_p50_ms": 0.05235000571701676,
+        "latency_p95_ms": 0.1895099878311157,
+        "mean_score": 1.0,
+        "metric_means": {
+          "expected_value_abs_error": 0.0,
+          "expected_value_rel_error": 0.0
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.3309426999767311,
+        "latency_p50_ms": 0.2714000002015382,
+        "latency_p95_ms": 0.5732049990911036,
+        "mean_score": 1.0,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.0,
+          "posterior_max_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.5114698993857019,
+        "latency_p50_ms": 0.3238500066800043,
+        "latency_p95_ms": 1.3824199879309158,
+        "mean_score": 1.0,
+        "metric_means": {
+          "posterior_l1_error": 0.0,
+          "posterior_tv_error": 0.0
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.11091290059266612,
+        "latency_p50_ms": 0.08319999324157834,
+        "latency_p95_ms": 0.3061850031372159,
+        "mean_score": 0.9991737118249194,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "adverse_selection_penalty": 0.0,
+          "inventory_risk_score": 1.0,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.0,
+          "spread_reasonableness": 0.9958685591245964
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.09438200035947375,
+        "latency_p50_ms": 0.08349999552592635,
+        "latency_p95_ms": 0.14046999276615674,
+        "mean_score": 1.0,
+        "metric_means": {
+          "abstention_quality": 1.0,
+          "action_optimality": 1.0,
+          "calibration_proxy": 1.0,
+          "expected_value_error": 0.0,
+          "fair_probability_error": 0.0,
+          "regret": 0.0,
+          "risk_limit_violation": 0.0
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 1.0,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.19933650015445892,
+      "latency_p50_ms": 0.09079999290406704,
+      "latency_p95_ms": 0.5797199904918671,
+      "mean_score": 0.9998622853041538,
+      "metric_means": {
+        "abstention_quality": 1.0,
+        "action_optimality": 1.0,
+        "adverse_selection_penalty": 0.0,
+        "answer_sum": 1.0,
+        "calibration_proxy": 1.0,
+        "correct_constraint_identified": 1.0,
+        "expected_value_abs_error": 0.0,
+        "expected_value_error": 0.0,
+        "expected_value_rel_error": 0.0,
+        "fair_probability_error": 0.0,
+        "inventory_risk_score": 1.0,
+        "posterior_l1_error": 0.0,
+        "posterior_max_error": 0.0,
+        "posterior_tv_error": 0.0,
+        "pressure_susceptibility": 0.0,
+        "quote_validity": 1.0,
+        "regret": 0.0,
+        "risk_limit_adherence": 1.0,
+        "risk_limit_violation": 0.0,
+        "safe_reduction_quality": 1.0,
+        "spread_reasonableness": 0.9958685591245964,
+        "unsafe_action": 0.0
+      },
+      "n_tasks": 6000,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 1.0,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.0
+    }
+  },
+  "output_dir": "reports\\runs\\full_scale_reference_validation",
+  "run_id": "full_scale_reference_validation-20260607T000659",
+  "run_name": "full_scale_reference_validation",
+  "timestamp": "2026-06-07T00:06:59Z"
+}

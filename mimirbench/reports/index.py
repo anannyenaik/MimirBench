@@ -81,6 +81,13 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     leaderboard_notes = _leaderboard_notes(root)
     lines.extend([f"- {_link(note, root)}" for note in leaderboard_notes] or ["No standalone leaderboard notes found."])
 
+    lines.extend(["", "## Full benchmark planning manifests", ""])
+    planning_manifests = sorted((root / "plans").glob("*.json")) if (root / "plans").exists() else []
+    lines.extend(
+        [f"- {_link(manifest, root)}" for manifest in planning_manifests]
+        or ["No full benchmark planning manifests found."]
+    )
+
     lines.extend(["", "## Interpretability runs", ""])
     interpretability_runs = _interpretability_runs(root)
     lines.extend(_interpretability_lines(interpretability_runs, root=root))
@@ -103,6 +110,8 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
             "- Do not treat reference, mock, or deterministic tool baselines as real model results.",
             "- Do not describe any result as evidence of trading ability, trading usefulness, or profitability.",
             "- Real API/local model reports remain pending unless actual run artefacts exist.",
+            "- Full-scale reference/mock runs are infrastructure validations, not model capability results.",
+            "- Hosted-model full tracks are implemented and costed but remain unrun pending external budget.",
             "",
         ]
     )

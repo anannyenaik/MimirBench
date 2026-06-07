@@ -10,6 +10,13 @@ results. Nothing here is a trading claim, a broad provider-superiority claim, or
 statistical-significance claim. See [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md)
 for bootstrap CIs over these same saved artefacts.
 
+The funded larger-scale protocol is defined in
+[FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md). Full track A
+(100/environment x 3 seeds) and full track B (200/environment x 5 seeds) are
+implemented, costed, and reproducibility-ready, but no full hosted-model run has
+been made because external API budget is not available. Larger hosted-model rows
+are intentionally not simulated.
+
 ## Two official tracks
 
 ### A. Strict-512 track
@@ -110,3 +117,5 @@ Both commands read saved artefacts only; neither makes any API call.
 - Cross-track comparisons are not identical-decoding.
 - No broad provider- or model-superiority claim; no trading-usefulness claim.
 - No hidden chain-of-thought is collected; all grading is deterministic.
+- Existing hosted-model rows remain pilot rows even though the full-scale
+  protocol is now implemented.

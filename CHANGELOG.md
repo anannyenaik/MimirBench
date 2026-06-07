@@ -6,6 +6,24 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- **Full hosted-model benchmark protocol package:** strict-512 and best-valid
+  configs for 100 tasks/environment x 3 seeds and 200 tasks/environment x 5
+  seeds, plus exact inclusion/exclusion rules in `FULL_BENCHMARK_PROTOCOL.md`.
+- **No-execute full benchmark planner:** `mimirbench plan-full-benchmark` writes
+  call, token, configured-pricing cost, artefact-path, and exact-run-command
+  manifests under `reports/plans/` without checking or calling providers.
+- **Pilot-variance power planning:** `mimirbench power-plan-full-benchmark`
+  estimates approximate CI widths from saved pilot artefacts only.
+- **Free full-scale infrastructure validation:** reference and deterministic mock
+  controls each completed 6,000 tasks (200/environment x 5 seeds x 6
+  environments) with no hosted/API calls. These are not capability results.
+
+### Changed
+- Public docs now state explicitly that all hosted-model results remain
+  pilot-scale and that funded full hosted-model runs are implemented but unrun;
+  larger hosted-model rows are not simulated or fabricated.
+
 ### Planned
 - Stage 9: a paper-style report consolidating evals, robustness, training, and
   interpretability with polished figures, tables, and limitations.

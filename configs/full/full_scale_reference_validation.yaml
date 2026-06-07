@@ -1,0 +1,40 @@
+# Free infrastructure validation only. This is not a model-capability result.
+run:
+  name: full_scale_reference_validation
+  seed: 123
+  output_dir: reports/runs/full_scale_reference_validation
+  cache: true
+  max_workers: 1
+agent: {type: reference}
+environments:
+  - {name: bayesian_games, num_tasks: 200, seed: 123}
+  - {name: auctions, num_tasks: 200, seed: 123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 123}
+  - {name: market_making, num_tasks: 200, seed: 123}
+  - {name: prediction_markets, num_tasks: 200, seed: 123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 123}
+  - {name: bayesian_games, num_tasks: 200, seed: 1123}
+  - {name: auctions, num_tasks: 200, seed: 1123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 1123}
+  - {name: market_making, num_tasks: 200, seed: 1123}
+  - {name: prediction_markets, num_tasks: 200, seed: 1123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 1123}
+  - {name: bayesian_games, num_tasks: 200, seed: 2123}
+  - {name: auctions, num_tasks: 200, seed: 2123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 2123}
+  - {name: market_making, num_tasks: 200, seed: 2123}
+  - {name: prediction_markets, num_tasks: 200, seed: 2123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 2123}
+  - {name: bayesian_games, num_tasks: 200, seed: 3123}
+  - {name: auctions, num_tasks: 200, seed: 3123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 3123}
+  - {name: market_making, num_tasks: 200, seed: 3123}
+  - {name: prediction_markets, num_tasks: 200, seed: 3123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 3123}
+  - {name: bayesian_games, num_tasks: 200, seed: 4123}
+  - {name: auctions, num_tasks: 200, seed: 4123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 4123}
+  - {name: market_making, num_tasks: 200, seed: 4123}
+  - {name: prediction_markets, num_tasks: 200, seed: 4123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 4123}
+reporting: {write_jsonl: true, write_summary: true, write_markdown: true}

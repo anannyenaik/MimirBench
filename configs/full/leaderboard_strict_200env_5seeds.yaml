@@ -1,0 +1,96 @@
+# Planned full track B, strict-512 hosted-model leaderboard.
+# This file makes paid calls only when explicitly passed to run-leaderboard with
+# --allow-real-models. It is never run by tests. Status: implemented, not run.
+run:
+  name: leaderboard_strict_200env_5seeds
+  seed: 123
+  output_dir: reports/runs/leaderboard/leaderboard_strict_200env_5seeds
+  cache: true
+  max_workers: 1
+protocol:
+  track: strict-512
+  scale: full-b
+  tasks_per_environment: 200
+  task_seeds: [123, 1123, 2123, 3123, 4123]
+  execution_status: planned_not_run
+models:
+  - name: openai_gpt_4_1_mini_strict_full
+    provider: openai
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing: {input_usd_per_1m: 0.40, output_usd_per_1m: 1.60}
+  - name: openai_gpt_5_4_mini_strict_full
+    provider: openai
+    model: gpt-5.4-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing: {input_usd_per_1m: 0.75, output_usd_per_1m: 4.50}
+  - name: openai_gpt_5_4_strict_full
+    provider: openai
+    model: gpt-5.4
+    api_key_env: OPENAI_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing: {input_usd_per_1m: 2.50, output_usd_per_1m: 15.00}
+  - name: anthropic_claude_haiku_4_5_strict_full
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+    api_key_env: ANTHROPIC_API_KEY
+    temperature: 0
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing: {input_usd_per_1m: 1.00, output_usd_per_1m: 5.00}
+  - name: gemini_3_1_flash_lite_strict_full
+    provider: gemini
+    model: gemini-3.1-flash-lite
+    api_key_env: GEMINI_API_KEY
+    temperature: 1
+    request_extra: {use_default_temperature: true}
+    max_tokens: 512
+    max_retries: 3
+    timeout_seconds: 60
+    pricing: {input_usd_per_1m: 0.25, output_usd_per_1m: 1.50}
+agents: [direct]
+environments:
+  - {name: bayesian_games, num_tasks: 200, seed: 123}
+  - {name: auctions, num_tasks: 200, seed: 123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 123}
+  - {name: market_making, num_tasks: 200, seed: 123}
+  - {name: prediction_markets, num_tasks: 200, seed: 123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 123}
+  - {name: bayesian_games, num_tasks: 200, seed: 1123}
+  - {name: auctions, num_tasks: 200, seed: 1123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 1123}
+  - {name: market_making, num_tasks: 200, seed: 1123}
+  - {name: prediction_markets, num_tasks: 200, seed: 1123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 1123}
+  - {name: bayesian_games, num_tasks: 200, seed: 2123}
+  - {name: auctions, num_tasks: 200, seed: 2123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 2123}
+  - {name: market_making, num_tasks: 200, seed: 2123}
+  - {name: prediction_markets, num_tasks: 200, seed: 2123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 2123}
+  - {name: bayesian_games, num_tasks: 200, seed: 3123}
+  - {name: auctions, num_tasks: 200, seed: 3123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 3123}
+  - {name: market_making, num_tasks: 200, seed: 3123}
+  - {name: prediction_markets, num_tasks: 200, seed: 3123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 3123}
+  - {name: bayesian_games, num_tasks: 200, seed: 4123}
+  - {name: auctions, num_tasks: 200, seed: 4123}
+  - {name: hidden_regimes, num_tasks: 200, seed: 4123}
+  - {name: market_making, num_tasks: 200, seed: 4123}
+  - {name: prediction_markets, num_tasks: 200, seed: 4123}
+  - {name: adversarial_risk, num_tasks: 200, seed: 4123}
+robustness: {enabled: false}
+reporting: {write_jsonl: true, write_summary: true, write_markdown: true}

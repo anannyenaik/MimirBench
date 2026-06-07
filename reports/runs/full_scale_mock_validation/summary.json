@@ -1,0 +1,410 @@
+{
+  "agent": {
+    "config": {
+      "action_error_rate": 0.0,
+      "allowed_tools": null,
+      "api_key_env": null,
+      "backend": null,
+      "base_url": null,
+      "behaviour": "random_valid",
+      "checkpoint_path": null,
+      "confidence_bias": 0.0,
+      "device": null,
+      "do_sample": null,
+      "max_new_tokens": 512,
+      "max_retries": 3,
+      "max_steps": 6,
+      "max_tokens": 1024,
+      "model": null,
+      "model_name": null,
+      "name": null,
+      "posterior_noise": 0.0,
+      "pricing": null,
+      "provider": null,
+      "request_extra": {},
+      "require_tool_first": false,
+      "risk_violation_rate": 0.0,
+      "seed": 123,
+      "system_prompt": null,
+      "temperature": 0.0,
+      "timeout_seconds": 60.0,
+      "tool_max_steps": 3,
+      "tool_policy": "reference",
+      "top_p": null,
+      "type": "mock"
+    },
+    "name": "mock::random_valid",
+    "type": "mock",
+    "warning": "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  },
+  "cost_latency": {
+    "cost_estimated": false,
+    "cost_note": "not estimated (no per-task cost available; configure 'pricing' to estimate)",
+    "estimated_total_cost_usd": null,
+    "invalid_response_rate": 0.0,
+    "mean_latency_ms": 0.09243063323083334,
+    "n_model_tasks": 0,
+    "n_tasks": 6000,
+    "p50_latency_ms": 0.07110001752153039,
+    "p95_latency_ms": 0.23691999958828097,
+    "parse_failure_rate": 0.0,
+    "provider_error_rate": 0.0,
+    "timeout_rate": 0.0,
+    "total_input_tokens": null,
+    "total_output_tokens": null,
+    "total_tokens": null
+  },
+  "environments": [
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 1123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 2123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 3123
+    },
+    {
+      "name": "bayesian_games",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "auctions",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "hidden_regimes",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "market_making",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "prediction_markets",
+      "num_tasks": 200,
+      "seed": 4123
+    },
+    {
+      "name": "adversarial_risk",
+      "num_tasks": 200,
+      "seed": 4123
+    }
+  ],
+  "failure_examples": [
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.822405885350871, 0.177594114649129], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.8639133352756547,
+      "task_id": "bayesian_games-123",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.14438348407161292, 0.4535985193585016, 0.17502497753831325, 0.22699301903157224], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.688103444445888,
+      "task_id": "bayesian_games-124",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.15403395917675972, 0.2808780893694978, 0.5650879514537425], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.5178401394309029,
+      "task_id": "bayesian_games-125",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.38896950401519204, 0.611030495984808], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.7822535175675418,
+      "task_id": "bayesian_games-126",
+      "violations": []
+    },
+    {
+      "environment": "bayesian_games",
+      "error": null,
+      "response_excerpt": "{\"posterior\": [0.39371429006782, 0.11626577686785805, 0.49001993306432196], \"reasoning_summary\": \"Deterministic random valid mock answer; not a model output.\"}",
+      "score": 0.8116696045231379,
+      "task_id": "bayesian_games-127",
+      "violations": []
+    }
+  ],
+  "known_limitations": [
+    "Scores are meaningful only for the environments and graders actually run.",
+    "No hidden chain-of-thought is collected; model output stores concise summaries only.",
+    "This is a deterministic mock or diagnostic baseline, not a real model benchmark."
+  ],
+  "metrics": {
+    "environments": {
+      "adversarial_risk": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.07627899979706854,
+        "latency_p50_ms": 0.06924998888280243,
+        "latency_p95_ms": 0.10876501182792703,
+        "mean_score": 0.3897573439620363,
+        "metric_means": {
+          "correct_constraint_identified": 0.4085,
+          "pressure_susceptibility": 0.526650000000005,
+          "risk_limit_adherence": 0.31774999999999953,
+          "safe_reduction_quality": 0.5451867198101651,
+          "unsafe_action": 0.345
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.112,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.759
+      },
+      "auctions": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.07371879962738603,
+        "latency_p50_ms": 0.06195000605657697,
+        "latency_p95_ms": 0.12533499393612144,
+        "mean_score": 0.08460486239435339,
+        "metric_means": {
+          "expected_value_abs_error": 16.465609455891506,
+          "expected_value_rel_error": 2091.9811948246224
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.004,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "bayesian_games": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.08196150008006953,
+        "latency_p50_ms": 0.06960000609979033,
+        "latency_p95_ms": 0.13130998122505844,
+        "mean_score": 0.6649273753397568,
+        "metric_means": {
+          "answer_sum": 1.0,
+          "posterior_l1_error": 0.6701452493204876,
+          "posterior_max_error": 0.3208452586152442,
+          "posterior_tv_error": 0.3350726246602438
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.036,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "hidden_regimes": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.13658920035231858,
+        "latency_p50_ms": 0.08604998583905399,
+        "latency_p95_ms": 0.32526000286452467,
+        "mean_score": 0.71792987847664,
+        "metric_means": {
+          "posterior_l1_error": 0.5641402430467187,
+          "posterior_tv_error": 0.28207012152335936
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.063,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.0
+      },
+      "market_making": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.10578339992207475,
+        "latency_p50_ms": 0.07239999831654131,
+        "latency_p95_ms": 0.31672999466536544,
+        "mean_score": 0.6216812462430998,
+        "metric_means": {
+          "abstention_quality": 0.8203499999999986,
+          "adverse_selection_penalty": 0.056600758416737076,
+          "inventory_risk_score": 0.6639499999999994,
+          "quote_validity": 1.0,
+          "risk_limit_violation": 0.243,
+          "spread_reasonableness": 0.7066295680627362
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.62,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.243
+      },
+      "prediction_markets": {
+        "invalid_response_rate": 0.0,
+        "latency_mean_ms": 0.08025189960608259,
+        "latency_p50_ms": 0.07300000288523734,
+        "latency_p95_ms": 0.11200500739505515,
+        "mean_score": 0.25148254425969646,
+        "metric_means": {
+          "abstention_quality": 0.6607000000000034,
+          "action_optimality": 0.15283428170358168,
+          "calibration_proxy": 0.6524604000000004,
+          "expected_value_error": 0.28296543799999957,
+          "fair_probability_error": 0.316145048,
+          "regret": 1.876694190559268,
+          "risk_limit_violation": 0.08
+        },
+        "n_tasks": 1000,
+        "parse_failure_rate": 0.0,
+        "pass_rate": 0.006,
+        "runtime_error_rate": 0.0,
+        "violation_rate": 0.08
+      }
+    },
+    "overall": {
+      "invalid_response_rate": 0.0,
+      "latency_mean_ms": 0.09243063323083334,
+      "latency_p50_ms": 0.07110001752153039,
+      "latency_p95_ms": 0.23691999958828097,
+      "mean_score": 0.4550638751125975,
+      "metric_means": {
+        "abstention_quality": 0.7405249999999962,
+        "action_optimality": 0.15283428170358168,
+        "adverse_selection_penalty": 0.056600758416737076,
+        "answer_sum": 1.0,
+        "calibration_proxy": 0.6524604000000004,
+        "correct_constraint_identified": 0.4085,
+        "expected_value_abs_error": 16.465609455891506,
+        "expected_value_error": 0.28296543799999957,
+        "expected_value_rel_error": 2091.9811948246224,
+        "fair_probability_error": 0.316145048,
+        "inventory_risk_score": 0.6639499999999994,
+        "posterior_l1_error": 0.6171427461836034,
+        "posterior_max_error": 0.3208452586152442,
+        "posterior_tv_error": 0.3085713730918017,
+        "pressure_susceptibility": 0.526650000000005,
+        "quote_validity": 1.0,
+        "regret": 1.876694190559268,
+        "risk_limit_adherence": 0.31774999999999953,
+        "risk_limit_violation": 0.1615,
+        "safe_reduction_quality": 0.5451867198101651,
+        "spread_reasonableness": 0.7066295680627362,
+        "unsafe_action": 0.345
+      },
+      "n_tasks": 6000,
+      "parse_failure_rate": 0.0,
+      "pass_rate": 0.14016666666666666,
+      "runtime_error_rate": 0.0,
+      "violation_rate": 0.18033333333333335
+    }
+  },
+  "output_dir": "reports\\runs\\full_scale_mock_validation",
+  "run_id": "full_scale_mock_validation-20260607T000659",
+  "run_name": "full_scale_mock_validation",
+  "timestamp": "2026-06-07T00:06:59Z"
+}

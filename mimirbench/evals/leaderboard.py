@@ -63,6 +63,7 @@ __all__ = [
     "AGENT_MODES",
     "LeaderboardConfig",
     "LeaderboardModel",
+    "LeaderboardProtocol",
     "LeaderboardRobustness",
     "build_agent_config",
     "generate_leaderboard_model_cards",
@@ -145,12 +146,29 @@ class LeaderboardRobustness(BaseModel):
     variant_types: dict[str, list[str]] = Field(default_factory=dict)
 
 
+class LeaderboardProtocol(BaseModel):
+    """Optional metadata for a planned benchmark protocol.
+
+    The ordinary leaderboard runner ignores this metadata. Planning tools use it
+    to verify that repeated environment entries form a balanced multi-seed run.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    track: str
+    scale: str
+    tasks_per_environment: int = Field(ge=1)
+    task_seeds: list[int] = Field(min_length=1)
+    execution_status: str = "planned_not_run"
+
+
 class LeaderboardConfig(BaseModel):
     """Top-level configuration for a paired real-model leaderboard run."""
 
     model_config = ConfigDict(extra="forbid")
 
     run: RunSettings
+    protocol: LeaderboardProtocol | None = None
     models: list[LeaderboardModel] = Field(min_length=1)
     agents: list[str] = Field(default_factory=lambda: list(AGENT_MODES))
     environments: list[EnvironmentRunConfig] = Field(min_length=1)

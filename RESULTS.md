@@ -10,6 +10,13 @@
 > These are pilot CIs over the saved synthetic sample, not population-level
 > benchmark claims.
 
+> **Full-scale status:** the strict-512 and best-valid full protocols are
+> implemented for 100 tasks/environment x 3 seeds and 200 tasks/environment x 5
+> seeds, with no-execute call/token/cost manifests in `reports/plans/`. They have
+> not been run on hosted models because external budget is required. Larger
+> hosted-model rows are intentionally not simulated. See
+> [FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md).
+
 ## Current Status
 
 A preliminary Claude Haiku 4.5 direct-agent run was added on 2026-06-03 as the
@@ -69,6 +76,20 @@ scores validate task generation and grading. Mock scores test parser/scoring
 sensitivity. The tool-reference baseline exercises the tool loop and audit log.
 None should be reported as model performance.
 
+## Full-scale infrastructure validation (non-model)
+
+The full track B task volume was run with free controls only:
+
+| Run | Scale | Runtime errors | Invalid responses | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| `full_scale_reference_validation` | 6,000 tasks | 0 | 0 | Reference-solver infrastructure sanity check |
+| `full_scale_mock_validation` | 6,000 tasks | 0 | 0 | Deterministic mock/parser/grader sensitivity check |
+
+Each run covers 200 tasks/environment, five seeds, and all six environments.
+These validate generation, grading, aggregation, caching, and artefact writing at
+larger scale. They are not hosted-model results and make no model-capability,
+provider-superiority, or statistical-significance claim.
+
 ## Generated Artefacts
 
 | Run | Config | Artefacts |
@@ -84,6 +105,8 @@ None should be reported as model performance.
 | `adversarial_risk_mock_smoke` | `configs/eval_mock_adversarial_risk.yaml` | `reports/runs/adversarial_risk_mock_smoke/` |
 | `all_envs_reference_smoke` | `configs/eval_reference_all_envs.yaml` | `reports/runs/all_envs_reference_smoke/` |
 | `all_envs_mock_smoke` | `configs/eval_mock_all_envs.yaml` | `reports/runs/all_envs_mock_smoke/` |
+| `full_scale_reference_validation` | `configs/full/full_scale_reference_validation.yaml` | `reports/runs/full_scale_reference_validation/` |
+| `full_scale_mock_validation` | `configs/full/full_scale_mock_validation.yaml` | `reports/runs/full_scale_mock_validation/` |
 | `robustness_reference_bayes` | `configs/robustness_reference_bayes.yaml` | `reports/runs/robustness_reference_bayes/` |
 | `robustness_mock_bayes` | `configs/robustness_mock_bayes.yaml` | `reports/runs/robustness_mock_bayes/` |
 | `robustness_reference_all_envs` | `configs/robustness_reference_all_envs.yaml` | `reports/runs/robustness_reference_all_envs/` |

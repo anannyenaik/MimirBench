@@ -37,6 +37,23 @@ with the columns:
 
 `Model | Track | n | Mean | 95% CI | Pass | Parse fail | Risk violation | Cost | p50/p95 latency | Caveat`
 
+## Planning for larger hosted-model runs
+
+The implemented full protocol is described in
+[FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md). A saved-artifact-only
+planning command estimates approximate mean-score CI widths under the pilot,
+100/environment x 3-seed, and 200/environment x 5-seed designs:
+
+```bash
+mimirbench power-plan-full-benchmark
+```
+
+The generated report is
+[`reports/runs/leaderboard/full_benchmark_power_plan.md`](reports/runs/leaderboard/full_benchmark_power_plan.md).
+**These are planning estimates based on pilot variance, not results from unrun
+hosted-model evaluations.** Because the pilot has one seed, it cannot estimate
+seed-to-seed variation; full runs must report that variation directly.
+
 ## How to read the paired deltas
 
 A paired delta is `candidate − baseline` over aligned tasks. A 95% bootstrap CI
@@ -72,3 +89,5 @@ Rows are grouped by the tracks defined in
 - **Not identical-decoding across providers** on the best-valid track.
 - **No broad superiority or trading claim.** These are model-ranking diagnostics for
   this synthetic benchmark only.
+- **No pilot significance claim.** Narrow pilot intervals or paired deltas do not
+  justify describing the current hosted-model rows as statistically significant.

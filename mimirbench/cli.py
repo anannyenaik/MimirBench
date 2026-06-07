@@ -705,6 +705,92 @@ def statistical_validity_command(
     )
 
 
+@app.command("plan-full-benchmark")
+def plan_full_benchmark_command(
+    config_path: Path = typer.Argument(
+        ..., exists=True, readable=True, help="Path to a full hosted-model leaderboard YAML."
+    ),
+    output_dir: Path = typer.Option(
+        Path("reports") / "plans", help="Directory for the no-execute plan manifest."
+    ),
+) -> None:
+    """Plan and cost a full hosted benchmark without checking or calling providers."""
+    from mimirbench.analysis.full_benchmark_planning import (
+        build_full_benchmark_plan,
+        write_full_benchmark_plan,
+    )
+
+    try:
+        plan = build_full_benchmark_plan(config_path)
+        path = write_full_benchmark_plan(config_path, output_dir=output_dir)
+    except (KeyError, ValueError, ValidationError) as exc:
+        console.print(f"[red]Invalid full benchmark config:[/red] {config_path}")
+        console.print(str(exc))
+        raise typer.Exit(code=1) from exc
+    counts = plan["counts"]
+    tokens = plan["token_estimate"]
+    console.print(
+        f"[bold]{plan['leaderboard_name']}[/bold] | track=[cyan]{plan['protocol']['track']}[/cyan] | "
+        f"models={counts['models']} environments={counts['environments']} seeds={counts['seeds']}"
+    )
+    console.print(
+        f"tasks/model={counts['tasks_per_model']:,} | "
+        f"scheduled calls={counts['scheduled_model_calls']:,} | "
+        f"retry-attempt upper={counts['retry_attempt_upper']:,}"
+    )
+    console.print(
+        f"estimated total tokens={tokens['total_tokens_range'][0]:,}-"
+        f"{tokens['total_tokens_range'][1]:,} | "
+        f"cost={plan['cost_estimate_usd']['formatted']}"
+    )
+    model_table = Table(title="Planned hosted models")
+    model_table.add_column("model", style="bold cyan")
+    model_table.add_column("provider")
+    model_table.add_column("calls", justify="right")
+    model_table.add_column("cost range", justify="right")
+    for model in plan["models"]:
+        model_table.add_row(
+            str(model["label"]),
+            str(model["provider"]),
+            f"{int(model['scheduled_calls']):,}",
+            str(model["cost_range_formatted"]),
+        )
+    console.print(model_table)
+    environment_table = Table(title="Environment/seed cells")
+    environment_table.add_column("environment", style="bold cyan")
+    environment_table.add_column("seed", justify="right")
+    environment_table.add_column("tasks", justify="right")
+    for environment in plan["environments"]:
+        environment_table.add_row(
+            str(environment["environment"]),
+            str(environment["seed"]),
+            f"{int(environment['tasks']):,}",
+        )
+    console.print(environment_table)
+    console.print(f"[green]No-execute manifest written:[/green] {path}")
+    console.print(f"Exact run command: {plan['exact_run_command']}")
+    console.print("[dim]No provider was checked or called; no credential value was read.[/dim]")
+
+
+@app.command("power-plan-full-benchmark")
+def power_plan_full_benchmark_command(
+    base_dir: Path = typer.Option(
+        Path("reports") / "runs" / "leaderboard",
+        help="Leaderboard directory holding saved pilot artefacts.",
+    ),
+    output_path: Path = typer.Option(
+        Path("reports") / "runs" / "leaderboard" / "full_benchmark_power_plan.md",
+        help="Destination planning report.",
+    ),
+) -> None:
+    """Estimate full-track CI widths from saved pilot artefacts only."""
+    from mimirbench.analysis.power_planning import write_power_planning_report
+
+    path = write_power_planning_report(base_dir, output_path=output_path)
+    console.print(f"[green]Full benchmark power plan written:[/green] {path}")
+    console.print("[dim]Planning estimates only; no model was run.[/dim]")
+
+
 def _print_interpretability_summary(summary: dict[str, Any], *, inspect: bool = False) -> None:
     if summary.get("status") == "pending":
         console.print(

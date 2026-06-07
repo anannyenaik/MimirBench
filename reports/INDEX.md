@@ -13,6 +13,8 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | auctions_reference_smoke | [`runs/auctions_reference_smoke`](runs/auctions_reference_smoke) | reference sanity check | 100 | 1 |
 | bayes_mock_smoke | [`runs/bayes_mock_smoke`](runs/bayes_mock_smoke) | mock diagnostic baseline | 100 | 0.686737 |
 | bayes_reference_smoke | [`runs/bayes_reference_smoke`](runs/bayes_reference_smoke) | reference sanity check | 100 | 1 |
+| full_scale_mock_validation | [`runs/full_scale_mock_validation`](runs/full_scale_mock_validation) | mock diagnostic baseline | 6000 | 0.455064 |
+| full_scale_reference_validation | [`runs/full_scale_reference_validation`](runs/full_scale_reference_validation) | reference sanity check | 6000 | 0.999862 |
 | hidden_regimes_reference_smoke | [`runs/hidden_regimes_reference_smoke`](runs/hidden_regimes_reference_smoke) | reference sanity check | 100 | 1 |
 | market_making_mock_smoke | [`runs/market_making_mock_smoke`](runs/market_making_mock_smoke) | mock diagnostic baseline | 50 | 0.596485 |
 | market_making_reference_smoke | [`runs/market_making_reference_smoke`](runs/market_making_reference_smoke) | reference sanity check | 50 | 0.99905 |
@@ -112,11 +114,19 @@ Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-tr
 
 - [`runs/leaderboard/claude_model_ladder_direct_20env_comparison.md`](runs/leaderboard/claude_model_ladder_direct_20env_comparison.md)
 - [`runs/leaderboard/cross_provider_direct_20env_comparison.md`](runs/leaderboard/cross_provider_direct_20env_comparison.md)
+- [`runs/leaderboard/full_benchmark_power_plan.md`](runs/leaderboard/full_benchmark_power_plan.md)
 - [`runs/leaderboard/gemini_budget_extension_attempts.md`](runs/leaderboard/gemini_budget_extension_attempts.md)
 - [`runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md`](runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md)
 - [`runs/leaderboard/gemini_strongest_robustness_comparison.md`](runs/leaderboard/gemini_strongest_robustness_comparison.md)
 - [`runs/leaderboard/openai_model_ladder_20env_comparison.md`](runs/leaderboard/openai_model_ladder_20env_comparison.md)
 - [`runs/leaderboard/statistical_validity_existing_artifacts.md`](runs/leaderboard/statistical_validity_existing_artifacts.md)
+
+## Full benchmark planning manifests
+
+- [`plans/leaderboard_best_valid_100env_3seeds.json`](plans/leaderboard_best_valid_100env_3seeds.json)
+- [`plans/leaderboard_best_valid_200env_5seeds.json`](plans/leaderboard_best_valid_200env_5seeds.json)
+- [`plans/leaderboard_strict_100env_3seeds.json`](plans/leaderboard_strict_100env_3seeds.json)
+- [`plans/leaderboard_strict_200env_5seeds.json`](plans/leaderboard_strict_200env_5seeds.json)
 
 ## Interpretability runs
 
@@ -140,14 +150,6 @@ Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-tr
 | interp_bayes_probes_tiny | [`interpretability/interp_bayes_probes_tiny`](interpretability/interp_bayes_probes_tiny) | complete | probes | 0.916667 |
 
 Interpretability runs analyse a small synthetic Bayesian transformer. Probe accuracy is decodability, not causation; no frontier-model claim is made.
-
-Curated aggregate reports:
-
-- [`interpretability/interp_bayes_multiseed_summary.md`](interpretability/interp_bayes_multiseed_summary.md)
-  - six-seed whole-site/token-group replication and negative controls.
-- [`interpretability/interp_bayes_head_token_summary.md`](interpretability/interp_bayes_head_token_summary.md)
-  - six-seed per-head patching, per-head ablation, and individual token-position
-    patching. No consistently dominant head or position was found.
 
 ## Model cards
 
@@ -310,3 +312,5 @@ Curated aggregate reports:
 - Do not treat reference, mock, or deterministic tool baselines as real model results.
 - Do not describe any result as evidence of trading ability, trading usefulness, or profitability.
 - Real API/local model reports remain pending unless actual run artefacts exist.
+- Full-scale reference/mock runs are infrastructure validations, not model capability results.
+- Hosted-model full tracks are implemented and costed but remain unrun pending external budget.

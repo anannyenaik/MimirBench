@@ -1,0 +1,283 @@
+{
+  "artefacts": {
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/leaderboard_summary.json",
+    "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/paired_deltas.jsonl",
+    "per_model_pattern": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/<model>/agents/direct"
+  },
+  "caveats": [
+    "Planning only: no provider was contacted and no hosted-model result was generated.",
+    "Token estimates use one representative synthetic prompt per environment and ~4 chars/token.",
+    "Scheduled calls exclude retries; retry_attempt_upper assumes every call uses max_retries.",
+    "Cost ranges use configured pricing fields and exclude taxes, provider changes, and cache effects."
+  ],
+  "config_path": "configs/full/leaderboard_strict_100env_3seeds.yaml",
+  "cost_estimate_usd": {
+    "basis": "configured pricing fields; input-only lower bound and max-output upper bound",
+    "formatted": "$4.18-$29.61 USD",
+    "range": [
+      4.1768,
+      29.6129
+    ]
+  },
+  "counts": {
+    "environments": 6,
+    "models": 5,
+    "retry_attempt_upper": 27000,
+    "scheduled_model_calls": 9000,
+    "seeds": 3,
+    "tasks_per_environment_per_seed": 100,
+    "tasks_per_model": 1800
+  },
+  "environments": [
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 458,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 402,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 488,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 508,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 474,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 510,
+      "seed": 123,
+      "tasks": 100
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 440,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 401,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 472,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 507,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 469,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 510,
+      "seed": 1123,
+      "tasks": 100
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 472,
+      "seed": 2123,
+      "tasks": 100
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 401,
+      "seed": 2123,
+      "tasks": 100
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 512,
+      "seed": 2123,
+      "tasks": 100
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 507,
+      "seed": 2123,
+      "tasks": 100
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 477,
+      "seed": 2123,
+      "tasks": 100
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 516,
+      "seed": 2123,
+      "tasks": 100
+    }
+  ],
+  "exact_run_command": "python -m mimirbench.cli run-leaderboard configs/full/leaderboard_strict_100env_3seeds.yaml --allow-real-models",
+  "leaderboard_name": "leaderboard_strict_100env_3seeds",
+  "manifest_type": "mimirbench_full_benchmark_plan",
+  "models": [
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$0.34-$1.82 USD",
+      "cost_range_usd": [
+        0.341,
+        1.8155
+      ],
+      "estimated_input_tokens": 852400,
+      "estimated_output_tokens_upper": 921600,
+      "label": "openai_gpt_4_1_mini_strict_full",
+      "model": "gpt-4.1-mini",
+      "provider": "openai",
+      "retry_attempt_upper": 5400,
+      "scheduled_calls": 1800
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$0.64-$4.79 USD",
+      "cost_range_usd": [
+        0.6393,
+        4.7865
+      ],
+      "estimated_input_tokens": 852400,
+      "estimated_output_tokens_upper": 921600,
+      "label": "openai_gpt_5_4_mini_strict_full",
+      "model": "gpt-5.4-mini",
+      "provider": "openai",
+      "retry_attempt_upper": 5400,
+      "scheduled_calls": 1800
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/openai_gpt_5_4_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$2.13-$15.96 USD",
+      "cost_range_usd": [
+        2.131,
+        15.955
+      ],
+      "estimated_input_tokens": 852400,
+      "estimated_output_tokens_upper": 921600,
+      "label": "openai_gpt_5_4_strict_full",
+      "model": "gpt-5.4",
+      "provider": "openai",
+      "retry_attempt_upper": 5400,
+      "scheduled_calls": 1800
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$0.85-$5.46 USD",
+      "cost_range_usd": [
+        0.8524,
+        5.4604
+      ],
+      "estimated_input_tokens": 852400,
+      "estimated_output_tokens_upper": 921600,
+      "label": "anthropic_claude_haiku_4_5_strict_full",
+      "model": "claude-haiku-4-5-20251001",
+      "provider": "anthropic",
+      "retry_attempt_upper": 5400,
+      "scheduled_calls": 1800
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_100env_3seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$0.21-$1.60 USD",
+      "cost_range_usd": [
+        0.2131,
+        1.5955
+      ],
+      "estimated_input_tokens": 852400,
+      "estimated_output_tokens_upper": 921600,
+      "label": "gemini_3_1_flash_lite_strict_full",
+      "model": "gemini-3.1-flash-lite",
+      "provider": "gemini",
+      "retry_attempt_upper": 5400,
+      "scheduled_calls": 1800
+    }
+  ],
+  "no_execute": true,
+  "protocol": {
+    "execution_status": "planned_not_run",
+    "scale": "full-a",
+    "task_seeds": [
+      123,
+      1123,
+      2123
+    ],
+    "tasks_per_environment": 100,
+    "track": "strict-512"
+  },
+  "provider_calls_made": 0,
+  "token_estimate": {
+    "input_tokens_approx": 4262000,
+    "output_tokens_range": [
+      0,
+      4608000
+    ],
+    "total_tokens_range": [
+      4262000,
+      8870000
+    ]
+  }
+}

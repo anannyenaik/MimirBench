@@ -22,6 +22,7 @@ writers, and honest reports.
 
 **Documentation map:**
 [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md) ·
+[FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md) ·
 [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md) ·
 [RESULTS.md](RESULTS.md) ·
 [ROBUSTNESS.md](ROBUSTNESS.md) ·
@@ -92,6 +93,14 @@ mimirbench summarise-leaderboard reports/runs/leaderboard/leaderboard_all_availa
 # Real model runs require keys/weights and are never run by the test suite:
 # mimirbench run-eval configs/eval_api_openai_bayes_smoke.yaml
 # mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml --allow-real-models
+```
+
+Full hosted-model evaluation is protocol-ready but intentionally unrun pending
+external budget. The no-execute planner never checks providers or runs inference:
+
+```bash
+python -m mimirbench.cli plan-full-benchmark configs/full/leaderboard_best_valid_100env_3seeds.yaml
+python -m mimirbench.cli power-plan-full-benchmark
 ```
 
 Stage 7 adds the synthetic small-transformer training pipeline (see
@@ -215,6 +224,14 @@ transformer/interp track now checked in:
   and the classification table in [reports/INDEX.md](reports/INDEX.md). Bootstrap
   CIs over the saved sample are in
   [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md).
+- Every hosted-model row remains a pilot result: 20 tasks/environment and one
+  seed. Full track A (100/environment x 3 seeds) and full track B
+  (200/environment x 5 seeds), for strict-512 and best-valid, are implemented,
+  costed, and reproducibility-ready but have not been run because they require
+  external API budget. Larger hosted-model results are not simulated.
+- The full-B task volume has been validated with non-paid reference and mock
+  controls only (6,000 tasks each). These are infrastructure validations, not
+  model-capability results.
 - Strongest comparable OpenAI **strict-512** direct row: `gpt-5.4`.
 - Strongest **best-valid** Claude direct row: Claude Sonnet 4.6 at
   `max_tokens=1536`.

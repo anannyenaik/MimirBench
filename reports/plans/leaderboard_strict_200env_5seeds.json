@@ -1,0 +1,357 @@
+{
+  "artefacts": {
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/leaderboard_summary.json",
+    "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/paired_deltas.jsonl",
+    "per_model_pattern": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/<model>/agents/direct"
+  },
+  "caveats": [
+    "Planning only: no provider was contacted and no hosted-model result was generated.",
+    "Token estimates use one representative synthetic prompt per environment and ~4 chars/token.",
+    "Scheduled calls exclude retries; retry_attempt_upper assumes every call uses max_retries.",
+    "Cost ranges use configured pricing fields and exclude taxes, provider changes, and cache effects."
+  ],
+  "config_path": "configs/full/leaderboard_strict_200env_5seeds.yaml",
+  "cost_estimate_usd": {
+    "basis": "configured pricing fields; input-only lower bound and max-output upper bound",
+    "formatted": "$13.92-$98.71 USD",
+    "range": [
+      13.918,
+      98.7052
+    ]
+  },
+  "counts": {
+    "environments": 6,
+    "models": 5,
+    "retry_attempt_upper": 90000,
+    "scheduled_model_calls": 30000,
+    "seeds": 5,
+    "tasks_per_environment_per_seed": 200,
+    "tasks_per_model": 6000
+  },
+  "environments": [
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 458,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 402,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 488,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 508,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 474,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 510,
+      "seed": 123,
+      "tasks": 200
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 440,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 401,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 472,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 507,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 469,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 510,
+      "seed": 1123,
+      "tasks": 200
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 472,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 401,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 512,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 507,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 477,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 516,
+      "seed": 2123,
+      "tasks": 200
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 456,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 402,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 483,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 508,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 474,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 508,
+      "seed": 3123,
+      "tasks": 200
+    },
+    {
+      "environment": "bayesian_games",
+      "representative_input_tokens_approx": 448,
+      "seed": 4123,
+      "tasks": 200
+    },
+    {
+      "environment": "auctions",
+      "representative_input_tokens_approx": 401,
+      "seed": 4123,
+      "tasks": 200
+    },
+    {
+      "environment": "hidden_regimes",
+      "representative_input_tokens_approx": 512,
+      "seed": 4123,
+      "tasks": 200
+    },
+    {
+      "environment": "market_making",
+      "representative_input_tokens_approx": 507,
+      "seed": 4123,
+      "tasks": 200
+    },
+    {
+      "environment": "prediction_markets",
+      "representative_input_tokens_approx": 474,
+      "seed": 4123,
+      "tasks": 200
+    },
+    {
+      "environment": "adversarial_risk",
+      "representative_input_tokens_approx": 505,
+      "seed": 4123,
+      "tasks": 200
+    }
+  ],
+  "exact_run_command": "python -m mimirbench.cli run-leaderboard configs/full/leaderboard_strict_200env_5seeds.yaml --allow-real-models",
+  "leaderboard_name": "leaderboard_strict_200env_5seeds",
+  "manifest_type": "mimirbench_full_benchmark_plan",
+  "models": [
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_4_1_mini_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$1.14-$6.05 USD",
+      "cost_range_usd": [
+        1.1362,
+        6.0514
+      ],
+      "estimated_input_tokens": 2840400,
+      "estimated_output_tokens_upper": 3072000,
+      "label": "openai_gpt_4_1_mini_strict_full",
+      "model": "gpt-4.1-mini",
+      "provider": "openai",
+      "retry_attempt_upper": 18000,
+      "scheduled_calls": 6000
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_mini_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$2.13-$15.95 USD",
+      "cost_range_usd": [
+        2.1303,
+        15.9543
+      ],
+      "estimated_input_tokens": 2840400,
+      "estimated_output_tokens_upper": 3072000,
+      "label": "openai_gpt_5_4_mini_strict_full",
+      "model": "gpt-5.4-mini",
+      "provider": "openai",
+      "retry_attempt_upper": 18000,
+      "scheduled_calls": 6000
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/openai_gpt_5_4_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$7.10-$53.18 USD",
+      "cost_range_usd": [
+        7.101,
+        53.181
+      ],
+      "estimated_input_tokens": 2840400,
+      "estimated_output_tokens_upper": 3072000,
+      "label": "openai_gpt_5_4_strict_full",
+      "model": "gpt-5.4",
+      "provider": "openai",
+      "retry_attempt_upper": 18000,
+      "scheduled_calls": 6000
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/anthropic_claude_haiku_4_5_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$2.84-$18.20 USD",
+      "cost_range_usd": [
+        2.8404,
+        18.2004
+      ],
+      "estimated_input_tokens": 2840400,
+      "estimated_output_tokens_upper": 3072000,
+      "label": "anthropic_claude_haiku_4_5_strict_full",
+      "model": "claude-haiku-4-5-20251001",
+      "provider": "anthropic",
+      "retry_attempt_upper": 18000,
+      "scheduled_calls": 6000
+    },
+    {
+      "artefacts": {
+        "output_dir": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct",
+        "report": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/report.md",
+        "results": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/results.jsonl",
+        "summary": "reports/runs/leaderboard/leaderboard_strict_200env_5seeds/models/gemini_3_1_flash_lite_strict_full/agents/direct/summary.json"
+      },
+      "configured_max_retries": 3,
+      "configured_max_tokens": 512,
+      "cost_range_formatted": "$0.71-$5.32 USD",
+      "cost_range_usd": [
+        0.7101,
+        5.3181
+      ],
+      "estimated_input_tokens": 2840400,
+      "estimated_output_tokens_upper": 3072000,
+      "label": "gemini_3_1_flash_lite_strict_full",
+      "model": "gemini-3.1-flash-lite",
+      "provider": "gemini",
+      "retry_attempt_upper": 18000,
+      "scheduled_calls": 6000
+    }
+  ],
+  "no_execute": true,
+  "protocol": {
+    "execution_status": "planned_not_run",
+    "scale": "full-b",
+    "task_seeds": [
+      123,
+      1123,
+      2123,
+      3123,
+      4123
+    ],
+    "tasks_per_environment": 200,
+    "track": "strict-512"
+  },
+  "provider_calls_made": 0,
+  "token_estimate": {
+    "input_tokens_approx": 14202000,
+    "output_tokens_range": [
+      0,
+      15360000
+    ],
+    "total_tokens_range": [
+      14202000,
+      29562000
+    ]
+  }
+}
