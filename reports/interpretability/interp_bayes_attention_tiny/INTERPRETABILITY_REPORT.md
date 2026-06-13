@@ -24,13 +24,13 @@ Whether the small transformer's internal activations linearly encode the Bayesia
 - A patch at a specific site that consistently moves the corrupted prediction back to the clean decision (high recovery rate, positive causal effect concentrated at that site).
 - A probe direction whose ablation degrades the matching decision.
 
-## What would NOT count as causal evidence
+## Insufficient Evidence
 
 - High probe accuracy alone (decodability is correlational, not causal).
 - Causal effects within noise, or recovery rates near the flip rate.
 - Any result here transferring to larger or frontier models.
 
-## Limitations and caveats
+## Scope and Limitations
 
 - The model is tiny (see header), fully synthetic, and trained on a narrow Bayesian generator; mean pooling dilutes individual token effects.
 - Probe/patching numbers are specific to this checkpoint and seed.

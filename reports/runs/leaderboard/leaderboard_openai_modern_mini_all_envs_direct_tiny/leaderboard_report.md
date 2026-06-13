@@ -4,7 +4,7 @@
 - Timestamp: `2026-06-02T21:07:58Z`
 - Agent modes: direct
 - Tasks per agent: `30`
-- Preliminary tiny run: **yes**
+- Pilot-scale run: **yes**
 - Real model execution permitted: **yes**
 
 ## Provider availability
@@ -27,7 +27,7 @@ No paired deltas (need at least two agent modes per model).
 
 No headline candidates: available metrics did not meet the evidence threshold.
 
-## Caveats
+## Scope and Limitations
 
 - All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).
 - Higher mean score is better; lower posterior error, risk violations, parse failures, latency, cost, and robustness score drop are better.
@@ -35,8 +35,8 @@ No headline candidates: available metrics did not meet the evidence threshold.
 - No hidden chain-of-thought is collected or reported; graders and labels are deterministic.
 - These are benchmark diagnostics, not evidence of trading usefulness or profitability.
 - These are synthetic deterministic evaluation tasks, not live-market or deployment outcomes.
-- Leaderboard rows describe only the configured model, agent mode, environments, and task set; they are not frontier-model claims.
-- This is a PRELIMINARY tiny real-model run (<= a handful of tasks per environment); expand the evaluation before drawing strong conclusions.
+- Each leaderboard row is scoped to the configured model, agent mode, environments, and task set.
+- This is a pilot hosted-model evaluation (<= a handful of tasks per environment); full-scale confirmation is required for broader conclusions.
 
 ## Artefacts
 

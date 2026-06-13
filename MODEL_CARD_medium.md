@@ -1,12 +1,9 @@
 # Model card: medium synthetic Bayesian/risk transformer
 
-A curated, human-readable card for the **medium model organism** — the checkpoint
+A curated model card for the **medium model organism**: the checkpoint
 that learns the synthetic Bayesian-to-decision mapping and yields MimirBench's
 narrow causal interpretability result. The auto-generated companion card is
 [`reports/model_cards/small_transformer_bayes_medium.md`](reports/model_cards/small_transformer_bayes_medium.md).
-
-> This is a small, fully synthetic model organism. **No frontier-model claim is
-> made and nothing here transfers to frontier-model internals.**
 
 ## Architecture
 
@@ -56,7 +53,7 @@ narrow causal interpretability result. The auto-generated companion card is
 `weight_decay=0.01`, `grad_clip=1.0`, `device=cpu`. Full resolved config:
 `reports/training/small_transformer_bayes_medium/config_resolved.yaml`.
 
-## Held-out metrics (2,000 unseen tasks, seed 20000)
+## Held-Out Metrics (2,000 Unseen Tasks, Seed 20000)
 
 | Metric | Value |
 | --- | ---: |
@@ -71,7 +68,7 @@ narrow causal interpretability result. The auto-generated companion card is
 Best validation metrics (epoch 25): val loss 0.031958, action/risk/rationale
 accuracy 1.000, posterior-bucket accuracy 0.9935, confidence 0.998, EV 0.9985.
 
-## Intended use
+## Intended Use
 
 - A **model organism** for mechanistic interpretability under known ground truth:
   probes, clean/corrupted activation patching, attention analysis, and the

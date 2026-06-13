@@ -1,10 +1,10 @@
-# Preliminary cross-provider direct comparison
+# Pilot cross-provider direct comparison
 
 Generated from saved artefacts on 2026-06-03 local time. This is a synthetic,
 direct-agent-only comparison with 20 tasks per environment across six
 environments. It compares one Anthropic model against the completed OpenAI
-`gpt-5.4` direct row only. It is not statistically conclusive, not a trading
-result, and not a broad provider-superiority claim.
+`gpt-5.4` direct row only. The pilot sample does not establish broad
+provider superiority or real-world performance.
 
 ## Source runs
 
@@ -67,7 +67,7 @@ Delta is Claude Haiku 4.5 minus OpenAI `gpt-5.4`.
 | `market_making` | 0.581961 | 0.772774 | -0.190813 |
 | `prediction_markets` | 0.540825 | 0.428989 | +0.111835 |
 
-## Preliminary reading
+## Pilot reading
 
 Claude Haiku 4.5 completed all 120 calls with zero parse failures and zero
 provider/runtime errors. In this small direct-agent slice, it was cheaper than

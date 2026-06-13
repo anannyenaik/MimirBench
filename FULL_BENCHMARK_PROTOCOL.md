@@ -1,14 +1,10 @@
 # MimirBench full benchmark protocol
 
-This package defines the funded, larger-scale hosted-model evaluation that
-MimirBench is ready to run. The protocol, configs, no-execute cost planner, and
-statistical planning are implemented. **The full hosted-model protocol has not
-been run because external API budget is not available.** Larger hosted-model
-results are intentionally not simulated or fabricated.
+This document defines the larger-scale hosted-model evaluation that MimirBench is
+ready to run. The protocol, configs, no-execute cost planner, and statistical
+planning are implemented. **The full hosted-model protocol has not been run.**
 
-All MimirBench tasks remain deterministic synthetic benchmark tasks. Neither the
-pilot nor a future full run supports a trading claim, a broad provider-superiority
-claim, or an automatic statistical-significance claim.
+All MimirBench tasks are deterministic synthetic benchmark tasks.
 
 ## Scale tracks
 
@@ -39,7 +35,7 @@ a thinking setting. It is not identical-decoding across providers. It answers
 how a model performs under a practical valid-output configuration, not which
 provider is intrinsically superior.
 
-## Full hosted configs and planned volume
+## Full Hosted Configurations and Planned Volume
 
 | Config | Models | Tasks/model | Scheduled calls | Retry-attempt upper | Configured-price range |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -56,13 +52,13 @@ estimated input cost only and the upper bound assumes every scheduled call uses
 its full output budget. They exclude retries, taxes, cache effects, and future
 provider price changes.
 
-## Exact inclusion and exclusion rules
+## Inclusion and Exclusion Rules
 
 These rules apply to full hosted-model rows. Existing 20/environment rows retain
 their published pilot classifications in
 [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md).
 
-### Clean rows included in a headline track
+### Clean rows included in a principal comparison
 
 A full row is `strict-track clean` or `best-valid clean` only when all are true:
 
@@ -80,7 +76,7 @@ A full row is `strict-track clean` or `best-valid clean` only when all are true:
 Risk violations and low scores remain included as model outcomes. They do not
 remove a row from the clean set when the row otherwise satisfies the rules.
 
-### Rows excluded from headline capability comparisons
+### Rows excluded from principal capability comparisons
 
 - **Protocol-limited:** all calls completed, but the row exceeds its track's
   parse-failure threshold because of truncation, empty output, hidden-token
@@ -101,7 +97,7 @@ Excluded rows remain inspectable and must be labelled with their exclusion
 reason. They cannot contribute to model/provider rankings or paired headline
 deltas.
 
-## Required full-run reporting
+## Required Full-Run Reporting
 
 Each clean full row must report:
 
@@ -119,7 +115,7 @@ Full-run uncertainty may support narrower benchmark-specific statements, but it
 does not erase synthetic-task limitations or establish broad provider
 superiority. Pilot rows must not be described as statistically significant.
 
-## No-execute planning
+## No-Execute Planning
 
 The planning command parses config, generates representative synthetic prompts,
 and performs arithmetic only:
@@ -133,9 +129,9 @@ It does not check providers, read credential values, or run inference. Manifests
 are written under `reports/plans/`; pilot-variance CI-width planning is written to
 `reports/runs/leaderboard/full_benchmark_power_plan.md`.
 
-## Free infrastructure validation
+## Infrastructure Validation
 
-The full-B task volume was exercised with non-paid controls only:
+The full-B task volume was exercised with deterministic controls:
 
 - `reports/runs/full_scale_reference_validation/`
 - `reports/runs/full_scale_mock_validation/`
@@ -144,3 +140,13 @@ Each run contains 6,000 tasks: 200 tasks/environment, five seeds, all six
 environments. These runs validate generation, grading, aggregation, caching, and
 artefact writing at the planned scale. They are not hosted-model or model
 capability results.
+
+## Scope and Limitations
+
+- The full-scale protocol has not been run on hosted models.
+- Synthetic-task results do not establish real-world performance or trading
+  usefulness.
+- Strict-512 supports controlled decoding comparisons; best-valid mixes model
+  capability with provider-specific valid-output settings.
+- Full-run uncertainty quantifies benchmark-specific variation and does not by
+  itself establish broad provider superiority.

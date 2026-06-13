@@ -11,11 +11,11 @@ MimirBench is a reproducible evaluation harness for agents that must update
 beliefs, estimate expected value, and respect constraints under uncertainty. It
 pairs deterministic synthetic environments with deterministic graders, reference
 solvers, configurable agent backends, response caching, structured result
-writers, and honest reports.
+writers, robustness probes, and inspectable reports.
 
-> **Current stable review target: v0.2.0.** This is a synthetic-evals /
-> research-engineering project, not a trading system. All real-model statistics are
-> computed from saved artefacts; see [RELEASE_NOTES_v0.2.0.md](RELEASE_NOTES_v0.2.0.md).
+> **Current stable review target: v0.2.0.** All hosted-model statistics are
+> computed from saved pilot evaluation artefacts; see
+> [RELEASE_NOTES_v0.2.0.md](RELEASE_NOTES_v0.2.0.md).
 > The medium `best.pt` checkpoint and `vocab.json` are available as convenience
 > assets on the [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0);
 > `.pt` files remain gitignored in the repository.
@@ -39,7 +39,7 @@ writers, and honest reports.
 | `bayesian_games` | Posterior updating from a likelihood model | Implemented and registered |
 | `auctions` | Expected-surplus reasoning in second-price auctions | Implemented and registered |
 | `hidden_regimes` | Sequential belief filtering in a hidden Markov model | Implemented and registered |
-| `market_making` | Toy quote decisions under inventory, loss, and adverse-selection constraints | Implemented and registered |
+| `market_making` | Synthetic quote decisions under inventory, loss, and adverse-selection constraints | Implemented and registered |
 | `prediction_markets` | Binary markets separating belief, price, edge, and limits | Implemented and registered |
 | `adversarial_risk` | Obeying hard risk limits under adversarial pressure | Implemented and registered |
 
@@ -79,8 +79,8 @@ mimirbench run-robustness configs/robustness_mock_all_envs.yaml
 mimirbench summarise-robustness reports/runs/robustness_mock_all_envs
 ```
 
-Stage 5 adds real-model and tool-agent commands (see [MODELS.md](MODELS.md) and
-[TOOLS.md](TOOLS.md)):
+Hosted-model and tool-agent commands are documented in [MODELS.md](MODELS.md)
+and [TOOLS.md](TOOLS.md):
 
 ```bash
 mimirbench check-provider openai            # package/key check; never prints the key
@@ -90,23 +90,22 @@ mimirbench inspect-failures reports/runs/tool_reference_bayes
 mimirbench inspect-tool-audit reports/runs/tool_reference_bayes
 mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml
 mimirbench summarise-leaderboard reports/runs/leaderboard/leaderboard_all_available_tiny
-# Real model runs require keys/weights and are never run by the test suite:
+# Hosted/local model runs require keys/weights and are never run by the test suite:
 # mimirbench run-eval configs/eval_api_openai_bayes_smoke.yaml
 # mimirbench run-leaderboard configs/leaderboard/leaderboard_all_available_tiny.yaml --allow-real-models
 ```
 
-Full hosted-model evaluation is protocol-ready but intentionally unrun pending
-external budget. The no-execute planner never checks providers or runs inference:
+The full-scale benchmark protocol is implemented and costed but has not been run
+on hosted models. The no-execute planner never checks providers or runs inference:
 
 ```bash
 python -m mimirbench.cli plan-full-benchmark configs/full/leaderboard_best_valid_100env_3seeds.yaml
 python -m mimirbench.cli power-plan-full-benchmark
 ```
 
-Stage 7 adds the synthetic small-transformer training pipeline (see
-[TRAINING.md](TRAINING.md)). The `tiny` config is a CPU smoke test; the `medium`
-config is the model organism that actually learns the task and yields the causal
-interpretability result:
+The synthetic small-transformer training pipeline is documented in
+[TRAINING.md](TRAINING.md). The `tiny` config is a CPU smoke test; the `medium`
+config is the model organism used for the causal patching analysis:
 
 ```bash
 # Tiny smoke artefact (fast, does not learn the task):
@@ -123,7 +122,7 @@ Eval configs write these artefacts under the configured output directory:
 
 - `results.jsonl` - one serialisable record per task
 - `summary.json` - aggregate metrics and run metadata
-- `report.md` - a human-readable report with explicit caveats
+- `report.md` - a human-readable report with an explicit limitations section
 
 Robustness configs write:
 
@@ -134,9 +133,9 @@ Robustness configs write:
 
 Leaderboard configs write:
 
-- `leaderboard_summary.json` - provider status, pending models, rows, paired metrics, and caveats
+- `leaderboard_summary.json` - provider status, pending models, rows, paired metrics, and limitations
 - `leaderboard_report.md` - score, robustness, risk, parse, cost, and latency table
-- `headline_candidates.md` - deterministic candidate findings only when supported by saved artefacts
+- `headline_candidates.md` - deterministic candidate findings supported by saved artefacts
 - `paired_deltas.jsonl` - direct/tool/reflective deltas aligned by environment, task ID, seed, and variant ID where applicable
 
 In Python, the legacy single-environment API still works:
@@ -150,7 +149,7 @@ print(report.mean_score, report.pass_rate)
 
 ## Config-Driven Runs
 
-Stage 2 YAML files use this shape:
+Config-driven YAML files use this shape:
 
 ```yaml
 run:
@@ -207,28 +206,26 @@ agent:
 Local models use `type: local` and `model_name: ...`. Diagnostic baselines that
 use answers must be labelled as reference or mock baselines, never model runs.
 
-## Current Status
+## Research Snapshot
 
-MimirBench is a research-alpha project, with deterministic synthetic environments, real-model
-provider integrations, preliminary hosted-model artefacts, and a small synthetic
-transformer/interp track now checked in:
+MimirBench combines a synthetic benchmark for strategic reasoning with a
+controlled model-organism interpretability programme:
 
 - Six deterministic synthetic environment families are implemented:
   `bayesian_games`, `auctions`, `hidden_regimes`, `market_making`,
   `prediction_markets`, and `adversarial_risk`.
 - Real-model provider support exists for OpenAI, Anthropic/Claude, Gemini,
   generic HTTP, and optional local Hugging Face models.
-- Real-model leaderboard artefacts have been generated for OpenAI, Claude, and
-  Gemini. Every row is classified by track (strict-512 / best-valid) or as a
-  protocol/probe/diagnostic artefact — see [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md)
+- Pilot hosted-model evaluation artefacts have been generated for OpenAI, Claude,
+  and Gemini. Every row is classified by track (strict-512 / best-valid) or as a
+  protocol/probe/diagnostic artefact; see [BENCHMARK_PROTOCOL.md](BENCHMARK_PROTOCOL.md)
   and the classification table in [reports/INDEX.md](reports/INDEX.md). Bootstrap
   CIs over the saved sample are in
   [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md).
-- Every hosted-model row remains a pilot result: 20 tasks/environment and one
+- Every hosted-model row is a pilot evaluation: 20 tasks/environment and one
   seed. Full track A (100/environment x 3 seeds) and full track B
   (200/environment x 5 seeds), for strict-512 and best-valid, are implemented,
-  costed, and reproducibility-ready but have not been run because they require
-  external API budget. Larger hosted-model results are not simulated.
+  costed, and reproducibility-ready but have not been run.
 - The full-B task volume has been validated with non-paid reference and mock
   controls only (6,000 tasks each). These are infrastructure validations, not
   model-capability results.
@@ -236,7 +233,7 @@ transformer/interp track now checked in:
 - Strongest **best-valid** Claude direct row: Claude Sonnet 4.6 at
   `max_tokens=1536`.
 - Strongest **best-valid** Gemini direct row: `gemini-3.1-pro-preview` with
-  `thinking_level=low` (cache-backed retry; provider-load caveat).
+  `thinking_level=low` (cache-backed retry; provider-load condition).
 - Gemini `gemini-3.5-flash` with `thinking_budget=0` is the strongest best-valid
   non-Pro Gemini row.
 - Best-valid rows are not identical-decoding; cross-provider differences mix
@@ -249,7 +246,7 @@ transformer/interp track now checked in:
 - Responses are parsed and repaired deterministically, with no LLM judge and no
   hidden chain-of-thought collection.
 - A medium synthetic Bayesian/risk transformer is trained and analysed end to
-  end (Stage 7/8): 321,455 parameters, 12,000 train / 2,000 val / 2,000 test
+  end: 321,455 parameters, 12,000 train / 2,000 val / 2,000 test
   traces. On 2,000 held-out tasks it reaches a posterior-bucket accuracy of about
   0.990, action accuracy 1.000, risk accuracy 1.000, and a mean posterior error
   of about 0.0162.
@@ -261,10 +258,8 @@ transformer/interp track now checked in:
   checkpoints (seeds 123–128)**: layer-0 MLP action recovery is 0.000 on all six
   seeds while layer-0/1 attention recovery is 0.96/0.99 (mean). It is specific to
   this synthetic model organism and does not transfer to frontier models.
-- The earlier tiny checkpoint is kept only as the original CPU smoke artefact
-  (undertrained, near-zero/negative interpretability) — not as a current result.
-- All results are preliminary, synthetic, direct-agent unless labelled otherwise,
-  and not statistically conclusive.
+- The earlier tiny checkpoint is retained as the original CPU smoke artefact
+  (undertrained, with near-zero or negative interpretability results).
 - Main model comparisons use a single seed/schedule. The interpretability result
   is **replicated across six independently trained synthetic checkpoints (seeds
   123–128)** ([multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md));
@@ -278,7 +273,7 @@ transformer/interp track now checked in:
 - This is not a trading bot, live trading system, market-beating claim, trading-
   usefulness claim, or solved AI-safety benchmark.
 
-## Headline Findings
+## Principal Findings
 
 MimirBench surfaces environment-specific differences rather than a single
 uniformly dominant model. Across 20 tasks per environment, stronger/newer models
@@ -293,9 +288,8 @@ clean into corrupted prompts restored the correct action on 118/122 flipped
 pairs, providing a narrow causal model-organism result; the same pattern
 replicates across six independently trained checkpoints (seeds 123–128, with
 layer-0 MLP action recovery 0.000 on every seed). These are synthetic,
-deterministic tasks; the comparisons are not statistically conclusive, carry no
-trading-usefulness claim, and the small-model interpretability does not transfer
-to frontier models.
+deterministic tasks; the small-model interpretability does not transfer to
+frontier models.
 
 ## Where To Look
 
@@ -311,54 +305,34 @@ to frontier models.
   [extended report](reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md),
   the [multi-seed status](reports/interpretability/interp_bayes_multiseed_summary.md),
   and the [per-head/token summary](reports/interpretability/interp_bayes_head_token_summary.md)
-- Artifacts & reproduction: [ARTIFACTS.md](ARTIFACTS.md),
+- Artefacts & reproduction: [ARTIFACTS.md](ARTIFACTS.md),
   [MODEL_CARD_medium.md](MODEL_CARD_medium.md), [TRAINING.md](TRAINING.md)
 
-## Avoiding Overclaiming
+## Evidence Standards
 
 - Label every run as `reference solver`, `deterministic baseline`,
-  `local stub/mock baseline`, or `real model run`.
+  `local stub/mock baseline`, or `hosted/local model run`.
 - Do not report GPT, Claude, Gemini, or other model numbers unless credentials or
   weights were supplied and artefacts were actually generated.
 - Reference scores are sanity checks for generation and grading, not model scores.
-- Mock baselines test scoring sensitivity and parser behavior, not intelligence.
+- Mock baselines test scoring sensitivity and parser behaviour, not intelligence.
 - MimirBench never asks for hidden chain-of-thought; records store concise
   reasoning summaries and structured answers only.
 
-## Roadmap
+## Scope and Limitations
 
-1. ~~Stage 5: real API/local model integration, response parsing/repair, safe
-   tool-use policies, tool-use audit logs, and cost/latency reporting.~~ Done -
-   see [MODELS.md](MODELS.md) and [TOOLS.md](TOOLS.md).
-2. ~~Stage 6: comparison runner, plots, model cards, report index, failure
-   taxonomy, and paper-style results infrastructure.~~ Done.
-3. ~~Stage 7: synthetic Bayesian traces, compact transformer training,
-   checkpoint evaluation, plots, and model cards.~~ Done.
-4. ~~Stage 8: mechanistic interpretability on the trained checkpoint - activation
-   capture, linear probes, clean/corrupted activation patching, attention
-   analysis, circuit configs, and interpretability reports.~~ Done - see
-   [INTERPRETABILITY.md](INTERPRETABILITY.md). Findings describe one small
-   synthetic model only; no frontier-model claim is made.
-5. ~~Real-model provider phase: OpenAI, Claude, and Gemini direct leaderboard
-   artefacts plus targeted robustness probes.~~ Done. Provider-specific protocol
-   settings and caveats remain part of the reported result.
-6. ~~Train a larger synthetic Bayesian/risk transformer and rerun
-   interpretability to seek a causal model-organism result.~~ Done - the medium
-   checkpoint (321,455 params) learns the task and yields a narrow causal
-   patching result; see [INTERPRETABILITY.md](INTERPRETABILITY.md) and
-   [RESULTS.md](RESULTS.md). The finding is specific to that synthetic
-   checkpoint and makes no frontier-model claim.
-7. Stage 9: a paper-style report consolidating evals, robustness, training, and
-   interpretability, with polished figures, tables, and limitations.
-
-## What This Is Not
-
-- Not a trading bot.
-- Not a claim to beat markets.
-- Not a live trading system.
-- Not a solved AI-safety benchmark.
-
-All data is synthetic and seed-generated.
+- The benchmark is synthetic and seed-generated; it does not use live market
+  data or establish trading usefulness.
+- Hosted-model results are pilot evaluations based on 20 tasks/environment and a
+  single seed/schedule. They do not establish broad provider superiority or
+  statistical significance.
+- Best-valid rows use provider-specific output and thinking settings and are not
+  identical-decoding comparisons.
+- The six-seed model-organism replication supports a narrow causal patching
+  result within the synthetic transformer family. It does not establish transfer
+  to frontier-model internals.
+- MimirBench is an evaluation and research platform, not a deployment or trading
+  system.
 
 ## License
 

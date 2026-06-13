@@ -1,9 +1,12 @@
 # Model cards
 
-One card per evaluated model or agent. A model card records *exactly how* a model was
-evaluated and *what was found*, so a reader can trust and reproduce the numbers.
+One card per evaluated model or agent. Each card records the evaluated artefact,
+configuration, metrics, and limitations required to reproduce and interpret the
+result.
 
-Add a card only when it is backed by a real, reproducible run.
+Curated and generated cards in this directory cover the deterministic controls
+and the tiny and medium synthetic transformers. Hosted-model cards are stored
+alongside their leaderboard runs under `reports/runs/leaderboard/`.
 
 ## Template
 
@@ -28,7 +31,7 @@ Add a card only when it is backed by a real, reproducible run.
 - Paraphrase consistency: …
 - Adversarial score drop: …
 
-## Known limitations & caveats
+## Scope and limitations
 - …
 
 ## Reproduction
@@ -36,5 +39,3 @@ Add a card only when it is backed by a real, reproducible run.
 mimirbench run-eval <config> --seed <seed> --n-tasks <n>
 ```
 ```
-
-_No model cards yet._

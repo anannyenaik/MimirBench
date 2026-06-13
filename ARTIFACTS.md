@@ -1,21 +1,22 @@
-# Artifacts
+# Artefacts
 
-What is committed, what is regenerated, and how to verify it. The guiding rule:
+This document defines what is committed, what is regenerated, and how to verify
+it. The repository policy is:
 **curated reports and metrics are committed; large binary weights and raw caches
 are regenerated from configs + seeds**, because they are deterministic.
 
-## What is committed
+## Committed Artefacts
 
 - **Curated reports** under `reports/` — `INDEX.md`, leaderboard reports and
   comparison notes, robustness reports, interpretability reports, and the
   generated statistical-validity table
   (`reports/runs/leaderboard/statistical_validity_existing_artifacts.md`).
 - **Per-task results** — `results.jsonl` and `summary.json` for the saved
-  real-model leaderboard rows (the inputs to
+  hosted-model leaderboard rows (the inputs to
   [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md)).
 - **Training/eval summaries and figures** for the tiny and medium model organisms
   (`reports/training/...`, `reports/runs/small_transformer_bayes_*_eval/`).
-- **Interpretability artefacts** — probe/patching/attention JSON, the Stage 8
+- **Interpretability artefacts** — probe/patching/attention JSON, the
   reports, the extended report
   (`reports/interpretability/interp_bayes_medium_extended/`), and the **multi-seed
   replication** (seeds 123–128): per-seed summaries/figures under
@@ -29,7 +30,7 @@ are regenerated from configs + seeds**, because they are deterministic.
 - **Model cards** under `reports/model_cards/` (auto-generated for real runs) and
   the curated [MODEL_CARD_medium.md](MODEL_CARD_medium.md).
 
-## What is gitignored (regenerated, not committed)
+## Regenerated Artefacts
 
 Per [.gitignore](.gitignore):
 
@@ -56,7 +57,7 @@ convenience assets. The release asset does not change repository policy:
 checkpoints remain gitignored and the checkpoint is reproducible from the
 committed config.
 
-Download and verify them exactly:
+Download and verify them:
 
 ```powershell
 gh release download v0.2.0 --pattern best.pt --pattern vocab.json --dir release-assets\v0.2.0
@@ -105,7 +106,7 @@ Get-FileHash reports\training\small_transformer_bayes_medium\checkpoints\best.pt
 sha256sum reports/training/small_transformer_bayes_medium/checkpoints/best.pt
 ```
 
-> Note: PyTorch may serialise identical weights with minor container differences
+> PyTorch may serialise identical weights with minor container differences
 > across versions/platforms. If the byte-level hash differs, confirm equivalence
 > via the held-out metrics in [MODEL_CARD_medium.md](MODEL_CARD_medium.md) (action
 > accuracy 1.000, posterior-bucket accuracy 0.990, mean posterior error ≈ 0.0162)

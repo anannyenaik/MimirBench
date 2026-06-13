@@ -1,11 +1,9 @@
 # Interpretability
 
-> **Status:** Stage 8 is implemented. Activation capture, linear probes,
-> clean/corrupted activation patching, and attention analysis run end to end on a
-> trained small Bayesian transformer and write inspectable artefacts and figures.
-> All findings are about small, fully synthetic model organisms (a tiny smoke
-> checkpoint and a stronger medium one). **No claim is made about frontier models,
-> and no result here transfers to them.**
+MimirBench uses controlled synthetic transformers to study how evidence is
+represented and used in strategic decisions. The programme combines activation
+capture, linear probes, causal patching, attention analysis, robustness probes,
+and six-seed model-organism replication.
 
 ## What is analysed
 
@@ -19,7 +17,7 @@ interpretability track asks *how* a model represents that reasoning internally:
   *causally* driven by the evidence?
 - **Confidence** — is the confidence bucket represented?
 
-We analyse the Stage 7 checkpoint trained by
+We analyse the synthetic checkpoint trained by
 `mimirbench/training/train_small_transformer.py` on deterministic synthetic
 Bayesian traces. Because we own the generator, the exact posterior and the final
 action/risk labels are known, so we know precisely what an interpretability
@@ -27,9 +25,9 @@ method should be able to recover.
 
 ## Why small synthetic models are appropriate
 
-Running mechanistic interpretability directly on frontier models is hard and
-confounded: unknown pretraining data, no ground-truth posterior, and enormous
-scale. MimirBench uses a **model-organism** approach instead — a tiny, fully
+Mechanistic interpretability on frontier models is confounded by unknown
+pretraining data, unavailable ground-truth posteriors, and scale. MimirBench uses
+a **model-organism** approach: a compact, fully
 controlled transformer trained on a generator we wrote. This buys:
 
 - **Ground truth.** We know the true posterior and decision for every input, so
@@ -39,9 +37,8 @@ controlled transformer trained on a generator we wrote. This buys:
 - **Falsifiability.** Each experiment states what would count as a negative
   result, and negative results are reported as-is.
 
-The cost is external validity: a mechanism found here is evidence about *this*
-model only. That trade — honesty and control over scale and transfer — is the
-whole point.
+The resulting mechanisms are specific to this controlled model family; external
+validity is addressed explicitly in the limitations section.
 
 ## Activation capture
 
@@ -79,7 +76,7 @@ and evaluated on held-out val/test splits. For each (site, label) we report trai
 
 `mimirbench/interpretability/{counterfactuals,activation_patching}.py`
 
-`counterfactuals.py` builds minimal pairs from the Stage 7 machinery: a **clean**
+`counterfactuals.py` builds minimal pairs from the training machinery: a **clean**
 trace and a **corrupted** trace that share prior, likelihood, and payoff but whose
 evidence points at a different hypothesis (plus order-control and distractor
 variants). The same `compute_trace_targets` used in training labels both sides.
@@ -103,7 +100,7 @@ Input tokens are grouped into prior / likelihood / evidence / payoff-risk spans.
 For each layer and head we report attention entropy (how diffuse the head is) and
 the attention mass placed on each token group, plus the top attended positions.
 
-## What would count as causal evidence
+## Causal Evidence Criteria
 
 - A patch at a specific site that **consistently** moves the corrupted prediction
   back to the clean decision: a high recovery rate and a positive causal effect
@@ -111,7 +108,7 @@ the attention mass placed on each token group, plus the top attended positions.
 - A probe direction whose **ablation** measurably degrades the matching decision.
 - An attention head whose evidence-reading behaviour correlates with patch effects.
 
-## What would NOT count as causal evidence
+## Insufficient Evidence
 
 - **High probe accuracy alone.** Decodability is correlational; a feature can be
   present in activations without being used by the model.
@@ -121,7 +118,7 @@ the attention mass placed on each token group, plus the top attended positions.
   reproduces the clean output; that is a sanity check, not localisation.
 - **Anything transferring to larger or frontier models.**
 
-## Findings on the current checkpoint (honest summary)
+## Tiny Checkpoint Findings
 
 The shipped checkpoint is deliberately tiny (1 layer, `d_model=32`, 2 heads,
 trained 2 epochs on 128 traces). On it:
@@ -142,13 +139,13 @@ Exact numbers are in `RESULTS.md` and in each run's
 patching results together: the representation encodes the decision above chance,
 but on this underpowered model the decision is only weakly evidence-driven.
 
-## Findings on the medium checkpoint (a narrow causal result)
+## Medium Checkpoint Findings
 
-The tiny checkpoint was undertrained, so there was no learned computation to
+The tiny checkpoint was undertrained and did not expose a learned computation to
 localise. A stronger **medium** model organism (2 layers, `d_model=128`, 4 heads,
 321,455 parameters, trained on 12,000 traces) was therefore trained and analysed
 with `configs/interp_bayes_all_medium.yaml` (256 traces/split, 128 counterfactual
-pairs). Full numbers are in `RESULTS.md`; the honest summary:
+pairs). Full numbers are in `RESULTS.md`:
 
 - **Probes:** every label is now strongly decodable. The 20-way posterior bucket
   reaches 0.984 test accuracy (baseline 0.297) at `blocks.1.resid_post`; action
@@ -177,20 +174,19 @@ individual-position analysis below shows that the result does not localise to a
 single stable head or token position. There is no SAE-level analysis and no
 transfer to frontier models.
 
-## Extended analysis: position-resolved patching and negative controls
+## Position-Resolved Patching and Negative Controls
 
 `mimirbench/interpretability/{token_group_patching,extended_interpretability}.py`
 
 The whole-site result above cannot say *which token positions* carry the signal,
 so `mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml`
-adds three local-only, deterministic experiments on the medium checkpoint (no API
-calls). Artefacts:
+adds three deterministic experiments on the medium checkpoint. Artefacts:
 `reports/interpretability/interp_bayes_medium_extended/EXTENDED_INTERPRETABILITY_REPORT.md`.
 
 - **Token-group (position-resolved) patching.** Each sub-block site is patched
   *only* at the positions of one token group (prior / evidence / payoff-risk).
   Because the corruption changes only the evidence tokens, prior/payoff-risk are
-  honest negative controls. **Result (honest):** patching any single token group's
+  negative controls. **Result:** patching any single token group's
   positions recovers the flipped action on ≤2% of pairs — including the evidence
   group. The evidence→decision signal is therefore **distributed across positions**
   (the encoder mean-pools, and attention spreads the evidence everywhere), not
@@ -205,7 +201,7 @@ calls). Artefacts:
   **1.000** on real labels and **0.484** (below the 0.594 majority baseline) on
   shuffled labels, confirming the probe reads genuine structure, not noise.
 
-**Multi-seed replication.** The extended findings above — attention-concentrated
+**Six-seed model-organism replication.** The extended findings above — attention-concentrated
 whole-site recovery, ≤~2% token-group recovery, the mismatched-donor gap, and the
 label-shuffle collapse — are **replicated across six independently trained
 synthetic checkpoints (seeds 123–128)**. Each seed independently resamples the
@@ -219,9 +215,9 @@ mean/range are in
 [`reports/interpretability/interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md).
 Regenerate with
 `mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml`
-(local-only, CPU, no API calls).
+(CPU; no API calls).
 
-## Per-head and individual-token analysis
+## Per-Head and Individual-Token Analysis
 
 `mimirbench/interpretability/head_token_analysis.py`
 
@@ -250,7 +246,7 @@ This supports an attention-mediated but distributed computation. It does not
 support a clean circuit claim. Full tables and seed ranges:
 [`reports/interpretability/interp_bayes_head_token_summary.md`](reports/interpretability/interp_bayes_head_token_summary.md).
 
-## Running it
+## Reproduction
 
 ```bash
 pip install -e ".[ml]"               # torch is required for the model paths
@@ -261,12 +257,12 @@ mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_ti
 mimirbench run-interpretability configs/interp_bayes_all_medium.yaml
 mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_medium
 
-# Extended, position-resolved patching plus negative controls (local-only):
+# Extended, position-resolved patching plus negative controls:
 mimirbench run-extended-interpretability configs/interp_bayes_medium_extended.yaml
 
-# Multi-seed replication across seeds 123-128 (local-only, no API calls):
+# Six-seed model-organism replication across seeds 123-128:
 # trains any missing per-seed checkpoint, reruns the whole-site + extended
-# pipeline and a held-out eval per seed, and writes an honest mean/range aggregate.
+# pipeline and a held-out eval per seed, and writes a mean/range aggregate.
 mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml
 
 # Per-head patching/ablation and individual-position patching across saved seeds:

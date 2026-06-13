@@ -7,7 +7,7 @@ payoff-risk) of a site, which directly addresses the documented "patching is
 full-sequence per site" limitation.
 
 Because the counterfactual corruption changes **only** the evidence
-(observation) tokens, the prior and payoff-risk groups are honest *negative
+(observation) tokens, the prior and payoff-risk groups are designed *negative
 controls* at the sub-block sites: their activations still differ between clean
 and corrupted (attention mixes the changed evidence into every position), yet
 restoring them should recover the decision far less than restoring the evidence

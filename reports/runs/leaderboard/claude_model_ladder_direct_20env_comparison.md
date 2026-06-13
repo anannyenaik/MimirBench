@@ -1,4 +1,4 @@
-# Preliminary Claude model-ladder comparison (direct, 20 tasks/env)
+# Pilot Claude model-ladder comparison (direct, 20 tasks/env)
 
 Generated from saved artefacts on 2026-06-03 local time. This is a synthetic,
 direct-agent-only comparison with 20 tasks per environment across six
@@ -151,7 +151,7 @@ Against the external `gpt-5.4` reference (which used `max_tokens=512`), Sonnet a
 rate. It was also far slower and more expensive, and unlike `gpt-5.4` it required
 the larger output budget to parse cleanly.
 
-## Preliminary reading
+## Pilot reading
 
 - The strongest **clean** Claude direct row in this benchmark snapshot is
   **Claude Sonnet 4.6** (`claude-sonnet-4-6`) at `max_tokens=1536`: mean score
@@ -163,9 +163,9 @@ the larger output budget to parse cleanly.
 - On these synthetic tasks Sonnet 4.6 outscored the `gpt-5.4` reference overall
   and in most environments, but at a strong latency and cost penalty and only
   after its output budget was tripled to avoid truncation.
-- This is a budget-conscious, preliminary comparison: one Anthropic ladder
+- This is a budget-conscious, pilot comparison: one Anthropic ladder
   (two models) plus one external OpenAI reference row, direct agents only,
   synthetic deterministic tasks, 20 tasks per environment, one seed/task
   schedule, no tools, no reflective agents, and a non-identical output budget for
-  Sonnet. It is not statistically conclusive, not a trading result, and not a
-  broad provider- or model-superiority claim.
+  Sonnet. The sample does not establish broad provider superiority or real-world
+  performance.

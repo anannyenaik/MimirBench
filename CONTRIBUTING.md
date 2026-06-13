@@ -47,8 +47,8 @@ CI runs the same three on Python 3.11 and 3.12. PRs must be green.
   it in graders.
 - **No fabricated results.** Do not add numbers to `RESULTS.md` or `reports/` unless
   they come from a real, reproducible run. The reference baseline is not a result.
-- **Honest status.** Mark unfinished environments as scaffolds; prefer a clear
-  `NotImplementedError` pointing to the roadmap over a plausible-but-wrong stub.
+- **Explicit status.** Mark unfinished environments as scaffolds; prefer a clear
+  `NotImplementedError` over a plausible but incorrect stub.
 
 ## Adding an environment
 

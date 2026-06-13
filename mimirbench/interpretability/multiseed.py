@@ -3,7 +3,7 @@
 Local-only, CPU, **no API calls and no downloads**. This driver counters the
 "interpretability is single-seed" criticism by running the *same* Stage 8 +
 extended pipeline on several independently trained synthetic checkpoints and
-aggregating the per-seed metrics honestly.
+aggregating the per-seed metrics explicitly.
 
 For each seed it:
 
@@ -560,7 +560,7 @@ def _seed_story_replicated(metrics: dict[str, Any]) -> dict[str, Any]:
 
 
 def aggregate_seed_records(records: list[dict[str, Any]], *, run_name: str) -> dict[str, Any]:
-    """Aggregate per-seed records into an honest mean/range summary."""
+    """Aggregate per-seed records into an explicit mean/range summary."""
     attempted = [int(r["seed"]) for r in records]
     completed = [r for r in records if r.get("status") == "complete"]
     completed_seeds = [int(r["seed"]) for r in completed]

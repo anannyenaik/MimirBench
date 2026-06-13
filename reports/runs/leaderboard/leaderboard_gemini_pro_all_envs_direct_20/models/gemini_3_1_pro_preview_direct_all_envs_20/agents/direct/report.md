@@ -74,10 +74,10 @@
 - `hidden_regimes/hidden_regimes-129` score=`0.857698` violations=`[]` error=`None`
 - `hidden_regimes/hidden_regimes-130` score=`0` violations=`['no_valid_answer']` error=`model call failed after 3 attempt(s): ServerError: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

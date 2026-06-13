@@ -36,10 +36,10 @@ No deterministic failure cases were extracted from this run.
 
 ## Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 - This is a reference solver sanity check, not a real model benchmark.
-- Results apply only to the saved task set, prompt, parser, and decoding settings.
+- Results are scoped to the saved task set, prompt, parser, and decoding settings.
 - No LLM judges are used; all grading and failure labels are deterministic.
 - These benchmark diagnostics are not evidence of trading usefulness or profitability.
 - This card describes a non-model baseline, not model capability.

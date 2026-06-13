@@ -1,11 +1,9 @@
 # Failure cases
 
-A curated catalogue of specific, **reproducible** reasoning failures surfaced by
-MimirBench. Each entry is reconstructible from its seed, so anyone can inspect the
-exact task and the agent's response.
-
-> _Empty until model-agent runs exist. The structure below shows how entries will be
-> recorded._
+A catalogue specification for reproducible reasoning failures surfaced by
+MimirBench. Run-level catalogues are generated alongside robustness evaluations;
+see [INDEX.md](INDEX.md) for the committed reports. Each entry is reconstructible
+from its task identifier, seed, task text, and saved response.
 
 ## Entry template
 

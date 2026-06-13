@@ -1,21 +1,20 @@
 # MimirBench benchmark protocol
 
-This document defines the **official evaluation tracks** for MimirBench real-model
+This document defines the **official evaluation tracks** for MimirBench hosted-model
 rows and the rules for labelling every saved run. It exists so that protocol
-artefacts (output-budget truncation, provider load) are never confused with
-capability results, and so that "which rows are comparable?" has one answer.
+artefacts such as output-budget truncation and provider load remain distinct from
+capability results.
 
-All rows below are **synthetic, pilot, 20-tasks-per-environment, single-seed**
-results. Nothing here is a trading claim, a broad provider-superiority claim, or a
-statistical-significance claim. See [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md)
-for bootstrap CIs over these same saved artefacts.
+All rows below are **pilot hosted-model evaluations** on a synthetic benchmark:
+20 tasks per environment and one seed. See
+[STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md) for bootstrap CIs over the
+same saved artefacts.
 
 The funded larger-scale protocol is defined in
 [FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md). Full track A
 (100/environment x 3 seeds) and full track B (200/environment x 5 seeds) are
 implemented, costed, and reproducibility-ready, but no full hosted-model run has
-been made because external API budget is not available. Larger hosted-model rows
-are intentionally not simulated.
+been completed.
 
 ## Two official tracks
 
@@ -38,16 +37,16 @@ Claude Haiku 4.5; Gemini Flash-Lite.
 
 ### B. Best-valid track
 
-A practical "usable model under its documented protocol" comparison. Each provider
+A practical valid-output comparison. Each provider
 gets the **minimum documented settings needed to emit valid JSON** (for example a
 larger output budget, or a thinking/decoding switch). This track is explicitly
 **not identical-decoding**: rows use different output budgets or thinking settings,
-so cross-row differences mix capability with protocol. It answers "how well does
-each model do when configured to actually return parseable answers?".
+so cross-row differences mix capability with protocol. It measures performance
+under each model's documented valid-output configuration.
 
 Best-valid clean rows currently: Claude Sonnet 4.6 (`max_tokens=1536`); Gemini
 Flash (`thinking_budget=0`); Gemini Pro Preview (`thinking_level=low`, cache-backed
-retry, provider-load caveat). `gpt-5.4` is clean in both tracks (already clean at
+retry, provider-load condition). `gpt-5.4` is clean in both tracks (already clean at
 512).
 
 ## Row classification rules
@@ -78,7 +77,7 @@ so it survives index regeneration.
   as capability.
 - A **provider-failed row** has unrecovered provider errors; its clean replacement
   (e.g. a cache-backed retry) is the row that may be reported, with the failure
-  noted as a caveat.
+  noted as a limitation.
 - A **rescue probe** is a deliberately small run that isolates whether a failure is
   protocol-driven. It is diagnostic and never replaces a full ladder score.
 - A **diagnostic tool run** forces a tool call; forced-tool use is not natural tool
@@ -86,7 +85,7 @@ so it survives index regeneration.
 - **Reference / mock / non-model** rows validate generation, grading, and tool
   plumbing. They are controls and must never be reported as model performance.
 
-## Current track assignments (the rows that matter)
+## Current Track Assignments
 
 | Row | Track / label |
 | --- | --- |
@@ -99,7 +98,7 @@ so it survives index regeneration.
 | Gemini Flash-Lite | strict-track clean |
 | Gemini Flash (default thinking, 512) | protocol-limited (118/120 stopped at MAX_TOKENS) |
 | Gemini Flash (`thinking_budget=0`) | best-valid clean |
-| Gemini Pro Preview (`thinking_level=low`, retry) | best-valid clean (provider-load caveat) |
+| Gemini Pro Preview (`thinking_level=low`, retry) | best-valid clean (provider-load condition) |
 
 ## Reproducing the classification and statistics
 
@@ -110,7 +109,7 @@ mimirbench statistical-validity               # bootstrap CIs + paired deltas (n
 
 Both commands read saved artefacts only; neither makes any API call.
 
-## Caveats (apply to every row)
+## Scope and Limitations
 
 - Synthetic, deterministic evaluation tasks; not live-market or trading results.
 - 20 tasks/environment, single seed/schedule; pilot CIs only.

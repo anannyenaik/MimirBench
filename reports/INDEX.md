@@ -1,6 +1,6 @@
 # MimirBench report index
 
-Generated from saved artefacts. Reference, mock, and reference-tool runs are non-model diagnostics; real-model rows are only present when an actual run directory exists.
+Index of saved evaluation artefacts. Reference, mock, and reference-tool runs are non-model controls; hosted-model rows are present only when a completed run directory exists.
 
 ## Baseline runs
 
@@ -23,18 +23,18 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | small_transformer_bayes_eval | [`runs/small_transformer_bayes_eval`](runs/small_transformer_bayes_eval) | unknown | n/a | n/a |
 | small_transformer_bayes_medium_eval | [`runs/small_transformer_bayes_medium_eval`](runs/small_transformer_bayes_medium_eval) | unknown | n/a | n/a |
 | tool_reference_bayes | [`runs/tool_reference_bayes`](runs/tool_reference_bayes) | deterministic non-model tool baseline | 10 | 1 |
-| verify_require_tool_bayes_micro | [`runs/verify_require_tool_bayes_micro`](runs/verify_require_tool_bayes_micro) | real API model | 3 | 0.619711 |
-| verify_require_tool_bayes_micro_v2 | [`runs/verify_require_tool_bayes_micro_v2`](runs/verify_require_tool_bayes_micro_v2) | real API model | 3 | 0.999637 |
-| verify_require_tool_predmkt_micro | [`runs/verify_require_tool_predmkt_micro`](runs/verify_require_tool_predmkt_micro) | real API model | 3 | 0.237347 |
+| verify_require_tool_bayes_micro | [`runs/verify_require_tool_bayes_micro`](runs/verify_require_tool_bayes_micro) | hosted API model | 3 | 0.619711 |
+| verify_require_tool_bayes_micro_v2 | [`runs/verify_require_tool_bayes_micro_v2`](runs/verify_require_tool_bayes_micro_v2) | hosted API model | 3 | 0.999637 |
+| verify_require_tool_predmkt_micro | [`runs/verify_require_tool_predmkt_micro`](runs/verify_require_tool_predmkt_micro) | hosted API model | 3 | 0.237347 |
 
 ## Robustness runs
 
 | Name | Path | Label | Tasks | Mean score / drop |
 | --- | --- | --- | ---: | ---: |
-| leaderboard_claude_sonnet_robustness_tiny | [`runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny`](runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny) | real model | 18 | -0.00529801 |
-| leaderboard_gemini_pro_robustness_small | [`runs/leaderboard/leaderboard_gemini_pro_robustness_small`](runs/leaderboard/leaderboard_gemini_pro_robustness_small) | real model | 18 | -0.0124366 |
-| leaderboard_gemini_strongest_robustness_tiny | [`runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny`](runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny) | real model | 30 | 0.0280413 |
-| leaderboard_openai_gpt54_robustness_tiny | [`runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny`](runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny) | real model | 30 | 0.0484097 |
+| leaderboard_claude_sonnet_robustness_tiny | [`runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny`](runs/leaderboard/leaderboard_claude_sonnet_robustness_tiny) | hosted model | 18 | -0.00529801 |
+| leaderboard_gemini_pro_robustness_small | [`runs/leaderboard/leaderboard_gemini_pro_robustness_small`](runs/leaderboard/leaderboard_gemini_pro_robustness_small) | hosted model | 18 | -0.0124366 |
+| leaderboard_gemini_strongest_robustness_tiny | [`runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny`](runs/leaderboard/leaderboard_gemini_strongest_robustness_tiny) | hosted model | 30 | 0.0280413 |
+| leaderboard_openai_gpt54_robustness_tiny | [`runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny`](runs/leaderboard/leaderboard_openai_gpt54_robustness_tiny) | hosted model | 30 | 0.0484097 |
 | robustness_mock_all_envs | [`runs/robustness_mock_all_envs`](runs/robustness_mock_all_envs) | mock agent (diagnostic baseline) | 90 | 0.00548605 |
 | robustness_mock_bayes | [`runs/robustness_mock_bayes`](runs/robustness_mock_bayes) | mock agent (diagnostic baseline) | 25 | 0.0949578 |
 | robustness_reference_all_envs | [`runs/robustness_reference_all_envs`](runs/robustness_reference_all_envs) | reference solver (sanity check) | 90 | 1.32169e-18 |
@@ -50,7 +50,7 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 
 ## Leaderboard runs
 
-| Name | Path | Models run | Pending | Tasks/agent | Headlines | Preliminary |
+| Name | Path | Models run | Pending | Tasks/agent | Headlines | Pilot-scale |
 | --- | --- | ---: | ---: | ---: | ---: | :---: |
 | leaderboard_all_available_tiny | [`runs/leaderboard/leaderboard_all_available_tiny`](runs/leaderboard/leaderboard_all_available_tiny) | 0 | 3 | 60 | 0 | yes |
 | leaderboard_claude_haiku_all_envs_direct_20 | [`runs/leaderboard/leaderboard_claude_haiku_all_envs_direct_20`](runs/leaderboard/leaderboard_claude_haiku_all_envs_direct_20) | 1 | 0 | 120 | 0 | yes |
@@ -77,9 +77,9 @@ Generated from saved artefacts. Reference, mock, and reference-tool runs are non
 | leaderboard_openai_minis_all_envs_direct_20 | [`runs/leaderboard/leaderboard_openai_minis_all_envs_direct_20`](runs/leaderboard/leaderboard_openai_minis_all_envs_direct_20) | 2 | 0 | 120 | 0 | yes |
 | leaderboard_openai_modern_mini_all_envs_direct_tiny | [`runs/leaderboard/leaderboard_openai_modern_mini_all_envs_direct_tiny`](runs/leaderboard/leaderboard_openai_modern_mini_all_envs_direct_tiny) | 1 | 0 | 30 | 0 | yes |
 
-Leaderboard rows are real model results only when `models_run > 0` and the saved summary contains concrete per-agent run artefacts.
+Leaderboard rows are hosted/local-model results only when `models_run > 0` and the saved summary contains concrete per-agent run artefacts.
 
-## Real-model row classification (tracks)
+## Hosted-Model Row Classification
 
 Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-track clean` and `best-valid clean` rows are headline comparisons; everything else is a documented protocol/probe/diagnostic artefact.
 
@@ -96,7 +96,7 @@ Tracks follow [BENCHMARK_PROTOCOL.md](../BENCHMARK_PROTOCOL.md). Only `strict-tr
 | `leaderboard_gemini_flash_lite_smoke` | smoke run (6 tasks) |
 | `leaderboard_gemini_flash_rescue_probe_thinking0` | rescue probe (6 tasks, thinking disabled) |
 | `leaderboard_gemini_pro_all_envs_direct_20` | provider-failed diagnostic (14/120 503/504) |
-| `leaderboard_gemini_pro_all_envs_direct_20_retry` | best-valid clean (cache-backed; provider-load caveat) |
+| `leaderboard_gemini_pro_all_envs_direct_20_retry` | best-valid clean (cache-backed; provider-load condition) |
 | `leaderboard_gemini_pro_rescue_probe_low_thinking` | rescue probe (6 tasks, thinking_level=low) |
 | `leaderboard_gemini_pro_smoke` | smoke run (request rejected, no model usage) |
 | `leaderboard_openai_all_envs_direct_tiny` | smoke run (30 tasks) |
@@ -306,11 +306,11 @@ Interpretability runs analyse a small synthetic Bayesian transformer. Probe accu
 - [`training/small_transformer_bayes_tiny/figures/validation_posterior_bucket_accuracy.png`](training/small_transformer_bayes_tiny/figures/validation_posterior_bucket_accuracy.png)
 - [`training/small_transformer_bayes_tiny/figures/validation_risk_accuracy.png`](training/small_transformer_bayes_tiny/figures/validation_risk_accuracy.png)
 
-## Caveats
+## Scope and Limitations
 
 - All entries are backed by files under `reports/`.
-- Do not treat reference, mock, or deterministic tool baselines as real model results.
-- Do not describe any result as evidence of trading ability, trading usefulness, or profitability.
-- Real API/local model reports remain pending unless actual run artefacts exist.
+- Reference, mock, and deterministic tool baselines are non-model controls.
+- Results do not establish trading ability, trading usefulness, or profitability.
+- Hosted API/local model reports remain pending unless complete run artefacts exist.
 - Full-scale reference/mock runs are infrastructure validations, not model capability results.
 - Hosted-model full tracks are implemented and costed but remain unrun pending external budget.

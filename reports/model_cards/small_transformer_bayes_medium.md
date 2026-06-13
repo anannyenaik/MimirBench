@@ -48,7 +48,7 @@
 - Final checkpoint: `reports\training\small_transformer_bayes_medium\checkpoints\final.pt`
 - Tokenizer vocabulary: `reports\training\small_transformer_bayes_medium\vocab.json`
 
-## Known Limitations
+## Scope and Limitations
 
 - This is a small synthetic model, not a frontier model.
 - Training traces come from a narrow deterministic Bayesian generator and do not represent open-ended strategic reasoning.

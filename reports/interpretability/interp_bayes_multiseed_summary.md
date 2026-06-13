@@ -13,7 +13,7 @@ backed by a completed run rather than an aspiration.
 | Extended interpretability (`interp_bayes_medium_extended`) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
 | Held-out test evaluation (fresh n=2000 draw) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
 
-**Headline (honest):** extended medium-model interpretability is now **replicated
+**Principal finding:** extended medium-model interpretability is now **replicated
 across six independently trained synthetic checkpoints** (seeds 123–128). Each
 seed independently resamples the training data, the weight initialisation, **and**
 the interpretability probe/patch set — so these are genuinely independent draws,
@@ -87,7 +87,7 @@ Each seed independently passes all four pre-registered checks
    group's positions (evidence / prior / payoff-risk) of any one sub-block
    recovers the action on at most 2.6% of flipped pairs (mean 1.1%). The encoder
    mean-pools, so the signal is distributed across positions rather than localised
-   to the evidence token positions — reported as an honest negative result, and it
+   to the evidence token positions — reported as a negative result, and it
    holds on every seed.
 3. **The patch restores a *specific* computation (mismatched-donor control).** At
    `blocks.0.attn_out`, a matched donor recovers the action on 0.96 of flipped
@@ -118,7 +118,7 @@ regenerable artefacts (synthetic traces, activation dumps, per-row patching logs
 held-out eval rows) are gitignored; the per-seed summaries, patching summaries,
 reports, and figures are kept.
 
-## Caveats
+## Scope and Limitations
 
 - One narrow synthetic Bayesian/risk generator; deterministic, CPU-only. Six
   seeds establish seed-to-seed stability of *this* model organism, not generality

@@ -74,10 +74,10 @@
 - `prediction_markets/prediction_markets-123` score=`0.730301` violations=`[]` error=`None`
 - `prediction_markets/prediction_markets-124` score=`0.537032` violations=`[]` error=`None`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

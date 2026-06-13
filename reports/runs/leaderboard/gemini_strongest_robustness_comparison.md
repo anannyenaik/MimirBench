@@ -52,6 +52,6 @@ higher than base tasks on average in this small synthetic sample.
 
 The Pro robustness probe is useful because it tests the newly clean Pro row after
 the provider-error retry, but it is small and should not be compared as a strict
-ranking against the 30+90 Flash/OpenAI rows. These are preliminary synthetic
+ranking against the 30+90 Flash/OpenAI rows. These are pilot synthetic
 diagnostics only. No statistical-significance, trading-usefulness, or broad
 provider-superiority claim is made.

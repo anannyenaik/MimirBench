@@ -2,10 +2,10 @@
 
 The leaderboard runs *paired* benchmarks on identical task IDs for a set of agent
 modes (``direct``, ``tool``, ``reflective``) across one or more configured
-models, then produces an honest leaderboard with cost, latency, robustness, and
+models, then produces an evidence-backed leaderboard with cost, latency, robustness, and
 failure summaries.
 
-Design rules (the same honesty contract used elsewhere in MimirBench):
+Design rules:
 
 * **Never fabricate.** A model is only run when its provider reports as usable
   (package present + key present). Unusable models are recorded as ``pending`` -
@@ -954,7 +954,7 @@ def _headline(
     preliminary: bool,
 ) -> dict[str, Any]:
     suffix = f" (n={n_tasks} tasks/agent" if n_tasks is not None else " ("
-    suffix += "; PRELIMINARY tiny run)" if preliminary else ")"
+    suffix += "; pilot-scale run)" if preliminary else ")"
     return {
         "text": text + suffix,
         "evidence": evidence,
@@ -974,7 +974,7 @@ def _write_leaderboard_report(summary: dict[str, Any], path: Path) -> None:
         f"- Timestamp: `{summary['timestamp']}`",
         f"- Agent modes: {', '.join(summary['agent_modes'])}",
         f"- Tasks per agent: `{summary['tasks_per_agent']}`",
-        f"- Preliminary tiny run: **{'yes' if summary['preliminary'] else 'no'}**",
+        f"- Pilot-scale run: **{'yes' if summary['preliminary'] else 'no'}**",
         f"- Real model execution permitted: **{'yes' if summary.get('real_execution_permitted') else 'no'}**",
         "",
         "## Provider availability",
@@ -1052,7 +1052,7 @@ def _write_leaderboard_report(summary: dict[str, Any], path: Path) -> None:
     for candidate in candidates:
         lines.append(f"- {candidate['text']}")
 
-    lines.extend(["", "## Caveats", ""])
+    lines.extend(["", "## Scope and Limitations", ""])
     for caveat in summary.get("caveats", []):
         lines.append(f"- {caveat}")
 
@@ -1075,11 +1075,11 @@ def _write_headline_candidates(summary: dict[str, Any], path: Path) -> None:
         "",
         f"- Run ID: `{summary['run_id']}`",
         f"- Tasks per agent: `{summary['tasks_per_agent']}`",
-        f"- Preliminary tiny run: **{'yes' if summary['preliminary'] else 'no'}**",
+        f"- Pilot-scale run: **{'yes' if summary['preliminary'] else 'no'}**",
         "",
-        "Candidates are proposed deterministically and only when the supporting "
-        "metrics exist. They are *candidates*, not validated findings; confirm "
-        "with larger runs before publishing.",
+        "Candidate findings are emitted deterministically when supporting metrics "
+        "meet the configured evidence thresholds. Pilot findings require "
+        "confirmation at full scale.",
         "",
     ]
     candidates = summary.get("headline_candidates", [])
@@ -1094,7 +1094,7 @@ def _write_headline_candidates(summary: dict[str, Any], path: Path) -> None:
             lines.append("")
             lines.append(f"- Evidence: `{json.dumps(candidate['evidence'], sort_keys=True)}`")
             lines.append(f"- Task count: `{candidate['n_tasks']}`")
-            lines.append(f"- Preliminary: `{candidate['preliminary']}`")
+            lines.append(f"- Pilot-scale: `{candidate['preliminary']}`")
             lines.append("")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -1120,8 +1120,8 @@ def _leaderboard_caveats(
     ]
     if _is_preliminary(config):
         caveats.append(
-            "This is a PRELIMINARY tiny real-model run (<= a handful of tasks per environment); "
-            "expand the evaluation before drawing strong conclusions."
+            "This is a pilot hosted-model run (<= a handful of tasks per environment); "
+            "full-scale confirmation is required for broader conclusions."
         )
     if not model_payloads:
         caveats.append(

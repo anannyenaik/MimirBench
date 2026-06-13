@@ -76,7 +76,7 @@ def test_report_index_includes_expected_directories(tmp_path) -> None:  # type: 
     assert "mock_bayes" in text
     assert "nested_robustness" in text
     assert "pending" in text
-    assert "Leaderboard rows are real model results only" in text
+    assert "Leaderboard rows are hosted/local-model results only" in text
     assert "model_ladder_note.md" in text
     assert "score_by_environment.png" in text
     assert "baseline.md" in text

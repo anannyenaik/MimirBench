@@ -139,7 +139,7 @@ def _render_small_transformer_card(
             f"- Final checkpoint: `{paths.get('final_checkpoint', 'n/a')}`",
             f"- Tokenizer vocabulary: `{paths.get('vocab', 'n/a')}`",
             "",
-            "## Known Limitations",
+            "## Scope and Limitations",
             "",
             "- This is a small synthetic model, not a frontier model.",
             "- Training traces come from a narrow deterministic Bayesian generator and do not represent open-ended strategic reasoning.",

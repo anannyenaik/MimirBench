@@ -462,7 +462,7 @@ def _write_comparison_report(summary: dict[str, Any], path: Path) -> None:
     else:
         lines.append("No figures were generated.")
 
-    lines.extend(["", "## Caveats", ""])
+    lines.extend(["", "## Scope and Limitations", ""])
     for caveat in summary.get("caveats", []):
         lines.append(f"- {caveat}")
 

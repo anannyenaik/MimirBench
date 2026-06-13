@@ -9,7 +9,7 @@ All experiments are local, deterministic, CPU-only; no model is downloaded and n
 
 ## Position-resolved (token-group) activation patching
 
-Each sub-block site is patched **only at the positions of one token group**. The corruption changes only the evidence (observation) tokens, so the `prior` and `payoff_risk` groups are honest negative controls: restoring them should recover the decision far less than restoring `evidence`.
+Each sub-block site is patched **only at the positions of one token group**. The corruption changes only the evidence (observation) tokens, so the `prior` and `payoff_risk` groups are designed negative controls: restoring them should recover the decision far less than restoring `evidence`.
 
 | Site | Group | Action recovery | Mean action causal effect | n flipped |
 | --- | --- | ---: | ---: | ---: |
@@ -54,7 +54,7 @@ A matched recovery well above the mismatched recovery confirms the patch restore
 
 A genuine signal collapses to ~baseline when labels are shuffled; a large real-minus-shuffled gap indicates the probe reads structure, not noise.
 
-## Limitations and caveats
+## Scope and Limitations
 
 - One checkpoint, one seed, one narrow synthetic Bayesian/risk generator.
 - Position-resolved patching is at the token-group level; it does not isolate individual heads or neurons, and uses no sparse autoencoder.

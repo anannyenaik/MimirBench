@@ -58,7 +58,7 @@
 14. `bayesian_games` `bayesian_games-123::misleading_authority` **large_score_drop** (score 0.86 → 0.21): Score dropped by 0.65 under an answer-preserving transformation.
 15. `bayesian_games` `bayesian_games-142::misleading_authority` **large_score_drop** (score 0.93 → 0.35): Score dropped by 0.58 under an answer-preserving transformation.
 
-## Caveats
+## Scope and Limitations
 
 - Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.
 - Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.

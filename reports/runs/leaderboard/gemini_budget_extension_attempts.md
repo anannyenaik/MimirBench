@@ -46,7 +46,7 @@ from provider-failed diagnostic to a clean cache-backed 20/env row, and a small
 Pro robustness probe was added. Further spend is possible within the cap, but was
 not needed for this controlled retry pass.
 
-## Caveats
+## Scope and Limitations
 
 No statistical-significance claim is made. No trading-usefulness claim is made.
 No broad provider-superiority claim is made. The initial Pro diagnostic remains a

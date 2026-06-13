@@ -59,12 +59,12 @@
 14. `bayesian_games` `bayesian_games-127::paraphrase` **paraphrase_action_flip** (score 0.87 → 0.87): The chosen action flipped under a meaning-preserving paraphrase.
 15. `prediction_markets` `prediction_markets-123::risk_pressure` **high_regret** (score 0.80 → 0.78): The variant decision incurred high regret (0.114) versus the reference action.
 
-## Caveats
+## Scope and Limitations
 
 - Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.
 - Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.
 - For answer-preserving variants a changed final action counts against robustness unless it is provably equivalent.
-- Real-model robustness numbers are only meaningful for the exact model, prompt, and decoding settings used.
+- Hosted-model robustness results are scoped to the exact model, prompt, and decoding settings used.
 
 ## Artefacts
 

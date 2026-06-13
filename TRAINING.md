@@ -1,15 +1,15 @@
-# Small-Transformer Training
+# Synthetic Transformer Training
 
-Stage 7 trains a compact transformer on deterministic synthetic Bayesian traces.
-The goal is not frontier-model benchmarking. The goal is to produce a tiny,
-inspectable model organism for later mechanistic interpretability experiments.
+MimirBench trains compact transformers on deterministic synthetic Bayesian
+traces to provide inspectable model organisms for mechanistic interpretability.
 
 ## Why Train A Small Model
 
 Frontier models are hard to instrument and confounded by unknown pretraining data.
 MimirBench therefore trains a small model on a fully controlled generator where
-the exact posterior, decision labels, and risk labels are known. If the model
-learns these labels, Stage 8 can ask where those features live in the model.
+the exact posterior, decision labels, and risk labels are known. Once a model
+learns these labels, the interpretability programme can identify where those
+features are represented and used.
 
 ## Synthetic Trace Generation
 
@@ -55,7 +55,7 @@ transformer with token embeddings, positional embeddings, a small transformer
 encoder stack, an optional LM head, and supervised classification heads. Torch is
 imported only when training or checkpoint inference is invoked.
 
-## Run Tiny Training
+## Run the Tiny Smoke Configuration
 
 Install the ML extra first:
 
@@ -92,7 +92,7 @@ reports/training/small_transformer_bayes_tiny/
   figures/validation_accuracy.png
 ```
 
-## Evaluate The Checkpoint
+## Evaluate the Checkpoint
 
 ```bash
 mimirbench eval-small-transformer configs/eval_small_transformer_bayes.yaml
@@ -112,7 +112,7 @@ The evaluation computes posterior-bucket accuracy, action accuracy, risk accurac
 confidence accuracy, approximate posterior error, regret, invalid-response rate,
 and latency summaries.
 
-## Inspect A Run
+## Inspect a Run
 
 ```bash
 mimirbench inspect-training reports/training/small_transformer_bayes_tiny
@@ -144,7 +144,7 @@ action/risk heads saturate from little data while the 20-way posterior bucket is
 the data-hungry head. Exact numbers and the comparison table live in
 `RESULTS.md` ("Larger Small-Transformer Model Organism").
 
-This medium checkpoint is the one the Stage 8 medium interpretability run
+This medium checkpoint is the one the medium interpretability run
 analyses, and the one that yields a (narrow, synthetic) positive causal patching
 result.
 
@@ -159,11 +159,11 @@ reproduces the checkpoint, and the committed `summary.json`, `metrics.jsonl`,
 figures, and model card under `reports/training/small_transformer_bayes_medium/`
 record the numbers without needing the weights.
 
-## Interpretability (Stage 8)
+## Interpretability
 
 Checkpoints include the model config, label vocabularies, tokenizer payload, and
 run metadata. The supervised heads create clean targets for linear probes and
-activation patching, which Stage 8 now implements end to end:
+activation patching, which the interpretability pipeline implements end to end:
 
 - activation capture hooks (`mimirbench/interpretability/activation_capture.py`);
 - linear probes for posterior, risk, action, and confidence
@@ -180,7 +180,7 @@ mimirbench run-interpretability configs/interp_bayes_all_tiny.yaml
 mimirbench inspect-interpretability reports/interpretability/interp_bayes_all_tiny
 ```
 
-See `INTERPRETABILITY.md` for methods, findings, and caveats. The interpretability
+See `INTERPRETABILITY.md` for methods, findings, and limitations. The interpretability
 results describe this small synthetic model only and make no frontier-model claim.
 
 ## Limitations

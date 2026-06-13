@@ -1,7 +1,7 @@
 # Design
 
-This document explains *why* MimirBench is built the way it is. For how to run
-evals see [EVALS.md](EVALS.md); for robustness methodology see
+This document sets out MimirBench's research and engineering principles. For
+evaluation procedures, see [EVALS.md](EVALS.md); for robustness methodology, see
 [ROBUSTNESS.md](ROBUSTNESS.md); for the interpretability plan see
 [INTERPRETABILITY.md](INTERPRETABILITY.md).
 
@@ -18,8 +18,8 @@ agent's reasoning under uncertainty**. Concretely, four capabilities:
 4. **Robustness** — are its conclusions stable under paraphrase and adversarial
    pressure?
 
-Crucially, we also want to ask *why* an agent succeeds or fails — not only at the
-behavioural level, but at the level of internal mechanism. That second goal is what
+The benchmark also asks *why* an agent succeeds or fails, at both the
+behavioural and mechanistic levels. That second goal is what
 separates MimirBench from a pure eval suite and motivates the parallel track of
 small, fully-controlled transformer models.
 
@@ -28,7 +28,7 @@ small, fully-controlled transformer models.
 - **Closed-form ground truth or it doesn't ship.** Every registered environment has
   a reference solver that computes the optimal answer exactly. If we cannot grade an
   environment deterministically, it stays a scaffold until we can.
-- **Small, readable, boring code.** Prefer explicit functions and pydantic models
+- **Small, readable code.** Prefer explicit functions and pydantic models
   over clever abstractions. The benchmark's credibility rests on being auditable.
 - **Separation of concerns via stable contracts.** Environments, agents, graders,
   and analysis communicate only through the schemas in
@@ -39,8 +39,7 @@ small, fully-controlled transformer models.
   types, not vigilance.
 - **Determinism as a feature.** Reproducibility from a seed is a first-class
   property, tested in CI.
-- **Honesty about scope.** Unfinished work is labelled a scaffold; result files stay
-  empty until real runs exist.
+- **Explicit scope.** Result files remain empty until reproducible runs exist.
 
 ## Why deterministic graders matter
 
@@ -71,7 +70,7 @@ Tasks are generated from seeds rather than scraped or hand-written. This gives:
 
 ## Why train a small synthetic transformer
 
-Stage 7 adds a compact transformer trained on synthetic Bayesian strategic
+MimirBench trains a compact transformer on synthetic Bayesian strategic
 traces. This is a model-organism track, not a frontier-model claim. The synthetic
 traces expose exact posterior buckets, action labels, EV buckets, risk flags,
 confidence buckets, and concise rationale classes. They deliberately do not
@@ -81,7 +80,7 @@ That choice keeps the training target auditable and mechanistically useful:
 later probes can ask whether posterior, action, and risk features are linearly
 decodable from activations without relying on elicited private reasoning text.
 The model remains small enough for CPU smoke tests, checkpoint inspection, and
-Stage 8 activation-capture experiments.
+activation-capture experiments.
 
 ## Bridging frontier AI evals and quant-style uncertainty
 
@@ -108,19 +107,19 @@ robustness, interpretability) applied to quant-style uncertainty problems.
 | `bayesian_games` | Report the posterior over hidden sources after a signal sequence | Exact naive-Bayes posterior |
 | `hidden_regimes` | Report the filtered belief over the current regime in an HMM | Exact forward algorithm |
 | `auctions` | Report expected surplus from truthful bidding | Closed-form IPV second-price surplus |
-| `market_making` | Choose toy bid/ask quotes and sizes while obeying inventory/loss limits | Deterministic inventory-aware quote heuristic + risk checker |
-| `prediction_markets` | Separate posterior belief, market price, edge, and conservative sizing | Binary Bayesian posterior + toy cost/impact sizing |
+| `market_making` | Choose synthetic bid/ask quotes and sizes while obeying inventory/loss limits | Deterministic inventory-aware quote heuristic + risk checker |
+| `prediction_markets` | Separate posterior belief, market price, edge, and conservative sizing | Binary Bayesian posterior + synthetic cost/impact sizing |
 | `adversarial_risk` | Keep obeying limits under misleading pressure | Deterministic risk-policy solver |
 
 All six families are implemented and registered. Reference solvers are sanity
 checks for the generate-grade pipeline, not model results.
 
-## Why market-making is toy-only
+## Why Synthetic Market-Making
 
 The `market_making` environment is a one-shot quote decision benchmark. It uses
-synthetic mid prices, generated inventory states, synthetic volatility, a toy
+synthetic mid prices, generated inventory states, synthetic volatility, a
 adverse-selection scalar, and explicit hard limits. The reference policy widens
-spreads under higher toy risk and skews sizes away from inventory expansion near
+spreads under higher risk and skews sizes away from inventory expansion near
 limits.
 
 It is not a trading strategy. It has no live data, no execution model, no
@@ -135,7 +134,7 @@ that language agents often conflate:
 
 - belief: the posterior probability after the private signal
 - price: the current market price
-- edge: the difference after toy transaction cost and impact
+- edge: the difference after synthetic transaction cost and impact
 
 That separation lets the grader distinguish a calibration error from a trade
 direction error or a risk-sizing error. The generated markets are binary,
@@ -156,9 +155,9 @@ requiring a model judge.
 
 ## Why robustness is first-class
 
-A high score on a single prompt is not enough. Strategic-reasoning agents should
+A high score on a single prompt is insufficient. Strategic-reasoning agents should
 keep the same answer when only wording, irrelevant framing, evidence order, or
-untrusted pressure changes. Stage 4 therefore treats robustness as a benchmark
+untrusted pressure changes. MimirBench therefore treats robustness as a benchmark
 surface rather than an afterthought:
 
 - `VariantSpec` records the parent task, environment, variant type, whether the

@@ -1,15 +1,15 @@
 # Statistical validity
 
-MimirBench's real-model numbers are a **pilot**: 20 tasks per environment, six
+MimirBench's hosted-model numbers are a **pilot**: 20 tasks per environment, six
 environments, a single seed/schedule, and a synthetic task distribution. This
-document explains how uncertainty is attached to those numbers and how to read the
-generated tables honestly.
+document defines the uncertainty analysis and the correct interpretation of the
+generated tables.
 
 > **One-line framing:** every interval here is a *pilot CI over the saved
 > synthetic sample*, quantifying resampling noise on that fixed sample — **not** a
 > population-level benchmark claim.
 
-## How it is computed (over saved artefacts only)
+## Method
 
 The analysis lives in
 [`mimirbench/analysis/statistical_validity.py`](mimirbench/analysis/statistical_validity.py)
@@ -40,7 +40,7 @@ with the columns:
 ## Planning for larger hosted-model runs
 
 The implemented full protocol is described in
-[FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md). A saved-artifact-only
+[FULL_BENCHMARK_PROTOCOL.md](FULL_BENCHMARK_PROTOCOL.md). A saved-artefact-only
 planning command estimates approximate mean-score CI widths under the pilot,
 100/environment x 3-seed, and 200/environment x 5-seed designs:
 
@@ -54,7 +54,7 @@ The generated report is
 hosted-model evaluations.** Because the pilot has one seed, it cannot estimate
 seed-to-seed variation; full runs must report that variation directly.
 
-## How to read the paired deltas
+## Interpreting Paired Deltas
 
 A paired delta is `candidate − baseline` over aligned tasks. A 95% bootstrap CI
 that **excludes 0** indicates the paired difference is unlikely to be sampling
@@ -80,7 +80,7 @@ Rows are grouped by the tracks defined in
 - **protocol-limited** rows are included for completeness but reflect
   output-budget/protocol behaviour, not capability.
 
-## Caveats
+## Scope and Limitations
 
 - **Single seed/schedule.** CIs capture resampling noise over one fixed task
   schedule, not variation across seeds.

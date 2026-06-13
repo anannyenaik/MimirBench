@@ -1,4 +1,4 @@
-# Preliminary OpenAI model-ladder comparison
+# Pilot OpenAI model-ladder comparison
 
 Generated from saved artefacts on 2026-06-03 local time. This is a synthetic,
 direct-agent-only comparison with 20 tasks per environment and six environments.
@@ -144,7 +144,7 @@ parse failures.
 ## Reading
 
 This is now a four-model OpenAI direct-agent ladder, but it is still
-preliminary: synthetic tasks, 20 tasks per environment, one agent mode, no
+pilot: synthetic tasks, 20 tasks per environment, one agent mode, no
 robustness, no tools, and one row (`gpt-5.5`) that used API-default temperature
 because the model rejected `temperature=0`. It supports the same high-level
 reading as before: `gpt-5.4` is the strongest OpenAI direct row in this benchmark

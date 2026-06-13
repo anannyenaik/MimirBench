@@ -54,7 +54,7 @@
 
 No failure cases were extracted.
 
-## Caveats
+## Scope and Limitations
 
 - Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.
 - Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.

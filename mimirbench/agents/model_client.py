@@ -10,7 +10,7 @@ implements, so the rest of the harness never depends on a particular SDK:
 
 Three deliberate design choices:
 
-* **Costs are honest.** :attr:`ModelUsage.estimated_cost_usd` is ``None`` unless
+* **Costs are explicit.** :attr:`ModelUsage.estimated_cost_usd` is ``None`` unless
   a :class:`Pricing` was explicitly configured. We never silently invent a
   dollar figure from a hard-coded price table.
 * **No hidden chain-of-thought.** The contract carries a single ``raw_text`` plus

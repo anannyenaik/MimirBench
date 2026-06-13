@@ -3,8 +3,8 @@
 Updated 2026-06-03 after the cache-backed Pro retry and small Pro robustness
 probe. This compares completed Gemini direct-agent rows against the strongest
 completed OpenAI direct row (`gpt-5.4`) and the strongest clean Claude direct row
-(Claude Sonnet 4.6 at `max_tokens=1536`). It is preliminary, synthetic,
-direct-agent only, and not statistically conclusive.
+(Claude Sonnet 4.6 at `max_tokens=1536`). It is a pilot synthetic evaluation
+of direct agents.
 
 ## Sources and protocol
 
@@ -136,11 +136,11 @@ Gemini Flash `gemini-3.5-flash` with `thinking_budget=0` remains the strongest
 clean non-Pro Gemini row and the row used for the earlier larger Gemini
 robustness probe.
 
-## Caveats
+## Scope and Limitations
 
 These are synthetic deterministic tasks with one task schedule and 20
 tasks/environment for the main ladder. They are direct-agent results only, not
-tool-use or reflective-agent results. They are preliminary and not statistically
+tool-use or reflective-agent results. They are pilot and not statistically
 conclusive. They are not trading results. No broad provider-superiority claim is
 made. The initial Pro diagnostic remains provider-failed and is not a capability
 row; the clean Pro retry is a cache-backed row under provider-load caveats.

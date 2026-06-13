@@ -206,7 +206,7 @@ def _write_report(cfg: InterpretabilityConfig, summary: dict[str, Any], output_d
         "",
         "Each sub-block site is patched **only at the positions of one token group**. "
         "The corruption changes only the evidence (observation) tokens, so the `prior` "
-        "and `payoff_risk` groups are honest negative controls: restoring them should "
+        "and `payoff_risk` groups are designed negative controls: restoring them should "
         "recover the decision far less than restoring `evidence`.",
         "",
         "| Site | Group | Action recovery | Mean action causal effect | n flipped |",
@@ -259,7 +259,7 @@ def _write_report(cfg: InterpretabilityConfig, summary: dict[str, Any], output_d
             "",
             shuffle["interpretation"],
             "",
-            "## Limitations and caveats",
+            "## Scope and Limitations",
             "",
             "- One checkpoint, one seed, one narrow synthetic Bayesian/risk generator.",
             "- Position-resolved patching is at the token-group level; it does not isolate "

@@ -1,7 +1,7 @@
 # Evaluation Guide
 
-MimirBench turns seeded synthetic tasks into graded, aggregate reports. Stage 3
-has six runnable environment families on the same config-driven runner, with
+MimirBench turns seeded synthetic tasks into graded, aggregate reports. Six
+runnable environment families share the same config-driven runner, with
 agent resolution, response caching, optional concurrency, structured per-task
 records, and report writers.
 
@@ -25,7 +25,7 @@ environment. New YAML configs use `EvalRunConfig` with `run`, `agent`,
 
 ## Robustness Runner Flow
 
-Stage 4 adds `RobustnessRunConfig` for base-vs-variant evaluations:
+Base-vs-variant evaluations use `RobustnessRunConfig`:
 
 ```text
 RobustnessRunConfig
@@ -147,7 +147,7 @@ with agent errors are not cached.
 Metrics are averaged only over tasks that report them, so mixed-environment runs
 remain well defined.
 
-For real-model runs, `aggregate_cost_latency` adds a `cost_latency` block to the
+For hosted/local-model runs, `aggregate_cost_latency` adds a `cost_latency` block to the
 summary: `total_input_tokens`, `total_output_tokens`, `total_tokens`,
 `estimated_total_cost_usd` (only when `pricing` is configured; otherwise `null`
 with a `cost_note`), `mean/p50/p95_latency_ms`, `timeout_rate`,
@@ -221,7 +221,7 @@ results, invalid JSON or parse failures, and high-regret failures.
 variation, L1, and max-error metrics. `auctions` grades expected surplus with
 absolute and relative expected-value error.
 
-`market_making` generates one-shot toy quote decisions with mid price,
+`market_making` generates one-shot synthetic quote decisions with mid price,
 inventory, position limits, daily loss state, volatility, displayed spread,
 adverse-selection risk, arrival intensity, and risk aversion. Agent responses
 include bid/ask prices, bid/ask sizes, `reduce_inventory`, `abstain`,
@@ -234,7 +234,7 @@ Hard loss or position-limit violations are constraint-gated.
 prior probability, private signal, signal reliability, market-impact parameter,
 transaction cost, position limit, budget limit, and optional public evidence.
 The reference solver computes a posterior probability, compares fair probability
-to price after toy cost/impact, and sizes conservatively. The grader reports
+to price after synthetic cost/impact, and sizes conservatively. The grader reports
 `fair_probability_error`, `expected_value_error`, `action_optimality`, `regret`,
 `calibration_proxy`, `risk_limit_violation`, and `abstention_quality`.
 
@@ -263,8 +263,8 @@ For robustness runs it also writes:
 - `failure_cases.jsonl` and `failure_cases.md` - ranked diagnostic failures
 
 Markdown reports include the run name, timestamp, agent, environments, task
-counts, aggregate metrics, failure examples, known limitations, and a warning
-when the agent is reference or mock rather than a real model.
+counts, aggregate metrics, failure examples, scope and limitations, and a warning
+when the agent is reference or mock rather than a hosted/local model.
 
 ## CLI
 
@@ -276,7 +276,7 @@ mimirbench summarise-run reports/runs/bayes_mock_smoke
 mimirbench list-variant-types
 mimirbench run-robustness configs/robustness_mock_all_envs.yaml
 mimirbench summarise-robustness reports/runs/robustness_mock_all_envs
-# Stage 5 model / tool commands:
+# Hosted-model and tool commands:
 mimirbench check-provider openai
 mimirbench estimate-run-cost configs/eval_api_openai_bayes_smoke.yaml
 mimirbench inspect-failures reports/runs/<run_name>

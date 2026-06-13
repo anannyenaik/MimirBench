@@ -18,7 +18,7 @@ principle, compute exactly the answer it is graded against.
 | `ev_calculator` | Expected value / variance (optional best action) | `{payoffs, probabilities}` |
 | `risk_checker` | Hard position/loss/inventory limit check | `{position, proposed_trade, max_abs_position, max_loss}` |
 | `auction_solver` | Second-price IPV surplus/revenue/welfare | `{your_value, n_bidders, v_max}` |
-| `market_simulator` | Deterministic toy mid-price path | `{n_steps, start, drift, volatility, seed}` |
+| `market_simulator` | Deterministic synthetic mid-price path | `{n_steps, start, drift, volatility, seed}` |
 
 ### Per-environment allow-lists
 

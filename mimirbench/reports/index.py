@@ -8,7 +8,7 @@ from typing import Any
 
 __all__ = ["build_report_index"]
 
-# Curated track classification for the saved real-model leaderboard rows, keyed by
+# Curated track classification for the saved hosted-model leaderboard rows, keyed by
 # leaderboard run-directory name. Tracks follow BENCHMARK_PROTOCOL.md. This is the
 # single source of truth for "is this row a clean comparison or a protocol/probe
 # artefact?" and is emitted into INDEX.md so the distinction survives regeneration.
@@ -23,19 +23,19 @@ _ROW_CLASSIFICATION: dict[str, str] = {
     "leaderboard_claude_sonnet_all_envs_direct_20": "protocol-limited (max_tokens=512 truncation)",
     "leaderboard_claude_sonnet_all_envs_direct_20_maxtok1536": "best-valid clean (max_tokens=1536)",
     "leaderboard_claude_sonnet_rescue_probe_1024": "rescue probe (30 tasks, max_tokens=1024)",
-    "leaderboard_claude_sonnet_robustness_tiny": "real-model robustness probe (best-valid row)",
+    "leaderboard_claude_sonnet_robustness_tiny": "hosted-model robustness probe (best-valid row)",
     "leaderboard_gemini_flash_lite_all_envs_direct_20": "strict-track clean",
     "leaderboard_gemini_flash_lite_smoke": "smoke run (6 tasks)",
     "leaderboard_gemini_flash_all_envs_direct_20": "protocol-limited (default thinking, 512 budget)",
     "leaderboard_gemini_flash_all_envs_direct_20_thinking0": "best-valid clean (thinking_budget=0)",
     "leaderboard_gemini_flash_rescue_probe_thinking0": "rescue probe (6 tasks, thinking disabled)",
     "leaderboard_gemini_pro_all_envs_direct_20": "provider-failed diagnostic (14/120 503/504)",
-    "leaderboard_gemini_pro_all_envs_direct_20_retry": "best-valid clean (cache-backed; provider-load caveat)",
+    "leaderboard_gemini_pro_all_envs_direct_20_retry": "best-valid clean (cache-backed; provider-load condition)",
     "leaderboard_gemini_pro_rescue_probe_low_thinking": "rescue probe (6 tasks, thinking_level=low)",
     "leaderboard_gemini_pro_smoke": "smoke run (request rejected, no model usage)",
-    "leaderboard_gemini_pro_robustness_small": "real-model robustness probe (best-valid row)",
-    "leaderboard_gemini_strongest_robustness_tiny": "real-model robustness probe (best-valid row)",
-    "leaderboard_openai_gpt54_robustness_tiny": "real-model robustness probe (strict-track row)",
+    "leaderboard_gemini_pro_robustness_small": "hosted-model robustness probe (best-valid row)",
+    "leaderboard_gemini_strongest_robustness_tiny": "hosted-model robustness probe (best-valid row)",
+    "leaderboard_openai_gpt54_robustness_tiny": "hosted-model robustness probe (strict-track row)",
     "leaderboard_openai_gpt54mini_bayes_direct_tool_50": "diagnostic forced-tool run (direct vs tool)",
     "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25": "diagnostic forced-tool run (direct vs tool)",
     "leaderboard_openai_all_envs_direct_tiny": "smoke run (30 tasks)",
@@ -54,7 +54,7 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     lines = [
         "# MimirBench report index",
         "",
-        "Generated from saved artefacts. Reference, mock, and reference-tool runs are non-model diagnostics; real-model rows are only present when an actual run directory exists.",
+        "Index of saved evaluation artefacts. Reference, mock, and reference-tool runs are non-model controls; hosted-model rows are present only when a completed run directory exists.",
         "",
         "## Baseline runs",
         "",
@@ -74,7 +74,7 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     leaderboard_runs = _leaderboard_runs(root)
     lines.extend(_leaderboard_lines(leaderboard_runs, root=root))
 
-    lines.extend(["", "## Real-model row classification (tracks)", ""])
+    lines.extend(["", "## Hosted-Model Row Classification", ""])
     lines.extend(_classification_lines(leaderboard_runs))
 
     lines.extend(["", "## Standalone leaderboard analysis notes", ""])
@@ -104,12 +104,12 @@ def build_report_index(reports_dir: str | Path = "reports") -> Path:
     lines.extend(
         [
             "",
-            "## Caveats",
+            "## Scope and Limitations",
             "",
             "- All entries are backed by files under `reports/`.",
-            "- Do not treat reference, mock, or deterministic tool baselines as real model results.",
-            "- Do not describe any result as evidence of trading ability, trading usefulness, or profitability.",
-            "- Real API/local model reports remain pending unless actual run artefacts exist.",
+            "- Reference, mock, and deterministic tool baselines are non-model controls.",
+            "- Results do not establish trading ability, trading usefulness, or profitability.",
+            "- Hosted API/local model reports remain pending unless complete run artefacts exist.",
             "- Full-scale reference/mock runs are infrastructure validations, not model capability results.",
             "- Hosted-model full tracks are implemented and costed but remain unrun pending external budget.",
             "",
@@ -251,7 +251,7 @@ def _leaderboard_lines(runs: list[dict[str, Any]], *, root: Path) -> list[str]:
     if not runs:
         return ["No leaderboard runs found."]
     lines = [
-        "| Name | Path | Models run | Pending | Tasks/agent | Headlines | Preliminary |",
+        "| Name | Path | Models run | Pending | Tasks/agent | Headlines | Pilot-scale |",
         "| --- | --- | ---: | ---: | ---: | ---: | :---: |",
     ]
     for run in runs:
@@ -264,7 +264,7 @@ def _leaderboard_lines(runs: list[dict[str, Any]], *, root: Path) -> list[str]:
         )
     lines.append("")
     lines.append(
-        "Leaderboard rows are real model results only when `models_run > 0` and the "
+        "Leaderboard rows are hosted/local-model results only when `models_run > 0` and the "
         "saved summary contains concrete per-agent run artefacts."
     )
     return lines
@@ -302,7 +302,7 @@ def _run_lines(runs: list[dict[str, Any]], *, root: Path, empty: str) -> list[st
         lines.append(
             "| "
             f"{run['name']} | {_link(run['path'], root)} | "
-            f"{run.get('label') or 'n/a'} | {_fmt(run.get('n_tasks'))} | "
+            f"{_display_label(run.get('label'))} | {_fmt(run.get('n_tasks'))} | "
             f"{_fmt(run.get('mean_score'))} |"
         )
     return lines
@@ -322,10 +322,16 @@ def _baseline_kind(summary: dict[str, Any]) -> str:
         if isinstance(config, dict) and str(config.get("tool_policy", "reference")).lower() == "reference":
             return "deterministic non-model tool baseline"
     if agent_type == "local":
-        return "real local model"
+        return "local model"
     if agent_type in {"api", "direct", "reflective", "tool"}:
-        return "real API model"
+        return "hosted API model"
     return agent_type or "unknown"
+
+
+def _display_label(value: Any) -> str:
+    if not isinstance(value, str):
+        return "n/a"
+    return value.replace("real model", "hosted model").replace("real API model", "hosted API model")
 
 
 def _read_json(path: Path) -> dict[str, Any]:

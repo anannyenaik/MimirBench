@@ -26,7 +26,7 @@ Deltas are candidate minus baseline on matched `(environment, task_id)` rows.
 - `reports\runs\comparisons\reference_bayes\figures\latency_distribution.png`
 - `reports\runs\comparisons\reference_bayes\figures\parse_failure_rate_by_agent.png`
 
-## Caveats
+## Scope and Limitations
 
 - All paired deltas are candidate minus baseline on identical task IDs.
 - Lower regret, posterior error, risk violations, parse failures, latency, and cost are better; higher score is better.

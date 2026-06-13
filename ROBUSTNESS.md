@@ -1,6 +1,6 @@
 # Robustness Evaluation
 
-Stage 4 makes robustness a first-class MimirBench feature. A robustness run asks:
+Robustness is a first-class MimirBench evaluation surface. A robustness run asks:
 does an agent keep the same decision when the problem's answer is preserved, and
 does it resist misleading or irrelevant context when hard constraints still
 apply?
@@ -154,7 +154,7 @@ python -m mimirbench.cli summarise-robustness reports/runs/robustness_mock_all_e
 
 Robustness configs live under `configs/robustness_*.yaml`.
 
-## Known Limitations
+## Scope and Limitations
 
 - Deterministic templates are intentionally limited. They are reproducible and
   auditable, but they do not cover the full diversity of natural paraphrases.
@@ -166,8 +166,8 @@ Robustness configs live under `configs/robustness_*.yaml`.
   end. Historical reference and mock robustness remain sanity-check/diagnostic
   only (see the two bullets above), not model results.
 - Real-model robustness probes have now been run and saved for OpenAI `gpt-5.4`,
-  Claude Sonnet 4.6, Gemini Flash, and Gemini Pro. These are preliminary
-  synthetic robustness probes, not statistically conclusive. Robustness sample
+  Claude Sonnet 4.6, Gemini Flash, and Gemini Pro. These are pilot
+  synthetic robustness probes. Robustness sample
   sizes differ by provider/config where documented, so rows are not always
   directly comparable. Read them through [RESULTS.md](RESULTS.md) and
   [reports/INDEX.md](reports/INDEX.md), alongside the saved comparison and run
@@ -181,16 +181,16 @@ Robustness configs live under `configs/robustness_*.yaml`.
 
   Protocol-limited or provider-failed rows must not be treated as capability
   rows, and nothing here is a trading-usefulness or broad provider-superiority
-  claim. See [MODELS.md](MODELS.md) for provider setup and caveats.
+  claim. See [MODELS.md](MODELS.md) for provider setup and limitations.
 - The benchmark does not use LLM judges, so it cannot score free-form rationale
   quality beyond deterministic parseable outputs and grader metrics.
 - Tasks are synthetic and evaluation-only. They do not use live market data and
   are not trading systems or recommendations.
 
-## Why Templates Before LLM-Generated Variants
+## Deterministic Variant Design
 
 LLM-generated paraphrases can be useful later, but they create extra variance and
-can accidentally change the task. Stage 4 starts with deterministic templates so
+can accidentally change the task. MimirBench starts with deterministic templates so
 that every robustness failure is traceable to a known, reviewable transformation.
-Once real-model baselines exist, LLM-generated variants can be added as an
+Once hosted/local-model baselines exist, LLM-generated variants can be added as an
 optional audited layer with explicit preservation checks.

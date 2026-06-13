@@ -1,6 +1,6 @@
 # Models
 
-How to run MimirBench against real models — hosted APIs or local Hugging Face
+How to run MimirBench against hosted APIs or local Hugging Face
 weights — and how to do so **without** accidentally running an expensive
 benchmark.
 
@@ -78,7 +78,7 @@ agent:
 - Local inference has no provider billing, so cost is always reported as
   **"not estimated"**.
 
-## Running a tiny smoke eval
+## Running a Controlled Smoke Evaluation
 
 Always estimate first, then run the smallest possible config:
 
@@ -90,7 +90,7 @@ mimirbench summarise-run    reports/runs/api_openai_bayes_smoke
 mimirbench inspect-failures reports/runs/api_openai_bayes_smoke
 ```
 
-Stage 5 ships these tiny real-model configs (5–20 tasks, cache on,
+MimirBench ships controlled hosted/local-model configs (5–20 tasks, cache on,
 `max_workers: 1`, `temperature: 0`):
 
 | Config | Backend | Scope |
@@ -102,7 +102,7 @@ Stage 5 ships these tiny real-model configs (5–20 tasks, cache on,
 | `configs/eval_local_all_envs_tiny.yaml` | local HF | 5 tasks × 6 families |
 | `configs/eval_tool_api_openai_bayes_smoke.yaml` | OpenAI + tools | tool loop |
 
-## Real model leaderboard
+## Hosted and Local Model Leaderboard
 
 The leaderboard configs pair `direct`, `tool`, and `reflective` agents on the
 same environment/task IDs and write artefacts under `reports/runs/leaderboard/`.
@@ -178,7 +178,7 @@ and robustness variant ID where applicable.
 - Tool-using model agents make up to `tool_max_steps + 1` calls per task — budget
   accordingly.
 
-## Honesty guarantees
+## Reporting Guarantees
 
 - No hidden chain-of-thought is requested or stored. Anthropic "thinking" output
   is **not** enabled. Prompts ask only for a brief `reasoning_summary`.
@@ -190,4 +190,4 @@ and robustness variant ID where applicable.
   retried. Exhausted retries surface as recorded errors, not crashes.
 
 See [TOOLS.md](TOOLS.md) for the tool-using agent, and [RESULTS.md](RESULTS.md)
-for current real-model results and caveats.
+for current hosted-model results and limitations.

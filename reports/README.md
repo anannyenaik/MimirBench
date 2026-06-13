@@ -1,17 +1,16 @@
 # Reports
 
-Curated, human-readable outputs of MimirBench runs. Unlike the git-ignored raw
-artifacts under `runs/`/`artifacts/`, everything here is **intentionally committed**
-and **reproducible from a config + seed + model version**.
+Curated, human-readable outputs of MimirBench runs. The committed reports are
+reproducible from a config, seed, and model version; raw caches and large binary
+artefacts remain gitignored.
 
 ## Start here
 
 - [`INDEX.md`](INDEX.md) — the main report navigator. It lists every committed
   baseline, robustness, comparison, leaderboard, interpretability, and training
   artefact with its path and headline number.
-- [`../RESULTS.md`](../RESULTS.md) — the narrative results document with the
-  full caveats. **Read generated reports together with the caveats there:** they
-  are synthetic and preliminary.
+- [`../RESULTS.md`](../RESULTS.md) — the narrative results document and its
+  consolidated scope and limitations.
 
 ## Contents
 
@@ -19,7 +18,7 @@ and **reproducible from a config + seed + model version**.
 - [`model_cards/`](model_cards/) — one card per evaluated model/agent: setup,
   headline metrics, known limitations.
 - [`runs/`](runs/) — committed run reports: reference/mock smoke tests, the
-  deterministic tool baseline, real-model leaderboards (OpenAI, Claude, Gemini),
+  deterministic tool baseline, hosted-model leaderboards (OpenAI, Claude, Gemini),
   robustness probes, and the small-transformer evaluations.
 - [`training/`](training/) — small-transformer training artefacts (metrics,
   curves, model cards) for the tiny and medium model organisms.
@@ -35,10 +34,10 @@ and [`runs/leaderboard/gemini_model_ladder_direct_20env_comparison.md`](runs/lea
 
 ## Rules
 
-- **No fabricated numbers.** A report is added only when it is backed by a real run.
+- **Artefact-backed evidence.** A report is added only when it is backed by a
+  reproducible run.
 - **Always reproducible.** Every report names the environment, seed(s), `n_tasks`,
   agent, and model version so it can be regenerated.
-- **Honest framing.** All committed results are synthetic and preliminary, not
-  statistically conclusive, and carry no trading-usefulness claim. Interpretability
-  results describe one small synthetic checkpoint and do not transfer to frontier
-  models. Report limitations, not just point estimates.
+- **Explicit scope.** Hosted-model rows are pilot evaluations on a synthetic
+  benchmark. Interpretability findings describe controlled synthetic model
+  organisms. Each report states its limitations alongside its point estimates.

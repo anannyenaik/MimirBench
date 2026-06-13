@@ -20,7 +20,7 @@ Tracks follow [BENCHMARK_PROTOCOL.md](../../../BENCHMARK_PROTOCOL.md): `strict-t
 | Gemini Flash (thinking_budget=0) | best-valid clean | 120 | 0.7454 | [0.6965, 0.7936] | 0.4417 | [0.3500, 0.5333] | 0.0083 | [0.0000, 0.0250] | 0.0083 | [0.0000, 0.0250] | $0.2282 | 1573 / 1985 | thinking_budget=0; strongest clean non-Pro Gemini row. |
 | Gemini Pro Preview (thinking_level=low, retry) | best-valid clean | 120 | 0.8545 | [0.8178, 0.8884] | 0.7833 | [0.7083, 0.8500] | 0.0000 | [0.0000, 0.0000] | 0.0000 | [0.0000, 0.0000] | $1.3139 | 8590 / 51159 | cache-backed clean retry; first full run failed 14/120 with 503/504 provider load. |
 
-## Paired model deltas (candidate − baseline)
+## Paired model deltas (candidate minus baseline)
 
 Deltas are computed only over tasks whose `(environment, task_id, seed)` align in both rows. Rows that do not align are reported as unpaired descriptive comparisons. A 95% bootstrap CI that excludes 0 indicates the paired difference is unlikely to be sampling noise *on this sample*; it is not a population-level significance claim.
 
@@ -36,7 +36,7 @@ Deltas are computed only over tasks whose `(environment, task_id, seed)` align i
 | Gemini Flash (thinking_budget=0) | Gemini Pro Preview (thinking_level=low, retry) | 120 | 0.1091 | [0.0544, 0.1641] | yes | paired over aligned task IDs/seeds |
 | Claude Sonnet 4.6 (1536) | Gemini Pro Preview (thinking_level=low, retry) | 120 | -0.0022 | [-0.0353, 0.0341] | no | paired over aligned task IDs/seeds |
 
-## Caveats
+## Scope and Limitations
 
 - Single seed/schedule: every row uses one task schedule, so these CIs capture resampling noise over that fixed sample, not seed-to-seed variation.
 - Synthetic task distribution: tasks are deterministic synthetic environments, so the CIs do not generalise to real-world or live tasks.

@@ -49,10 +49,10 @@
 - `market_making/market_making-123` score=`0` violations=`['no_valid_answer']` error=`model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}`
 - `prediction_markets/prediction_markets-123` score=`0` violations=`['no_valid_answer']` error=`model call failed after 3 attempt(s): ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Budget 0 is invalid. This model only works in thinking mode.', 'status': 'INVALID_ARGUMENT'}}`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

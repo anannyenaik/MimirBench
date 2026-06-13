@@ -74,10 +74,10 @@
 - `hidden_regimes/hidden_regimes-134` score=`0.893266` violations=`[]` error=`None`
 - `market_making/market_making-123` score=`0.632508` violations=`[]` error=`None`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

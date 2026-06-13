@@ -2,8 +2,8 @@
 
 - Run ID: `leaderboard_claude_sonnet_rescue_probe_1024-20260603T030733`
 - Tasks per agent: `30`
-- Preliminary tiny run: **yes**
+- Pilot-scale run: **yes**
 
-Candidates are proposed deterministically and only when the supporting metrics exist. They are *candidates*, not validated findings; confirm with larger runs before publishing.
+Candidate findings are emitted deterministically when supporting metrics meet the configured evidence thresholds. Pilot findings require confirmation at full scale.
 
 No headline candidates were generated. This run did not produce metrics that meet the evidence threshold.

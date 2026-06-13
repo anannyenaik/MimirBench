@@ -49,10 +49,10 @@
 - `bayesian_games/bayesian_games-126` score=`0` violations=`['no_valid_answer']` error=`model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': "Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}`
 - `bayesian_games/bayesian_games-127` score=`0` violations=`['no_valid_answer']` error=`model call failed after 3 attempt(s): BadRequestError: Error code: 400 - {'error': {'message': "Unsupported value: 'temperature' does not support 0 with this model. Only the default (1) value is supported.", 'type': 'invalid_request_error', 'param': 'temperature', 'code': 'unsupported_value'}}`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

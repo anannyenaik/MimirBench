@@ -1,11 +1,9 @@
 # MimirBench v0.2.0
 
-**Current stable review target.** This alpha-stage research release makes
-MimirBench's real-model evidence honest and inspectable: an official benchmark
-protocol, statistical validity over saved artefacts, replicated local-only
-interpretability, and release/artifact hygiene. **No paid model API calls are made
-by anything in this release**; all real-model statistics are computed from saved
-artefacts.
+**Current stable review target.** This research release establishes an official
+benchmark protocol, uncertainty analysis over saved artefacts, six-seed
+model-organism replication, and a documented artefact policy. All hosted-model
+statistics are computed from saved evaluation artefacts.
 
 ## Highlights
 
@@ -22,11 +20,11 @@ artefacts.
 - **Per-head and individual-token causal analysis**: projected head outputs are
   patchable and ablatable, and attention-site positions are patched one at a time
   before semantic aggregation.
-- **Artifact inspectability**: [ARTIFACTS.md](ARTIFACTS.md) and
+- **Artefact inspectability**: [ARTIFACTS.md](ARTIFACTS.md) and
   [MODEL_CARD_medium.md](MODEL_CARD_medium.md) document release assets,
   gitignored weights, SHA256 checksums, and exact reproduction commands.
 
-## Headline real-model rows
+## Principal Hosted-Model Rows
 
 These are synthetic, pilot 20-tasks-per-environment rows from saved artefacts.
 They do not establish broad provider superiority.
@@ -41,7 +39,7 @@ They do not establish broad provider superiority.
 Full classification and paired deltas:
 [statistical_validity_existing_artifacts.md](reports/runs/leaderboard/statistical_validity_existing_artifacts.md).
 
-## Replicated interpretability result
+## Replicated Interpretability Result
 
 Seeds **123-128 all completed** on the same narrow synthetic Bayesian/risk model
 organism setup:
@@ -64,7 +62,7 @@ Reports:
 [multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md) and
 [per-head/token summary](reports/interpretability/interp_bayes_head_token_summary.md).
 
-## Convenience release assets
+## Release Assets
 
 The [v0.2.0 GitHub release](https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0)
 includes the medium `best.pt` checkpoint and `vocab.json` as convenience assets.
@@ -76,7 +74,7 @@ from the committed config.
 | `best.pt` | `3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546` |
 | `vocab.json` | `d7a994c5a616d4326250483528ff0cd06f933b05c41cf7d735f428d64ba2ecfa` |
 
-## Caveats
+## Scope and Limitations
 
 - Synthetic deterministic tasks and a pilot model leaderboard.
 - No trading claim or claim of trading usefulness.

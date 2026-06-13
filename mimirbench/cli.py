@@ -627,7 +627,7 @@ def run_multiseed_interpretability_command(
     """Replicate medium-model interpretability across seeds (local-only, no API calls).
 
     Trains any missing per-seed checkpoints, runs whole-site and extended
-    interpretability per seed, evaluates held-out metrics, and writes an honest
+    interpretability per seed, evaluates held-out metrics, and writes an explicit
     mean/range aggregate. Per-seed failures are fail-soft.
     """
     from mimirbench.interpretability.multiseed import (

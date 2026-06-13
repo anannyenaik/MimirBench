@@ -61,10 +61,10 @@
 - `bayesian_games/bayesian_games-138` score=`0.913488` violations=`[]` error=`None`
 - `bayesian_games/bayesian_games-140` score=`0.294915` violations=`[]` error=`None`
 
-## Known Limitations
+## Scope and Limitations
 
-- Scores are meaningful only for the environments and graders actually run.
-- No hidden chain-of-thought is collected; model output stores concise summaries only.
+- Results apply to the evaluated environments and deterministic graders.
+- Model outputs contain structured answers and concise reasoning summaries; hidden chain-of-thought is not collected.
 
 ## Artefacts
 

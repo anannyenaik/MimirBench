@@ -24,20 +24,13 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   pilot-scale and that funded full hosted-model runs are implemented but unrun;
   larger hosted-model rows are not simulated or fabricated.
 
-### Planned
-- Stage 9: a paper-style report consolidating evals, robustness, training, and
-  interpretability with polished figures, tables, and limitations.
-- Natural-language task generators for `market_making`, `prediction_markets`, and
-  `adversarial_risk`.
-
 ## [0.2.0] — 2026-06-06
 
-The alpha-stage stable review target for the public repository. Adds real-model provider artefacts,
-robustness probes, the medium transformer model organism and its interpretability
-result, and — new in this release — an official benchmark protocol, statistical
-validity over saved artefacts, deepened (position-resolved) interpretability, and
-release/artifact hygiene. **No paid API calls are made by any of this; all
-real-model statistics are computed from saved artefacts.**
+The stable review target for the public repository. Adds hosted-model provider
+artefacts, robustness probes, the medium transformer model organism and its
+interpretability result, an official benchmark protocol, uncertainty analysis
+over saved artefacts, position-resolved interpretability, and a documented
+artefact policy.
 
 ### Added — benchmark protocol and statistical validity
 - **`BENCHMARK_PROTOCOL.md`** — two official tracks (strict-512 and best-valid) and
@@ -72,7 +65,7 @@ real-model statistics are computed from saved artefacts.**
   `reports/interpretability/interp_bayes_multiseed_summary.md`, and
   `reports/interpretability/interp_bayes_head_token_summary.md` (plus JSON).
 
-### Added — artifact inspectability and release hygiene
+### Added — artefact inspectability and release hygiene
 - **`ARTIFACTS.md`** and curated **`MODEL_CARD_medium.md`** — what is committed vs
   gitignored, SHA256 checksums for the medium checkpoint, and exact reproduce
   commands.
@@ -120,7 +113,7 @@ Initial repository foundation. No benchmark results are claimed.
 - **Shared contracts** — pydantic schemas for `Task`, `GradingKey`, `TaskInstance`,
   `ModelResponse`, `GraderResult`, `EvalConfig`, `EvalReport`.
 - **Deterministic tools** — Bayesian posterior calculator, risk checker, sealed-bid
-  auction surplus helper, expected-value helper, and a toy price-path simulator.
+  auction surplus helper, expected-value helper, and a synthetic price-path simulator.
 - **Environments** — fully implemented and registered `bayesian_games`, `auctions`,
   and `hidden_regimes`; scaffolds with real primitives for `market_making`,
   `prediction_markets`, and `adversarial_risk`.

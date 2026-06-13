@@ -273,7 +273,7 @@ def aggregate_cost_latency(records: list[EvalTaskRecord]) -> dict[str, Any]:
     cost, in which case it sums only the available per-task estimates and the
     accompanying ``cost_estimated`` flag and ``cost_note`` explain the coverage.
     Reference/mock baselines have no usage, so their token/cost fields stay
-    ``None`` and are honestly reported as "not estimated".
+    ``None`` and are explicitly reported as "not estimated".
     """
     n = len(records)
     latencies = [r.latency_ms for r in records if r.latency_ms is not None]

@@ -215,7 +215,7 @@ def write_markdown_report(
                 f"error=`{failure['error']}`"
             )
 
-    lines.extend(["", "## Known Limitations", ""])
+    lines.extend(["", "## Scope and Limitations", ""])
     for limitation in summary.get("known_limitations", []):
         lines.append(f"- {limitation}")
 
@@ -416,7 +416,7 @@ def write_robustness_report(
                 f"{case['variant_grader_result']['score']:.2f}): {case['why_interesting']}"
             )
 
-    lines.extend(["", "## Caveats", ""])
+    lines.extend(["", "## Scope and Limitations", ""])
     for caveat in summary.get("caveats", []):
         lines.append(f"- {caveat}")
 

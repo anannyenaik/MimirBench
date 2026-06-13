@@ -4,7 +4,7 @@
 - Timestamp: `2026-06-02T18:48:48Z`
 - Agent modes: direct, tool, reflective
 - Tasks per agent: `60`
-- Preliminary tiny run: **yes**
+- Pilot-scale run: **yes**
 - Real model execution permitted: **no**
 
 ## Provider availability
@@ -35,14 +35,14 @@ No paired deltas (need at least two agent modes per model).
 
 No headline candidates: no run produced metrics that meet the evidence threshold. Real model runs are pending.
 
-## Caveats
+## Scope and Limitations
 
 - All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).
 - Higher mean score is better; lower posterior error, risk violations, parse failures, latency, cost, and robustness score drop are better.
 - Cost is reported only when pricing was configured; otherwise it is 'not estimated'.
 - No hidden chain-of-thought is collected or reported; graders and labels are deterministic.
 - These are benchmark diagnostics, not evidence of trading usefulness or profitability.
-- This is a PRELIMINARY tiny run (<= a handful of tasks per environment); treat all numbers as smoke-level signal, not a verdict.
+- This is a pilot-scale infrastructure run (<= a handful of tasks per environment); interpret it as a smoke test.
 - No model-performance rows were produced in this run; provider checks and pending artefacts are infrastructure status, not benchmark results.
 
 ## Artefacts

@@ -53,12 +53,12 @@
 8. `auctions` `auctions-124::risk_pressure` **action_flip** (score 1.00 → 1.00): The action changed under an answer-preserving 'risk_pressure' transformation.
 9. `auctions` `auctions-125::irrelevant_context` **action_flip** (score 1.00 → 1.00): The action changed under an answer-preserving 'irrelevant_context' transformation.
 
-## Caveats
+## Scope and Limitations
 
 - Robustness compares an agent on a base task versus deterministic, answer-preserving (or precisely-rescaled) variants of it.
 - Variants are built from fixed templates and text banks, not from a language model; see ROBUSTNESS.md for the taxonomy and rationale.
 - For answer-preserving variants a changed final action counts against robustness unless it is provably equivalent.
-- Real-model robustness numbers are only meaningful for the exact model, prompt, and decoding settings used.
+- Hosted-model robustness results are scoped to the exact model, prompt, and decoding settings used.
 
 ## Artefacts
 

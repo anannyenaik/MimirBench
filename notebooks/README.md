@@ -13,9 +13,9 @@ the `mimirbench` package and covered by tests.
   code into cells.
 - **No secrets** (API keys) in cells; read them from the environment.
 
-## Planned notebooks
+## Candidate Analyses
 
-- `01_bayesian_intuition.ipynb` — visualise posterior updates and order-invariance.
-- `02_hidden_regimes_filtering.ipynb` — forward-filter beliefs vs the true regime path.
-- `03_calibration_walkthrough.ipynb` — reliability diagrams from eval outputs.
-- `04_belief_probe.ipynb` — probe a trained regime-LM for the Bayes-filtered belief.
+- Bayesian posterior updates and order invariance.
+- Hidden-regime filtering against the generated regime path.
+- Reliability diagrams from evaluation outputs.
+- Belief probes for trained synthetic model organisms.
