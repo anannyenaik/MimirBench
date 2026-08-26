@@ -6,7 +6,7 @@ document defines the uncertainty analysis and the correct interpretation of the
 generated tables.
 
 > **One-line framing:** every interval here is a *pilot CI over the saved
-> synthetic sample*, quantifying resampling noise on that fixed sample — **not** a
+> synthetic sample*, quantifying resampling noise on that fixed sample, **not** a
 > population-level benchmark claim.
 
 ## Method
@@ -23,10 +23,10 @@ This command **never runs a model**. It reads the per-task `results.jsonl` files
 already saved under `reports/runs/leaderboard/` and computes, with a seeded
 percentile bootstrap (`n_resamples=2000`, 95%):
 
-- **mean-score 95% CI** — bootstrap over per-task scores;
-- **pass-rate CI**, **parse-failure-rate CI**, **risk-violation-rate CI** —
+- **mean-score 95% CI**: bootstrap over per-task scores;
+- **pass-rate CI**, **parse-failure-rate CI**, **risk-violation-rate CI**:
   bootstrap over the per-task 0/1 indicators;
-- **paired model deltas** — computed only over tasks whose
+- **paired model deltas**: computed only over tasks whose
   `(environment, task_id, seed)` actually align in both rows; otherwise the pair is
   reported as an *unpaired descriptive comparison*;
 - **per-row n** and **p50/p95 latency**.

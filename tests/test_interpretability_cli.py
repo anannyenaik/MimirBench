@@ -1,4 +1,4 @@
-"""CLI smoke tests for the Stage 8 interpretability commands."""
+"""CLI smoke tests for the interpretability commands."""
 
 from __future__ import annotations
 

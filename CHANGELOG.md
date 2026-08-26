@@ -23,8 +23,29 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Public docs now state explicitly that all hosted-model results remain
   pilot-scale and that funded full hosted-model runs are implemented but unrun;
   larger hosted-model rows are not simulated or fabricated.
+- Documentation, docstrings, comments, and CLI help reworked for consistent
+  research-engineering prose. Internal "Stage N" development labels were replaced
+  with descriptive names throughout, including the affected test modules and the
+  exported `TAXONOMY_FAILURE_LABELS` (previously `STAGE6_FAILURE_LABELS`).
 
-## [0.2.0] — 2026-06-06
+### Fixed
+- `mimirbench --version` reported `0.1.0` while the package declared `0.2.0`.
+  `mimirbench.__version__` is now the single source of truth, checked against
+  `pyproject.toml` by a test. The response cache's fallback version matches it,
+  so running from an uninstalled checkout no longer silently misses every cached
+  response.
+- Artefacts recorded paths using the host's separator, so runs on Windows wrote
+  `reports\runs\...` into committed JSON and Markdown. Paths now go through
+  `mimirbench.artefacts.artefact_path`, and the committed artefacts were
+  normalised to POSIX form.
+- Artefact writers now emit LF endings explicitly, so regenerating a report on
+  Windows produces a byte-identical file rather than a whitespace-only diff.
+- Leaderboard model cards no longer repeat the leaderboard and model names in
+  their filename. The longest tracked path drops from 284 to 181 characters, so
+  the repository can be cloned on Windows without `core.longpaths`.
+- Removed the changelog link to a `v0.1.0` release that was never tagged.
+
+## [0.2.0] - 2026-06-06
 
 The stable review target for the public repository. Adds hosted-model provider
 artefacts, robustness probes, the medium transformer model organism and its
@@ -32,19 +53,19 @@ interpretability result, an official benchmark protocol, uncertainty analysis
 over saved artefacts, position-resolved interpretability, and a documented
 artefact policy.
 
-### Added — benchmark protocol and statistical validity
-- **`BENCHMARK_PROTOCOL.md`** — two official tracks (strict-512 and best-valid) and
+### Added: benchmark protocol and statistical validity
+- **`BENCHMARK_PROTOCOL.md`**: two official tracks (strict-512 and best-valid) and
   explicit row-classification rules (clean / protocol-limited / provider-failed /
   rescue probe / smoke / diagnostic / non-model).
-- **`STATISTICAL_VALIDITY.md`** and `mimirbench statistical-validity` — seeded
+- **`STATISTICAL_VALIDITY.md`** and `mimirbench statistical-validity`: seeded
   bootstrap 95% CIs (mean score, pass, parse-fail, risk-violation), paired
   task-aligned deltas, per-row n and latency, generated to
   `reports/runs/leaderboard/statistical_validity_existing_artifacts.md` from saved
   `results.jsonl` only (no model is run).
-- **Row reclassification** — curated track labels emitted into `reports/INDEX.md`
+- **Row reclassification**: curated track labels emitted into `reports/INDEX.md`
   so protocol/probe artefacts are never confused with capability rows.
 
-### Added — deepened interpretability (local-only, no API calls)
+### Added: deepened interpretability (local-only, no API calls)
 - **Position-resolved (token-group) activation patching** plus a
   **mismatched-donor negative control** and a **label-shuffle probe control**
   (`mimirbench run-extended-interpretability`). On the medium checkpoint: a matched
@@ -65,8 +86,8 @@ artefact policy.
   `reports/interpretability/interp_bayes_multiseed_summary.md`, and
   `reports/interpretability/interp_bayes_head_token_summary.md` (plus JSON).
 
-### Added — artefact inspectability and release hygiene
-- **`ARTIFACTS.md`** and curated **`MODEL_CARD_medium.md`** — what is committed vs
+### Added: artefact inspectability and release hygiene
+- **`ARTIFACTS.md`** and curated **`MODEL_CARD_medium.md`**: what is committed vs
   gitignored, SHA256 checksums for the medium checkpoint, and exact reproduce
   commands.
 - **`RELEASE_NOTES_v0.2.0.md`** and this `[0.2.0]` entry.
@@ -89,7 +110,7 @@ artefact policy.
   (`thinking_budget=0`, best-valid). A forced Bayesian tool-use run was kept as a
   diagnostic only.
 
-### From Stage 5/6/7/8 (carried into 0.2.0)
+### Carried into 0.2.0 from earlier development
 - Provider-agnostic `ModelClient` (OpenAI/Anthropic/Gemini/generic-HTTP/local HF),
   deterministic parsing/repair (no LLM judge), a sandboxed audited tool agent, and
   cost/latency reporting.
@@ -101,37 +122,37 @@ artefact policy.
 - Mechanistic interpretability (activation capture, linear probes,
   clean/corrupted activation patching, attention analysis). On the medium
   checkpoint, layer-0 attention patching restored the clean action on 118/122
-  flipped pairs while layer-0 MLP restored 0/122 — a narrow causal model-organism
+  flipped pairs while layer-0 MLP restored 0/122, a narrow causal model-organism
   result specific to that synthetic checkpoint, with no frontier-model transfer
   claim.
 
-## [0.1.0] — 2026-06-02
+## 0.1.0 - 2026-06-02
 
-Initial repository foundation. No benchmark results are claimed.
+Initial repository foundation, never tagged as a release. No benchmark results
+are claimed.
 
 ### Added
-- **Shared contracts** — pydantic schemas for `Task`, `GradingKey`, `TaskInstance`,
+- **Shared contracts**: pydantic schemas for `Task`, `GradingKey`, `TaskInstance`,
   `ModelResponse`, `GraderResult`, `EvalConfig`, `EvalReport`.
-- **Deterministic tools** — Bayesian posterior calculator, risk checker, sealed-bid
+- **Deterministic tools**: Bayesian posterior calculator, risk checker, sealed-bid
   auction surplus helper, expected-value helper, and a synthetic price-path simulator.
-- **Environments** — fully implemented and registered `bayesian_games`, `auctions`,
+- **Environments**: fully implemented and registered `bayesian_games`, `auctions`,
   and `hidden_regimes`; scaffolds with real primitives for `market_making`,
   `prediction_markets`, and `adversarial_risk`.
-- **Eval harness** — environment registry, runner, scoring/aggregation, seeded
+- **Eval harness**: environment registry, runner, scoring/aggregation, seeded
   bootstrap, and paraphrase / adversarial variant generators.
-- **Agents** — `BaseAgent`, `ReferenceAgent`, `DirectAgent`, `ToolAgent`,
+- **Agents**: `BaseAgent`, `ReferenceAgent`, `DirectAgent`, `ToolAgent`,
   `ReflectiveAgent`, and lazy-loading `LocalModelAgent` / `APIModelAgent`.
-- **Analysis** — calibration (ECE, Brier, reliability curve), regret, robustness, and
+- **Analysis**: calibration (ECE, Brier, reliability curve), regret, robustness, and
   matplotlib plotting helpers.
-- **Training** — symbol tokenizer, synthetic regime dataset, Bayes-optimal NLL
+- **Training**: symbol tokenizer, synthetic regime dataset, Bayes-optimal NLL
   baseline, and guarded small-transformer train/eval scaffolds.
-- **Interpretability** — ridge linear probe, attention summaries, activation-patching
+- **Interpretability**: ridge linear probe, attention summaries, activation-patching
   data structures, SAE config, and the experiment plan-as-data.
-- **CLI** — `mimirbench` with `list-envs`, `validate-config`, and `run-eval`.
-- **Tooling** — `pyproject.toml` (hatchling), ruff, mypy, pytest, pre-commit, and a
+- **CLI**: `mimirbench` with `list-envs`, `validate-config`, and `run-eval`.
+- **Tooling**: `pyproject.toml` (hatchling), ruff, mypy, pytest, pre-commit, and a
   GitHub Actions CI workflow (ruff + mypy + pytest).
-- **Docs** — README, DESIGN, EVALS, INTERPRETABILITY, RESULTS, CONTRIBUTING.
+- **Docs**: README, DESIGN, EVALS, INTERPRETABILITY, RESULTS, CONTRIBUTING.
 
 [Unreleased]: https://github.com/anannyenaik/MimirBench/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/anannyenaik/MimirBench/releases/tag/v0.2.0
-[0.1.0]: https://github.com/anannyenaik/MimirBench/releases/tag/v0.1.0

@@ -8,7 +8,7 @@ from its task identifier, seed, task text, and saved response.
 ## Entry template
 
 ```markdown
-### FC-001 — <short title>
+### FC-001: <short title>
 - **Failure mode:** <base-rate neglect | over/under-reaction | miscalibration |
   risk-limit violation under pressure | paraphrase brittleness | unfaithful explanation>
 - **Environment / seed:** <env> / <seed>   (reproduce: `generate_task(seed)`)
@@ -22,10 +22,10 @@ from its task identifier, seed, task text, and saved response.
 
 ## Failure modes we are cataloguing
 
-1. **Base-rate neglect** — ignoring the prior; over-weighting the latest signal.
-2. **Evidence over-/under-reaction** — belief moves too far or too little; order effects.
-3. **Miscalibration** — stated probabilities that don't match outcome frequencies.
-4. **Expected-value distortion** — risk attitudes inconsistent with the objective.
-5. **Risk-limit violation under pressure** — abandoning hard limits when nudged.
-6. **Paraphrase brittleness** — answers flipping under meaning-preserving rewrites.
-7. **Unfaithful explanation** — rationale that contradicts the action taken.
+1. **Base-rate neglect**: ignoring the prior; over-weighting the latest signal.
+2. **Evidence over-/under-reaction**: belief moves too far or too little; order effects.
+3. **Miscalibration**: stated probabilities that don't match outcome frequencies.
+4. **Expected-value distortion**: risk attitudes inconsistent with the objective.
+5. **Risk-limit violation under pressure**: abandoning hard limits when nudged.
+6. **Paraphrase brittleness**: answers flipping under meaning-preserving rewrites.
+7. **Unfaithful explanation**: rationale that contradicts the action taken.

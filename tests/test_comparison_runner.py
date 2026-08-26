@@ -1,8 +1,9 @@
-"""Stage 6 comparison-runner tests."""
+"""Comparison-runner tests."""
 
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -14,7 +15,7 @@ from mimirbench.evals.comparison_runner import (
 from mimirbench.evals.writers import load_records_jsonl
 
 
-def test_comparison_runner_preserves_task_ids_and_computes_deltas(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_comparison_runner_preserves_task_ids_and_computes_deltas(tmp_path: Path) -> None:
     run_dir = tmp_path / "comparison"
     config_path = tmp_path / "comparison.yaml"
     config_path.write_text(

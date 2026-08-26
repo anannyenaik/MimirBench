@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from mimirbench.training.tokenizer import UNK_TOKEN, TraceTokenizer
 
 
@@ -15,7 +17,7 @@ def test_trace_tokenizer_roundtrips_simple_trace_text() -> None:
     assert len(encoded["attention_mask"]) == 32
 
 
-def test_trace_tokenizer_unknown_token_and_save_load(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_trace_tokenizer_unknown_token_and_save_load(tmp_path: Path) -> None:
     tokenizer = TraceTokenizer.from_texts(["known token"], max_length=12)
     encoded = tokenizer.encode("unknown_token")
     assert tokenizer.unk_id in encoded["input_ids"]

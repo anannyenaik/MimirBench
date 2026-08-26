@@ -1,5 +1,5 @@
 {
-  "checkpoint_path": "reports\\training\\small_transformer_bayes_medium_seed_127\\checkpoints\\best.pt",
+  "checkpoint_path": "reports/training/small_transformer_bayes_medium_seed_127/checkpoints/best.pt",
   "config": {
     "checkpoint_path": "reports/training/small_transformer_bayes_medium_seed_127/checkpoints/best.pt",
     "data": {
@@ -39,16 +39,16 @@
     "regret_mean": 0.006469734346321033,
     "risk_flag_accuracy": 1.0
   },
-  "output_dir": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127",
+  "output_dir": "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127",
   "paths": {
     "figures": [
-      "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127\\figures\\posterior_abs_error.png",
-      "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127\\figures\\regret.png"
+      "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127/figures/posterior_abs_error.png",
+      "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127/figures/regret.png"
     ],
     "model_card": "tmp\\model_cards\\small_transformer_bayes_medium_seed_127.md",
-    "report": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127\\report.md",
-    "results": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127\\results.jsonl",
-    "summary": "reports\\interpretability\\interp_bayes_multiseed\\heldout_eval_seed_127\\summary.json"
+    "report": "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127/report.md",
+    "results": "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127/results.jsonl",
+    "summary": "reports/interpretability/interp_bayes_multiseed/heldout_eval_seed_127/summary.json"
   },
   "run_name": "small_transformer_bayes_medium_heldout_seed_127",
   "timestamp": "2026-06-06T21:41:42+00:00"

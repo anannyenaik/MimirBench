@@ -214,7 +214,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\all_envs_reference_smoke",
+  "output_dir": "reports/runs/all_envs_reference_smoke",
   "run_id": "all_envs_reference_smoke-20260602T014233",
   "run_name": "all_envs_reference_smoke",
   "timestamp": "2026-06-02T01:43:05Z"

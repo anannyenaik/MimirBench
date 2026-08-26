@@ -1,6 +1,6 @@
 # Small transformer Bayesian evaluation: small_transformer_bayes_medium_heldout_seed_128
 
-- Checkpoint: `reports\training\small_transformer_bayes_medium_seed_128\checkpoints\best.pt`
+- Checkpoint: `reports/training/small_transformer_bayes_medium_seed_128/checkpoints/best.pt`
 - Posterior bucket accuracy: `0.9915`
 - Action accuracy: `0.9995`
 - Risk flag accuracy: `0.9995`

@@ -2,7 +2,7 @@
 
 The proper-scoring-rule helpers (:func:`brier_score`, :func:`log_score`) are
 kept for calibration analysis. The registry-compatible :func:`grade` scores
-binary trade decisions from Stage 3 tasks.
+binary trade decisions from generated tasks.
 """
 
 from __future__ import annotations

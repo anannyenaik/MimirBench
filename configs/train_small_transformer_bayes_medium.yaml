@@ -1,7 +1,7 @@
-# Stage 7 medium training: a stronger synthetic Bayesian/risk transformer.
+# Medium training run: a stronger synthetic Bayesian/risk transformer.
 #
 # Goal: train a model that genuinely learns the evidence -> posterior -> action
-# computation (unlike the undertrained tiny smoke model), so the Stage 8
+# computation (unlike the undertrained tiny smoke model), so the
 # interpretability patching experiments have a real computation to localise.
 # CPU-only, deterministic (dropout 0, fixed seed), no downloads.
 run:

@@ -93,7 +93,7 @@ All agents implement `BaseAgent.act(task: Task) -> ModelResponse`.
 Real agents receive only `Task`. Prompts are environment-aware
 ([`mimirbench/agents/prompts.py`](mimirbench/agents/prompts.py)) and responses are
 parsed/repaired deterministically
-([`mimirbench/agents/parsing.py`](mimirbench/agents/parsing.py)) — no second LLM
+([`mimirbench/agents/parsing.py`](mimirbench/agents/parsing.py)); no second LLM
 is used to judge or repair. The noisy reference mock is explicitly diagnostic and
 uses `GradingKey` through a separate `act_with_key` path; no real or tool agent
 ever receives the `GradingKey`. See [MODELS.md](MODELS.md) for backends.

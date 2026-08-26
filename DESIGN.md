@@ -10,12 +10,12 @@ evaluation procedures, see [EVALS.md](EVALS.md); for robustness methodology, see
 We want to measure something sharper than task success: the **quality of an
 agent's reasoning under uncertainty**. Concretely, four capabilities:
 
-1. **Belief updating** — does the agent move its probabilities the right way, by
+1. **Belief updating**: does the agent move its probabilities the right way, by
    the right amount, when it sees evidence?
-2. **Expected-value reasoning** — does it value uncertain outcomes correctly?
-3. **Constraint obedience** — does it respect hard limits even when violating them
+2. **Expected-value reasoning**: does it value uncertain outcomes correctly?
+3. **Constraint obedience**: does it respect hard limits even when violating them
    looks locally attractive?
-4. **Robustness** — are its conclusions stable under paraphrase and adversarial
+4. **Robustness**: are its conclusions stable under paraphrase and adversarial
    pressure?
 
 The benchmark also asks *why* an agent succeeds or fails, at both the
@@ -48,12 +48,12 @@ and cost into the measurement. For decision tasks we don't need it: the optimal
 posterior, the expected surplus, and the set of breached risk limits are all exactly
 computable. Deterministic grading buys us:
 
-- **Calibrated error, not just pass/fail** — we report *how far* an answer is from
+- **Calibrated error, not just pass/fail**: we report *how far* an answer is from
   optimal (e.g. total-variation distance to the true posterior), which is far more
   informative than a binary verdict.
-- **Zero grader variance** — re-running grading never changes a score.
-- **Auditability** — a reviewer can recompute any score by hand.
-- **Speed and cost** — no judge-model calls in the inner loop.
+- **Zero grader variance**: re-running grading never changes a score.
+- **Auditability**: a reviewer can recompute any score by hand.
+- **Speed and cost**: no judge-model calls in the inner loop.
 
 ## Why synthetic task generation matters
 
@@ -65,7 +65,7 @@ Tasks are generated from seeds rather than scraped or hand-written. This gives:
 - **Unlimited, balanced data.** Enough instances for tight confidence intervals and
   for training the small interpretability models on the *same* task structure.
 - **Known structure for interpretability.** Because we generate the data-generating
-  process, we know the Bayes-optimal belief at every step — the target a probe tries
+  process, we know the Bayes-optimal belief at every step: the target a probe tries
   to read out of a model's activations.
 
 ## Why train a small synthetic transformer
@@ -87,7 +87,7 @@ activation-capture experiments.
 Quantitative finance has spent decades formalising decision-making under
 uncertainty: Bayesian filtering of hidden states, expected-value and risk trade-offs,
 auction and market mechanisms, inventory and loss limits. These are not used here to
-build a trading system — they are used as a **deep, well-posed library of decision
+build a trading system; they are used as a **deep, well-posed library of decision
 problems** with known optimal solutions.
 
 That makes them an unusually good evaluation substrate for frontier models:
@@ -179,17 +179,17 @@ move, it should not score that case.
 
 ## Failure modes we want to study
 
-- **Base-rate neglect / prior insensitivity** — ignoring the prior and over-weighting
+- **Base-rate neglect / prior insensitivity**: ignoring the prior and over-weighting
   the latest signal.
-- **Evidence over- and under-reaction** — moving beliefs too far or too little per
+- **Evidence over- and under-reaction**: moving beliefs too far or too little per
   observation; order effects in sequential updating.
-- **Miscalibration** — confident probabilities that don't match outcome frequencies.
-- **Expected-value distortions** — risk-seeking/averse errors inconsistent with the
+- **Miscalibration**: confident probabilities that don't match outcome frequencies.
+- **Expected-value distortions**: risk-seeking/averse errors inconsistent with the
   task's stated objective.
-- **Risk-limit violations under pressure** — abandoning hard constraints when an
+- **Risk-limit violations under pressure**: abandoning hard constraints when an
   adversarial prompt makes breaking them look attractive.
-- **Brittleness** — answers that flip under paraphrase or irrelevant distractors.
-- **Unfaithful explanations** — a stated rationale that does not match the action
+- **Brittleness**: answers that flip under paraphrase or irrelevant distractors.
+- **Unfaithful explanations**: a stated rationale that does not match the action
   actually taken.
 
 For each behavioural failure, the interpretability track asks the mechanistic

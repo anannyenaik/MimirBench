@@ -37,7 +37,7 @@ jobs:
         run: ruff check .
 
       - name: Mypy (type check)
-        run: mypy mimirbench
+        run: mypy mimirbench tests
 
       - name: Pytest
         run: pytest

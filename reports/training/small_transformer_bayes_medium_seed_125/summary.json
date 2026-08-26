@@ -103,23 +103,23 @@
       "rationale_class"
     ]
   },
-  "output_dir": "reports\\training\\small_transformer_bayes_medium_seed_125",
+  "output_dir": "reports/training/small_transformer_bayes_medium_seed_125",
   "paths": {
-    "best_checkpoint": "reports\\training\\small_transformer_bayes_medium_seed_125\\checkpoints\\best.pt",
-    "config": "reports\\training\\small_transformer_bayes_medium_seed_125\\config_resolved.yaml",
+    "best_checkpoint": "reports/training/small_transformer_bayes_medium_seed_125/checkpoints/best.pt",
+    "config": "reports/training/small_transformer_bayes_medium_seed_125/config_resolved.yaml",
     "figures": [
-      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\training_loss.png",
-      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_accuracy.png",
-      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_posterior_bucket_accuracy.png",
-      "reports\\training\\small_transformer_bayes_medium_seed_125\\figures\\validation_risk_accuracy.png"
+      "reports/training/small_transformer_bayes_medium_seed_125/figures/training_loss.png",
+      "reports/training/small_transformer_bayes_medium_seed_125/figures/validation_accuracy.png",
+      "reports/training/small_transformer_bayes_medium_seed_125/figures/validation_posterior_bucket_accuracy.png",
+      "reports/training/small_transformer_bayes_medium_seed_125/figures/validation_risk_accuracy.png"
     ],
-    "final_checkpoint": "reports\\training\\small_transformer_bayes_medium_seed_125\\checkpoints\\final.pt",
-    "metrics": "reports\\training\\small_transformer_bayes_medium_seed_125\\metrics.jsonl",
+    "final_checkpoint": "reports/training/small_transformer_bayes_medium_seed_125/checkpoints/final.pt",
+    "metrics": "reports/training/small_transformer_bayes_medium_seed_125/metrics.jsonl",
     "model_card": "tmp\\model_cards\\small_transformer_bayes_medium_seed_125.md",
-    "test_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\test_traces.jsonl",
-    "train_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\train_traces.jsonl",
-    "val_traces": "reports\\training\\small_transformer_bayes_medium_seed_125\\val_traces.jsonl",
-    "vocab": "reports\\training\\small_transformer_bayes_medium_seed_125\\vocab.json"
+    "test_traces": "reports/training/small_transformer_bayes_medium_seed_125/test_traces.jsonl",
+    "train_traces": "reports/training/small_transformer_bayes_medium_seed_125/train_traces.jsonl",
+    "val_traces": "reports/training/small_transformer_bayes_medium_seed_125/val_traces.jsonl",
+    "vocab": "reports/training/small_transformer_bayes_medium_seed_125/vocab.json"
   },
   "run_name": "small_transformer_bayes_medium_seed_125",
   "timestamp": "2026-06-06T20:52:16+00:00"

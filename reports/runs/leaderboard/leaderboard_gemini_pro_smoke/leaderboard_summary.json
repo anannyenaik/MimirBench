@@ -3,10 +3,10 @@
     "direct"
   ],
   "artefacts": {
-    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\headline_candidates.md",
-    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\leaderboard_report.md",
-    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\leaderboard_summary.json",
-    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\paired_deltas.jsonl"
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/leaderboard_summary.json",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/paired_deltas.jsonl"
   },
   "caveats": [
     "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
@@ -72,7 +72,7 @@
   ],
   "leaderboard_name": "leaderboard_gemini_pro_smoke",
   "model_cards": [
-    "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\model_cards\\leaderboard_gemini_pro_smoke__gemini_3_1_pro_preview_direct_smoke__direct__gemini_3_1_pro_preview_direct_smoke_direct.md"
+    "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/model_cards/gemini_3_1_pro_preview_direct_smoke__direct.md"
   ],
   "models_pending": [],
   "models_run": [
@@ -104,21 +104,21 @@
           "latency_p95_ms": 2826.2990250004805,
           "mean_score": 0.0,
           "n_tasks": 6,
-          "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\models\\gemini_3_1_pro_preview_direct_smoke\\agents\\direct",
+          "output_dir": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/models/gemini_3_1_pro_preview_direct_smoke/agents/direct",
           "parse_failure_rate": 1.0,
           "run_id": "leaderboard_gemini_pro_smoke__gemini_3_1_pro_preview_direct_smoke__direct-20260603T063353",
           "run_name": "leaderboard_gemini_pro_smoke__gemini_3_1_pro_preview_direct_smoke__direct"
         }
       },
       "label": "gemini_3_1_pro_preview_direct_smoke",
-      "model_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke\\models\\gemini_3_1_pro_preview_direct_smoke",
+      "model_dir": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke/models/gemini_3_1_pro_preview_direct_smoke",
       "provider": "gemini",
       "result_label": "real API model",
       "robustness": {},
       "usable": true
     }
   ],
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_smoke",
+  "output_dir": "reports/runs/leaderboard/leaderboard_gemini_pro_smoke",
   "paired_metrics": {},
   "preliminary": true,
   "provider_availability": {

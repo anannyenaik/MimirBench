@@ -325,8 +325,8 @@ def run_head_token_multiseed(config: Any) -> dict[str, Any]:
     summary_dir.mkdir(parents=True, exist_ok=True)
     json_path = summary_dir / "interp_bayes_head_token_summary.json"
     report_path = summary_dir / "interp_bayes_head_token_summary.md"
-    json_path.write_text(json.dumps(aggregate, indent=2, sort_keys=True), encoding="utf-8")
-    report_path.write_text(_render_report(aggregate), encoding="utf-8")
+    json_path.write_text(json.dumps(aggregate, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+    report_path.write_text(_render_report(aggregate), encoding="utf-8", newline="\n")
     aggregate["json_path"] = json_path.as_posix()
     aggregate["report_path"] = report_path.as_posix()
     return aggregate

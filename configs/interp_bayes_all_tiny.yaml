@@ -1,4 +1,4 @@
-# Stage 8 interpretability: run all experiments on the tiny Bayesian checkpoint.
+# Interpretability: run all experiments on the tiny Bayesian checkpoint.
 # Deterministic, CPU-only, no downloads. Requires the trained checkpoint and the
 # "ml" extra (torch). If either is missing the runner writes a "pending" report.
 run:

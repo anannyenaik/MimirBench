@@ -362,7 +362,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\full_scale_reference_validation",
+  "output_dir": "reports/runs/full_scale_reference_validation",
   "run_id": "full_scale_reference_validation-20260607T000659",
   "run_name": "full_scale_reference_validation",
   "timestamp": "2026-06-07T00:06:59Z"

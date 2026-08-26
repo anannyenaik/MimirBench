@@ -1,7 +1,7 @@
 # Notebooks
 
 Exploratory and explanatory notebooks. Notebooks are for **exploration and
-figures**, not for the source of truth — anything reusable should be promoted into
+figures**, not for the source of truth; anything reusable should be promoted into
 the `mimirbench` package and covered by tests.
 
 ## Conventions

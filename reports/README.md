@@ -6,25 +6,25 @@ artefacts remain gitignored.
 
 ## Start here
 
-- [`INDEX.md`](INDEX.md) — the main report navigator. It lists every committed
+- [`INDEX.md`](INDEX.md): the main report navigator. It lists every committed
   baseline, robustness, comparison, leaderboard, interpretability, and training
   artefact with its path and headline number.
-- [`../RESULTS.md`](../RESULTS.md) — the narrative results document and its
+- [`../RESULTS.md`](../RESULTS.md): the narrative results document and its
   consolidated scope and limitations.
 
 ## Contents
 
-- [`INDEX.md`](INDEX.md) — generated index of all committed artefacts.
-- [`model_cards/`](model_cards/) — one card per evaluated model/agent: setup,
+- [`INDEX.md`](INDEX.md): generated index of all committed artefacts.
+- [`model_cards/`](model_cards/): one card per evaluated model/agent: setup,
   headline metrics, known limitations.
-- [`runs/`](runs/) — committed run reports: reference/mock smoke tests, the
+- [`runs/`](runs/): committed run reports: reference/mock smoke tests, the
   deterministic tool baseline, hosted-model leaderboards (OpenAI, Claude, Gemini),
   robustness probes, and the small-transformer evaluations.
-- [`training/`](training/) — small-transformer training artefacts (metrics,
+- [`training/`](training/): small-transformer training artefacts (metrics,
   curves, model cards) for the tiny and medium model organisms.
-- [`interpretability/`](interpretability/) — activation-patching, probe, and
+- [`interpretability/`](interpretability/): activation-patching, probe, and
   attention artefacts and figures for the tiny and medium checkpoints.
-- [`failure_cases.md`](failure_cases.md) — curated, seeded examples of specific
+- [`failure_cases.md`](failure_cases.md): curated, seeded examples of specific
   reasoning failures.
 
 Standalone cross-provider comparison notes live under `runs/leaderboard/`, e.g.

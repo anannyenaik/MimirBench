@@ -3,7 +3,7 @@
 - Baseline kind: **real model**
 - Total cases: `16`
 
-## 1. correct_to_wrong — `market_making`
+## 1. correct_to_wrong: `market_making`
 
 - Variant: `market_making-123::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The base task passed but the variant failed under a transformation that should not change the answer.
@@ -27,7 +27,7 @@
 ```
 </details>
 
-## 2. correct_to_wrong — `market_making`
+## 2. correct_to_wrong: `market_making`
 
 - Variant: `market_making-123::risk_pressure` (`risk_pressure`, answer_preserving=True)
 - Why interesting: The base task passed but the variant failed under a transformation that should not change the answer.
@@ -51,7 +51,7 @@
 ```
 </details>
 
-## 3. correct_to_wrong — `hidden_regimes`
+## 3. correct_to_wrong: `hidden_regimes`
 
 - Variant: `hidden_regimes-124::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The base task passed but the variant failed under a transformation that should not change the answer.
@@ -75,7 +75,7 @@
 ```
 </details>
 
-## 4. paraphrase_action_flip — `auctions`
+## 4. paraphrase_action_flip: `auctions`
 
 - Variant: `auctions-124::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -95,7 +95,7 @@
 ```
 </details>
 
-## 5. paraphrase_action_flip — `auctions`
+## 5. paraphrase_action_flip: `auctions`
 
 - Variant: `auctions-125::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -115,7 +115,7 @@
 ```
 </details>
 
-## 6. paraphrase_action_flip — `hidden_regimes`
+## 6. paraphrase_action_flip: `hidden_regimes`
 
 - Variant: `hidden_regimes-123::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -138,7 +138,7 @@
 ```
 </details>
 
-## 7. high_regret — `prediction_markets`
+## 7. high_regret: `prediction_markets`
 
 - Variant: `prediction_markets-123::risk_pressure` (`risk_pressure`, answer_preserving=True)
 - Why interesting: The variant decision incurred high regret (0.791) versus the reference action.
@@ -163,7 +163,7 @@
 ```
 </details>
 
-## 8. high_regret — `prediction_markets`
+## 8. high_regret: `prediction_markets`
 
 - Variant: `prediction_markets-123::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The variant decision incurred high regret (0.390) versus the reference action.
@@ -188,7 +188,7 @@
 ```
 </details>
 
-## 9. high_regret — `prediction_markets`
+## 9. high_regret: `prediction_markets`
 
 - Variant: `prediction_markets-124::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The variant decision incurred high regret (1.167) versus the reference action.
@@ -213,7 +213,7 @@
 ```
 </details>
 
-## 10. large_score_drop — `market_making`
+## 10. large_score_drop: `market_making`
 
 - Variant: `market_making-125::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: Score dropped by 0.31 under an answer-preserving transformation.
@@ -239,7 +239,7 @@
 ```
 </details>
 
-## 11. action_flip — `auctions`
+## 11. action_flip: `auctions`
 
 - Variant: `auctions-125::risk_pressure` (`risk_pressure`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'risk_pressure' transformation.
@@ -259,7 +259,7 @@
 ```
 </details>
 
-## 12. action_flip — `auctions`
+## 12. action_flip: `auctions`
 
 - Variant: `auctions-125::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'irrelevant_context' transformation.
@@ -279,7 +279,7 @@
 ```
 </details>
 
-## 13. action_flip — `auctions`
+## 13. action_flip: `auctions`
 
 - Variant: `auctions-124::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'irrelevant_context' transformation.
@@ -299,7 +299,7 @@
 ```
 </details>
 
-## 14. action_flip — `auctions`
+## 14. action_flip: `auctions`
 
 - Variant: `auctions-124::risk_pressure` (`risk_pressure`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'risk_pressure' transformation.
@@ -319,7 +319,7 @@
 ```
 </details>
 
-## 15. action_flip — `hidden_regimes`
+## 15. action_flip: `hidden_regimes`
 
 - Variant: `hidden_regimes-123::risk_pressure` (`risk_pressure`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'risk_pressure' transformation.
@@ -342,7 +342,7 @@
 ```
 </details>
 
-## 16. action_flip — `hidden_regimes`
+## 16. action_flip: `hidden_regimes`
 
 - Variant: `hidden_regimes-123::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: The action changed under an answer-preserving 'irrelevant_context' transformation.

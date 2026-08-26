@@ -9,11 +9,11 @@ which the runner persists to ``tool_audit.jsonl`` / ``tool_audit.md``.
 
 Two concrete policies ship here:
 
-* :class:`ReferenceToolAgent` — a deterministic, non-model policy that consults an
+* :class:`ReferenceToolAgent`: a deterministic, non-model policy that consults an
   allowed tool and then answers from the tool output (or the environment's public
   reference solver). It is the tool-loop analogue of the reference baseline and is
   fully reproducible, so it anchors the audit/metrics tests.
-* :class:`ModelToolAgent` — a model-backed policy that asks a
+* :class:`ModelToolAgent`: a model-backed policy that asks a
   :class:`~mimirbench.agents.model_client.ModelClient` to propose tool calls and a
   final answer in JSON.
 

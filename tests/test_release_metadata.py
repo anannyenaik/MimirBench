@@ -16,6 +16,14 @@ def test_pyproject_declares_v020_alpha() -> None:
     assert "Development Status :: 2 - Pre-Alpha" not in project["classifiers"]
 
 
+def test_runtime_version_matches_pyproject() -> None:
+    """``mimirbench --version`` must not drift from the packaged version."""
+    import mimirbench
+
+    data = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    assert mimirbench.__version__ == data["project"]["version"]
+
+
 def test_release_docs_describe_existing_assets_without_stale_creation_steps() -> None:
     release_notes = (ROOT / "RELEASE_NOTES_v0.2.0.md").read_text(encoding="utf-8")
     artifacts = (ROOT / "ARTIFACTS.md").read_text(encoding="utf-8")

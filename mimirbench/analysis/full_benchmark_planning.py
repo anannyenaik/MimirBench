@@ -190,7 +190,7 @@ def write_full_benchmark_plan(
     plan = build_full_benchmark_plan(config_path)
     path = Path(output_dir) / f"{Path(config_path).stem}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return path
 
 

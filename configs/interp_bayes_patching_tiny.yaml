@@ -1,4 +1,4 @@
-# Stage 8 interpretability: clean/corrupted activation patching only.
+# Interpretability: clean/corrupted activation patching only.
 # Builds minimal evidence-corruption pairs and patches each site from the clean
 # run into the corrupted run, measuring how far the prediction is restored.
 run:

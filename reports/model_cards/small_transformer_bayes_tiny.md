@@ -4,7 +4,7 @@
 
 - Model name: `small_transformer_bayes_tiny`
 - Model type: compact synthetic Bayesian trace transformer
-- Training run directory: `reports\training\small_transformer_bayes_tiny`
+- Training run directory: `reports/training/small_transformer_bayes_tiny`
 - Created from actual training artefacts: `yes`
 
 ## Architecture
@@ -24,7 +24,7 @@
 ## Training Config
 
 - Optimisation config: `{"batch_size": 32, "device": "cpu", "early_stopping_patience": null, "epochs": 2, "grad_clip": 1.0, "learning_rate": 0.001, "weight_decay": 0.01}`
-- Full resolved config: `reports\training\small_transformer_bayes_tiny\config_resolved.yaml`
+- Full resolved config: `reports/training/small_transformer_bayes_tiny/config_resolved.yaml`
 
 ## Validation Metrics
 
@@ -34,7 +34,7 @@
 ## Held-Out MimirBench Metrics
 
 - Held-out evaluation summary: `{"action_accuracy": 0.4453125, "approx_posterior_abs_error_mean": 0.4510692918970604, "confidence_bucket_accuracy": 0.5703125, "invalid_response_rate": 0.0, "latency_mean_ms": 27.30671171866561, "latency_p50_ms": 10.482450001291, "latency_p95_ms": 129.0135750034096, "posterior_bucket_accuracy": 0.0546875, "regret_mean": 0.26037435970090295, "risk_flag_accuracy": 0.5546875}`
-- Evaluation run directory: `reports\runs\small_transformer_bayes_eval`
+- Evaluation run directory: `reports/runs/small_transformer_bayes_eval`
 
 ## Interpretability Readiness
 
@@ -44,9 +44,9 @@
 
 ## Checkpoints
 
-- Best checkpoint: `reports\training\small_transformer_bayes_tiny\checkpoints\best.pt`
-- Final checkpoint: `reports\training\small_transformer_bayes_tiny\checkpoints\final.pt`
-- Tokenizer vocabulary: `reports\training\small_transformer_bayes_tiny\vocab.json`
+- Best checkpoint: `reports/training/small_transformer_bayes_tiny/checkpoints/best.pt`
+- Final checkpoint: `reports/training/small_transformer_bayes_tiny/checkpoints/final.pt`
+- Tokenizer vocabulary: `reports/training/small_transformer_bayes_tiny/vocab.json`
 
 ## Scope and Limitations
 

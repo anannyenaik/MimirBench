@@ -111,7 +111,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference",
+  "output_dir": "reports/runs/comparisons/reference_bayes/agent_runs/reference",
   "run_id": "reference_bayes_reference-20260602T060923",
   "run_name": "reference_bayes_reference",
   "timestamp": "2026-06-02T06:09:23Z"

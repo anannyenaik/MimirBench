@@ -200,8 +200,8 @@ tightly coupled in the generator.
 
 Causal effects are near zero and no pair flips the action head, so the best
 action-recovery site is `n/a`. The `1.000` label-recovery at `embed` and
-`resid_post` is the **expected sanity check** — patching the whole input
-embedding or the full final residual stream reproduces the clean run — not
+`resid_post` is the **expected sanity check**: patching the whole input
+embedding or the full final residual stream reproduces the clean run, not
 localisation. Interpretation: this underpowered, mean-pooling checkpoint
 treats the decision heads as nearly evidence-invariant, so there is little
 clean-vs-corrupted gap to restore. The infrastructure is verified correct (a
@@ -214,7 +214,7 @@ clean-vs-corrupted gap to restore. The infrastructure is verified correct (a
 | 0 | 3.584 | 0.179 | 0.100 | 0.255 |
 
 Attention is near-uniform (entropy close to `ln(seq_len)`) and roughly tracks
-group size rather than singling out evidence tokens — no strong evidence-reading
+group size rather than singling out evidence tokens; no strong evidence-reading
 head emerges in this 1-layer model.
 
 ### Scope and limitations
@@ -305,7 +305,7 @@ Identical architecture trained on 2,000 traces instead of 12,000, scored on the
 | posterior bucket accuracy (20-way) | 0.962000 | 0.993500 |
 
 Reading: the binary action/risk decisions are learnable from little data
-(≈0.998 at 2k), but the 20-way posterior bucketing is the data-hungry part — it
+(≈0.998 at 2k), but the 20-way posterior bucketing is the data-hungry part: it
 loses ~3 points and validation loss is ~7x higher at 2k. The 2k run never
 triggered early stopping (best at the final epoch 30), i.e. it was still
 data-limited, whereas the 12k run peaked at epoch 25.
@@ -326,8 +326,8 @@ artefacts: `reports/interpretability/interp_bayes_all_medium/`.
 | confidence_bucket | `blocks.1.resid_post` | 1.000 | 0.852 | +0.148 |
 
 Unlike the tiny model (posterior only +0.083 above chance, confidence at
-baseline), every label is now strongly decodable, and the posterior bucket — the
-hard 20-way target — is decodable far above chance and best read from the deeper
+baseline), every label is now strongly decodable, and the posterior bucket, the
+hard 20-way target, is decodable far above chance and best read from the deeper
 residual stream.
 
 **Activation patching (clean → corrupted, 128 pairs).** The corruption flips the
@@ -373,9 +373,9 @@ corruption had flipped (0.967) and the clean posterior bucket on 116/128 (0.906)
 while patching the **layer-0 MLP sub-block output** restored **0/122** actions
 and **0/128** posteriors. Layer-1 attention behaves the same way (119/122);
 layer-1 MLP only partially (88/122). Because the effect is concentrated at the
-attention sub-blocks and is essentially absent at the layer-0 MLP — and because
+attention sub-blocks and is essentially absent at the layer-0 MLP, and because
 the attention analysis independently shows layer-0 heads reading the evidence
-tokens — this is evidence that **the attention sub-blocks (layer-0 attention in
+tokens, this is evidence that **the attention sub-blocks (layer-0 attention in
 particular) causally carry this model's learned evidence-to-decision
 computation**, not the MLP sub-blocks. The result is specific to this synthetic
 checkpoint and seed.
@@ -737,7 +737,7 @@ and output budget).
 | New invalid responses on variants | 0.000000 | 0.000000 |
 
 Environment concentration: the only material degradation was `market_making`
-under `irrelevant_context` — one variant induced a risk-limit violation and a
+under `irrelevant_context`: one variant induced a risk-limit violation and a
 `0.775` score drop (env mean score drop `0.100819`, unsafe/risk increase
 `0.111`). `auctions` showed pressure susceptibility (`0.667`) but no score drop.
 `bayesian_games`, `hidden_regimes`, and `adversarial_risk` were stable (zero

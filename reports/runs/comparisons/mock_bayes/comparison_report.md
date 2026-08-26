@@ -22,11 +22,11 @@ Deltas are candidate minus baseline on matched `(environment, task_id)` rows.
 
 ## Figures
 
-- `reports\runs\comparisons\mock_bayes\figures\score_by_environment.png`
-- `reports\runs\comparisons\mock_bayes\figures\posterior_error_distribution.png`
-- `reports\runs\comparisons\mock_bayes\figures\risk_violation_rate_by_environment.png`
-- `reports\runs\comparisons\mock_bayes\figures\latency_distribution.png`
-- `reports\runs\comparisons\mock_bayes\figures\parse_failure_rate_by_agent.png`
+- `reports/runs/comparisons/mock_bayes/figures/score_by_environment.png`
+- `reports/runs/comparisons/mock_bayes/figures/posterior_error_distribution.png`
+- `reports/runs/comparisons/mock_bayes/figures/risk_violation_rate_by_environment.png`
+- `reports/runs/comparisons/mock_bayes/figures/latency_distribution.png`
+- `reports/runs/comparisons/mock_bayes/figures/parse_failure_rate_by_agent.png`
 
 ## Scope and Limitations
 
@@ -39,6 +39,6 @@ Deltas are candidate minus baseline on matched `(environment, task_id)` rows.
 
 ## Artefacts
 
-- `paired_results.jsonl`: `reports\runs\comparisons\mock_bayes\paired_results.jsonl`
-- Agent run directories: `reports\runs\comparisons\mock_bayes\agent_runs`
-- Machine-readable summary: `reports\runs\comparisons\mock_bayes\comparison_summary.json`
+- `paired_results.jsonl`: `reports/runs/comparisons/mock_bayes/paired_results.jsonl`
+- Agent run directories: `reports/runs/comparisons/mock_bayes/agent_runs`
+- Machine-readable summary: `reports/runs/comparisons/mock_bayes/comparison_summary.json`

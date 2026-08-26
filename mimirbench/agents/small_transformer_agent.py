@@ -1,4 +1,4 @@
-"""Agent wrapper for Stage 7 small-transformer Bayesian checkpoints."""
+"""Agent wrapper for small-transformer Bayesian checkpoints."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from mimirbench.agents.base import BaseAgent
+from mimirbench.artefacts import artefact_path
 from mimirbench.environments.bayesian_games.schemas import BayesianTaskParams
 from mimirbench.evals.schemas import EnvironmentFamily, ModelResponse, Task
 from mimirbench.training.small_transformer import SmallTransformerForTracePrediction, require_torch
@@ -91,7 +92,7 @@ class SmallTransformerAgent(BaseAgent):
             ),
             latency_s=time.perf_counter() - start,
             metadata={
-                "checkpoint_path": str(self.checkpoint_path),
+                "checkpoint_path": artefact_path(self.checkpoint_path),
                 "provider": "local_synthetic",
                 "model": "small_transformer_bayes",
             },

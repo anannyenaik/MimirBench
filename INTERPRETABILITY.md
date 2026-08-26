@@ -10,12 +10,12 @@ and six-seed model-organism replication.
 The behavioural evals ask whether an agent reasons well under uncertainty. The
 interpretability track asks *how* a model represents that reasoning internally:
 
-- **Posterior beliefs** — is the Bayesian posterior bucket linearly decodable
+- **Posterior beliefs**: is the Bayesian posterior bucket linearly decodable
   from the activations?
-- **Risk flags** — is the safe/risky distinction represented?
-- **Action decisions** — is the buy/pass decision represented, and is it
+- **Risk flags**: is the safe/risky distinction represented?
+- **Action decisions**: is the buy/pass decision represented, and is it
   *causally* driven by the evidence?
-- **Confidence** — is the confidence bucket represented?
+- **Confidence**: is the confidence bucket represented?
 
 We analyse the synthetic checkpoint trained by
 `mimirbench/training/train_small_transformer.py` on deterministic synthetic
@@ -47,8 +47,8 @@ validity is addressed explicitly in the limitations section.
 - `ActivationCapturer` registers forward hooks on named modules and records their
   outputs during a no-grad pass (the generic "named module hooks" tool).
 - `capture_trace_activations` runs the model's instrumented forward over a batch
-  of traces and mean-pools each site over the un-padded sequence — exactly the
-  pooling the classification heads see — producing one feature vector per trace
+  of traces and mean-pools each site over the un-padded sequence (exactly the
+  pooling the classification heads see), producing one feature vector per trace
   per site.
 - Captured sites: the embedding output, and per block the attention-sub-block
   output (`blocks.i.attn_out`), MLP-sub-block output (`blocks.i.mlp_out`), and
@@ -69,8 +69,8 @@ disturbing the default training path.
 A ridge classifier (sklearn `RidgeClassifier` when available, a closed-form NumPy
 one-hot ridge fallback otherwise) is fit on a train split of captured activations
 and evaluated on held-out val/test splits. For each (site, label) we report train
-/ val / test accuracy, the class distribution, a confusion matrix, and — crucially
-— the **majority-class baseline**, so accuracy is always read relative to chance.
+/ val / test accuracy, the class distribution, a confusion matrix, and, crucially,
+the **majority-class baseline**, so accuracy is always read relative to chance.
 
 ## Activation patching
 
@@ -150,8 +150,8 @@ pairs). Full numbers are in `RESULTS.md`:
 - **Probes:** every label is now strongly decodable. The 20-way posterior bucket
   reaches 0.984 test accuracy (baseline 0.297) at `blocks.1.resid_post`; action
   and risk hit 1.000; confidence 1.000. Decodability has clearly improved over the
-  tiny model — but it is still only decodability.
-- **Patching — the causal part.** Corrupting the evidence now actually flips the
+  tiny model, but it is still only decodability.
+- **Patching: the causal part.** Corrupting the evidence now actually flips the
   model's action on 122/128 pairs (the tiny model had zero flips), so recovery
   rates mean something. Patching the **layer-0 attention sub-block output** from
   the clean run into the corrupted run restores the clean action on **118/122**
@@ -167,7 +167,7 @@ pairs). Full numbers are in `RESULTS.md`:
 
 Read together, the sub-block patching contrast (attention recovers the decision,
 the layer-0 MLP does not) plus the evidence-reading attention is evidence that
-**the attention sub-blocks — layer-0 attention especially — causally carry this
+**the attention sub-blocks, layer-0 attention especially, causally carry this
 model's learned evidence-to-decision computation**. This is a positive causal
 result, but a deliberately narrow one. The six-seed per-head and
 individual-position analysis below shows that the result does not localise to a
@@ -187,7 +187,7 @@ adds three deterministic experiments on the medium checkpoint. Artefacts:
   *only* at the positions of one token group (prior / evidence / payoff-risk).
   Because the corruption changes only the evidence tokens, prior/payoff-risk are
   negative controls. **Result:** patching any single token group's
-  positions recovers the flipped action on ≤2% of pairs — including the evidence
+  positions recovers the flipped action on ≤2% of pairs, including the evidence
   group. The evidence→decision signal is therefore **distributed across positions**
   (the encoder mean-pools, and attention spreads the evidence everywhere), not
   localised to the evidence token positions. This is reported as a negative result
@@ -201,9 +201,9 @@ adds three deterministic experiments on the medium checkpoint. Artefacts:
   **1.000** on real labels and **0.484** (below the 0.594 majority baseline) on
   shuffled labels, confirming the probe reads genuine structure, not noise.
 
-**Six-seed model-organism replication.** The extended findings above — attention-concentrated
+**Six-seed model-organism replication.** The extended findings above (attention-concentrated
 whole-site recovery, ≤~2% token-group recovery, the mismatched-donor gap, and the
-label-shuffle collapse — are **replicated across six independently trained
+label-shuffle collapse) are **replicated across six independently trained
 synthetic checkpoints (seeds 123–128)**. Each seed independently resamples the
 training data, the weight initialisation, and the probe/patch set. Across the six
 seeds the layer-0 *MLP* action recovery is **0.000 on every seed** while layer-0/

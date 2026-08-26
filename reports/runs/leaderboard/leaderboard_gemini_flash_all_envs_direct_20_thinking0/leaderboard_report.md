@@ -40,6 +40,6 @@ No headline candidates: available metrics did not meet the evidence threshold.
 
 ## Artefacts
 
-- `leaderboard_summary.json`: `reports\runs\leaderboard\leaderboard_gemini_flash_all_envs_direct_20_thinking0\leaderboard_summary.json`
-- `paired_deltas.jsonl`: `reports\runs\leaderboard\leaderboard_gemini_flash_all_envs_direct_20_thinking0\paired_deltas.jsonl`
-- `headline_candidates.md`: `reports\runs\leaderboard\leaderboard_gemini_flash_all_envs_direct_20_thinking0\headline_candidates.md`
+- `leaderboard_summary.json`: `reports/runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0/leaderboard_summary.json`
+- `paired_deltas.jsonl`: `reports/runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0/paired_deltas.jsonl`
+- `headline_candidates.md`: `reports/runs/leaderboard/leaderboard_gemini_flash_all_envs_direct_20_thinking0/headline_candidates.md`

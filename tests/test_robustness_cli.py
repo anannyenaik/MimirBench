@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from typer.testing import CliRunner
 
 from mimirbench.cli import app
 
 
-def test_robustness_cli_list_run_and_summarise(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_robustness_cli_list_run_and_summarise(tmp_path: Path) -> None:
     run_dir = tmp_path / "robustness_cli"
     config_path = tmp_path / "robustness.yaml"
     config_path.write_text(

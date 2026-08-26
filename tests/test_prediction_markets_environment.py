@@ -1,4 +1,4 @@
-"""Stage 3 tests for binary prediction-market tasks."""
+"""Tests for binary prediction-market tasks."""
 
 from __future__ import annotations
 

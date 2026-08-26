@@ -1,7 +1,7 @@
 """Evaluation runner.
 
 The legacy :func:`run_eval` API remains a small single-environment convenience
-wrapper. Stage 2 config-driven runs use :func:`run_eval_config`, which writes
+wrapper. Config-driven runs use :func:`run_eval_config`, which writes
 structured per-task records, summaries, and Markdown reports.
 """
 
@@ -11,7 +11,6 @@ import hashlib
 import time
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +19,7 @@ from pydantic import ValidationError
 
 from mimirbench.agents.base import BaseAgent
 from mimirbench.agents.resolver import resolve_agent as resolve_agent_from_config
+from mimirbench.artefacts import make_run_id, utc_timestamp
 from mimirbench.evals import registry
 from mimirbench.evals.cache import ResponseCache, make_cache_key, stable_json_dumps
 from mimirbench.evals.registry import EnvironmentSpec
@@ -91,7 +91,7 @@ def run_eval(config: EvalConfig, agent: BaseAgent | None = None) -> EvalReport:
 
 
 def load_eval_config(path: Path) -> EvalRunConfig | EvalConfig:
-    """Load either a Stage 2 run config or a legacy single-environment config."""
+    """Load either a run config or a legacy single-environment config."""
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
         raise ValueError(f"config {path} must contain a YAML mapping.")
@@ -122,7 +122,7 @@ def validate_eval_config(config: EvalRunConfig | EvalConfig) -> None:
 
 
 def run_eval_config(config: EvalRunConfig) -> dict[str, Any]:
-    """Run a Stage 2 evaluation config and write requested artefacts."""
+    """Run an evaluation config and write requested artefacts."""
     validate_eval_config(config)
     output_dir = _output_dir(config)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -133,8 +133,8 @@ def run_eval_config(config: EvalRunConfig) -> dict[str, Any]:
         for record in existing_records
     }
 
-    timestamp = _utc_timestamp()
-    run_id = existing_records[0].run_id if existing_records else _make_run_id(config.run.name, timestamp)
+    timestamp = utc_timestamp()
+    run_id = existing_records[0].run_id if existing_records else make_run_id(config.run.name, timestamp)
     cache = ResponseCache(
         _cache_path(config, output_dir),
         enabled=config.run.cache,
@@ -367,13 +367,3 @@ def _agent_config_hash(agent_config: AgentConfig) -> str:
     return hashlib.sha256(
         stable_json_dumps(agent_config.model_dump(mode="json")).encode("utf-8")
     ).hexdigest()
-
-
-def _utc_timestamp() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def _make_run_id(run_name: str, timestamp: str) -> str:
-    safe_timestamp = timestamp.replace(":", "").replace("-", "").replace("Z", "")
-    safe_name = "".join(char if char.isalnum() or char in {"-", "_"} else "_" for char in run_name)
-    return f"{safe_name}-{safe_timestamp}"

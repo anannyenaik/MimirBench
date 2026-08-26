@@ -103,23 +103,23 @@
       "rationale_class"
     ]
   },
-  "output_dir": "reports\\training\\small_transformer_bayes_tiny",
+  "output_dir": "reports/training/small_transformer_bayes_tiny",
   "paths": {
-    "best_checkpoint": "reports\\training\\small_transformer_bayes_tiny\\checkpoints\\best.pt",
-    "config": "reports\\training\\small_transformer_bayes_tiny\\config_resolved.yaml",
+    "best_checkpoint": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
+    "config": "reports/training/small_transformer_bayes_tiny/config_resolved.yaml",
     "figures": [
-      "reports\\training\\small_transformer_bayes_tiny\\figures\\training_loss.png",
-      "reports\\training\\small_transformer_bayes_tiny\\figures\\validation_accuracy.png",
-      "reports\\training\\small_transformer_bayes_tiny\\figures\\validation_posterior_bucket_accuracy.png",
-      "reports\\training\\small_transformer_bayes_tiny\\figures\\validation_risk_accuracy.png"
+      "reports/training/small_transformer_bayes_tiny/figures/training_loss.png",
+      "reports/training/small_transformer_bayes_tiny/figures/validation_accuracy.png",
+      "reports/training/small_transformer_bayes_tiny/figures/validation_posterior_bucket_accuracy.png",
+      "reports/training/small_transformer_bayes_tiny/figures/validation_risk_accuracy.png"
     ],
-    "final_checkpoint": "reports\\training\\small_transformer_bayes_tiny\\checkpoints\\final.pt",
-    "metrics": "reports\\training\\small_transformer_bayes_tiny\\metrics.jsonl",
-    "model_card": "reports\\model_cards\\small_transformer_bayes_tiny.md",
-    "test_traces": "reports\\training\\small_transformer_bayes_tiny\\test_traces.jsonl",
-    "train_traces": "reports\\training\\small_transformer_bayes_tiny\\train_traces.jsonl",
-    "val_traces": "reports\\training\\small_transformer_bayes_tiny\\val_traces.jsonl",
-    "vocab": "reports\\training\\small_transformer_bayes_tiny\\vocab.json"
+    "final_checkpoint": "reports/training/small_transformer_bayes_tiny/checkpoints/final.pt",
+    "metrics": "reports/training/small_transformer_bayes_tiny/metrics.jsonl",
+    "model_card": "reports/model_cards/small_transformer_bayes_tiny.md",
+    "test_traces": "reports/training/small_transformer_bayes_tiny/test_traces.jsonl",
+    "train_traces": "reports/training/small_transformer_bayes_tiny/train_traces.jsonl",
+    "val_traces": "reports/training/small_transformer_bayes_tiny/val_traces.jsonl",
+    "vocab": "reports/training/small_transformer_bayes_tiny/vocab.json"
   },
   "run_name": "small_transformer_bayes_tiny",
   "timestamp": "2026-06-02T07:25:38+00:00"

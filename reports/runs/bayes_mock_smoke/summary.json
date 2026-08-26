@@ -120,7 +120,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\bayes_mock_smoke",
+  "output_dir": "reports/runs/bayes_mock_smoke",
   "run_id": "bayes_mock_smoke-20260602T010928",
   "run_name": "bayes_mock_smoke",
   "timestamp": "2026-06-02T01:14:13Z"

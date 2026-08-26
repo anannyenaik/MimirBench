@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from mimirbench.training.datasets import BayesianTraceDatasetConfig
@@ -14,7 +16,7 @@ from mimirbench.training.train_small_transformer import (
 )
 
 
-def test_tiny_training_smoke_writes_artifacts(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_tiny_training_smoke_writes_artifacts(tmp_path: Path) -> None:
     pytest.importorskip("torch")
     config = SmallTransformerTrainConfig(
         run=RunConfig(name="test_tiny", seed=1, output_dir=str(tmp_path / "training")),

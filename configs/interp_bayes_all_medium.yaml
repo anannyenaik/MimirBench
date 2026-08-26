@@ -1,4 +1,4 @@
-# Stage 8 interpretability on the medium Bayesian checkpoint.
+# Interpretability on the medium Bayesian checkpoint.
 # Runs probes, activation patching, and attention analysis on the model trained
 # by configs/train_small_transformer_bayes_medium.yaml. Deterministic, CPU-only,
 # no downloads. If the checkpoint or torch is missing the runner writes a

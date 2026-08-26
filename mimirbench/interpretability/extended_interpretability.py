@@ -1,13 +1,13 @@
 """Extended, local-only interpretability: position-resolved patching + controls.
 
-This driver deepens Stage 8 without any paid API calls. On the trained medium
+This driver extends the whole-site analysis without any paid API calls. On the trained medium
 checkpoint it runs:
 
-* **token-group (position-resolved) activation patching** — patch only the
+* **token-group (position-resolved) activation patching**: patch only the
   prior / evidence / payoff-risk token positions of each sub-block site;
-* a **mismatched-donor negative control** — patch with a clean activation from an
+* a **mismatched-donor negative control**: patch with a clean activation from an
   unrelated same-length example;
-* a **label-shuffle probe control** — refit the action probe on shuffled labels,
+* a **label-shuffle probe control**: refit the action probe on shuffled labels,
   which should collapse to the majority baseline.
 
 If the checkpoint or torch is missing it writes a ``status="pending"`` report
@@ -110,7 +110,7 @@ def run_extended_interpretability(
     report_path = _write_report(cfg, summary, output_dir)
     summary["report_path"] = report_path.as_posix()
     (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return summary
 
@@ -270,7 +270,7 @@ def _write_report(cfg: InterpretabilityConfig, summary: dict[str, Any], output_d
         ]
     )
     report_path = output_dir / "EXTENDED_INTERPRETABILITY_REPORT.md"
-    report_path.write_text("\n".join(lines), encoding="utf-8")
+    report_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
     return report_path
 
 
@@ -304,10 +304,10 @@ def _write_pending(
         "",
     ]
     (output_dir / "EXTENDED_INTERPRETABILITY_REPORT.md").write_text(
-        "\n".join(lines), encoding="utf-8"
+        "\n".join(lines), encoding="utf-8", newline="\n"
     )
     (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return summary
 
@@ -342,7 +342,7 @@ def _load_tokenizer(tokenizer_cls: Any, vocab: Path, payload: dict[str, Any]) ->
 
 
 def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         for row in rows:
             handle.write(json.dumps(row, sort_keys=True) + "\n")
 

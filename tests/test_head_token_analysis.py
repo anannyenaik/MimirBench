@@ -8,7 +8,7 @@ from mimirbench.interpretability.counterfactuals import generate_counterfactual_
 from mimirbench.training.synthetic_traces import BayesianTraceConfig, PayoffRiskConfig
 
 
-def _pairs(tiny_interp_checkpoint: dict, count: int = 4) -> list:
+def _pairs(count: int = 4) -> list:
     config = BayesianTraceConfig(
         seed=31,
         min_observations=2,
@@ -27,7 +27,7 @@ def test_instrumented_forward_exposes_projected_per_head_outputs(
 
     model = tiny_interp_checkpoint["model"]
     tokenizer = tiny_interp_checkpoint["tokenizer"]
-    encoded = tokenizer.encode(_pairs(tiny_interp_checkpoint, 1)[0].clean_input)
+    encoded = tokenizer.encode(_pairs(1)[0].clean_input)
     input_ids = torch.as_tensor([encoded["input_ids"]], dtype=torch.long)
     mask = torch.as_tensor([encoded["attention_mask"]], dtype=torch.long)
 
@@ -55,7 +55,7 @@ def test_per_head_patching_and_ablation_shapes(tiny_interp_checkpoint: dict) -> 
 
     model = tiny_interp_checkpoint["model"]
     tokenizer = tiny_interp_checkpoint["tokenizer"]
-    pairs = _pairs(tiny_interp_checkpoint)
+    pairs = _pairs()
     patching = run_per_head_patching(model, tokenizer, pairs, seed=9)
     n_sites = model.config.n_layers * model.config.n_heads
     assert len(patching["rows"]) == len(pairs) * n_sites * 2 * 2
@@ -85,7 +85,7 @@ def test_individual_position_patching_precedes_semantic_aggregation(
 
     model = tiny_interp_checkpoint["model"]
     tokenizer = tiny_interp_checkpoint["tokenizer"]
-    pairs = _pairs(tiny_interp_checkpoint)
+    pairs = _pairs()
     result = run_individual_token_position_patching(model, tokenizer, pairs)
     assert result["positions"]
     assert all("position" in row and "heads" in row for row in result["positions"])

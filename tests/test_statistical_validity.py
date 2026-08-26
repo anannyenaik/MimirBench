@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from mimirbench.analysis.statistical_validity import (
     CanonicalRow,
@@ -47,7 +48,9 @@ def _record(task_id: str, score: float, *, parsed: bool = True) -> EvalTaskRecor
     )
 
 
-def _write_run(base, run_dir_name, model_dir, records):  # type: ignore[no-untyped-def]
+def _write_run(
+    base: Path, run_dir_name: str, model_dir: str, records: list[EvalTaskRecord]
+) -> None:
     results_dir = base / run_dir_name / "models" / model_dir / "agents" / "direct"
     results_dir.mkdir(parents=True)
     write_results_jsonl(records, results_dir / "results.jsonl")
@@ -72,7 +75,7 @@ def _write_run(base, run_dir_name, model_dir, records):  # type: ignore[no-untyp
     )
 
 
-def test_load_task_scores_round_trips(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_load_task_scores_round_trips(tmp_path: Path) -> None:
     records = [_record("bayesian_games-1", 0.9), _record("bayesian_games-2", 0.1, parsed=False)]
     path = tmp_path / "results.jsonl"
     write_results_jsonl(records, path)
@@ -82,7 +85,7 @@ def test_load_task_scores_round_trips(tmp_path) -> None:  # type: ignore[no-unty
     assert scores[1].parse_failed is True
 
 
-def test_summarise_row_brackets_the_mean(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_summarise_row_brackets_the_mean() -> None:
     scores = [
         TaskScore("bayesian_games", f"t{i}", 123, score=0.6, passed=True,
                   parse_failed=False, risk_violation=False, latency_ms=float(i))
@@ -114,7 +117,7 @@ def test_paired_delta_aligns_on_task_identity() -> None:
     assert unpaired.n_aligned == 0
 
 
-def test_build_markdown_lists_missing_rows(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_build_markdown_lists_missing_rows(tmp_path: Path) -> None:
     rows = (
         CanonicalRow("present", "Present", "openai", "strict-track clean",
                      "run_present", "model_present", "direct", "caveat"),

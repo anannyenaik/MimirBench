@@ -103,23 +103,23 @@
       "rationale_class"
     ]
   },
-  "output_dir": "reports\\training\\small_transformer_bayes_medium_ablation_data2k",
+  "output_dir": "reports/training/small_transformer_bayes_medium_ablation_data2k",
   "paths": {
-    "best_checkpoint": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\checkpoints\\best.pt",
-    "config": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\config_resolved.yaml",
+    "best_checkpoint": "reports/training/small_transformer_bayes_medium_ablation_data2k/checkpoints/best.pt",
+    "config": "reports/training/small_transformer_bayes_medium_ablation_data2k/config_resolved.yaml",
     "figures": [
-      "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\figures\\training_loss.png",
-      "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\figures\\validation_accuracy.png",
-      "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\figures\\validation_posterior_bucket_accuracy.png",
-      "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\figures\\validation_risk_accuracy.png"
+      "reports/training/small_transformer_bayes_medium_ablation_data2k/figures/training_loss.png",
+      "reports/training/small_transformer_bayes_medium_ablation_data2k/figures/validation_accuracy.png",
+      "reports/training/small_transformer_bayes_medium_ablation_data2k/figures/validation_posterior_bucket_accuracy.png",
+      "reports/training/small_transformer_bayes_medium_ablation_data2k/figures/validation_risk_accuracy.png"
     ],
-    "final_checkpoint": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\checkpoints\\final.pt",
-    "metrics": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\metrics.jsonl",
-    "model_card": "reports\\model_cards\\small_transformer_bayes_medium_ablation_data2k.md",
-    "test_traces": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\test_traces.jsonl",
-    "train_traces": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\train_traces.jsonl",
-    "val_traces": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\val_traces.jsonl",
-    "vocab": "reports\\training\\small_transformer_bayes_medium_ablation_data2k\\vocab.json"
+    "final_checkpoint": "reports/training/small_transformer_bayes_medium_ablation_data2k/checkpoints/final.pt",
+    "metrics": "reports/training/small_transformer_bayes_medium_ablation_data2k/metrics.jsonl",
+    "model_card": "reports/model_cards/small_transformer_bayes_medium_ablation_data2k.md",
+    "test_traces": "reports/training/small_transformer_bayes_medium_ablation_data2k/test_traces.jsonl",
+    "train_traces": "reports/training/small_transformer_bayes_medium_ablation_data2k/train_traces.jsonl",
+    "val_traces": "reports/training/small_transformer_bayes_medium_ablation_data2k/val_traces.jsonl",
+    "vocab": "reports/training/small_transformer_bayes_medium_ablation_data2k/vocab.json"
   },
   "run_name": "small_transformer_bayes_medium_ablation_data2k",
   "timestamp": "2026-06-04T00:30:25+00:00"

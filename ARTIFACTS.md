@@ -7,16 +7,19 @@ are regenerated from configs + seeds**, because they are deterministic.
 
 ## Committed Artefacts
 
-- **Curated reports** under `reports/` — `INDEX.md`, leaderboard reports and
+- **Curated reports** under `reports/`: `INDEX.md`, leaderboard reports and
   comparison notes, robustness reports, interpretability reports, and the
   generated statistical-validity table
   (`reports/runs/leaderboard/statistical_validity_existing_artifacts.md`).
-- **Per-task results** — `results.jsonl` and `summary.json` for the saved
+- **Per-task results**: `results.jsonl` and `summary.json` for the saved
   hosted-model leaderboard rows (the inputs to
   [STATISTICAL_VALIDITY.md](STATISTICAL_VALIDITY.md)).
+- **Response caches**: `responses_cache.jsonl` next to each committed run. These
+  hold the verbatim provider responses, so a saved hosted-model row can be
+  re-scored and re-analysed offline without paying for the calls again.
 - **Training/eval summaries and figures** for the tiny and medium model organisms
   (`reports/training/...`, `reports/runs/small_transformer_bayes_*_eval/`).
-- **Interpretability artefacts** — probe/patching/attention JSON, the
+- **Interpretability artefacts**: probe/patching/attention JSON, the
   reports, the extended report
   (`reports/interpretability/interp_bayes_medium_extended/`), and the **multi-seed
   replication** (seeds 123–128): per-seed summaries/figures under
@@ -34,13 +37,13 @@ are regenerated from configs + seeds**, because they are deterministic.
 
 Per [.gitignore](.gitignore):
 
-- model weights — `*.pt`, `*.ckpt`, `*.safetensors` (so all `checkpoints/` are
+- model weights: `*.pt`, `*.ckpt`, `*.safetensors` (so all `checkpoints/` are
   **not** committed);
-- response caches and raw run scratch (`*.log`, large `responses_cache.jsonl` are
-  byproducts);
-- `.env` and `.env.*` (secrets) — only `.env.example` is tracked;
+- raw run scratch (`*.log`) and scratch output directories (`/runs/`, `/outputs/`,
+  `/artifacts/`, `results/`);
+- `.env` and `.env.*`, so a local key file can never be committed by accident;
 - virtualenvs, tool caches, build artefacts;
-- **multi-seed replication bulk** (seeds 124+) — per-seed synthetic traces,
+- **multi-seed replication bulk** (seeds 124+): per-seed synthetic traces,
   activation dumps, per-row patching logs, and held-out eval rows are regenerable
   and gitignored; the per-seed summaries, patching summaries, reports, and figures
   are kept.

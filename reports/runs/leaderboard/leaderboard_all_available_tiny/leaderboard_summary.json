@@ -5,10 +5,10 @@
     "reflective"
   ],
   "artefacts": {
-    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_all_available_tiny\\headline_candidates.md",
-    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_all_available_tiny\\leaderboard_report.md",
-    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_all_available_tiny\\leaderboard_summary.json",
-    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_all_available_tiny\\paired_deltas.jsonl"
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_all_available_tiny/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_all_available_tiny/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_all_available_tiny/leaderboard_summary.json",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_all_available_tiny/paired_deltas.jsonl"
   },
   "caveats": [
     "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
@@ -76,7 +76,7 @@
     }
   ],
   "models_run": [],
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_all_available_tiny",
+  "output_dir": "reports/runs/leaderboard/leaderboard_all_available_tiny",
   "paired_metrics": {},
   "preliminary": true,
   "provider_availability": {

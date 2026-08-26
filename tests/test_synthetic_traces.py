@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 
 from mimirbench.tools.bayes_calculator import posterior
@@ -46,7 +48,7 @@ def test_trace_splits_do_not_overlap_by_id() -> None:
     assert ids_by_split["val"].isdisjoint(ids_by_split["test"])
 
 
-def test_trace_jsonl_roundtrip(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_trace_jsonl_roundtrip(tmp_path: Path) -> None:
     traces = [generate_trace(i, BayesianTraceConfig(seed=5)) for i in range(3)]
     path = write_traces_jsonl(traces, tmp_path / "traces.jsonl")
     assert load_traces_jsonl(path) == traces

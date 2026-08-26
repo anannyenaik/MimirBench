@@ -47,6 +47,6 @@ No headline candidates: no run produced metrics that meet the evidence threshold
 
 ## Artefacts
 
-- `leaderboard_summary.json`: `reports\runs\leaderboard\leaderboard_all_available_tiny\leaderboard_summary.json`
-- `paired_deltas.jsonl`: `reports\runs\leaderboard\leaderboard_all_available_tiny\paired_deltas.jsonl`
-- `headline_candidates.md`: `reports\runs\leaderboard\leaderboard_all_available_tiny\headline_candidates.md`
+- `leaderboard_summary.json`: `reports/runs/leaderboard/leaderboard_all_available_tiny/leaderboard_summary.json`
+- `paired_deltas.jsonl`: `reports/runs/leaderboard/leaderboard_all_available_tiny/paired_deltas.jsonl`
+- `headline_candidates.md`: `reports/runs/leaderboard/leaderboard_all_available_tiny/headline_candidates.md`

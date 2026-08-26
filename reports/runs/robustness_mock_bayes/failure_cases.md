@@ -3,7 +3,7 @@
 - Baseline kind: **mock agent (diagnostic baseline)**
 - Total cases: `25`
 
-## 1. paraphrase_action_flip — `bayesian_games`
+## 1. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-137::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -18,7 +18,7 @@
 ```
 </details>
 
-## 2. paraphrase_action_flip — `bayesian_games`
+## 2. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-136::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -33,7 +33,7 @@
 ```
 </details>
 
-## 3. paraphrase_action_flip — `bayesian_games`
+## 3. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-126::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -48,7 +48,7 @@
 ```
 </details>
 
-## 4. paraphrase_action_flip — `bayesian_games`
+## 4. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-138::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -63,7 +63,7 @@
 ```
 </details>
 
-## 5. paraphrase_action_flip — `bayesian_games`
+## 5. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-145::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -78,7 +78,7 @@
 ```
 </details>
 
-## 6. paraphrase_action_flip — `bayesian_games`
+## 6. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-129::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -93,7 +93,7 @@
 ```
 </details>
 
-## 7. paraphrase_action_flip — `bayesian_games`
+## 7. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-134::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -108,7 +108,7 @@
 ```
 </details>
 
-## 8. paraphrase_action_flip — `bayesian_games`
+## 8. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-132::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -123,7 +123,7 @@
 ```
 </details>
 
-## 9. paraphrase_action_flip — `bayesian_games`
+## 9. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-135::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -138,7 +138,7 @@
 ```
 </details>
 
-## 10. paraphrase_action_flip — `bayesian_games`
+## 10. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-131::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -153,7 +153,7 @@
 ```
 </details>
 
-## 11. paraphrase_action_flip — `bayesian_games`
+## 11. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-124::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -168,7 +168,7 @@
 ```
 </details>
 
-## 12. paraphrase_action_flip — `bayesian_games`
+## 12. paraphrase_action_flip: `bayesian_games`
 
 - Variant: `bayesian_games-139::paraphrase` (`paraphrase`, answer_preserving=True)
 - Why interesting: The chosen action flipped under a meaning-preserving paraphrase.
@@ -183,7 +183,7 @@
 ```
 </details>
 
-## 13. large_score_drop — `bayesian_games`
+## 13. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-123::order_permutation` (`order_permutation`, answer_preserving=True)
 - Why interesting: Score dropped by 0.75 under an answer-preserving transformation.
@@ -198,7 +198,7 @@
 ```
 </details>
 
-## 14. large_score_drop — `bayesian_games`
+## 14. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-123::misleading_authority` (`misleading_authority`, answer_preserving=True)
 - Why interesting: Score dropped by 0.65 under an answer-preserving transformation.
@@ -213,7 +213,7 @@
 ```
 </details>
 
-## 15. large_score_drop — `bayesian_games`
+## 15. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-142::misleading_authority` (`misleading_authority`, answer_preserving=True)
 - Why interesting: Score dropped by 0.58 under an answer-preserving transformation.
@@ -228,7 +228,7 @@
 ```
 </details>
 
-## 16. large_score_drop — `bayesian_games`
+## 16. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-142::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: Score dropped by 0.55 under an answer-preserving transformation.
@@ -243,7 +243,7 @@
 ```
 </details>
 
-## 17. large_score_drop — `bayesian_games`
+## 17. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-133::order_permutation` (`order_permutation`, answer_preserving=True)
 - Why interesting: Score dropped by 0.51 under an answer-preserving transformation.
@@ -258,7 +258,7 @@
 ```
 </details>
 
-## 18. large_score_drop — `bayesian_games`
+## 18. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-137::misleading_authority` (`misleading_authority`, answer_preserving=True)
 - Why interesting: Score dropped by 0.48 under an answer-preserving transformation.
@@ -273,7 +273,7 @@
 ```
 </details>
 
-## 19. large_score_drop — `bayesian_games`
+## 19. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-144::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: Score dropped by 0.47 under an answer-preserving transformation.
@@ -288,7 +288,7 @@
 ```
 </details>
 
-## 20. large_score_drop — `bayesian_games`
+## 20. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-123::emotional_pressure` (`emotional_pressure`, answer_preserving=True)
 - Why interesting: Score dropped by 0.44 under an answer-preserving transformation.
@@ -303,7 +303,7 @@
 ```
 </details>
 
-## 21. large_score_drop — `bayesian_games`
+## 21. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-140::emotional_pressure` (`emotional_pressure`, answer_preserving=True)
 - Why interesting: Score dropped by 0.44 under an answer-preserving transformation.
@@ -318,7 +318,7 @@
 ```
 </details>
 
-## 22. large_score_drop — `bayesian_games`
+## 22. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-132::irrelevant_context` (`irrelevant_context`, answer_preserving=True)
 - Why interesting: Score dropped by 0.43 under an answer-preserving transformation.
@@ -333,7 +333,7 @@
 ```
 </details>
 
-## 23. large_score_drop — `bayesian_games`
+## 23. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-141::order_permutation` (`order_permutation`, answer_preserving=True)
 - Why interesting: Score dropped by 0.41 under an answer-preserving transformation.
@@ -348,7 +348,7 @@
 ```
 </details>
 
-## 24. large_score_drop — `bayesian_games`
+## 24. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-146::misleading_authority` (`misleading_authority`, answer_preserving=True)
 - Why interesting: Score dropped by 0.39 under an answer-preserving transformation.
@@ -363,7 +363,7 @@
 ```
 </details>
 
-## 25. large_score_drop — `bayesian_games`
+## 25. large_score_drop: `bayesian_games`
 
 - Variant: `bayesian_games-142::order_permutation` (`order_permutation`, answer_preserving=True)
 - Why interesting: Score dropped by 0.39 under an answer-preserving transformation.

@@ -9,7 +9,7 @@
 - Run ID: `mock_bayes_mock_random_valid-20260602T060945`
 - Run name: `mock_bayes_mock_random_valid`
 - Date/time: `2026-06-02T06:09:45Z`
-- Run directory: `reports\runs\comparisons\mock_bayes\agent_runs\mock_random_valid`
+- Run directory: `reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid`
 
 ## Evaluation
 

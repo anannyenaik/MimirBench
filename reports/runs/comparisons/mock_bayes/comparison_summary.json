@@ -95,12 +95,12 @@
           "violation_rate": 0.0
         }
       },
-      "output_dir": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\reference",
-      "report_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\reference\\report.md",
-      "results_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\reference\\results.jsonl",
+      "output_dir": "reports/runs/comparisons/mock_bayes/agent_runs/reference",
+      "report_path": "reports/runs/comparisons/mock_bayes/agent_runs/reference/report.md",
+      "results_path": "reports/runs/comparisons/mock_bayes/agent_runs/reference/results.jsonl",
       "run_id": "mock_bayes_reference-20260602T060943",
       "run_name": "mock_bayes_reference",
-      "summary_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\reference\\summary.json"
+      "summary_path": "reports/runs/comparisons/mock_bayes/agent_runs/reference/summary.json"
     },
     {
       "agent": {
@@ -197,26 +197,26 @@
           "violation_rate": 0.0
         }
       },
-      "output_dir": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid",
-      "report_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid\\report.md",
-      "results_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid\\results.jsonl",
+      "output_dir": "reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid",
+      "report_path": "reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid/report.md",
+      "results_path": "reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid/results.jsonl",
       "run_id": "mock_bayes_mock_random_valid-20260602T060945",
       "run_name": "mock_bayes_mock_random_valid",
-      "summary_path": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid\\summary.json"
+      "summary_path": "reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid/summary.json"
     }
   ],
   "artefacts": {
-    "agent_runs": "reports\\runs\\comparisons\\mock_bayes\\agent_runs",
-    "comparison_report": "reports\\runs\\comparisons\\mock_bayes\\comparison_report.md",
-    "comparison_summary": "reports\\runs\\comparisons\\mock_bayes\\comparison_summary.json",
+    "agent_runs": "reports/runs/comparisons/mock_bayes/agent_runs",
+    "comparison_report": "reports/runs/comparisons/mock_bayes/comparison_report.md",
+    "comparison_summary": "reports/runs/comparisons/mock_bayes/comparison_summary.json",
     "figures": [
-      "reports\\runs\\comparisons\\mock_bayes\\figures\\score_by_environment.png",
-      "reports\\runs\\comparisons\\mock_bayes\\figures\\posterior_error_distribution.png",
-      "reports\\runs\\comparisons\\mock_bayes\\figures\\risk_violation_rate_by_environment.png",
-      "reports\\runs\\comparisons\\mock_bayes\\figures\\latency_distribution.png",
-      "reports\\runs\\comparisons\\mock_bayes\\figures\\parse_failure_rate_by_agent.png"
+      "reports/runs/comparisons/mock_bayes/figures/score_by_environment.png",
+      "reports/runs/comparisons/mock_bayes/figures/posterior_error_distribution.png",
+      "reports/runs/comparisons/mock_bayes/figures/risk_violation_rate_by_environment.png",
+      "reports/runs/comparisons/mock_bayes/figures/latency_distribution.png",
+      "reports/runs/comparisons/mock_bayes/figures/parse_failure_rate_by_agent.png"
     ],
-    "paired_results": "reports\\runs\\comparisons\\mock_bayes\\paired_results.jsonl"
+    "paired_results": "reports/runs/comparisons/mock_bayes/paired_results.jsonl"
   },
   "baseline_agent_key": "reference",
   "baseline_kind": "reference sanity check",
@@ -236,7 +236,7 @@
       "seed": 123
     }
   ],
-  "output_dir": "reports\\runs\\comparisons\\mock_bayes",
+  "output_dir": "reports/runs/comparisons/mock_bayes",
   "paired_metrics": {
     "mock_random_valid": {
       "mean_estimated_cost_usd_difference": null,

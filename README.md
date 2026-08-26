@@ -260,16 +260,13 @@ controlled model-organism interpretability programme:
   this synthetic model organism and does not transfer to frontier models.
 - The earlier tiny checkpoint is retained as the original CPU smoke artefact
   (undertrained, with near-zero or negative interpretability results).
-- Main model comparisons use a single seed/schedule. The interpretability result
-  is **replicated across six independently trained synthetic checkpoints (seeds
-  123–128)** ([multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md));
-  whole-site patching is complemented by per-head patching/ablation, individual
+- Main model comparisons use a single seed/schedule
+  ([multi-seed summary](reports/interpretability/interp_bayes_multiseed_summary.md)).
+  Whole-site patching is complemented by per-head patching/ablation, individual
   token-position patching, and negative controls
   ([head/token summary](reports/interpretability/interp_bayes_head_token_summary.md)).
-  No single head or token position dominates consistently across seeds; there is
-  still no SAE-level circuit analysis.
-- Small-model interpretability findings do not transfer to frontier-model
-  internals.
+  No single head or token position dominates consistently across seeds, and there
+  is no SAE-level circuit analysis yet.
 - This is not a trading bot, live trading system, market-beating claim, trading-
   usefulness claim, or solved AI-safety benchmark.
 
@@ -287,9 +284,7 @@ In the trained medium synthetic transformer, patching attention activations from
 clean into corrupted prompts restored the correct action on 118/122 flipped
 pairs, providing a narrow causal model-organism result; the same pattern
 replicates across six independently trained checkpoints (seeds 123–128, with
-layer-0 MLP action recovery 0.000 on every seed). These are synthetic,
-deterministic tasks; the small-model interpretability does not transfer to
-frontier models.
+layer-0 MLP action recovery 0.000 on every seed).
 
 ## Where To Look
 

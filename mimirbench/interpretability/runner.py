@@ -1,11 +1,11 @@
-"""Orchestrate the Stage 8 interpretability experiments end to end.
+"""Orchestrate the interpretability experiments end to end.
 
 Given a small YAML config, the runner: loads a trained checkpoint and tokenizer;
 deterministically generates synthetic Bayesian traces and counterfactual pairs;
 runs the requested experiments (linear probes, activation patching, attention
 analysis); and writes JSON/JSONL artefacts, figures, and a Markdown report.
 
-If the checkpoint or vocab is missing — or torch is unavailable — it does not
+If the checkpoint or vocab is missing, or torch is unavailable, it does not
 crash: it writes a report that states the experiments are *pending* and returns a
 summary with ``status="pending"``. Torch is imported lazily.
 """
@@ -230,7 +230,7 @@ def run_interpretability(config: InterpretabilityConfig | str | Path) -> dict[st
     report_path = _write_report(cfg, summary, output_dir)
     summary["report_path"] = report_path.as_posix()
     (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return summary
 
@@ -309,7 +309,7 @@ def _run_probes(
             "results": [r.to_dict() for r in results],
         }
         (probes_dir / f"{_PROBE_FILES[label]}.json").write_text(
-            json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8"
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
         )
 
     figures = _probe_figures(per_label, sites, figures_dir)
@@ -327,7 +327,7 @@ def _run_probes(
         "activations_dir": activations_dir.as_posix(),
     }
     (probes_dir / "probe_summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return summary
 
@@ -347,7 +347,7 @@ def _run_patching(
     figures_dir.mkdir(parents=True, exist_ok=True)
 
     result = run_activation_patching(model, tokenizer, pairs, sites=sites)
-    with (patch_dir / "patching_results.jsonl").open("w", encoding="utf-8") as handle:
+    with (patch_dir / "patching_results.jsonl").open("w", encoding="utf-8", newline="\n") as handle:
         for row in result.rows:
             handle.write(json.dumps(row, sort_keys=True) + "\n")
     summary_payload = {
@@ -357,7 +357,7 @@ def _run_patching(
         "summary": result.summary,
     }
     (patch_dir / "patching_summary.json").write_text(
-        json.dumps(summary_payload, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary_payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     figures = _patching_figures(result.summary, result.sites, figures_dir)
     return {
@@ -389,9 +389,9 @@ def _run_attention(
     limit = cfg.max_examples if cfg.max_examples is not None else min(32, len(traces))
     result = run_attention_analysis(model, tokenizer, traces, max_examples=limit)
     (attn_dir / "attention_summary.json").write_text(
-        json.dumps(result.summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(result.summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
-    with (attn_dir / "attention_examples.jsonl").open("w", encoding="utf-8") as handle:
+    with (attn_dir / "attention_examples.jsonl").open("w", encoding="utf-8", newline="\n") as handle:
         for example in result.examples:
             handle.write(json.dumps(example, sort_keys=True) + "\n")
     figures = _attention_figures(result, figures_dir)
@@ -586,7 +586,7 @@ def _write_report(cfg: InterpretabilityConfig, summary: dict[str, Any], output_d
         ]
     )
     report_path = output_dir / "INTERPRETABILITY_REPORT.md"
-    report_path.write_text("\n".join(lines), encoding="utf-8")
+    report_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
     return report_path
 
 
@@ -689,9 +689,9 @@ def _write_pending(
         f"{_NO_FRONTIER_CLAIM}",
         "",
     ]
-    (output_dir / "INTERPRETABILITY_REPORT.md").write_text("\n".join(lines), encoding="utf-8")
+    (output_dir / "INTERPRETABILITY_REPORT.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return summary
 
@@ -740,7 +740,7 @@ def _load_data_config(data: dict[str, Any]) -> InterpDataConfig:
 
 def _write_resolved_config(cfg: InterpretabilityConfig, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(yaml.safe_dump(asdict(cfg), sort_keys=False), encoding="utf-8")
+    path.write_text(yaml.safe_dump(asdict(cfg), sort_keys=False), encoding="utf-8", newline="\n")
 
 
 def _mapping(value: Any) -> dict[str, Any]:

@@ -6,7 +6,7 @@ auditable log (``tool_audit.jsonl``), a human-readable summary
 (``tool_audit.md``), and a small set of deterministic metrics.
 
 Every metric here is computed deterministically from the recorded trace and the
-final answer — no model is consulted. In particular
+final answer; no model is consulted. In particular
 ``final_answer_used_tool_result`` is a *heuristic* (numeric overlap between a tool
 output and the final answer); it is reported as ``unknown`` (``null``) whenever
 the heuristic cannot decide, never guessed.
@@ -239,7 +239,7 @@ def aggregate_tool_audit(audits: list[ToolTaskAudit]) -> dict[str, Any]:
 def write_tool_audit_jsonl(audits: list[ToolTaskAudit], path: Path) -> None:
     """Write one JSON row per tool step to ``tool_audit.jsonl``."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         for audit in audits:
             for step in audit.steps:
                 handle.write(
@@ -293,7 +293,7 @@ def write_tool_audit_markdown(
                 break
         if shown >= 25:
             break
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 def _fmt(value: Any) -> str:

@@ -53,7 +53,7 @@ class PredictionMarketParams(BaseModel):
     """Public problem statement for a prediction-market task.
 
     This legacy multiclass forecast schema is kept for the LMSR/proper-scoring
-    helpers. Stage 3 runner tasks use :class:`PredictionMarketTaskParams`.
+    helpers. Runner tasks use :class:`PredictionMarketTaskParams`.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")

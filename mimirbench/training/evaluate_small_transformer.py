@@ -13,6 +13,7 @@ from typing import Any
 import numpy as np
 import yaml
 
+from mimirbench.artefacts import artefact_path, write_json
 from mimirbench.reports.model_cards import generate_small_transformer_model_card
 from mimirbench.training.datasets import BayesianTraceDatasetConfig, make_bayesian_trace_dataset
 from mimirbench.training.small_transformer import SmallTransformerForTracePrediction, require_torch
@@ -139,6 +140,7 @@ def evaluate_checkpoint(
     (output_dir / "config_resolved.yaml").write_text(
         yaml.safe_dump(asdict(cfg), sort_keys=False),
         encoding="utf-8",
+        newline="\n",
     )
 
     rows: list[dict[str, Any]] = []
@@ -168,7 +170,7 @@ def evaluate_checkpoint(
         rows.append(row)
 
     results_path = output_dir / "results.jsonl"
-    with results_path.open("w", encoding="utf-8") as handle:
+    with results_path.open("w", encoding="utf-8", newline="\n") as handle:
         for row in rows:
             handle.write(json.dumps(row, sort_keys=True) + "\n")
 
@@ -176,14 +178,14 @@ def evaluate_checkpoint(
     summary: dict[str, Any] = {
         "run_name": cfg.run.name,
         "timestamp": _now(),
-        "output_dir": str(output_dir),
-        "checkpoint_path": str(checkpoint),
+        "output_dir": artefact_path(output_dir),
+        "checkpoint_path": artefact_path(checkpoint),
         "config": asdict(cfg),
         "metrics": metrics,
         "paths": {
-            "results": str(results_path),
-            "summary": str(output_dir / "summary.json"),
-            "report": str(output_dir / "report.md"),
+            "results": artefact_path(results_path),
+            "summary": artefact_path(output_dir / "summary.json"),
+            "report": artefact_path(output_dir / "report.md"),
             "figures": [],
         },
         "known_limitations": [
@@ -192,23 +194,17 @@ def evaluate_checkpoint(
         ],
     }
     figure_paths = _write_eval_figures(rows, figures_dir)
-    summary["paths"]["figures"] = [str(path) for path in figure_paths]
-    (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, sort_keys=True),
-        encoding="utf-8",
-    )
-    (output_dir / "report.md").write_text(_render_report(summary), encoding="utf-8")
+    summary["paths"]["figures"] = [artefact_path(path) for path in figure_paths]
+    write_json(summary, output_dir / "summary.json")
+    (output_dir / "report.md").write_text(_render_report(summary), encoding="utf-8", newline="\n")
 
     training_dir = _training_dir_from_payload(payload)
     if training_dir is not None and training_dir.exists():
         card_path = generate_small_transformer_model_card(
             training_dir, eval_dir=output_dir, output_dir=model_card_dir
         )
-        summary["paths"]["model_card"] = str(card_path)
-        (output_dir / "summary.json").write_text(
-            json.dumps(summary, indent=2, sort_keys=True),
-            encoding="utf-8",
-        )
+        summary["paths"]["model_card"] = artefact_path(card_path)
+        write_json(summary, output_dir / "summary.json")
     return summary
 
 

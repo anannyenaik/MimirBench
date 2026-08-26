@@ -5,7 +5,7 @@ the harder, causal question: *which activation, if restored from a clean run,
 moves a corrupted run's prediction back?* The recipe per minimal pair is:
 
 1. run the **clean** input and cache every site's activation;
-2. run the **corrupted** input (different evidence) — the prediction shifts;
+2. run the **corrupted** input (different evidence), and the prediction shifts;
 3. for each site, re-run the corrupted input but overwrite that site with the
    clean activation, and measure how far the prediction snaps back.
 

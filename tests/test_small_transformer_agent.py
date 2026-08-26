@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import inspect
+from pathlib import Path
 
 import pytest
 
@@ -19,7 +20,7 @@ from mimirbench.training.train_small_transformer import (
 )
 
 
-def test_small_transformer_agent_answers_bayesian_task_and_rejects_unsupported(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_small_transformer_agent_answers_bayesian_task_and_rejects_unsupported(tmp_path: Path) -> None:
     pytest.importorskip("torch")
     summary = train(
         SmallTransformerTrainConfig(

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from mimirbench.training.datasets import BayesianTraceDatasetConfig
@@ -20,7 +22,7 @@ from mimirbench.training.train_small_transformer import (
 )
 
 
-def test_small_transformer_eval_smoke(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_small_transformer_eval_smoke(tmp_path: Path) -> None:
     pytest.importorskip("torch")
     training_dir = tmp_path / "training"
     cards_dir = tmp_path / "model_cards"

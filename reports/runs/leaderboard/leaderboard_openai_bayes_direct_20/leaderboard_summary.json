@@ -3,10 +3,10 @@
     "direct"
   ],
   "artefacts": {
-    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\headline_candidates.md",
-    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\leaderboard_report.md",
-    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\leaderboard_summary.json",
-    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\paired_deltas.jsonl"
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/leaderboard_summary.json",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/paired_deltas.jsonl"
   },
   "caveats": [
     "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
@@ -47,7 +47,7 @@
   ],
   "leaderboard_name": "leaderboard_openai_bayes_direct_20",
   "model_cards": [
-    "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\model_cards\\leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct__openai_gpt_4_1_mini_direct_micro_direct.md"
+    "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/model_cards/openai_gpt_4_1_mini_direct_micro__direct.md"
   ],
   "models_pending": [],
   "models_run": [
@@ -79,21 +79,21 @@
           "latency_p95_ms": 2328.1200350116724,
           "mean_score": 0.7806153332920294,
           "n_tasks": 20,
-          "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\models\\openai_gpt_4_1_mini_direct_micro\\agents\\direct",
+          "output_dir": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/models/openai_gpt_4_1_mini_direct_micro/agents/direct",
           "parse_failure_rate": 0.0,
           "run_id": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct-20260602T200423",
           "run_name": "leaderboard_openai_bayes_direct_20__openai_gpt_4_1_mini_direct_micro__direct"
         }
       },
       "label": "openai_gpt_4_1_mini_direct_micro",
-      "model_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20\\models\\openai_gpt_4_1_mini_direct_micro",
+      "model_dir": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20/models/openai_gpt_4_1_mini_direct_micro",
       "provider": "openai",
       "result_label": "real API model",
       "robustness": {},
       "usable": true
     }
   ],
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_bayes_direct_20",
+  "output_dir": "reports/runs/leaderboard/leaderboard_openai_bayes_direct_20",
   "paired_metrics": {},
   "preliminary": true,
   "provider_availability": {

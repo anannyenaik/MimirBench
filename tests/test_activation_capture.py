@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pytest
 
@@ -59,7 +61,7 @@ def test_capture_trace_activations_shapes_labels_metadata(tiny_interp_checkpoint
     assert len(captured.trace_ids) == 16
 
 
-def test_captured_activations_roundtrip(tiny_interp_checkpoint: dict, tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_captured_activations_roundtrip(tiny_interp_checkpoint: dict, tmp_path: Path) -> None:
     pytest.importorskip("torch")
     from mimirbench.interpretability.activation_capture import (
         CapturedActivations,

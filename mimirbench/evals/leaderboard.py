@@ -11,7 +11,7 @@ Design rules:
   (package present + key present). Unusable models are recorded as ``pending`` -
   the infrastructure ran, but no numbers are invented.
 * **Reuse the existing runners.** Each (model, agent-mode) cell is an ordinary
-  Stage 2 :func:`run_eval_config` run, and robustness cells are ordinary
+  :func:`run_eval_config` run, and robustness cells are ordinary
   :func:`run_robustness_config` runs. Downstream tooling reads the same
   ``results.jsonl`` / ``summary.json`` it already understands.
 * **Pairing is explicit.** Deltas are aligned by ``(environment, task_id, seed)``
@@ -29,7 +29,6 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Iterable, Mapping
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -39,6 +38,7 @@ from pydantic import BaseModel, ConfigDict, Field
 import mimirbench.evals.registry as registry
 from mimirbench.agents.providers import provider_status
 from mimirbench.agents.resolver import resolve_agent as resolve_agent_from_config
+from mimirbench.artefacts import artefact_path, make_run_id, utc_timestamp, write_json, write_jsonl
 from mimirbench.evals.comparison_runner import agent_baseline_kind
 from mimirbench.evals.robustness_runner import run_robustness_config
 from mimirbench.evals.runner import run_eval_config
@@ -311,8 +311,8 @@ def run_leaderboard_config(
     output_dir = _output_dir(config)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    timestamp = _utc_timestamp()
-    run_id = _make_run_id(config.run.name, timestamp)
+    timestamp = utc_timestamp()
+    run_id = make_run_id(config.run.name, timestamp)
     robustness_modes = {
         mode.lower().strip() for mode in (config.robustness.agents or config.agents)
     }
@@ -371,7 +371,7 @@ def run_leaderboard_config(
                 run=config.run.model_copy(
                     update={
                         "name": f"{config.run.name}__{_slug(model.label)}__{mode}",
-                        "output_dir": str(run_dir),
+                        "output_dir": artefact_path(run_dir),
                     }
                 ),
                 agent=agent_config,
@@ -420,18 +420,18 @@ def run_leaderboard_config(
                     mode: _robustness_payload(summary)
                     for mode, summary in robustness_summaries.items()
                 },
-                "model_dir": str(model_dir),
+                "model_dir": artefact_path(model_dir),
             }
         )
 
     paired_path = output_dir / "paired_deltas.jsonl"
-    _write_jsonl(paired_rows, paired_path)
+    write_jsonl(paired_rows, paired_path)
 
     summary_payload: dict[str, Any] = {
         "leaderboard_name": config.run.name,
         "run_id": run_id,
         "timestamp": timestamp,
-        "output_dir": str(output_dir),
+        "output_dir": artefact_path(output_dir),
         "preliminary": _is_preliminary(config),
         "real_execution_permitted": allow_real_models,
         "agent_modes": list(config.agents),
@@ -453,21 +453,21 @@ def run_leaderboard_config(
         "paired_metrics": paired_metrics,
         "caveats": _leaderboard_caveats(model_payloads, config),
         "artefacts": {
-            "leaderboard_summary": str(output_dir / "leaderboard_summary.json"),
-            "leaderboard_report": str(output_dir / "leaderboard_report.md"),
-            "headline_candidates": str(output_dir / "headline_candidates.md"),
-            "paired_deltas": str(paired_path),
+            "leaderboard_summary": artefact_path(output_dir / "leaderboard_summary.json"),
+            "leaderboard_report": artefact_path(output_dir / "leaderboard_report.md"),
+            "headline_candidates": artefact_path(output_dir / "headline_candidates.md"),
+            "paired_deltas": artefact_path(paired_path),
         },
     }
     summary_payload["headline_candidates"] = propose_headline_candidates(summary_payload)
     summary_payload["model_cards"] = [
-        str(path)
+        artefact_path(path)
         for path in generate_leaderboard_model_cards(
             summary_payload, output_dir=output_dir / "model_cards"
         )
     ]
 
-    _write_json(summary_payload, output_dir / "leaderboard_summary.json")
+    write_json(summary_payload, output_dir / "leaderboard_summary.json")
     _write_leaderboard_report(summary_payload, output_dir / "leaderboard_report.md")
     _write_headline_candidates(summary_payload, output_dir / "headline_candidates.md")
     return summary_payload
@@ -483,6 +483,11 @@ def generate_leaderboard_model_cards(
     Reference and mock baselines are skipped (they are not models). A card is
     generated per (model, agent-mode) run directory, since each is a distinct
     evaluated configuration. Returns the list of written card paths.
+
+    Cards are named ``<model>__<mode>``, which is unique inside the leaderboard's
+    own ``model_cards/`` directory. The leaderboard name is deliberately left out:
+    it is already two levels up in the path, and repeating it overflows the
+    Windows path limit.
     """
     from mimirbench.reports.model_cards import generate_model_card
 
@@ -490,11 +495,14 @@ def generate_leaderboard_model_cards(
     for model in summary.get("models_run", []):
         if model.get("result_label") not in _REAL_MODEL_LABELS:
             continue
-        for agent in model.get("agents", {}).values():
+        label = _slug(str(model.get("label", "model")))
+        for mode, agent in model.get("agents", {}).items():
             run_dir = agent.get("output_dir")
             if not run_dir:
                 continue
-            card = generate_model_card(run_dir, output_dir=output_dir)
+            card = generate_model_card(
+                run_dir, output_dir=output_dir, stem=f"{label}__{mode}"
+            )
             if card is not None:
                 cards.append(card)
     return cards
@@ -535,7 +543,7 @@ def _run_robustness_cell(
         run=config.run.model_copy(
             update={
                 "name": f"{config.run.name}__{_slug(model.label)}__{mode}__robustness",
-                "output_dir": str(run_dir),
+                "output_dir": artefact_path(run_dir),
             }
         ),
         agent=agent_config,
@@ -1066,7 +1074,7 @@ def _write_leaderboard_report(summary: dict[str, Any], path: Path) -> None:
             f"- `headline_candidates.md`: `{summary['artefacts']['headline_candidates']}`",
         ]
     )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 def _write_headline_candidates(summary: dict[str, Any], path: Path) -> None:
@@ -1096,7 +1104,7 @@ def _write_headline_candidates(summary: dict[str, Any], path: Path) -> None:
             lines.append(f"- Task count: `{candidate['n_tasks']}`")
             lines.append(f"- Pilot-scale: `{candidate['preliminary']}`")
             lines.append("")
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 # --------------------------------------------------------------------------- #
@@ -1192,38 +1200,6 @@ def _output_dir(config: LeaderboardConfig) -> Path:
     if config.run.output_dir:
         return Path(config.run.output_dir)
     return Path("reports") / "runs" / "leaderboard" / config.run.name
-
-
-def _write_json(data: dict[str, Any], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(_stable_json(data, indent=2) + "\n", encoding="utf-8")
-
-
-def _write_jsonl(rows: list[dict[str, Any]], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        for row in rows:
-            handle.write(_stable_json(row) + "\n")
-
-
-def _stable_json(data: Any, *, indent: int | None = None) -> str:
-    return json.dumps(
-        data,
-        sort_keys=True,
-        separators=(",", ":") if indent is None else None,
-        indent=indent,
-        ensure_ascii=False,
-    )
-
-
-def _utc_timestamp() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def _make_run_id(run_name: str, timestamp: str) -> str:
-    safe_timestamp = timestamp.replace(":", "").replace("-", "").replace("Z", "")
-    safe_name = "".join(c if c.isalnum() or c in {"-", "_"} else "_" for c in run_name)
-    return f"{safe_name}-{safe_timestamp}"
 
 
 def _slug(value: str) -> str:

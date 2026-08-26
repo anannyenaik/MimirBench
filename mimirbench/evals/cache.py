@@ -21,10 +21,18 @@ def stable_json_dumps(data: Any) -> str:
 
 
 def _package_version() -> str:
+    """Return the installed package version, or the declared one from a source tree.
+
+    The version is part of the cache key, so the fallback must match the installed
+    version. Otherwise running from an uninstalled checkout would silently miss
+    every cached response and re-issue paid API calls.
+    """
     try:
         return version("mimirbench")
     except PackageNotFoundError:
-        return "0.1.0"
+        from mimirbench import __version__
+
+        return __version__
 
 
 def make_cache_key(

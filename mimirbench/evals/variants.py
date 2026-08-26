@@ -9,7 +9,7 @@ MimirBench's robustness evaluation.
 Design principles
 -----------------
 * **Deterministic first.** Every transform is a pure function of
-  ``(task, variant_type, seed)`` built from fixed templates and text banks — not
+  ``(task, variant_type, seed)`` built from fixed templates and text banks, not
   a language model. Model-generated paraphrases are deliberately deferred so that
   a robustness regression is always reproducible and attributable to an
   inspectable string. See :mod:`mimirbench.evals.paraphrases` and
@@ -273,8 +273,8 @@ def _order_permutation(instance: TaskInstance, *, seed: int) -> _Transformed:
         answer_preserving=True,
         description="Reordered the independent (i.i.d.) observed evidence.",
         expected_invariance=(
-            "The observations are exchangeable, so the posterior — and the score — "
-            "are invariant to their order."
+            "The observations are exchangeable, so the posterior and the score are "
+            "invariant to their order."
         ),
     )
 

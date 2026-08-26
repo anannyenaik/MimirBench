@@ -4,16 +4,16 @@ Activation patching needs *minimal pairs*: two inputs that share everything
 except the one thing whose causal role we want to test. Here that thing is the
 evidence. For each base trace we build:
 
-* **clean** — the original trace (evidence supports one posterior/action);
-* **corrupted** — same prior, likelihood, and payoff, but the observations are
+* **clean**: the original trace (evidence supports one posterior/action);
+* **corrupted**: same prior, likelihood, and payoff, but the observations are
   replaced with evidence for a *different* hypothesis, so the Bayes-optimal
   posterior bucket (and often the action) changes;
-* **order-control** — the clean evidence in a different order. Bayesian updating
+* **order-control**: the clean evidence in a different order. Bayesian updating
   is order-invariant, so the labels are unchanged; a model that respects the
   maths should be invariant too;
-* **distractor** — the clean trace plus label-irrelevant filler tokens.
+* **distractor**: the clean trace plus label-irrelevant filler tokens.
 
-Everything is generated from the Stage 7 trace machinery, so labels are computed
+Everything is generated from the synthetic-trace machinery, so labels are computed
 by the same :func:`compute_trace_targets` used during training. This module is
 torch-free.
 """

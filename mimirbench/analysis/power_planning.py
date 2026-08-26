@@ -137,5 +137,5 @@ def write_power_planning_report(
     """Write the saved-artifact-only power-planning report."""
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(build_power_planning_markdown(base_dir, rows=rows), encoding="utf-8")
+    path.write_text(build_power_planning_markdown(base_dir, rows=rows), encoding="utf-8", newline="\n")
     return path

@@ -1,7 +1,7 @@
 """Multi-seed interpretability replication for the medium Bayesian transformer.
 
 Local-only, CPU, **no API calls and no downloads**. This driver counters the
-"interpretability is single-seed" criticism by running the *same* Stage 8 +
+"interpretability is single-seed" criticism by running the *same* whole-site +
 extended pipeline on several independently trained synthetic checkpoints and
 aggregating the per-seed metrics explicitly.
 
@@ -10,8 +10,8 @@ For each seed it:
 1. trains the medium checkpoint (skipping any seed whose checkpoint already
    exists when ``skip_existing`` is set, so seed 123's curated artefacts are
    reused rather than retrained);
-2. runs whole-site Stage 8 interpretability (probes / activation patching /
-   attention) — the source of the headline "evidence->decision is concentrated
+2. runs whole-site interpretability (probes / activation patching /
+   attention), the source of the headline "evidence->decision is concentrated
    in the attention sub-blocks" result;
 3. runs extended position-resolved (token-group) patching plus the
    mismatched-donor and label-shuffle negative controls;
@@ -244,7 +244,7 @@ def run_multiseed_interpretability(config: MultiSeedConfig | str | Path) -> dict
         "skip_existing": cfg.skip_existing,
     }
     summary_path = summary_dir / "interp_bayes_multiseed_summary.json"
-    summary_path.write_text(json.dumps(aggregate, indent=2, sort_keys=True), encoding="utf-8")
+    summary_path.write_text(json.dumps(aggregate, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     aggregate["summary_path"] = summary_path.as_posix()
     return aggregate
 
@@ -306,7 +306,7 @@ def _execute_seed(
     if not paths.checkpoint_path.exists():
         raise FileNotFoundError(f"checkpoint missing after training step: {paths.checkpoint_path}")
 
-    # 2. Whole-site Stage 8 interpretability.
+    # 2. Whole-site interpretability.
     if cfg.run_full_interpretability:
         record["steps"]["full_interp"] = _maybe_run_interp(
             cfg, seed, cfg.interp_template, paths.interp_dir, paths

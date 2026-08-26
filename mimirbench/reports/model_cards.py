@@ -9,6 +9,7 @@ from typing import Any
 
 from mimirbench.analysis.calibration import calibration_summary_from_records
 from mimirbench.analysis.failure_cases import extract_eval_failure_cases
+from mimirbench.artefacts import artefact_path
 from mimirbench.evals.comparison_runner import agent_baseline_kind
 from mimirbench.evals.schemas import AgentConfig, EvalTaskRecord
 from mimirbench.evals.scoring import is_risk_violation
@@ -21,11 +22,17 @@ def generate_model_card(
     run_dir: str | Path,
     *,
     output_dir: str | Path = Path("reports") / "model_cards",
+    stem: str | None = None,
 ) -> Path | None:
     """Generate one model/agent card from an actual run directory.
 
     Returns ``None`` when the directory lacks concrete run artefacts. This is the
     guardrail that prevents cards for configs or models that were never run.
+
+    ``stem`` overrides the generated filename. Callers that already scope the card
+    by directory should pass a short stem: the default combines the full run name
+    and agent name, which repeats context the directory tree carries and can push
+    the path past the Windows 260-character limit.
     """
     root = Path(run_dir)
     summary_path = root / "summary.json"
@@ -39,8 +46,9 @@ def generate_model_card(
 
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    path = out_dir / f"{_slug(summary['run_name'])}__{_slug(_agent_name(summary))}.md"
-    path.write_text(_render_card(summary, records, root), encoding="utf-8")
+    name = _slug(stem) if stem else f"{_slug(summary['run_name'])}__{_slug(_agent_name(summary))}"
+    path = out_dir / f"{name}.md"
+    path.write_text(_render_card(summary, records, root), encoding="utf-8", newline="\n")
     return path
 
 
@@ -64,6 +72,7 @@ def generate_small_transformer_model_card(
     path.write_text(
         _render_small_transformer_card(summary, root, eval_summary=eval_summary),
         encoding="utf-8",
+        newline="\n",
     )
     return path
 
@@ -88,7 +97,7 @@ def _render_small_transformer_card(
         "",
         f"- Model name: `{run_name}`",
         "- Model type: compact synthetic Bayesian trace transformer",
-        f"- Training run directory: `{training_dir}`",
+        f"- Training run directory: `{artefact_path(training_dir)}`",
         "- Created from actual training artefacts: `yes`",
         "",
         "## Architecture",
@@ -185,7 +194,7 @@ def _render_card(summary: dict[str, Any], records: list[EvalTaskRecord], run_dir
         f"- Run ID: `{summary['run_id']}`",
         f"- Run name: `{summary['run_name']}`",
         f"- Date/time: `{summary['timestamp']}`",
-        f"- Run directory: `{run_dir}`",
+        f"- Run directory: `{artefact_path(run_dir)}`",
         "",
         "## Evaluation",
         "",

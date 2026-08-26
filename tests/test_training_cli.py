@@ -1,6 +1,8 @@
-"""CLI smoke tests for Stage 7 training commands."""
+"""CLI smoke tests for the training commands."""
 
 from __future__ import annotations
+
+from pathlib import Path
 
 import pytest
 from typer.testing import CliRunner
@@ -8,7 +10,7 @@ from typer.testing import CliRunner
 from mimirbench.cli import app
 
 
-def test_stage7_generate_traces_cli_smoke(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_generate_traces_cli_smoke(tmp_path: Path) -> None:
     config_path = tmp_path / "train.yaml"
     run_dir = tmp_path / "training"
     config_path.write_text(
@@ -45,7 +47,7 @@ training:
     assert (run_dir / "train_traces.jsonl").exists()
 
 
-def test_stage7_train_eval_and_inspect_cli_smoke(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_train_eval_and_inspect_cli_smoke(tmp_path: Path) -> None:
     pytest.importorskip("torch")
     train_config = tmp_path / "train.yaml"
     eval_config = tmp_path / "eval.yaml"

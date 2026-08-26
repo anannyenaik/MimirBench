@@ -1,8 +1,9 @@
-"""Tests for Stage 6 Matplotlib plot generation."""
+"""Tests for Matplotlib plot generation."""
 
 from __future__ import annotations
 
 import inspect
+from pathlib import Path
 
 from mimirbench.analysis import plots
 from mimirbench.analysis.plots import generate_run_plots
@@ -43,7 +44,7 @@ def _record(
     )
 
 
-def test_plots_generated_without_seaborn(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_plots_generated_without_seaborn(tmp_path: Path) -> None:
     run_dir = tmp_path / "run"
     write_results_jsonl(
         [

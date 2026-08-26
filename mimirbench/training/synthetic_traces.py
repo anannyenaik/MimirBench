@@ -357,7 +357,7 @@ def write_traces_jsonl(traces: Iterable[Mapping[str, Any]], path: str | Path) ->
     """Write traces to JSONL in deterministic key order."""
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
-    with output.open("w", encoding="utf-8") as handle:
+    with output.open("w", encoding="utf-8", newline="\n") as handle:
         for trace in traces:
             _assert_no_hidden_reasoning(trace)
             handle.write(json.dumps(trace, sort_keys=True) + "\n")

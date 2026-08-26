@@ -1,4 +1,4 @@
-"""Train the Stage 7 compact transformer on synthetic Bayesian traces."""
+"""Train the compact transformer on synthetic Bayesian traces."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ import numpy as np
 import yaml
 
 from mimirbench.analysis.plots import generate_training_plots
+from mimirbench.artefacts import artefact_path, write_json
 from mimirbench.reports.model_cards import generate_small_transformer_model_card
 from mimirbench.training.datasets import (
     BayesianTraceDatasetConfig,
@@ -90,7 +91,7 @@ class TrainingConfig:
 
 @dataclass(frozen=True)
 class SmallTransformerTrainConfig:
-    """Resolved Stage 7 training configuration."""
+    """Resolved training configuration."""
 
     run: RunConfig = field(default_factory=RunConfig)
     data: BayesianTraceDatasetConfig = field(default_factory=BayesianTraceDatasetConfig)
@@ -102,7 +103,7 @@ TrainConfig = SmallTransformerTrainConfig
 
 
 def load_config(path: str | Path) -> SmallTransformerTrainConfig:
-    """Load a Stage 7 training config from YAML."""
+    """Load a training config from YAML."""
     data = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
         raise ValueError("training config must be a YAML mapping.")
@@ -211,7 +212,7 @@ def train(
     metrics_rows: list[dict[str, Any]] = []
     rng = np.random.default_rng(cfg.run.seed)
 
-    with metrics_path.open("w", encoding="utf-8") as metrics_file:
+    with metrics_path.open("w", encoding="utf-8", newline="\n") as metrics_file:
         for epoch in range(1, cfg.training.epochs + 1):
             train_loss = _train_epoch(
                 model=model,
@@ -289,15 +290,15 @@ def train(
         "best_metrics": best_metrics,
         "final_metrics": metrics_rows[-1] if metrics_rows else {},
         "paths": {
-            "config": str(output_dir / "config_resolved.yaml"),
-            "vocab": str(tokenizer_path),
-            "train_traces": str(output_dir / "train_traces.jsonl"),
-            "val_traces": str(output_dir / "val_traces.jsonl"),
-            "test_traces": str(output_dir / "test_traces.jsonl"),
-            "metrics": str(metrics_path),
-            "best_checkpoint": str(checkpoints_dir / "best.pt"),
-            "final_checkpoint": str(final_checkpoint),
-            "figures": [str(path) for path in figures],
+            "config": artefact_path(output_dir / "config_resolved.yaml"),
+            "vocab": artefact_path(tokenizer_path),
+            "train_traces": artefact_path(output_dir / "train_traces.jsonl"),
+            "val_traces": artefact_path(output_dir / "val_traces.jsonl"),
+            "test_traces": artefact_path(output_dir / "test_traces.jsonl"),
+            "metrics": artefact_path(metrics_path),
+            "best_checkpoint": artefact_path(checkpoints_dir / "best.pt"),
+            "final_checkpoint": artefact_path(final_checkpoint),
+            "figures": [artefact_path(path) for path in figures],
         },
         "known_limitations": [
             "The model is trained only on deterministic synthetic Bayesian traces.",
@@ -306,10 +307,10 @@ def train(
         ],
     }
     summary_path = output_dir / "summary.json"
-    summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
+    write_json(summary, summary_path)
     card_path = generate_small_transformer_model_card(output_dir, output_dir=model_card_dir)
-    summary["paths"]["model_card"] = str(card_path)
-    summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
+    summary["paths"]["model_card"] = artefact_path(card_path)
+    write_json(summary, summary_path)
     return summary
 
 
@@ -511,7 +512,7 @@ def _seed_everything(seed: int, torch_mod: Any) -> None:
 
 def _write_resolved_config(cfg: SmallTransformerTrainConfig, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(yaml.safe_dump(asdict(cfg), sort_keys=False), encoding="utf-8")
+    path.write_text(yaml.safe_dump(asdict(cfg), sort_keys=False), encoding="utf-8", newline="\n")
 
 
 def _mapping(value: Any) -> dict[str, Any]:

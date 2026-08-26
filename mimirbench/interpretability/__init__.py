@@ -1,4 +1,4 @@
-"""Mechanistic interpretability toolkit (Stage 8).
+"""Mechanistic interpretability toolkit.
 
 The probe, counterfactual, attention, and patching primitives are dependency-free
 to import (numpy only); torch is imported lazily inside the functions that drive a

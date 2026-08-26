@@ -41,7 +41,7 @@ narrow causal interpretability result. The auto-generated companion card is
 | val | 2,000 |
 | test | 2,000 |
 
-- **Seed:** 123 (single seed). Dropout 0, CPU — fully deterministic.
+- **Seed:** 123 (single seed). Dropout 0, CPU, fully deterministic.
 - The held-out eval uses a **disjoint seed (20000)** and the `test`-split
   generator, so eval tasks were never trained on. Splits are content-disjoint (no
   shared input string across train/val/test), verified in
@@ -84,7 +84,7 @@ accuracy 1.000, posterior-bucket accuracy 0.9935, confidence 0.998, EV 0.9985.
 
 - This card documents one checkpoint (seed 123). The interpretability *result* it
   supports is **replicated across six independently trained checkpoints (seeds
-  123–128)** — see
+  123–128)**; see
   [`reports/interpretability/interp_bayes_multiseed_summary.md`](reports/interpretability/interp_bayes_multiseed_summary.md).
   It remains one narrow synthetic Bayesian/risk generator.
 - The encoder mean-pools before the heads, so whole-site patching localises at the

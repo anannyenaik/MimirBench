@@ -4,7 +4,7 @@ Real models rarely return exactly the JSON we ask for: they wrap it in Markdown
 fences, add a sentence before or after, use Python literals, or stringify
 numbers. This module turns messy model text into a validated answer dict (or an
 explicit, recorded parse error) using only **deterministic** rules. No second
-language model is used to repair responses in this stage — every transformation
+language model is used to repair responses in this stage; every transformation
 here is auditable and reproducible.
 
 The pipeline for :func:`parse_response` is:
@@ -149,7 +149,7 @@ def _deterministic_text_repairs(text: str) -> str:
     """Apply small, reversible cleanups that commonly fix invalid JSON.
 
     Strips code fences, maps Python literals to JSON, and removes trailing commas.
-    Intentionally conservative — it never rewrites keys or values.
+    Intentionally conservative: it never rewrites keys or values.
     """
     repaired = text.strip()
     fenced = _FENCE_RE.search(repaired)
@@ -218,7 +218,7 @@ class ParsedResponse:
     """Outcome of parsing one model response.
 
     ``parsed`` is the validated answer dict (or ``None`` if no JSON was
-    recovered). ``errors`` records every structural problem deterministically —
+    recovered). ``errors`` records every structural problem deterministically, so
     callers store these instead of crashing. ``repaired`` flags that a
     deterministic repair pass changed the text/fields. ``refusal`` flags a
     natural-language refusal. ``action`` is the canonical decision label when the
@@ -317,7 +317,7 @@ def validate_against_family(
     """Return a list of structural errors for ``parsed`` under ``family``.
 
     An empty list means the answer is structurally usable by the grader (it does
-    not guarantee a *correct* answer — that is the grader's job).
+    not guarantee a *correct* answer; that is the grader's job).
     """
     if parsed is None:
         return ["no_json_object"]

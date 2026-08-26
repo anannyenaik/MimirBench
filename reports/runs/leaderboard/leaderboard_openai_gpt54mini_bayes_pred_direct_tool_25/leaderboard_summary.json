@@ -4,10 +4,10 @@
     "tool"
   ],
   "artefacts": {
-    "headline_candidates": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\headline_candidates.md",
-    "leaderboard_report": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\leaderboard_report.md",
-    "leaderboard_summary": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\leaderboard_summary.json",
-    "paired_deltas": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\paired_deltas.jsonl"
+    "headline_candidates": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/headline_candidates.md",
+    "leaderboard_report": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/leaderboard_report.md",
+    "leaderboard_summary": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/leaderboard_summary.json",
+    "paired_deltas": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/paired_deltas.jsonl"
   },
   "caveats": [
     "All paired deltas are candidate minus baseline on identical task IDs (and identical variant IDs for robustness).",
@@ -69,8 +69,8 @@
   ],
   "leaderboard_name": "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25",
   "model_cards": [
-    "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\model_cards\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__direct__openai_gpt_5_4_mini_bayes_pred_25_direct.md",
-    "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\model_cards\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__tool__openai_gpt_5_4_mini_bayes_pred_25_tool.md"
+    "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/model_cards/openai_gpt_5_4_mini_bayes_pred_25__direct.md",
+    "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/model_cards/openai_gpt_5_4_mini_bayes_pred_25__tool.md"
   ],
   "models_pending": [],
   "models_run": [
@@ -103,7 +103,7 @@
           "latency_p95_ms": 3577.190864997826,
           "mean_score": 0.6543690820555541,
           "n_tasks": 50,
-          "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\models\\openai_gpt_5_4_mini_bayes_pred_25\\agents\\direct",
+          "output_dir": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/models/openai_gpt_5_4_mini_bayes_pred_25/agents/direct",
           "parse_failure_rate": 0.0,
           "run_id": "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__direct-20260602T215152",
           "run_name": "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__direct"
@@ -131,21 +131,21 @@
           "latency_p95_ms": 2746.253345003788,
           "mean_score": 0.55988153015416,
           "n_tasks": 50,
-          "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\models\\openai_gpt_5_4_mini_bayes_pred_25\\agents\\tool",
+          "output_dir": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/models/openai_gpt_5_4_mini_bayes_pred_25/agents/tool",
           "parse_failure_rate": 0.0,
           "run_id": "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__tool-20260602T215322",
           "run_name": "leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25__openai_gpt_5_4_mini_bayes_pred_25__tool"
         }
       },
       "label": "openai_gpt_5_4_mini_bayes_pred_25",
-      "model_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\\models\\openai_gpt_5_4_mini_bayes_pred_25",
+      "model_dir": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/models/openai_gpt_5_4_mini_bayes_pred_25",
       "provider": "openai",
       "result_label": "real API model",
       "robustness": {},
       "usable": true
     }
   ],
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25",
+  "output_dir": "reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25",
   "paired_metrics": {
     "openai_gpt_5_4_mini_bayes_pred_25": {
       "tool_vs_direct": {

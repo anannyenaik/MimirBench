@@ -24,7 +24,9 @@ from mimirbench.evals.schemas import (
     TaskInstance,
 )
 
-__version__ = "0.1.0"
+# Single source of truth for the runtime version. Kept in step with the
+# ``version`` field in pyproject.toml by tests/test_release_metadata.py.
+__version__ = "0.2.0"
 
 __all__ = [
     "AgentConfig",

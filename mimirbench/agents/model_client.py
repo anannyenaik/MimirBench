@@ -3,10 +3,10 @@
 This module defines the single contract every hosted or local model backend
 implements, so the rest of the harness never depends on a particular SDK:
 
-* :class:`ModelRequest` — the prompt and decoding settings going *in*;
-* :class:`ModelResponseEnvelope` — text, parsed JSON, usage, latency, and any
+* :class:`ModelRequest`: the prompt and decoding settings going *in*;
+* :class:`ModelResponseEnvelope`: text, parsed JSON, usage, latency, and any
   error coming *out*;
-* :class:`ModelClient` — the abstract backend that maps one to the other.
+* :class:`ModelClient`: the abstract backend that maps one to the other.
 
 Three deliberate design choices:
 
@@ -192,7 +192,7 @@ class RetryConfig:
 class ProviderStatus:
     """Result of a provider availability check (used by ``check-provider``).
 
-    Never carries the API key itself — only whether one was found.
+    Never carries the API key itself, only whether one was found.
     """
 
     provider: str
@@ -238,7 +238,7 @@ def is_retryable_error(exc: Exception, retry: RetryConfig) -> bool:
     """Classify whether an exception represents a transient, retryable failure.
 
     Auth errors (401/403) and malformed-request errors (400/404/422) are *not*
-    retried — retrying them only burns quota. Status is read from common SDK
+    retried, because retrying them only burns quota. Status is read from common SDK
     attributes; otherwise the exception class name is matched against a small set
     of transient-failure tokens.
     """

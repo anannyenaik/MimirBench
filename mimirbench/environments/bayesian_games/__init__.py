@@ -1,6 +1,6 @@
 """Bayesian-updating games: posterior inference under a known generative model.
 
-This is the reference environment for MimirBench — fully implemented end to end
+This is the reference environment for MimirBench: fully implemented end to end
 (generator, exact solver, deterministic grader) and the template other
 environments follow.
 """

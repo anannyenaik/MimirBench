@@ -1,7 +1,7 @@
 # Models
 
 How to run MimirBench against hosted APIs or local Hugging Face
-weights — and how to do so **without** accidentally running an expensive
+weights, and how to do so **without** accidentally running an expensive
 benchmark.
 
 MimirBench's core harness and test suite never import a model SDK. Provider
@@ -16,7 +16,7 @@ test; you only install model extras when you actually want to run a model.
 | Anthropic | `api` | `anthropic` | `anthropic` (`.[api]`) | `ANTHROPIC_API_KEY` | only if `pricing` configured |
 | Gemini | `api` | `gemini` | `google-genai` (`.[api]`) | `GEMINI_API_KEY` | only if `pricing` configured |
 | Generic HTTP (OpenAI-shaped) | `api` | `generic_http` | none (stdlib) | `MIMIRBENCH_LLM_API_KEY` (optional) | only if `pricing` configured |
-| Local Hugging Face | `local` | — | `torch`+`transformers` (`.[ml]`) | none | never (no provider billing) |
+| Local Hugging Face | `local` | n/a | `torch`+`transformers` (`.[ml]`) | none | never (no provider billing) |
 
 The provider-agnostic contract lives in
 [`mimirbench/agents/model_client.py`](mimirbench/agents/model_client.py):
@@ -175,7 +175,7 @@ and robustness variant ID where applicable.
 - Keep `num_tasks` small (the shipped configs use 5–20) and `max_workers: 1`.
 - `cache: true` deduplicates identical (agent, task) calls so re-runs are free.
 - Always run `estimate-run-cost` before a paid run.
-- Tool-using model agents make up to `tool_max_steps + 1` calls per task — budget
+- Tool-using model agents make up to `tool_max_steps + 1` calls per task; budget
   accordingly.
 
 ## Reporting Guarantees

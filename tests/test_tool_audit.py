@@ -38,7 +38,7 @@ def _tool_config(tmp_path: Path) -> EvalRunConfig:
     )
 
 
-def test_tool_audit_artefacts_written(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_tool_audit_artefacts_written(tmp_path: Path) -> None:
     summary = run_eval_config(_tool_config(tmp_path))
     output_dir = Path(summary["output_dir"])
     assert (output_dir / "tool_audit.jsonl").exists()

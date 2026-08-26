@@ -10,7 +10,7 @@ Two layers of API live here:
 * :func:`capture_trace_activations` is the project-specific driver. It runs the
   small transformer's instrumented forward over a batch of synthetic Bayesian
   traces, mean-pools each site over the (un-padded) sequence, and packages the
-  result — together with per-trace labels and reproducibility metadata — into a
+  result, together with per-trace labels and reproducibility metadata, into a
   :class:`CapturedActivations` object that the probes consume.
 
 Importing this module pulls in torch (lazily, via the training package). It is
@@ -150,7 +150,7 @@ class CapturedActivations:
             "label_classes": self.label_classes,
             "metadata": self.metadata,
         }
-        json_path.write_text(json.dumps(sidecar, indent=2, sort_keys=True), encoding="utf-8")
+        json_path.write_text(json.dumps(sidecar, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         return npz_path, json_path
 
     @classmethod
@@ -205,7 +205,7 @@ def capture_trace_activations(
     """Capture mean-pooled site activations for a list of synthetic traces.
 
     Each site's feature vector is the model's masked mean over un-padded
-    positions — i.e. exactly the pooling the classification heads see — so the
+    positions (exactly the pooling the classification heads see), so the
     probes read the same representation the model itself reduces to a decision.
 
     ``label_classes`` pins the integer encoding of each label (e.g. from the

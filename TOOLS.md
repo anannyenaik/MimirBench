@@ -46,18 +46,18 @@ and is bounded by `tool_max_steps` (**default 3**):
    allow-list;
 3. allowed calls are executed deterministically; the output is appended as an
    observation;
-4. invalid requests (disallowed or unknown tool) are **recorded and skipped** —
-   never executed — and the loop continues safely;
+4. invalid requests (disallowed or unknown tool) are **recorded and skipped**,
+   never executed, and the loop continues safely;
 5. when the policy returns a final answer, or the step budget is exhausted, the
    loop stops and returns a structured response.
 
 Two policies ship:
 
-- **`reference`** — a deterministic, non-model baseline that consults an allowed
+- **`reference`**: a deterministic, non-model baseline that consults an allowed
   tool and answers from the tool output (or the environment's public reference
   solver). Fully reproducible; used to exercise and test the loop. **Not a model
   result.**
-- **`model`** — a model-backed policy that asks a `ModelClient` to propose tool
+- **`model`**: a model-backed policy that asks a `ModelClient` to propose tool
   calls and a final answer in JSON.
 
 ```yaml
@@ -71,8 +71,8 @@ agent:
 
 Every step (valid or invalid) is recorded. A tool-agent run writes:
 
-- `reports/runs/<run_name>/tool_audit.jsonl` — one row per step;
-- `reports/runs/<run_name>/tool_audit.md` — a human-readable summary.
+- `reports/runs/<run_name>/tool_audit.jsonl`: one row per step;
+- `reports/runs/<run_name>/tool_audit.md`: a human-readable summary.
 
 Each row records: `task_id`, `environment`, `agent`, `step_number`,
 `requested_tool`, `tool_arguments`, `validation_status` (`allowed` /
@@ -90,19 +90,19 @@ mimirbench inspect-tool-audit reports/runs/tool_reference_bayes
 
 The audit aggregates ([`mimirbench/evals/tool_audit.py`](mimirbench/evals/tool_audit.py)):
 
-- `tool_call_rate` — fraction of tasks that requested ≥1 tool;
-- `invalid_tool_call_rate` — invalid requests / all tool requests;
-- `tool_error_rate` — tool execution errors / executed calls;
-- `mean_tool_steps` — average tool requests per task;
-- `final_answer_after_tool_rate` — tasks that produced a final answer after a
+- `tool_call_rate`: fraction of tasks that requested ≥1 tool;
+- `invalid_tool_call_rate`: invalid requests / all tool requests;
+- `tool_error_rate`: tool execution errors / executed calls;
+- `mean_tool_steps`: average tool requests per task;
+- `final_answer_after_tool_rate`: tasks that produced a final answer after a
   tool call;
-- `tool_result_ignored_rate` — tasks whose final answer used **none** of the
+- `tool_result_ignored_rate`: tasks whose final answer used **none** of the
   available tool outputs, where the heuristic can decide.
 
 `final_answer_used_tool_result` and `tool_result_ignored_rate` are deterministic
 **numeric-overlap heuristics**: a tool output counts as "used" when a number it
 produced reappears (within tolerance) in the final answer. When there is nothing
-numeric to compare, the value is reported as `unknown` (`null`) — never guessed.
+numeric to compare, the value is reported as `unknown` (`null`), never guessed.
 
 ## Limitations and safety
 

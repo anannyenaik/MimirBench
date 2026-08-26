@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from mimirbench.reports.index import build_report_index
 
 
-def test_report_index_includes_expected_directories(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_report_index_includes_expected_directories(tmp_path: Path) -> None:
     reports = tmp_path / "reports"
     run_dir = reports / "runs" / "baseline"
     run_dir.mkdir(parents=True)

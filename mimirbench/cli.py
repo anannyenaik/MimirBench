@@ -90,7 +90,7 @@ def validate_config(
         console.print(str(exc))
         raise typer.Exit(code=1) from exc
 
-    kind = "Stage 2 run config" if isinstance(config, EvalRunConfig) else "legacy eval config"
+    kind = "run config" if isinstance(config, EvalRunConfig) else "legacy eval config"
     console.print(f"[green]OK[/green] - {kind} is valid: {config_path}")
 
 
@@ -519,7 +519,7 @@ def train_small_transformer_command(
         Path("reports") / "model_cards", help="Where to write the generated model card."
     ),
 ) -> None:
-    """Train the Stage 7 compact transformer on synthetic Bayesian traces."""
+    """Train the compact transformer on synthetic Bayesian traces."""
     from mimirbench.training.train_small_transformer import train
 
     try:
@@ -572,7 +572,7 @@ def inspect_training_command(
 def run_interpretability_command(
     config_path: Path = typer.Argument(..., exists=True, readable=True, help="Path to an interpretability YAML."),
 ) -> None:
-    """Run Stage 8 interpretability experiments (probes, patching, attention)."""
+    """Run the interpretability experiments (probes, patching, attention)."""
     from mimirbench.interpretability.runner import (
         load_interpretability_config,
         run_interpretability,

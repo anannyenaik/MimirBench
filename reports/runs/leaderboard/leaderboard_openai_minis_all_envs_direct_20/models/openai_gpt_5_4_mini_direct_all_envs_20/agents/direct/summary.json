@@ -283,7 +283,7 @@
       "violation_rate": 0.016666666666666666
     }
   },
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_minis_all_envs_direct_20\\models\\openai_gpt_5_4_mini_direct_all_envs_20\\agents\\direct",
+  "output_dir": "reports/runs/leaderboard/leaderboard_openai_minis_all_envs_direct_20/models/openai_gpt_5_4_mini_direct_all_envs_20/agents/direct",
   "run_id": "leaderboard_openai_minis_all_envs_direct_20__openai_gpt_5_4_mini_direct_all_envs_20__direct-20260602T212421",
   "run_name": "leaderboard_openai_minis_all_envs_direct_20__openai_gpt_5_4_mini_direct_all_envs_20__direct",
   "timestamp": "2026-06-02T21:24:21Z"

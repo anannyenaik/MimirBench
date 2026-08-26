@@ -9,7 +9,7 @@ parses/repairs the response deterministically via
 It never touches the :class:`~mimirbench.evals.schemas.GradingKey`: it only ever
 sees the public :class:`~mimirbench.evals.schemas.Task`. Raw model text is
 preserved on the response, token usage and cost (when available) and parse
-errors are recorded in metadata, and only a concise reasoning summary is kept —
+errors are recorded in metadata, and only a concise reasoning summary is kept,
 never hidden chain-of-thought.
 """
 

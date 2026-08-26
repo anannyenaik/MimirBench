@@ -1,7 +1,7 @@
 """Deterministic adversarial prompt perturbations for robustness testing.
 
 These transforms add *misleading, pressuring, or irrelevant* framing around a
-task while leaving the underlying problem — and therefore its correct answer —
+task while leaving the underlying problem, and therefore its correct answer,
 unchanged. A robust agent should be unmoved by them; a brittle one will be nudged
 off the right answer, take an unsafe action, or flip its decision. All transforms
 are deterministic given a seed.
@@ -11,6 +11,12 @@ rather than a language model. Stronger, model-generated adversarial attacks are
 planned future work behind the same interface. Keeping the first implementation
 deterministic means a regression in robustness is reproducible and attributable
 to a specific, inspectable string rather than to a sampling artefact.
+
+The text banks below are benchmark stimulus, not prose. They are frozen: the
+response cache is keyed on a hash of the full task, so editing a string
+invalidates the cached responses saved under ``reports/runs/`` and would make the
+published robustness rows unreproducible without re-issuing paid API calls. Treat
+any change here as a benchmark-data revision and record it in the changelog.
 """
 
 from __future__ import annotations

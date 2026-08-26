@@ -1,4 +1,4 @@
-"""Stage 3 tests for adversarial risk-control tasks."""
+"""Tests for adversarial risk-control tasks."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Result writers for Stage 2 evaluation runs."""
+"""Result writers for evaluation runs."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from mimirbench.artefacts import artefact_path, stable_json
 from mimirbench.evals.schemas import (
     EvalRunConfig,
     EvalTaskRecord,
@@ -33,9 +34,9 @@ __all__ = [
 def write_results_jsonl(records: list[EvalTaskRecord], path: Path) -> None:
     """Write per-task records to JSONL."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         for record in records:
-            handle.write(_stable_json(record.model_dump(mode="json")) + "\n")
+            handle.write(stable_json(record.model_dump(mode="json")) + "\n")
 
 
 def load_records_jsonl(path: Path) -> list[EvalTaskRecord]:
@@ -79,7 +80,7 @@ def build_summary(
             "config": _redact_agent_config(config.agent.model_dump(mode="json")),
             "warning": warning,
         },
-        "output_dir": str(output_dir),
+        "output_dir": artefact_path(output_dir),
         "environments": [
             {
                 "name": env.name,
@@ -98,7 +99,7 @@ def build_summary(
 def write_summary_json(summary: dict[str, Any], path: Path) -> None:
     """Write ``summary.json``."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(_stable_json(summary, indent=2) + "\n", encoding="utf-8")
+    path.write_text(stable_json(summary, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def write_markdown_report(
@@ -232,7 +233,7 @@ def write_markdown_report(
     if records:
         cache_hits = sum(1 for record in records if record.metadata.get("cache_hit"))
         lines.append(f"- Cache hits: `{cache_hits}`.")
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 # --------------------------------------------------------------------------- #
@@ -241,9 +242,9 @@ def write_markdown_report(
 def write_robustness_results_jsonl(records: list[RobustnessRecord], path: Path) -> None:
     """Write per-variant robustness records to JSONL."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         for record in records:
-            handle.write(_stable_json(record.model_dump(mode="json")) + "\n")
+            handle.write(stable_json(record.model_dump(mode="json")) + "\n")
 
 
 def load_robustness_records_jsonl(path: Path) -> list[RobustnessRecord]:
@@ -346,7 +347,7 @@ def build_robustness_summary(
             "warning": _agent_warning(agent_type),
         },
         "baseline_kind": robustness_baseline_kind(agent_type),
-        "output_dir": str(output_dir),
+        "output_dir": artefact_path(output_dir),
         "environments": environments,
         "counts": {
             "n_base_tasks": n_base_tasks,
@@ -361,7 +362,7 @@ def build_robustness_summary(
 def write_robustness_summary_json(summary: dict[str, Any], path: Path) -> None:
     """Write ``robustness_summary.json``."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(_stable_json(summary, indent=2) + "\n", encoding="utf-8")
+    path.write_text(stable_json(summary, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def write_robustness_report(
@@ -431,15 +432,15 @@ def write_robustness_report(
             "- `failure_cases.jsonl` / `failure_cases.md`: ranked diagnostic failures.",
         ]
     )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 def write_failure_cases_jsonl(cases: list[dict[str, Any]], path: Path) -> None:
     """Write extracted failure cases to JSONL."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
         for case in cases:
-            handle.write(_stable_json(case) + "\n")
+            handle.write(stable_json(case) + "\n")
 
 
 def write_failure_cases_markdown(
@@ -459,7 +460,7 @@ def write_failure_cases_markdown(
     ]
     if not cases:
         lines.append("No failure cases were extracted for this run.")
-        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
         return
 
     for i, case in enumerate(cases, start=1):
@@ -467,7 +468,7 @@ def write_failure_cases_markdown(
         variant = case["variant_grader_result"]
         lines.extend(
             [
-                f"## {i}. {case['diagnostic_label']} — `{case['environment']}`",
+                f"## {i}. {case['diagnostic_label']}: `{case['environment']}`",
                 "",
                 f"- Variant: `{case['variant_id']}` (`{case['variant_type']}`, "
                 f"answer_preserving={case['answer_preserving']})",
@@ -488,7 +489,7 @@ def write_failure_cases_markdown(
                 "",
             ]
         )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 def _metric_lines(metrics: dict[str, Any]) -> list[str]:
@@ -588,13 +589,3 @@ def _fmt_count(value: int | None) -> str:
 
 def _fmt_float(value: float) -> str:
     return f"{value:.6g}"
-
-
-def _stable_json(data: Any, *, indent: int | None = None) -> str:
-    return json.dumps(
-        data,
-        sort_keys=True,
-        separators=(",", ":") if indent is None else None,
-        indent=indent,
-        ensure_ascii=False,
-    )

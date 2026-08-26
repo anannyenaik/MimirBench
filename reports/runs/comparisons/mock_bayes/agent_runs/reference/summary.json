@@ -111,7 +111,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\reference",
+  "output_dir": "reports/runs/comparisons/mock_bayes/agent_runs/reference",
   "run_id": "mock_bayes_reference-20260602T060943",
   "run_name": "mock_bayes_reference",
   "timestamp": "2026-06-02T06:09:43Z"

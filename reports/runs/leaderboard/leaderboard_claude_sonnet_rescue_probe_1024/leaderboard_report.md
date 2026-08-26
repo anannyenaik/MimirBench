@@ -40,6 +40,6 @@ No headline candidates: available metrics did not meet the evidence threshold.
 
 ## Artefacts
 
-- `leaderboard_summary.json`: `reports\runs\leaderboard\leaderboard_claude_sonnet_rescue_probe_1024\leaderboard_summary.json`
-- `paired_deltas.jsonl`: `reports\runs\leaderboard\leaderboard_claude_sonnet_rescue_probe_1024\paired_deltas.jsonl`
-- `headline_candidates.md`: `reports\runs\leaderboard\leaderboard_claude_sonnet_rescue_probe_1024\headline_candidates.md`
+- `leaderboard_summary.json`: `reports/runs/leaderboard/leaderboard_claude_sonnet_rescue_probe_1024/leaderboard_summary.json`
+- `paired_deltas.jsonl`: `reports/runs/leaderboard/leaderboard_claude_sonnet_rescue_probe_1024/paired_deltas.jsonl`
+- `headline_candidates.md`: `reports/runs/leaderboard/leaderboard_claude_sonnet_rescue_probe_1024/headline_candidates.md`

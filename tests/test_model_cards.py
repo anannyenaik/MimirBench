@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from mimirbench.evals.schemas import (
     AgentConfig,
     EnvironmentFamily,
@@ -16,7 +18,7 @@ from mimirbench.evals.writers import build_summary, write_results_jsonl, write_s
 from mimirbench.reports.model_cards import generate_model_card
 
 
-def test_model_card_generated_only_from_actual_run_artefacts(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_model_card_generated_only_from_actual_run_artefacts(tmp_path: Path) -> None:
     missing = tmp_path / "missing"
     missing.mkdir()
     assert generate_model_card(missing, output_dir=tmp_path / "cards") is None

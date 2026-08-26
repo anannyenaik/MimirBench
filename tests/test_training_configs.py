@@ -1,4 +1,4 @@
-"""Validation checks for Stage 7 training/eval configs."""
+"""Validation checks for the training and eval configs."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from mimirbench.training.evaluate_small_transformer import load_eval_config
 from mimirbench.training.train_small_transformer import load_config
 
 
-def test_stage7_training_configs_validate() -> None:
+def test_training_configs_validate() -> None:
     for path in (
         Path("configs/train_small_transformer_bayes_tiny.yaml"),
         Path("configs/train_small_transformer_bayes_small.yaml"),
@@ -21,7 +21,7 @@ def test_stage7_training_configs_validate() -> None:
         assert config.run.output_dir.startswith("reports/training/")
 
 
-def test_stage7_eval_config_validates() -> None:
+def test_eval_config_validates() -> None:
     config = load_eval_config(Path("configs/eval_small_transformer_bayes.yaml"))
     assert config.run.output_dir == "reports/runs/small_transformer_bayes_eval"
     assert config.data.num_tasks > 0

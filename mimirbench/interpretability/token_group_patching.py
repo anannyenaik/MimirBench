@@ -1,6 +1,6 @@
 """Position-resolved (token-group) activation patching and negative controls.
 
-The Stage 8 :func:`run_activation_patching` patches a whole site at once, so it
+The whole-site :func:`run_activation_patching` patches a whole site at once, so it
 cannot say *which token positions* carry the causal signal. This module patches
 only the positions belonging to a semantic token group (prior / evidence /
 payoff-risk) of a site, which directly addresses the documented "patching is

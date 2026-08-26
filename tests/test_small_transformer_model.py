@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from mimirbench.training.small_transformer import (
@@ -11,7 +13,7 @@ from mimirbench.training.small_transformer import (
 from mimirbench.training.synthetic_traces import label_vocab_for_config
 
 
-def test_small_transformer_forward_and_checkpoint_roundtrip(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_small_transformer_forward_and_checkpoint_roundtrip(tmp_path: Path) -> None:
     torch = pytest.importorskip("torch")
     label_vocab = label_vocab_for_config()
     model = SmallTransformerForTracePrediction(

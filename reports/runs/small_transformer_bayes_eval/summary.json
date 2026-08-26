@@ -1,5 +1,5 @@
 {
-  "checkpoint_path": "reports\\training\\small_transformer_bayes_tiny\\checkpoints\\best.pt",
+  "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
   "config": {
     "checkpoint_path": "reports/training/small_transformer_bayes_tiny/checkpoints/best.pt",
     "data": {
@@ -39,16 +39,16 @@
     "regret_mean": 0.26037435970090295,
     "risk_flag_accuracy": 0.5546875
   },
-  "output_dir": "reports\\runs\\small_transformer_bayes_eval",
+  "output_dir": "reports/runs/small_transformer_bayes_eval",
   "paths": {
     "figures": [
-      "reports\\runs\\small_transformer_bayes_eval\\figures\\posterior_abs_error.png",
-      "reports\\runs\\small_transformer_bayes_eval\\figures\\regret.png"
+      "reports/runs/small_transformer_bayes_eval/figures/posterior_abs_error.png",
+      "reports/runs/small_transformer_bayes_eval/figures/regret.png"
     ],
-    "model_card": "reports\\model_cards\\small_transformer_bayes_tiny.md",
-    "report": "reports\\runs\\small_transformer_bayes_eval\\report.md",
-    "results": "reports\\runs\\small_transformer_bayes_eval\\results.jsonl",
-    "summary": "reports\\runs\\small_transformer_bayes_eval\\summary.json"
+    "model_card": "reports/model_cards/small_transformer_bayes_tiny.md",
+    "report": "reports/runs/small_transformer_bayes_eval/report.md",
+    "results": "reports/runs/small_transformer_bayes_eval/results.jsonl",
+    "summary": "reports/runs/small_transformer_bayes_eval/summary.json"
   },
   "run_name": "small_transformer_bayes_eval",
   "timestamp": "2026-06-02T07:25:58+00:00"

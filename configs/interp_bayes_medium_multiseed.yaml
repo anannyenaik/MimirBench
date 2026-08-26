@@ -2,11 +2,11 @@
 #
 # Local-only, CPU, deterministic, no downloads and NO API calls. Counters the
 # "interpretability is single-seed" criticism by retraining the medium checkpoint
-# under several seeds and re-running the SAME Stage 8 + extended pipeline on each.
+# under several seeds and re-running the SAME whole-site + extended pipeline on each.
 #
 # Each seed independently resamples the training data, the weight initialisation,
 # and the interpretability probe/patch set, so the seeds are genuinely independent
-# draws — not the same data re-analysed.
+# draws, not the same data re-analysed.
 #
 # Run:
 #   mimirbench run-multiseed-interpretability configs/interp_bayes_medium_multiseed.yaml

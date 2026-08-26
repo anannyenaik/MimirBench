@@ -135,7 +135,7 @@ class EvalConfig(BaseModel):
 
     Legacy single-environment configuration. These objects are still accepted by
     :func:`mimirbench.evals.runner.run_eval` for backwards compatibility; new
-    Stage 2 YAML files use :class:`EvalRunConfig` below.
+    Config-driven YAML files use :class:`EvalRunConfig` below.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -172,7 +172,7 @@ class EvalReport(BaseModel):
 
 
 class AgentConfig(BaseModel):
-    """Agent factory configuration for Stage 2 runs.
+    """Agent factory configuration for config-driven runs.
 
     Optional model-backend fields live here, but optional packages are imported
     only by the concrete agent when it is actually used.
@@ -229,7 +229,7 @@ class RunSettings(BaseModel):
 
 
 class EnvironmentRunConfig(BaseModel):
-    """One environment entry inside a Stage 2 run config."""
+    """One environment entry inside a run config."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -250,7 +250,7 @@ class ReportingConfig(BaseModel):
 
 
 class EvalRunConfig(BaseModel):
-    """Stage 2 multi-environment evaluation configuration."""
+    """Multi-environment evaluation configuration."""
 
     model_config = ConfigDict(extra="forbid")
 

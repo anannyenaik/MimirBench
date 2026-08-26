@@ -270,7 +270,7 @@
     "worst_score_drop": 0.3689969035578311
   },
   "n_failure_cases": 16,
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_gemini_pro_robustness_small",
+  "output_dir": "reports/runs/leaderboard/leaderboard_gemini_pro_robustness_small",
   "run_id": "leaderboard_gemini_pro_robustness_small-20260603T194453",
   "run_name": "leaderboard_gemini_pro_robustness_small",
   "timestamp": "2026-06-03T19:44:53Z"

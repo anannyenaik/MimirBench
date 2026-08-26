@@ -1,5 +1,5 @@
 # Legacy single-environment config for the market-making environment.
-# Prefer configs/eval_reference_market_making.yaml for Stage 3 runs.
+# Prefer configs/eval_reference_market_making.yaml for reference runs.
 environment: market_making
 n_tasks: 30
 seed: 0

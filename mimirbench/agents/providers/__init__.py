@@ -49,7 +49,7 @@ def provider_status(
 
     This is the single place the leaderboard and the ``check-provider`` CLI use to
     decide whether a real run can proceed. It never reads, prints, or returns an
-    API key value — only whether one was found. Unknown providers return an
+    API key value, only whether one was found. Unknown providers return an
     unusable status rather than raising, so a config with one bad provider still
     reports cleanly for the others.
     """

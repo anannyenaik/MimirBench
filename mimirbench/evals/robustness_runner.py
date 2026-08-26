@@ -14,7 +14,6 @@ changes here.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +22,7 @@ import yaml
 from mimirbench.agents.base import BaseAgent
 from mimirbench.agents.resolver import resolve_agent
 from mimirbench.analysis.robustness import PRESSURE_VARIANT_TYPES, compute_robustness_metrics
+from mimirbench.artefacts import make_run_id, utc_timestamp
 from mimirbench.evals import registry
 from mimirbench.evals.cache import ResponseCache, make_cache_key
 from mimirbench.evals.registry import EnvironmentSpec
@@ -94,8 +94,8 @@ def run_robustness_config(config: RobustnessRunConfig) -> dict[str, Any]:
     output_dir = _output_dir(config)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    timestamp = _utc_timestamp()
-    run_id = _make_run_id(config.run.name, timestamp)
+    timestamp = utc_timestamp()
+    run_id = make_run_id(config.run.name, timestamp)
     cache = ResponseCache(
         _cache_path(config, output_dir),
         enabled=config.run.cache,
@@ -502,13 +502,3 @@ def _cache_path(config: RobustnessRunConfig, output_dir: Path) -> Path:
     if config.run.cache_path:
         return Path(config.run.cache_path)
     return output_dir / "responses_cache.jsonl"
-
-
-def _utc_timestamp() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def _make_run_id(run_name: str, timestamp: str) -> str:
-    safe_timestamp = timestamp.replace(":", "").replace("-", "").replace("Z", "")
-    safe_name = "".join(c if c.isalnum() or c in {"-", "_"} else "_" for c in run_name)
-    return f"{safe_name}-{safe_timestamp}"

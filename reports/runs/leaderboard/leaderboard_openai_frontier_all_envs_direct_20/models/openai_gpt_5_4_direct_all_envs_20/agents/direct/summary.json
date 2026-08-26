@@ -284,7 +284,7 @@
       "violation_rate": 0.058333333333333334
     }
   },
-  "output_dir": "reports\\runs\\leaderboard\\leaderboard_openai_frontier_all_envs_direct_20\\models\\openai_gpt_5_4_direct_all_envs_20\\agents\\direct",
+  "output_dir": "reports/runs/leaderboard/leaderboard_openai_frontier_all_envs_direct_20/models/openai_gpt_5_4_direct_all_envs_20/agents/direct",
   "run_id": "leaderboard_openai_frontier_all_envs_direct_20__openai_gpt_5_4_direct_all_envs_20__direct-20260602T235149",
   "run_name": "leaderboard_openai_frontier_all_envs_direct_20__openai_gpt_5_4_direct_all_envs_20__direct",
   "timestamp": "2026-06-02T23:51:49Z"

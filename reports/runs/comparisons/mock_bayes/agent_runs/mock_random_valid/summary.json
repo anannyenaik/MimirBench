@@ -152,7 +152,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\comparisons\\mock_bayes\\agent_runs\\mock_random_valid",
+  "output_dir": "reports/runs/comparisons/mock_bayes/agent_runs/mock_random_valid",
   "run_id": "mock_bayes_mock_random_valid-20260602T060945",
   "run_name": "mock_bayes_mock_random_valid",
   "timestamp": "2026-06-02T06:09:45Z"

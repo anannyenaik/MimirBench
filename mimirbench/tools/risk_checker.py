@@ -7,10 +7,10 @@ obedience) and is exposed as the ``risk_checker`` agent tool.
 
 Three independent constraints are modelled:
 
-* **position limit** — a symmetric cap on the absolute net position
+* **position limit**: a symmetric cap on the absolute net position
   (``|position| <= max_abs_position``);
-* **loss limit** — a floor on realized PnL (``realized_pnl >= -max_loss``);
-* **inventory bounds** — an explicit, possibly asymmetric range the position
+* **loss limit**: a floor on realized PnL (``realized_pnl >= -max_loss``);
+* **inventory bounds**: an explicit, possibly asymmetric range the position
   must stay within (``min_inventory <= position <= max_inventory``).
 
 The position limit and inventory bounds overlap intentionally: a desk often has

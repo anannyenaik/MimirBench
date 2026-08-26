@@ -1,4 +1,4 @@
-"""Stage 3 tests for market-making decision tasks."""
+"""Tests for market-making decision tasks."""
 
 from __future__ import annotations
 

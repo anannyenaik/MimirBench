@@ -1,4 +1,4 @@
-# Stage 8 interpretability: attention analysis only.
+# Interpretability: attention analysis only.
 # Reports per-layer/head attention entropy and the attention mass placed on the
 # prior / likelihood / evidence / payoff-risk token groups.
 run:

@@ -1,4 +1,4 @@
-"""Shared fixtures for the Stage 8 interpretability tests."""
+"""Shared fixtures for the interpretability tests."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import pytest
 def tiny_interp_checkpoint(tmp_path: Path) -> dict[str, Any]:
     """Build and save a tiny (untrained) small-transformer checkpoint + vocab.
 
-    Skips when torch is unavailable. The model has random weights — these tests
+    Skips when torch is unavailable. The model has random weights, so these tests
     exercise the interpretability *infrastructure*, not model quality.
     """
     pytest.importorskip("torch")

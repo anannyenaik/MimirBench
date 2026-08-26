@@ -45,6 +45,6 @@ No headline candidates: available metrics did not meet the evidence threshold.
 
 ## Artefacts
 
-- `leaderboard_summary.json`: `reports\runs\leaderboard\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\leaderboard_summary.json`
-- `paired_deltas.jsonl`: `reports\runs\leaderboard\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\paired_deltas.jsonl`
-- `headline_candidates.md`: `reports\runs\leaderboard\leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25\headline_candidates.md`
+- `leaderboard_summary.json`: `reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/leaderboard_summary.json`
+- `paired_deltas.jsonl`: `reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/paired_deltas.jsonl`
+- `headline_candidates.md`: `reports/runs/leaderboard/leaderboard_openai_gpt54mini_bayes_pred_direct_tool_25/headline_candidates.md`

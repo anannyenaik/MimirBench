@@ -79,7 +79,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\bayes_reference_smoke",
+  "output_dir": "reports/runs/bayes_reference_smoke",
   "run_id": "bayes_reference_smoke-20260602T010928",
   "run_name": "bayes_reference_smoke",
   "timestamp": "2026-06-02T01:09:28Z"

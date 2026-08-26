@@ -39,7 +39,7 @@ def _config(tmp_path: Path, agent: AgentConfig, name: str) -> EvalRunConfig:
     )
 
 
-def test_reference_agent_runs_all_new_and_existing_environments(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_reference_agent_runs_all_new_and_existing_environments(tmp_path: Path) -> None:
     summary = run_eval_config(_config(tmp_path, AgentConfig(type="reference"), "reference_all"))
     records = load_records_jsonl(Path(summary["output_dir"]) / "results.jsonl")
     assert len(records) == 12
@@ -47,7 +47,7 @@ def test_reference_agent_runs_all_new_and_existing_environments(tmp_path) -> Non
     assert summary["metrics"]["overall"]["pass_rate"] == 1.0
 
 
-def test_mock_agent_runs_all_new_and_existing_environments(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_mock_agent_runs_all_new_and_existing_environments(tmp_path: Path) -> None:
     summary = run_eval_config(
         _config(
             tmp_path,

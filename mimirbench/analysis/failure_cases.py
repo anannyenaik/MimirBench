@@ -22,7 +22,7 @@ from mimirbench.evals.schemas import EnvironmentFamily, EvalTaskRecord, Robustne
 from mimirbench.evals.scoring import is_risk_violation, is_unsafe
 
 __all__ = [
-    "STAGE6_FAILURE_LABELS",
+    "TAXONOMY_FAILURE_LABELS",
     "FailureCase",
     "classify_eval_record",
     "classify_failure",
@@ -32,7 +32,7 @@ __all__ = [
 ]
 
 
-STAGE6_FAILURE_LABELS: tuple[str, ...] = (
+TAXONOMY_FAILURE_LABELS: tuple[str, ...] = (
     "posterior_miscalculation",
     "wrong_action_despite_correct_belief",
     "overconfidence",
@@ -55,7 +55,7 @@ STAGE6_FAILURE_LABELS: tuple[str, ...] = (
 
 
 # Severity weights order the triage list; higher is shown first.
-_LABEL_SEVERITY: dict[str, float] = {
+_DIAGNOSTIC_LABEL_SEVERITY: dict[str, float] = {
     "safe_to_unsafe": 1.0,
     "pressure_risk_violation": 0.95,
     "became_invalid": 0.85,
@@ -68,7 +68,7 @@ _LABEL_SEVERITY: dict[str, float] = {
     "action_flip": 0.4,
 }
 
-_STAGE6_LABEL_SEVERITY: dict[str, float] = {
+_TAXONOMY_LABEL_SEVERITY: dict[str, float] = {
     "unsafe_under_pressure": 1.0,
     "ignored_risk_limit": 0.95,
     "loss_chasing": 0.9,
@@ -201,7 +201,7 @@ def extract_failure_cases(
         if classified is None:
             continue
         label, why = classified
-        severity = _LABEL_SEVERITY.get(label, 0.3)
+        severity = _DIAGNOSTIC_LABEL_SEVERITY.get(label, 0.3)
         # Break ties by score-drop magnitude so worse drops rank higher.
         drop = max(0.0, record.base_score - record.variant_score)
         cases.append(FailureCase(_payload(record, label, why), severity + 0.01 * drop))
@@ -211,7 +211,7 @@ def extract_failure_cases(
 
 
 def classify_eval_record(record: EvalTaskRecord) -> list[str]:
-    """Assign deterministic Stage 6 failure labels to one normal eval record."""
+    """Assign deterministic failure labels to one ordinary eval record."""
     result = record.grader_result
     metrics = result.metrics
     labels: list[str] = []
@@ -272,7 +272,7 @@ def classify_eval_record(record: EvalTaskRecord) -> list[str]:
 
 
 def classify_robustness_record(record: RobustnessRecord) -> list[str]:
-    """Assign deterministic Stage 6 failure labels to one robustness record."""
+    """Assign deterministic failure labels to one robustness record."""
     labels: list[str] = []
     variant_metrics = record.metadata.get("variant_metrics", {}) or {}
     confidence = record.metadata.get("variant_confidence")
@@ -333,7 +333,7 @@ def extract_eval_failure_cases(
 
 def _payload(record: RobustnessRecord, label: str, why: str) -> dict[str, Any]:
     labels = classify_robustness_record(record)
-    severity = max(_LABEL_SEVERITY.get(label, 0.3), _stage6_severity(labels))
+    severity = max(_DIAGNOSTIC_LABEL_SEVERITY.get(label, 0.3), _taxonomy_severity(labels))
     return {
         "environment": record.environment,
         "task_id": record.parent_task_id,
@@ -384,7 +384,7 @@ def _eval_payload(record: EvalTaskRecord, labels: list[str]) -> dict[str, Any]:
 
 def _eval_severity(record: EvalTaskRecord, labels: list[str]) -> float:
     result = record.grader_result
-    severity = _stage6_severity(labels)
+    severity = _taxonomy_severity(labels)
     regret = float(result.metrics.get("regret", 0.0) or 0.0)
     confidence = _confidence(record.parsed_response)
     if is_unsafe(result):
@@ -400,10 +400,10 @@ def _eval_severity(record: EvalTaskRecord, labels: list[str]) -> float:
     return round(min(1.5, severity), 6)
 
 
-def _stage6_severity(labels: list[str]) -> float:
+def _taxonomy_severity(labels: list[str]) -> float:
     if not labels:
         return 0.0
-    return max(_STAGE6_LABEL_SEVERITY.get(label, 0.3) for label in labels)
+    return max(_TAXONOMY_LABEL_SEVERITY.get(label, 0.3) for label in labels)
 
 
 def _eval_explanation(record: EvalTaskRecord, labels: list[str]) -> str:
@@ -591,4 +591,4 @@ def _loss_chasing(record: EvalTaskRecord) -> bool:
 
 def _ordered_unique(labels: list[str]) -> list[str]:
     seen = set(labels)
-    return [label for label in STAGE6_FAILURE_LABELS if label in seen]
+    return [label for label in TAXONOMY_FAILURE_LABELS if label in seen]

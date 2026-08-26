@@ -24,7 +24,7 @@ robustness variants. The task set is 20 tasks each for `bayesian_games`,
 confirmed against the live Anthropic model list (`claude-sonnet-4-6` =
 "Claude Sonnet 4.6"; `claude-haiku-4-5-20251001` = "Claude Haiku 4.5").
 
-## Output-budget (max_tokens) protocol note — read before comparing
+## Output-budget (max_tokens) protocol note: read before comparing
 
 This is the most important caveat. The rows are **not** at an identical output
 budget:

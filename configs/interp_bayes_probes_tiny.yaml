@@ -1,4 +1,4 @@
-# Stage 8 interpretability: linear probes only.
+# Interpretability: linear probes only.
 # Fits ridge-classifier probes for posterior / action / risk / confidence from
 # captured activations and reports accuracy vs the majority-class baseline.
 run:

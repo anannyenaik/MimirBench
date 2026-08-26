@@ -3,7 +3,7 @@
 A minimal, dependency-free fallback for self-hosted or third-party endpoints that
 speak the OpenAI Chat Completions JSON shape but for which the ``openai`` SDK is
 unavailable or undesirable. It uses only the Python standard library
-(``urllib``) and is intentionally small — it is a scaffold, not a full SDK.
+(``urllib``) and is intentionally small: it is a scaffold, not a full SDK.
 
 The endpoint URL and key environment variable are configurable. The key is read
 from the environment and never logged. A clear :class:`ModelClientError` is

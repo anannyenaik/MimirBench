@@ -85,7 +85,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\prediction_markets_reference_smoke",
+  "output_dir": "reports/runs/prediction_markets_reference_smoke",
   "run_id": "prediction_markets_reference_smoke-20260602T014211",
   "run_name": "prediction_markets_reference_smoke",
   "timestamp": "2026-06-02T01:42:11Z"

@@ -17,6 +17,7 @@ from mimirbench.agents.model_client import (
 )
 from mimirbench.agents.parsing import extract_json
 from mimirbench.evals.registry import get
+from mimirbench.evals.schemas import TaskInstance
 
 
 class FakeClient(ModelClient):
@@ -47,7 +48,7 @@ class FakeClient(ModelClient):
         return ProviderStatus("fake", True, False, False, None, True, "fake client")
 
 
-def _bayes_task():  # type: ignore[no-untyped-def]
+def _bayes_task() -> TaskInstance:
     return get("bayesian_games").generator(1)
 
 

@@ -1,8 +1,8 @@
-"""Paired comparison runner for Stage 6 benchmark analyses.
+"""Paired comparison runner for benchmark analyses.
 
 The comparison runner evaluates multiple agents on the same environment list
 and seeds, then aligns records by ``(environment, task_id)``. Each agent run is
-a normal Stage 2 run, so downstream tooling can inspect ``results.jsonl``,
+an ordinary evaluation run, so downstream tooling can inspect ``results.jsonl``,
 ``summary.json``, and ``report.md`` without learning a new schema.
 """
 
@@ -11,7 +11,6 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Iterable
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 import mimirbench.evals.registry as registry
 from mimirbench.agents.resolver import resolve_agent as resolve_agent_from_config
+from mimirbench.artefacts import artefact_path, make_run_id, utc_timestamp, write_json, write_jsonl
 from mimirbench.evals.runner import run_eval_config
 from mimirbench.evals.schemas import (
     AgentConfig,
@@ -55,7 +55,7 @@ class ComparisonConfig(BaseModel):
 
 
 def load_comparison_config(path: Path) -> ComparisonConfig:
-    """Load a Stage 6 comparison config from YAML."""
+    """Load a comparison config from YAML."""
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
         raise ValueError(f"comparison config {path} must contain a YAML mapping.")
@@ -91,8 +91,8 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     agent_root.mkdir(parents=True, exist_ok=True)
 
-    timestamp = _utc_timestamp()
-    comparison_run_id = _make_run_id(config.run.name, timestamp)
+    timestamp = utc_timestamp()
+    comparison_run_id = make_run_id(config.run.name, timestamp)
     agent_keys = _agent_keys(config.agents)
     baseline_key = _baseline_key(config, agent_keys)
 
@@ -105,7 +105,7 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
             run=config.run.model_copy(
                 update={
                     "name": f"{config.run.name}_{agent_key}",
-                    "output_dir": str(run_dir),
+                    "output_dir": artefact_path(run_dir),
                     "cache_path": None,
                 }
             ),
@@ -132,10 +132,10 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
             "run_id": summary["run_id"],
             "run_name": summary["run_name"],
             "agent": summary["agent"],
-            "output_dir": str(run_dir),
-            "results_path": str(run_dir / "results.jsonl"),
-            "summary_path": str(run_dir / "summary.json"),
-            "report_path": str(run_dir / "report.md"),
+            "output_dir": artefact_path(run_dir),
+            "results_path": artefact_path(run_dir / "results.jsonl"),
+            "summary_path": artefact_path(run_dir / "summary.json"),
+            "report_path": artefact_path(run_dir / "report.md"),
             "metrics": summary["metrics"],
             "cost_latency": summary.get("cost_latency", {}),
         }
@@ -143,7 +143,7 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
     _assert_aligned(records_by_agent, baseline_key=baseline_key)
     paired_rows = _paired_rows(records_by_agent, baseline_key=baseline_key)
     paired_path = output_dir / "paired_results.jsonl"
-    _write_jsonl(paired_rows, paired_path)
+    write_jsonl(paired_rows, paired_path)
 
     paired_metrics = _aggregate_paired_metrics(paired_rows)
     figures = _try_generate_figures(output_dir)
@@ -151,7 +151,7 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
         "comparison_name": config.run.name,
         "run_id": comparison_run_id,
         "timestamp": timestamp,
-        "output_dir": str(output_dir),
+        "output_dir": artefact_path(output_dir),
         "baseline_agent_key": baseline_key,
         "baseline_kind": agent_payloads[baseline_key]["baseline_kind"],
         "agents": [agent_payloads[key] for key in agent_keys],
@@ -165,15 +165,15 @@ def run_comparison_config(config: ComparisonConfig) -> dict[str, Any]:
         ],
         "paired_metrics": paired_metrics,
         "artefacts": {
-            "paired_results": str(paired_path),
-            "comparison_summary": str(output_dir / "comparison_summary.json"),
-            "comparison_report": str(output_dir / "comparison_report.md"),
-            "agent_runs": str(agent_root),
-            "figures": [str(path) for path in figures],
+            "paired_results": artefact_path(paired_path),
+            "comparison_summary": artefact_path(output_dir / "comparison_summary.json"),
+            "comparison_report": artefact_path(output_dir / "comparison_report.md"),
+            "agent_runs": artefact_path(agent_root),
+            "figures": [artefact_path(path) for path in figures],
         },
         "caveats": _comparison_caveats(agent_payloads.values()),
     }
-    _write_json(summary_payload, output_dir / "comparison_summary.json")
+    write_json(summary_payload, output_dir / "comparison_summary.json")
     _write_comparison_report(summary_payload, output_dir / "comparison_report.md")
     return summary_payload
 
@@ -187,7 +187,7 @@ def summarise_comparison(run_dir: Path) -> dict[str, Any]:
 
 
 def agent_baseline_kind(agent: AgentConfig) -> str:
-    """Return the required Stage 6 result label for an agent config."""
+    """Return the required result label for an agent config."""
     agent_type = agent.type.lower().strip()
     if agent_type == "reference":
         return "reference sanity check"
@@ -476,39 +476,7 @@ def _write_comparison_report(summary: dict[str, Any], path: Path) -> None:
             f"- Machine-readable summary: `{summary['artefacts']['comparison_summary']}`",
         ]
     )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def _write_json(data: dict[str, Any], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(_stable_json(data, indent=2) + "\n", encoding="utf-8")
-
-
-def _write_jsonl(rows: list[dict[str, Any]], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        for row in rows:
-            handle.write(_stable_json(row) + "\n")
-
-
-def _stable_json(data: Any, *, indent: int | None = None) -> str:
-    return json.dumps(
-        data,
-        sort_keys=True,
-        separators=(",", ":") if indent is None else None,
-        indent=indent,
-        ensure_ascii=False,
-    )
-
-
-def _utc_timestamp() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
-
-
-def _make_run_id(run_name: str, timestamp: str) -> str:
-    safe_timestamp = timestamp.replace(":", "").replace("-", "").replace("Z", "")
-    safe_name = "".join(char if char.isalnum() or char in {"-", "_"} else "_" for char in run_name)
-    return f"{safe_name}-{safe_timestamp}"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
 
 def _fmt(value: Any) -> str:

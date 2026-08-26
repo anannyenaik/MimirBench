@@ -404,7 +404,7 @@ def build_statistical_validity_markdown(
         "`results.jsonl` files only. **No model is run to produce this file.** Every "
         "interval is a percentile bootstrap "
         f"(n_resamples={_N_RESAMPLES}, 95%, seed={seed}) over the saved synthetic "
-        "sample — a pilot CI quantifying sampling noise on *this* sample, not a "
+        "sample: a pilot CI quantifying sampling noise on *this* sample, not a "
         "population-level benchmark claim.",
         "",
         "Tracks follow [BENCHMARK_PROTOCOL.md](../../../BENCHMARK_PROTOCOL.md): "
@@ -477,7 +477,7 @@ def build_statistical_validity_markdown(
     if missing:
         lines.extend(["", "## Missing artefacts (not summarised)", ""])
         for row in missing:
-            lines.append(f"- `{row.display}` — expected `{_results_path(base, row)}` (not found).")
+            lines.append(f"- `{row.display}`: expected `{_results_path(base, row)}` (not found).")
 
     lines.extend(
         [
@@ -525,6 +525,6 @@ def write_statistical_validity_report(
     )
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(
-        build_statistical_validity_markdown(base, rows=rows, seed=seed), encoding="utf-8"
+        build_statistical_validity_markdown(base, rows=rows, seed=seed), encoding="utf-8", newline="\n"
     )
     return out

@@ -1,6 +1,6 @@
 # Plan for the "where is the belief?" interpretability experiment.
 #
-# Descriptive config for a planned study (no loader yet — see INTERPRETABILITY.md
+# Descriptive config for a planned study (no loader yet; see INTERPRETABILITY.md
 # and mimirbench.interpretability.circuit_experiments). Documents the intended
 # model, targets, and methods so the experiment is reproducible when wired.
 checkpoint: artifacts/small_transformer/regime_lm.pt

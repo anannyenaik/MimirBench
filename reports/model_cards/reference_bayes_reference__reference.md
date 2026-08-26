@@ -9,7 +9,7 @@
 - Run ID: `reference_bayes_reference-20260602T060923`
 - Run name: `reference_bayes_reference`
 - Date/time: `2026-06-02T06:09:23Z`
-- Run directory: `reports\runs\comparisons\reference_bayes\agent_runs\reference`
+- Run directory: `reports/runs/comparisons/reference_bayes/agent_runs/reference`
 
 ## Evaluation
 

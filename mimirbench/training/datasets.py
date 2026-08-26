@@ -2,11 +2,11 @@
 
 A canonical, sticky 2-regime / 3-signal hidden Markov model produces observation
 sequences. A model trained to predict the next symbol must implicitly track a
-*belief* over the hidden regime — exactly the capability the interpretability
+*belief* over the hidden regime, exactly the capability the interpretability
 experiments probe for. :func:`bayes_optimal_nll` gives the irreducible (Bayes
 optimal) next-token loss, the natural yardstick for a trained model.
 
-Stage 7 adds deterministic Bayesian strategic traces. Those traces are
+The training pipeline adds deterministic Bayesian strategic traces. Those traces are
 supervised records for posterior/action/risk heads and intentionally contain no
 hidden chain-of-thought.
 """

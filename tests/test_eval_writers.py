@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from mimirbench.evals.schemas import (
     AgentConfig,
@@ -23,7 +24,7 @@ from mimirbench.evals.writers import (
 )
 
 
-def test_writers_emit_expected_files(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_writers_emit_expected_files(tmp_path: Path) -> None:
     record = EvalTaskRecord(
         run_id="run-1",
         timestamp="2026-06-02T00:00:00Z",

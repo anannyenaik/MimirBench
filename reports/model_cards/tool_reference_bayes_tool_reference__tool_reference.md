@@ -9,7 +9,7 @@
 - Run ID: `tool_reference_bayes_tool_reference-20260602T061002`
 - Run name: `tool_reference_bayes_tool_reference`
 - Date/time: `2026-06-02T06:10:02Z`
-- Run directory: `reports\runs\comparisons\tool_reference_bayes\agent_runs\tool_reference`
+- Run directory: `reports/runs/comparisons/tool_reference_bayes/agent_runs/tool_reference`
 
 ## Evaluation
 

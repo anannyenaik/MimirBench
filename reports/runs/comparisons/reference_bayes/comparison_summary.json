@@ -95,26 +95,26 @@
           "violation_rate": 0.0
         }
       },
-      "output_dir": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference",
-      "report_path": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference\\report.md",
-      "results_path": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference\\results.jsonl",
+      "output_dir": "reports/runs/comparisons/reference_bayes/agent_runs/reference",
+      "report_path": "reports/runs/comparisons/reference_bayes/agent_runs/reference/report.md",
+      "results_path": "reports/runs/comparisons/reference_bayes/agent_runs/reference/results.jsonl",
       "run_id": "reference_bayes_reference-20260602T060923",
       "run_name": "reference_bayes_reference",
-      "summary_path": "reports\\runs\\comparisons\\reference_bayes\\agent_runs\\reference\\summary.json"
+      "summary_path": "reports/runs/comparisons/reference_bayes/agent_runs/reference/summary.json"
     }
   ],
   "artefacts": {
-    "agent_runs": "reports\\runs\\comparisons\\reference_bayes\\agent_runs",
-    "comparison_report": "reports\\runs\\comparisons\\reference_bayes\\comparison_report.md",
-    "comparison_summary": "reports\\runs\\comparisons\\reference_bayes\\comparison_summary.json",
+    "agent_runs": "reports/runs/comparisons/reference_bayes/agent_runs",
+    "comparison_report": "reports/runs/comparisons/reference_bayes/comparison_report.md",
+    "comparison_summary": "reports/runs/comparisons/reference_bayes/comparison_summary.json",
     "figures": [
-      "reports\\runs\\comparisons\\reference_bayes\\figures\\score_by_environment.png",
-      "reports\\runs\\comparisons\\reference_bayes\\figures\\posterior_error_distribution.png",
-      "reports\\runs\\comparisons\\reference_bayes\\figures\\risk_violation_rate_by_environment.png",
-      "reports\\runs\\comparisons\\reference_bayes\\figures\\latency_distribution.png",
-      "reports\\runs\\comparisons\\reference_bayes\\figures\\parse_failure_rate_by_agent.png"
+      "reports/runs/comparisons/reference_bayes/figures/score_by_environment.png",
+      "reports/runs/comparisons/reference_bayes/figures/posterior_error_distribution.png",
+      "reports/runs/comparisons/reference_bayes/figures/risk_violation_rate_by_environment.png",
+      "reports/runs/comparisons/reference_bayes/figures/latency_distribution.png",
+      "reports/runs/comparisons/reference_bayes/figures/parse_failure_rate_by_agent.png"
     ],
-    "paired_results": "reports\\runs\\comparisons\\reference_bayes\\paired_results.jsonl"
+    "paired_results": "reports/runs/comparisons/reference_bayes/paired_results.jsonl"
   },
   "baseline_agent_key": "reference",
   "baseline_kind": "reference sanity check",
@@ -134,7 +134,7 @@
       "seed": 123
     }
   ],
-  "output_dir": "reports\\runs\\comparisons\\reference_bayes",
+  "output_dir": "reports/runs/comparisons/reference_bayes",
   "paired_metrics": {},
   "run_id": "reference_bayes-20260602T060923",
   "timestamp": "2026-06-02T06:09:23Z"

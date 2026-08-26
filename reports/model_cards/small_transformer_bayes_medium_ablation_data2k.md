@@ -4,7 +4,7 @@
 
 - Model name: `small_transformer_bayes_medium_ablation_data2k`
 - Model type: compact synthetic Bayesian trace transformer
-- Training run directory: `reports\training\small_transformer_bayes_medium_ablation_data2k`
+- Training run directory: `reports/training/small_transformer_bayes_medium_ablation_data2k`
 - Created from actual training artefacts: `yes`
 
 ## Architecture
@@ -24,7 +24,7 @@
 ## Training Config
 
 - Optimisation config: `{"batch_size": 64, "device": "cpu", "early_stopping_patience": 5, "epochs": 30, "grad_clip": 1.0, "learning_rate": 0.001, "weight_decay": 0.01}`
-- Full resolved config: `reports\training\small_transformer_bayes_medium_ablation_data2k\config_resolved.yaml`
+- Full resolved config: `reports/training/small_transformer_bayes_medium_ablation_data2k/config_resolved.yaml`
 
 ## Validation Metrics
 
@@ -43,9 +43,9 @@
 
 ## Checkpoints
 
-- Best checkpoint: `reports\training\small_transformer_bayes_medium_ablation_data2k\checkpoints\best.pt`
-- Final checkpoint: `reports\training\small_transformer_bayes_medium_ablation_data2k\checkpoints\final.pt`
-- Tokenizer vocabulary: `reports\training\small_transformer_bayes_medium_ablation_data2k\vocab.json`
+- Best checkpoint: `reports/training/small_transformer_bayes_medium_ablation_data2k/checkpoints/best.pt`
+- Final checkpoint: `reports/training/small_transformer_bayes_medium_ablation_data2k/checkpoints/final.pt`
+- Tokenizer vocabulary: `reports/training/small_transformer_bayes_medium_ablation_data2k/vocab.json`
 
 ## Scope and Limitations
 

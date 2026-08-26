@@ -8,9 +8,9 @@ compute precisely the answer it is graded against.
 
 Three safety properties hold by construction:
 
-* tools are a **fixed registry** — there is no arbitrary code/`eval` path;
-* tools are **pure and offline** — no network, no filesystem, no global state;
-* tools receive only the arguments the agent proposes — never the
+* tools are a **fixed registry**: there is no arbitrary code/`eval` path;
+* tools are **pure and offline**: no network, no filesystem, no global state;
+* tools receive only the arguments the agent proposes, never the
   :class:`~mimirbench.evals.schemas.GradingKey`.
 
 :data:`ENVIRONMENT_TOOL_ALLOWLIST` declares which tools are permitted per

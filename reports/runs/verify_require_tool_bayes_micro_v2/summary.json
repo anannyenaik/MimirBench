@@ -108,7 +108,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\verify_require_tool_bayes_micro_v2",
+  "output_dir": "reports/runs/verify_require_tool_bayes_micro_v2",
   "run_id": "verify_require_tool_bayes_micro_v2-20260602T231157",
   "run_name": "verify_require_tool_bayes_micro_v2",
   "timestamp": "2026-06-02T23:11:57Z",

@@ -29,7 +29,7 @@ A controlled, identical-decoding comparison. Every row in this track shares:
   environments, identical across rows).
 
 Truncation or empty-output rows under this track are **protocol findings**, not
-capability failures — unless a row is explicitly scoped as strict-track behaviour
+capability failures, unless a row is explicitly scoped as strict-track behaviour
 (i.e. "this model cannot emit valid JSON within 512 tokens" *is* the finding).
 
 Strict-512 clean rows currently: OpenAI `gpt-4.1-mini`, `gpt-5.4-mini`, `gpt-5.4`;

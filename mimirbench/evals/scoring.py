@@ -1,4 +1,4 @@
-"""Aggregation helpers for per-task grader results and Stage 2 run records."""
+"""Aggregation helpers for per-task grader results and run records."""
 
 from __future__ import annotations
 
@@ -207,7 +207,7 @@ def aggregate(
 
 
 def aggregate_records(records: list[EvalTaskRecord]) -> dict[str, Any]:
-    """Aggregate serialisable Stage 2 records across one or more environments."""
+    """Aggregate serialisable records across one or more environments."""
     by_environment: dict[str, list[EvalTaskRecord]] = defaultdict(list)
     for record in records:
         by_environment[record.environment].append(record)

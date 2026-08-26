@@ -40,6 +40,6 @@ No headline candidates: available metrics did not meet the evidence threshold.
 
 ## Artefacts
 
-- `leaderboard_summary.json`: `reports\runs\leaderboard\leaderboard_openai_bayes_direct_micro\leaderboard_summary.json`
-- `paired_deltas.jsonl`: `reports\runs\leaderboard\leaderboard_openai_bayes_direct_micro\paired_deltas.jsonl`
-- `headline_candidates.md`: `reports\runs\leaderboard\leaderboard_openai_bayes_direct_micro\headline_candidates.md`
+- `leaderboard_summary.json`: `reports/runs/leaderboard/leaderboard_openai_bayes_direct_micro/leaderboard_summary.json`
+- `paired_deltas.jsonl`: `reports/runs/leaderboard/leaderboard_openai_bayes_direct_micro/paired_deltas.jsonl`
+- `headline_candidates.md`: `reports/runs/leaderboard/leaderboard_openai_bayes_direct_micro/headline_candidates.md`

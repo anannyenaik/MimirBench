@@ -1,4 +1,4 @@
-"""Stage 6 deterministic failure taxonomy tests."""
+"""Deterministic failure-taxonomy tests."""
 
 from __future__ import annotations
 

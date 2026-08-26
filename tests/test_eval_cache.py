@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from mimirbench.environments.bayesian_games.generator import generate_task
 from mimirbench.evals.cache import ResponseCache, make_cache_key
 from mimirbench.evals.schemas import AgentConfig, ModelResponse
@@ -21,7 +23,7 @@ def test_cache_key_is_deterministic_and_config_sensitive() -> None:
     assert first_key != different_key
 
 
-def test_cache_hit_miss_and_bypass(tmp_path) -> None:  # type: ignore[no-untyped-def]
+def test_cache_hit_miss_and_bypass(tmp_path: Path) -> None:
     path = tmp_path / "cache.jsonl"
     cache = ResponseCache(path, enabled=True)
     response = ModelResponse(

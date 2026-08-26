@@ -1,4 +1,4 @@
-"""Validation checks for the Stage 8 interpretability configs (no torch needed)."""
+"""Validation checks for the interpretability configs (no torch needed)."""
 
 from __future__ import annotations
 

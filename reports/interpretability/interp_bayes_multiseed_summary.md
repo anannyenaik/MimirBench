@@ -9,20 +9,20 @@ backed by a completed run rather than an aspiration.
 | Component | Seeds actually run | Status |
 | --- | --- | --- |
 | Medium checkpoint training | 123, 124, 125, 126, 127, 128 | **actually run** (6 independent checkpoints) |
-| Stage 8 interpretability (`interp_bayes_all_medium`) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
+| Whole-site interpretability (`interp_bayes_all_medium`) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
 | Extended interpretability (`interp_bayes_medium_extended`) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
 | Held-out test evaluation (fresh n=2000 draw) | 123, 124, 125, 126, 127, 128 | **actually run** (6 seeds) |
 
 **Principal finding:** extended medium-model interpretability is now **replicated
 across six independently trained synthetic checkpoints** (seeds 123–128). Each
 seed independently resamples the training data, the weight initialisation, **and**
-the interpretability probe/patch set — so these are genuinely independent draws,
+the interpretability probe/patch set, so these are genuinely independent draws,
 not one dataset re-analysed. The evidence-to-decision mechanism remains
 concentrated in attention-mediated activations on every seed; token-group-only
 interventions show distributed positional dependence on every seed; and the
 negative controls reduce recovery substantially on every seed.
 
-All runs are local, deterministic, CPU-only — **no API calls, no downloads**. The
+All runs are local, deterministic, and CPU-only: **no API calls, no downloads**. The
 aggregate machine record is
 [`interp_bayes_multiseed_summary.json`](interp_bayes_multiseed_summary.json);
 per-seed checkpoint hashes are in
@@ -35,7 +35,7 @@ per-seed checkpoint hashes are in
 - Dataset sizes: **12,000 train / 2,000 val / 2,000 test** synthetic Bayesian
   traces per seed; `min_observations=2`, `max_observations=10`,
   `signal_reliability=0.75`, 20 posterior buckets, `risk_tolerance=0.35`.
-- This is the *same* full setup as the original seed-123 medium model — not a
+- This is the *same* full setup as the original seed-123 medium model, not a
   reduced replication.
 
 ## Per-seed results
@@ -73,7 +73,7 @@ patching **action-recovery** rates over flipped counterfactual pairs.
 | Label-shuffle probe: real labels | 1.000 | [1.000, 1.000] |
 | Label-shuffle probe: shuffled labels | 0.471 | [0.375, 0.563] |
 
-## Did the original causal story replicate? Yes — on all six seeds
+## Did the original causal story replicate? Yes: on all six seeds
 
 Each seed independently passes all four pre-registered checks
 (see `mimirbench/interpretability/multiseed.py` for the exact thresholds):
@@ -81,13 +81,13 @@ Each seed independently passes all four pre-registered checks
 1. **Evidence→decision is concentrated in the attention sub-blocks.** On every
    seed the whole-site patch at layer-0 *attention* restores the clean action on
    0.88–1.00 of flipped pairs and layer-1 attention on 0.98–1.00, while the
-   layer-0 *MLP* restores it on **exactly 0.000** — the cleanest part of the
+   layer-0 *MLP* restores it on **exactly 0.000**, the cleanest part of the
    result and identical across all six checkpoints.
 2. **Token-group-only interventions are distributed.** Patching a single token
    group's positions (evidence / prior / payoff-risk) of any one sub-block
    recovers the action on at most 2.6% of flipped pairs (mean 1.1%). The encoder
    mean-pools, so the signal is distributed across positions rather than localised
-   to the evidence token positions — reported as a negative result, and it
+   to the evidence token positions. This is reported as a negative result, and it
    holds on every seed.
 3. **The patch restores a *specific* computation (mismatched-donor control).** At
    `blocks.0.attn_out`, a matched donor recovers the action on 0.96 of flipped

@@ -103,7 +103,7 @@
       "violation_rate": 0.0
     }
   },
-  "output_dir": "reports\\runs\\tool_reference_bayes",
+  "output_dir": "reports/runs/tool_reference_bayes",
   "run_id": "tool_reference_bayes-20260602T045843",
   "run_name": "tool_reference_bayes",
   "timestamp": "2026-06-02T04:58:43Z",

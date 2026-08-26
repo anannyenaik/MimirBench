@@ -255,7 +255,7 @@
       "violation_rate": 0.15333333333333332
     }
   },
-  "output_dir": "reports\\runs\\all_envs_mock_smoke",
+  "output_dir": "reports/runs/all_envs_mock_smoke",
   "run_id": "all_envs_mock_smoke-20260602T014233",
   "run_name": "all_envs_mock_smoke",
   "timestamp": "2026-06-02T01:42:33Z"
