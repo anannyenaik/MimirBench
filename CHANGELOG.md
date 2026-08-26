@@ -44,6 +44,9 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   their filename. The longest tracked path drops from 284 to 181 characters, so
   the repository can be cloned on Windows without `core.longpaths`.
 - Removed the changelog link to a `v0.1.0` release that was never tagged.
+- Dropped the `python_version = "3.11"` pin from the mypy config. It made the
+  3.12 CI job parse third-party stubs under 3.11 syntax rules, which newer numpy
+  releases legitimately violate. The 3.11 job still enforces the version floor.
 
 ## [0.2.0] - 2026-06-06
 
