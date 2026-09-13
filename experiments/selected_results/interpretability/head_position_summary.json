@@ -1,0 +1,1262 @@
+{
+    "schema_version":  1,
+    "scope":  "Aggregate causal interventions across seeds 123 to 128.",
+    "seeds":  [
+                  123,
+                  124,
+                  125,
+                  126,
+                  127,
+                  128
+              ],
+    "per_seed":  [
+                     {
+                         "seed":  123,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.030451601868669988,
+                                                                                     "matched_action_recovery":  0.032786885245901641,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.024590163934426229
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.015084301139688132,
+                                                                                     "matched_action_recovery":  0.016393442622950821,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.016393442622950821
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  -8.3068358022913923E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.024590163934426229
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.036918986111094024,
+                                                                                     "matched_action_recovery":  0.040983606557377046,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.040983606557377046
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  -1.7738531482086633E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.58425529361778583,
+                                                                                     "matched_action_recovery":  0.61475409836065575,
+                                                                                     "matched_posterior_recovery":  0.078125,
+                                                                                     "mismatched_action_recovery":  0.28688524590163933
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  -2.6129652954318926E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.031975250107345247,
+                                                                                     "matched_action_recovery":  0.032786885245901641,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.049180327868852458
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.0390625,
+                                                                                     "mean_posterior_error_increase":  0.040474747678431761,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.2578125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.013654532624093463,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1015625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0.0234375,
+                                                                                     "mean_posterior_error_increase":  0.026199115302293297,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1953125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.09375,
+                                                                                     "mean_posterior_error_increase":  0.051471507099917782,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.359375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.015625,
+                                                                                     "mean_posterior_error_increase":  0.020064476387532781,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.296875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.03125,
+                                                                                     "mean_posterior_error_increase":  0.035199539195354221,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1796875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0015625000000000014,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0078125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.015625,
+                                                                                     "mean_posterior_error_increase":  0.015427721308537749,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     },
+                     {
+                         "seed":  124,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.019911661633011519,
+                                                                                     "matched_action_recovery":  0.02564102564102564,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.017094017094017096
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.0065938185077293338,
+                                                                                     "matched_action_recovery":  0.0085470085470085479,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.0085470085470085479
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.023183510366910905,
+                                                                                     "matched_action_recovery":  0.02564102564102564,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.02564102564102564
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.048448349176058253,
+                                                                                     "matched_action_recovery":  0.059829059829059832,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.05128205128205128
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  -0.00018798687798347348,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.023858034433296385,
+                                                                                     "matched_action_recovery":  0.02564102564102564,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.034188034188034191
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.031198182662014684,
+                                                                                     "matched_action_recovery":  0.034188034188034191,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.034188034188034191
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.022825891954567919,
+                                                                                     "matched_action_recovery":  0.02564102564102564,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.017094017094017096
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.012760007450040491,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1640625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.046875,
+                                                                                     "mean_posterior_error_increase":  0.036688759721598359,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.21875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.017114155260426443,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1640625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.0234375,
+                                                                                     "mean_posterior_error_increase":  0.033133229582793952,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.265625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.03125,
+                                                                                     "mean_posterior_error_increase":  0.011579201382497274,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.0040320709613112377,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.078125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0034526209677419387,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.015625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0035046214788732356,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0078125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0.0085470085470085479,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     },
+                     {
+                         "seed":  125,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  -4.535773107283063E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.565461564470178,
+                                                                                     "matched_action_recovery":  0.5714285714285714,
+                                                                                     "matched_posterior_recovery":  0.0078125,
+                                                                                     "mismatched_action_recovery":  0.33333333333333331
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.0058589916296071052,
+                                                                                     "matched_action_recovery":  0.0079365079365079361,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.015873015873015872
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.0030252542680015682,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.0079365079365079361
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.039488020284502962,
+                                                                                     "matched_action_recovery":  0.047619047619047616,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.063492063492063489
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  -2.4812974740555664E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  -8.1484473661406912E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.50166066293260037,
+                                                                                     "matched_action_recovery":  0.53174603174603174,
+                                                                                     "matched_posterior_recovery":  0.1953125,
+                                                                                     "mismatched_action_recovery":  0.30952380952380953
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.015625,
+                                                                                     "mean_posterior_error_increase":  0.036473374643376091,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.2578125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0703125,
+                                                                                     "mean_posterior_error_increase":  0.072922674356492731,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.6484375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.0055791035547561006,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0703125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0061984206033010823,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.00039062499999999861,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0078125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.0070511465269364158,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.171875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  -3.4694469519536142E-18,
+                                                                                     "posterior_bucket_accuracy_degradation":  0,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.014724359342785012,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1796875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     },
+                     {
+                         "seed":  126,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.21849847648206588,
+                                                                                     "matched_action_recovery":  0.23931623931623933,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.17094017094017094
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  2.7582905896758603E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.0085470085470085479
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.001696932286762376,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.02564102564102564
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.0078074818971852478,
+                                                                                     "matched_action_recovery":  0.0085470085470085479,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.0085470085470085479
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.036686718698870247,
+                                                                                     "matched_action_recovery":  0.042735042735042736,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.034188034188034191
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  -1.2086612977552091E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.024903923772576136,
+                                                                                     "matched_action_recovery":  0.02564102564102564,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.034188034188034191
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.012930703831926347,
+                                                                                     "matched_action_recovery":  0.017094017094017096,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.02564102564102564
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.078125,
+                                                                                     "mean_posterior_error_increase":  0.062715491235015991,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.4921875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0390625,
+                                                                                     "mean_posterior_error_increase":  0.00808417566054719,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0703125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0.046875,
+                                                                                     "mean_posterior_error_increase":  0.032844825131009336,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1796875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.0546875,
+                                                                                     "mean_posterior_error_increase":  0.034792467413890735,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.2578125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0,
+                                                                                     "posterior_bucket_accuracy_degradation":  0,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.03125,
+                                                                                     "mean_posterior_error_increase":  0.016427347285960361,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.28125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0,
+                                                                                     "posterior_bucket_accuracy_degradation":  0,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0,
+                                                                                     "posterior_bucket_accuracy_degradation":  0,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     },
+                     {
+                         "seed":  127,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  4.0848523415180134E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.00819672131147541
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  -2.3664817492898851E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.0067688646245929532,
+                                                                                     "matched_action_recovery":  0.00819672131147541,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.00819672131147541
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.46700645471601665,
+                                                                                     "matched_action_recovery":  0.49180327868852458,
+                                                                                     "matched_posterior_recovery":  0.0546875,
+                                                                                     "mismatched_action_recovery":  0.23770491803278687
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  -1.5019182786898749E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.010399647465110826,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0.0078125,
+                                                                                     "mismatched_action_recovery":  0.016393442622950821
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.61305085828768036,
+                                                                                     "matched_action_recovery":  0.62295081967213117,
+                                                                                     "matched_posterior_recovery":  0.3125,
+                                                                                     "mismatched_action_recovery":  0.34426229508196721
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  2.1238173342278928E-07,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.016358697558779972,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.140625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0,
+                                                                                     "posterior_bucket_accuracy_degradation":  0,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0045686141304347762,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0234375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.0703125,
+                                                                                     "mean_posterior_error_increase":  0.1044882644105396,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.703125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.00078125000000000069,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.0078125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.018488824611534449,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.109375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.050226152282018016,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.4375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.011315265827510164,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.1953125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     },
+                     {
+                         "seed":  128,
+                         "per_head_patching":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  0.045797133450748373,
+                                                                                     "matched_action_recovery":  0.03968253968253968,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.071428571428571425
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.037040556799785573,
+                                                                                     "matched_action_recovery":  0.03968253968253968,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.047619047619047616
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.0015927135820663972,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.015873015873015872
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.013795212787658594,
+                                                                                     "matched_action_recovery":  0.015873015873015872,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.023809523809523808
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "matched_action_causal_effect":  -8.1160005325152651E-06,
+                                                                                     "matched_action_recovery":  0,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "matched_action_causal_effect":  0.040269344415891473,
+                                                                                     "matched_action_recovery":  0.03968253968253968,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.047619047619047616
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "matched_action_causal_effect":  0.006411753174591129,
+                                                                                     "matched_action_recovery":  0.0079365079365079361,
+                                                                                     "matched_posterior_recovery":  0,
+                                                                                     "mismatched_action_recovery":  0.0079365079365079361
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "matched_action_causal_effect":  0.24323553642528609,
+                                                                                     "matched_action_recovery":  0.23809523809523808,
+                                                                                     "matched_posterior_recovery":  0.03125,
+                                                                                     "mismatched_action_recovery":  0.17460317460317459
+                                                                                 }
+                                               },
+                         "per_head_ablation":  {
+                                                   "blocks.0.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.0859375,
+                                                                                     "mean_posterior_error_increase":  0.051774405400239712,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.4375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0234375,
+                                                                                     "mean_posterior_error_increase":  0.030559234475156329,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.265625,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.00079225352112675951,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.03125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.0.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.0625,
+                                                                                     "mean_posterior_error_increase":  0.038526981391447321,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.234375,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.0.out":  {
+                                                                                     "action_accuracy_degradation":  0.0703125,
+                                                                                     "mean_posterior_error_increase":  0.029446194808843876,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.3203125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.1.out":  {
+                                                                                     "action_accuracy_degradation":  0.0078125,
+                                                                                     "mean_posterior_error_increase":  0.0038628472222222224,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.03125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.2.out":  {
+                                                                                     "action_accuracy_degradation":  0,
+                                                                                     "mean_posterior_error_increase":  0.0063455398606811035,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.046875,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 },
+                                                   "blocks.1.attn_heads.3.out":  {
+                                                                                     "action_accuracy_degradation":  0.03125,
+                                                                                     "mean_posterior_error_increase":  0.037330702926561612,
+                                                                                     "posterior_bucket_accuracy_degradation":  0.328125,
+                                                                                     "random_position_action_degradation":  0
+                                                                                 }
+                                               },
+                         "max_individual_position_action_recovery":  {
+                                                                         "blocks.0.attn_out":  0,
+                                                                         "blocks.1.attn_out":  0
+                                                                     }
+                     }
+                 ],
+    "per_head_patching":  {
+                              "blocks.0.attn_heads.0.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.21849847648206588,
+                                                                                                     "mean":  0.05244375078492109,
+                                                                                                     "min":  -4.535773107283063E-07,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.23931623931623933,
+                                                                                                "mean":  0.05623778164761772,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.0,
+                                                                                                   "mean":  0.0,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.17094017094017094,
+                                                                                                   "mean":  0.048708274118110184,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.0.attn_heads.1.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.565461564470178,
+                                                                                                     "mean":  0.10403046042663262,
+                                                                                                     "min":  -2.3664817492898851E-07,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.5714285714285714,
+                                                                                                "mean":  0.10600859371351173,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.0078125,
+                                                                                                   "mean":  0.0013020833333333333,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.3333333333333333,
+                                                                                                   "mean":  0.0690733067782248,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.0.attn_heads.2.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.023183510366910902,
+                                                                                                     "mean":  0.006516696967726584,
+                                                                                                     "min":  -8.3068358022913923E-07,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.02564102564102564,
+                                                                                                "mean":  0.006962375814834831,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.0,
+                                                                                                   "mean":  0.0,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.02564102564102564,
+                                                                                                   "mean":  0.019302494712330778,
+                                                                                                   "min":  0.00819672131147541,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.0.attn_heads.3.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.46700645471601665,
+                                                                                                     "mean":  0.09616695649266906,
+                                                                                                     "min":  0.003025254268001568,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.4918032786885246,
+                                                                                                "mean":  0.10283932824916431,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.0546875,
+                                                                                                   "mean":  0.009114583333333334,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.23770491803278687,
+                                                                                                   "mean":  0.06171060269420925,
+                                                                                                   "min":  0.007936507936507936,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.1.attn_heads.0.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.03948802028450296,
+                                                                                                     "mean":  0.012662560055571719,
+                                                                                                     "min":  -0.00018798687798347348,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.047619047619047616,
+                                                                                                "mean":  0.015059015059015059,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.0,
+                                                                                                   "mean":  0.0,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.06349206349206349,
+                                                                                                   "mean":  0.01628001628001628,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.1.attn_heads.1.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.5842552936177858,
+                                                                                                     "mean":  0.10979681052350655,
+                                                                                                     "min":  -1.2086612977552091E-06,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.6147540983606558,
+                                                                                                "mean":  0.11334627728070351,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.078125,
+                                                                                                   "mean":  0.014322916666666666,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.28688524590163933,
+                                                                                                   "mean":  0.06418096172194533,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.1.attn_heads.2.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.6130508582876804,
+                                                                                                     "mean":  0.11259394029259935,
+                                                                                                     "min":  -8.1484473661406912E-07,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.6229508196721312,
+                                                                                                "mean":  0.11511939790628316,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.3125,
+                                                                                                   "mean":  0.052083333333333336,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.3442622950819672,
+                                                                                                   "mean":  0.07009581189909059,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            },
+                              "blocks.1.attn_heads.3.out":  {
+                                                                "matched_action_causal_effect":  {
+                                                                                                     "max":  0.5016606629326004,
+                                                                                                     "mean":  0.1354380429389099,
+                                                                                                     "min":  2.1238173342278928E-07,
+                                                                                                     "n":  6
+                                                                                                 },
+                                                                "matched_action_recovery":  {
+                                                                                                "max":  0.5317460317460317,
+                                                                                                "mean":  0.14089386630370238,
+                                                                                                "min":  0.0,
+                                                                                                "n":  6
+                                                                                            },
+                                                                "matched_posterior_recovery":  {
+                                                                                                   "max":  0.1953125,
+                                                                                                   "mean":  0.037760416666666664,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               },
+                                                                "mismatched_action_recovery":  {
+                                                                                                   "max":  0.30952380952380953,
+                                                                                                   "mean":  0.09600705912181322,
+                                                                                                   "min":  0.0,
+                                                                                                   "n":  6
+                                                                                               }
+                                                            }
+                          },
+    "per_head_ablation":  {
+                              "blocks.0.attn_heads.0.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.0859375,
+                                                                                                    "mean":  0.037760416666666664,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.06271549123501599,
+                                                                                                      "mean":  0.036759453994314004,
+                                                                                                      "min":  0.012760007450040491,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.4921875,
+                                                                                                              "mean":  0.2916666666666667,
+                                                                                                              "min":  0.140625,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.0.attn_heads.1.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.0703125,
+                                                                                                    "mean":  0.03125,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.07292267435649273,
+                                                                                                      "mean":  0.026984896139648013,
+                                                                                                      "min":  0.0,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.6484375,
+                                                                                                              "mean":  0.21744791666666666,
+                                                                                                              "min":  0.0,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.0.attn_heads.2.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.046875,
+                                                                                                    "mean":  0.014322916666666666,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.032844825131009336,
+                                                                                                      "mean":  0.014516344483341118,
+                                                                                                      "min":  0.0007922535211267595,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.1953125,
+                                                                                                              "mean":  0.11067708333333333,
+                                                                                                              "min":  0.0234375,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.0.attn_heads.3.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.09375,
+                                                                                                    "mean":  0.05078125,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.10448826441053961,
+                                                                                                      "mean":  0.04476847841698175,
+                                                                                                      "min":  0.006198420603301082,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.703125,
+                                                                                                              "mean":  0.3138020833333333,
+                                                                                                              "min":  0.0625,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.1.attn_heads.0.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.0703125,
+                                                                                                    "mean":  0.01953125,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.029446194808843876,
+                                                                                                      "mean":  0.010376957929812322,
+                                                                                                      "min":  0.0,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.3203125,
+                                                                                                              "mean":  0.13671875,
+                                                                                                              "min":  0.0,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.1.attn_heads.1.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.03125,
+                                                                                                    "mean":  0.015625,
+                                                                                                    "min":  0.0078125,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.03519953919535422,
+                                                                                                      "mean":  0.014176962633886485,
+                                                                                                      "min":  0.0038628472222222224,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.28125,
+                                                                                                              "mean":  0.14192708333333334,
+                                                                                                              "min":  0.03125,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.1.attn_heads.2.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.0078125,
+                                                                                                    "mean":  0.0013020833333333333,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.050226152282018016,
+                                                                                                      "mean":  0.010264468851740175,
+                                                                                                      "min":  -3.4694469519536142E-18,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.4375,
+                                                                                                              "mean":  0.08463541666666667,
+                                                                                                              "min":  0.0,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            },
+                              "blocks.1.attn_heads.3.out":  {
+                                                                "action_accuracy_degradation":  {
+                                                                                                    "max":  0.03125,
+                                                                                                    "mean":  0.009114583333333334,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                "mean_posterior_error_increase":  {
+                                                                                                      "max":  0.03733070292656161,
+                                                                                                      "mean":  0.013717111814044627,
+                                                                                                      "min":  0.0,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                "posterior_bucket_accuracy_degradation":  {
+                                                                                                              "max":  0.328125,
+                                                                                                              "mean":  0.12890625,
+                                                                                                              "min":  0.0,
+                                                                                                              "n":  6
+                                                                                                          },
+                                                                "random_position_action_degradation":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       }
+                                                            }
+                          },
+    "individual_position_distribution":  {
+                                             "blocks.0.attn_out":  {
+                                                                       "action_recovery_max_across_positions":  0.0014245014245014246,
+                                                                       "action_recovery_mean_across_positions":  4.9982506122857E-05,
+                                                                       "n_positions":  57,
+                                                                       "posterior_recovery_max_across_positions":  0.0,
+                                                                       "posterior_recovery_mean_across_positions":  0.0
+                                                                   },
+                                             "blocks.1.attn_out":  {
+                                                                       "action_recovery_max_across_positions":  0.0,
+                                                                       "action_recovery_mean_across_positions":  0.0,
+                                                                       "n_positions":  57,
+                                                                       "posterior_recovery_max_across_positions":  0.0,
+                                                                       "posterior_recovery_mean_across_positions":  0.0
+                                                                   }
+                                         },
+    "semantic_position_aggregates":  {
+                                         "blocks.0.attn_out:evidence":  {
+                                                                            "action_recovery":  {
+                                                                                                    "max":  0.0,
+                                                                                                    "mean":  0.0,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                            "group":  "evidence",
+                                                                            "posterior_recovery":  {
+                                                                                                       "max":  0.0,
+                                                                                                       "mean":  0.0,
+                                                                                                       "min":  0.0,
+                                                                                                       "n":  6
+                                                                                                   },
+                                                                            "site":  "blocks.0.attn_out"
+                                                                        },
+                                         "blocks.0.attn_out:likelihood":  {
+                                                                              "action_recovery":  {
+                                                                                                      "max":  0.0003885003885003885,
+                                                                                                      "mean":  6.4750064750064755E-05,
+                                                                                                      "min":  0.0,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                              "group":  "likelihood",
+                                                                              "posterior_recovery":  {
+                                                                                                         "max":  0.0,
+                                                                                                         "mean":  0.0,
+                                                                                                         "min":  0.0,
+                                                                                                         "n":  6
+                                                                                                     },
+                                                                              "site":  "blocks.0.attn_out"
+                                                                          },
+                                         "blocks.0.attn_out:payoff_risk":  {
+                                                                               "action_recovery":  {
+                                                                                                       "max":  0.0006574621959237344,
+                                                                                                       "mean":  0.00010957703265395574,
+                                                                                                       "min":  0.0,
+                                                                                                       "n":  6
+                                                                                                   },
+                                                                               "group":  "payoff_risk",
+                                                                               "posterior_recovery":  {
+                                                                                                          "max":  0.0,
+                                                                                                          "mean":  0.0,
+                                                                                                          "min":  0.0,
+                                                                                                          "n":  6
+                                                                                                      },
+                                                                               "site":  "blocks.0.attn_out"
+                                                                           },
+                                         "blocks.0.attn_out:prior":  {
+                                                                         "action_recovery":  {
+                                                                                                 "max":  0.0,
+                                                                                                 "mean":  0.0,
+                                                                                                 "min":  0.0,
+                                                                                                 "n":  6
+                                                                                             },
+                                                                         "group":  "prior",
+                                                                         "posterior_recovery":  {
+                                                                                                    "max":  0.0,
+                                                                                                    "mean":  0.0,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                         "site":  "blocks.0.attn_out"
+                                                                     },
+                                         "blocks.0.attn_out:unclassified":  {
+                                                                                "action_recovery":  {
+                                                                                                        "max":  0.0,
+                                                                                                        "mean":  0.0,
+                                                                                                        "min":  0.0,
+                                                                                                        "n":  6
+                                                                                                    },
+                                                                                "group":  "unclassified",
+                                                                                "posterior_recovery":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       },
+                                                                                "site":  "blocks.0.attn_out"
+                                                                            },
+                                         "blocks.1.attn_out:evidence":  {
+                                                                            "action_recovery":  {
+                                                                                                    "max":  0.0,
+                                                                                                    "mean":  0.0,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                            "group":  "evidence",
+                                                                            "posterior_recovery":  {
+                                                                                                       "max":  0.0,
+                                                                                                       "mean":  0.0,
+                                                                                                       "min":  0.0,
+                                                                                                       "n":  6
+                                                                                                   },
+                                                                            "site":  "blocks.1.attn_out"
+                                                                        },
+                                         "blocks.1.attn_out:likelihood":  {
+                                                                              "action_recovery":  {
+                                                                                                      "max":  0.0,
+                                                                                                      "mean":  0.0,
+                                                                                                      "min":  0.0,
+                                                                                                      "n":  6
+                                                                                                  },
+                                                                              "group":  "likelihood",
+                                                                              "posterior_recovery":  {
+                                                                                                         "max":  0.0,
+                                                                                                         "mean":  0.0,
+                                                                                                         "min":  0.0,
+                                                                                                         "n":  6
+                                                                                                     },
+                                                                              "site":  "blocks.1.attn_out"
+                                                                          },
+                                         "blocks.1.attn_out:payoff_risk":  {
+                                                                               "action_recovery":  {
+                                                                                                       "max":  0.0,
+                                                                                                       "mean":  0.0,
+                                                                                                       "min":  0.0,
+                                                                                                       "n":  6
+                                                                                                   },
+                                                                               "group":  "payoff_risk",
+                                                                               "posterior_recovery":  {
+                                                                                                          "max":  0.0,
+                                                                                                          "mean":  0.0,
+                                                                                                          "min":  0.0,
+                                                                                                          "n":  6
+                                                                                                      },
+                                                                               "site":  "blocks.1.attn_out"
+                                                                           },
+                                         "blocks.1.attn_out:prior":  {
+                                                                         "action_recovery":  {
+                                                                                                 "max":  0.0,
+                                                                                                 "mean":  0.0,
+                                                                                                 "min":  0.0,
+                                                                                                 "n":  6
+                                                                                             },
+                                                                         "group":  "prior",
+                                                                         "posterior_recovery":  {
+                                                                                                    "max":  0.0,
+                                                                                                    "mean":  0.0,
+                                                                                                    "min":  0.0,
+                                                                                                    "n":  6
+                                                                                                },
+                                                                         "site":  "blocks.1.attn_out"
+                                                                     },
+                                         "blocks.1.attn_out:unclassified":  {
+                                                                                "action_recovery":  {
+                                                                                                        "max":  0.0,
+                                                                                                        "mean":  0.0,
+                                                                                                        "min":  0.0,
+                                                                                                        "n":  6
+                                                                                                    },
+                                                                                "group":  "unclassified",
+                                                                                "posterior_recovery":  {
+                                                                                                           "max":  0.0,
+                                                                                                           "mean":  0.0,
+                                                                                                           "min":  0.0,
+                                                                                                           "n":  6
+                                                                                                       },
+                                                                                "site":  "blocks.1.attn_out"
+                                                                            }
+                                     },
+    "top_head_counts":  {
+                            "blocks.0.attn_heads.0.out":  1,
+                            "blocks.0.attn_heads.1.out":  1,
+                            "blocks.0.attn_heads.3.out":  1,
+                            "blocks.1.attn_heads.1.out":  1,
+                            "blocks.1.attn_heads.2.out":  1,
+                            "blocks.1.attn_heads.3.out":  1
+                        }
+}

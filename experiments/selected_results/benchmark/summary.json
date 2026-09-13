@@ -1,0 +1,818 @@
+{
+  "bootstrap": {
+    "confidence": 0.95,
+    "n_resamples": 2000,
+    "seed": 20260606,
+    "unit": "task"
+  },
+  "experiment": {
+    "agent": "direct",
+    "environments": [
+      "bayesian_games",
+      "auctions",
+      "hidden_regimes",
+      "market_making",
+      "prediction_markets",
+      "adversarial_risk"
+    ],
+    "model_rows": 8,
+    "task_records": 960,
+    "task_seed": 123,
+    "tasks_per_environment": 20
+  },
+  "models": [
+    {
+      "display": "OpenAI gpt-4.1-mini",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8165000000000002,
+          "n": 20,
+          "pass_rate": 0.95,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.22428330826969142,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.7401302820320088,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.7542420733365469,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.6467891548241813,
+          "n": 20,
+          "pass_rate": 0.55,
+          "risk_violation_rate": 0.1
+        },
+        "prediction_markets": {
+          "mean_score": 0.535733987617209,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.05
+        }
+      },
+      "key": "openai_gpt_4_1_mini",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.6743632755977498,
+        "low": 0.5630054841700688,
+        "mean": 0.6196131343466061,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.041666666666666664,
+        "low": 0.0,
+        "mean": 0.016666666666666666,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.425,
+        "low": 0.25833333333333336,
+        "mean": 0.3416666666666667,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": 0
+      },
+      "provider": "OpenAI",
+      "results_file": "benchmark/openai_gpt_4_1_mini.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.058333333333333334,
+        "low": 0.0,
+        "mean": 0.025,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "strict-512"
+    },
+    {
+      "display": "OpenAI gpt-5.4-mini",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8250000000000002,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.03263228354878545,
+          "n": 20,
+          "pass_rate": 0.0,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.807898537895476,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.8010707591739992,
+          "n": 20,
+          "pass_rate": 0.05,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.7192568690906194,
+          "n": 20,
+          "pass_rate": 0.6,
+          "risk_violation_rate": 0.05
+        },
+        "prediction_markets": {
+          "mean_score": 0.4826390209802055,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.05
+        }
+      },
+      "key": "openai_gpt_5_4_mini",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.6714449557924337,
+        "low": 0.5471024346073945,
+        "mean": 0.6114162451148476,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.4166666666666667,
+        "low": 0.25,
+        "mean": 0.3333333333333333,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": 0
+      },
+      "provider": "OpenAI",
+      "results_file": "benchmark/openai_gpt_5_4_mini.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.041666666666666664,
+        "low": 0.0,
+        "mean": 0.016666666666666666,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "strict-512"
+    },
+    {
+      "display": "OpenAI gpt-5.4",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8500000000000002,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.19345805538249813,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.8835591098877205,
+          "n": 20,
+          "pass_rate": 0.3,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.8489947951815495,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.7727738401309964,
+          "n": 20,
+          "pass_rate": 0.7,
+          "risk_violation_rate": 0.0
+        },
+        "prediction_markets": {
+          "mean_score": 0.4289894286009199,
+          "n": 20,
+          "pass_rate": 0.2,
+          "risk_violation_rate": 0.2
+        }
+      },
+      "key": "openai_gpt_5_4",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.7202766280805866,
+        "low": 0.5996745128154263,
+        "mean": 0.6629625381972808,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.5166666666666667,
+        "low": 0.3333333333333333,
+        "mean": 0.425,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": 0
+      },
+      "provider": "OpenAI",
+      "results_file": "benchmark/openai_gpt_5_4.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.06666666666666667,
+        "low": 0.008333333333333333,
+        "mean": 0.03333333333333333,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "strict-512"
+    },
+    {
+      "display": "Claude Haiku 4.5",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.4534999999999999,
+          "n": 20,
+          "pass_rate": 0.4,
+          "risk_violation_rate": 0.45
+        },
+        "auctions": {
+          "mean_score": 0.03694934020741515,
+          "n": 20,
+          "pass_rate": 0.0,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.7691543497721895,
+          "n": 20,
+          "pass_rate": 0.2,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.6754549023208684,
+          "n": 20,
+          "pass_rate": 0.05,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.5819609057751685,
+          "n": 20,
+          "pass_rate": 0.55,
+          "risk_violation_rate": 0.3
+        },
+        "prediction_markets": {
+          "mean_score": 0.5408249134773448,
+          "n": 20,
+          "pass_rate": 0.1,
+          "risk_violation_rate": 0.0
+        }
+      },
+      "key": "claude_haiku_4_5",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.5711763133998043,
+        "low": 0.4427985275062688,
+        "mean": 0.509640735258831,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.2916666666666667,
+        "low": 0.14166666666666666,
+        "mean": 0.21666666666666667,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": 0
+      },
+      "provider": "Anthropic",
+      "results_file": "benchmark/claude_haiku_4_5.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.18333333333333332,
+        "low": 0.075,
+        "mean": 0.125,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "strict-512"
+    },
+    {
+      "display": "Claude Sonnet 4.6",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8350000000000002,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.8499573030801827,
+          "n": 20,
+          "pass_rate": 0.85,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.9994252225610119,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.9941751073023933,
+          "n": 20,
+          "pass_rate": 0.95,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.8092739272216141,
+          "n": 20,
+          "pass_rate": 0.65,
+          "risk_violation_rate": 0.0
+        },
+        "prediction_markets": {
+          "mean_score": 0.6524465376790898,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        }
+      },
+      "key": "claude_sonnet_4_6",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.8929763118602279,
+        "low": 0.8173261439212185,
+        "mean": 0.856713016307382,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.058333333333333334,
+        "low": 0.0,
+        "mean": 0.025,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.85,
+        "low": 0.7083333333333334,
+        "mean": 0.7833333333333333,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 1536,
+        "temperature": 0
+      },
+      "provider": "Anthropic",
+      "results_file": "benchmark/claude_sonnet_4_6.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "best-valid"
+    },
+    {
+      "display": "Gemini Flash-Lite",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8000000000000002,
+          "n": 20,
+          "pass_rate": 0.95,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.19718330332518322,
+          "n": 20,
+          "pass_rate": 0.15,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.8068531337861211,
+          "n": 20,
+          "pass_rate": 0.2,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.8678702343699257,
+          "n": 20,
+          "pass_rate": 0.2,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.6574965266688014,
+          "n": 20,
+          "pass_rate": 0.65,
+          "risk_violation_rate": 0.25
+        },
+        "prediction_markets": {
+          "mean_score": 0.5917152492729413,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        }
+      },
+      "key": "gemini_flash_lite",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.7144436585606979,
+        "low": 0.5879335961867135,
+        "mean": 0.653519741237162,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.041666666666666664,
+        "low": 0.0,
+        "mean": 0.016666666666666666,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.49166666666666664,
+        "low": 0.31666666666666665,
+        "mean": 0.4,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": "provider default"
+      },
+      "provider": "Google",
+      "results_file": "benchmark/gemini_flash_lite.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.075,
+        "low": 0.008333333333333333,
+        "mean": 0.041666666666666664,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "strict-512"
+    },
+    {
+      "display": "Gemini Flash",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8800000000000001,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.49504486445222395,
+          "n": 20,
+          "pass_rate": 0.25,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.8608356682885414,
+          "n": 20,
+          "pass_rate": 0.3,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.8716909535264394,
+          "n": 20,
+          "pass_rate": 0.15,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.7829845501470879,
+          "n": 20,
+          "pass_rate": 0.75,
+          "risk_violation_rate": 0.0
+        },
+        "prediction_markets": {
+          "mean_score": 0.581760877850422,
+          "n": 20,
+          "pass_rate": 0.2,
+          "risk_violation_rate": 0.05
+        }
+      },
+      "key": "gemini_flash",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.7936012811555618,
+        "low": 0.6964600659194666,
+        "mean": 0.7453861523774524,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.025,
+        "low": 0.0,
+        "mean": 0.008333333333333333,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.5333333333333333,
+        "low": 0.35,
+        "mean": 0.44166666666666665,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 512,
+        "temperature": "provider default",
+        "thinking_budget": 0
+      },
+      "provider": "Google",
+      "results_file": "benchmark/gemini_flash.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.025,
+        "low": 0.0,
+        "mean": 0.008333333333333333,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "best-valid"
+    },
+    {
+      "display": "Gemini Pro Preview",
+      "environment_metrics": {
+        "adversarial_risk": {
+          "mean_score": 0.8500000000000002,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "auctions": {
+          "mean_score": 0.9999966312428488,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "bayesian_games": {
+          "mean_score": 0.9994812827861328,
+          "n": 20,
+          "pass_rate": 1.0,
+          "risk_violation_rate": 0.0
+        },
+        "hidden_regimes": {
+          "mean_score": 0.9770052035492174,
+          "n": 20,
+          "pass_rate": 0.85,
+          "risk_violation_rate": 0.0
+        },
+        "market_making": {
+          "mean_score": 0.6645167021248028,
+          "n": 20,
+          "pass_rate": 0.55,
+          "risk_violation_rate": 0.0
+        },
+        "prediction_markets": {
+          "mean_score": 0.6358525989887679,
+          "n": 20,
+          "pass_rate": 0.3,
+          "risk_violation_rate": 0.0
+        }
+      },
+      "key": "gemini_pro_preview",
+      "mean_score": {
+        "confidence": 0.95,
+        "high": 0.8884122248048922,
+        "low": 0.8177618074777597,
+        "mean": 0.854475403115295,
+        "n_resamples": 2000
+      },
+      "n": 120,
+      "parse_failure_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "pass_rate": {
+        "confidence": 0.95,
+        "high": 0.85,
+        "low": 0.7083333333333334,
+        "mean": 0.7833333333333333,
+        "n_resamples": 2000
+      },
+      "protocol": {
+        "max_tokens": 4096,
+        "temperature": "provider default",
+        "thinking_level": "low"
+      },
+      "provider": "Google",
+      "results_file": "benchmark/gemini_pro_preview.jsonl",
+      "risk_violation_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "runtime_error_rate": {
+        "confidence": 0.95,
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0,
+        "n_resamples": 2000
+      },
+      "track": "best-valid"
+    }
+  ],
+  "paired_differences": [
+    {
+      "baseline": "openai_gpt_4_1_mini",
+      "candidate": "openai_gpt_5_4_mini",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.04271529136785289,
+        "low": -0.05925651333429937,
+        "mean": -0.008196889231758608,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_5_4_mini",
+      "candidate": "openai_gpt_5_4",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.09390231330333221,
+        "low": 0.016677986523294896,
+        "mean": 0.05154629308243311,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_4_1_mini",
+      "candidate": "openai_gpt_5_4",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.09550221804578062,
+        "low": -0.005006785494066855,
+        "mean": 0.043349403850674505,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_5_4",
+      "candidate": "claude_haiku_4_5",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": -0.09433711108285305,
+        "low": -0.21540100062487624,
+        "mean": -0.15332180293844963,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_5_4",
+      "candidate": "claude_sonnet_4_6",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.25341837561188973,
+        "low": 0.13838625650248862,
+        "mean": 0.19375047811010127,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_5_4",
+      "candidate": "gemini_flash",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.1291509183054145,
+        "low": 0.040771796827401806,
+        "mean": 0.08242361418017168,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "openai_gpt_5_4",
+      "candidate": "gemini_pro_preview",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.2553748103361544,
+        "low": 0.13005153599263933,
+        "mean": 0.19151286491801414,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "gemini_flash",
+      "candidate": "gemini_pro_preview",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.16410529642564234,
+        "low": 0.054418220176279904,
+        "mean": 0.1090892507378425,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    },
+    {
+      "baseline": "claude_sonnet_4_6",
+      "candidate": "gemini_pro_preview",
+      "mean_difference": {
+        "confidence": 0.95,
+        "high": 0.034081770249745985,
+        "low": -0.03533026527744543,
+        "mean": -0.0022376131920870744,
+        "n_resamples": 2000
+      },
+      "n_aligned": 120
+    }
+  ],
+  "schema_version": 1
+}

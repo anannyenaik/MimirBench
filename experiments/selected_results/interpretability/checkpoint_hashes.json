@@ -1,0 +1,31 @@
+{
+  "algorithm": "sha256",
+  "note": "Hashes identify the original best checkpoints. Checkpoints are regenerated locally and are not committed.",
+  "checkpoints": [
+    {
+      "seed": 123,
+      "sha256": "3f273cfe70d94e42c0f1b0440b9a907203c6260e6e03e02eff6ad5f4eaa1c546"
+    },
+    {
+      "seed": 124,
+      "sha256": "a4fb76d3f5edb49307454b9071ea69b3d6c62a0787ff55087d3ea596eb3fb295"
+    },
+    {
+      "seed": 125,
+      "sha256": "f803d0e24fddacf54f7e8004adfc18fe411e95e999f4d7aff548635d9d99ec9a"
+    },
+    {
+      "seed": 126,
+      "sha256": "641f2ea78afd4327715b7ce239f3546ec7a56437494c887dcec9678033b2c068"
+    },
+    {
+      "seed": 127,
+      "sha256": "888e6d96f0f70ce5ccbf1dcaba53d443caece8ef948323742a1b024e83764ed5"
+    },
+    {
+      "seed": 128,
+      "sha256": "5ea75a153ab15a9127e55c3d5232817cf2fdb2e1fecb5f1cc28e5cc0dedf35b0"
+    }
+  ],
+  "shared_vocabulary_sha256": "d7a994c5a616d4326250483528ff0cd06f933b05c41cf7d735f428d64ba2ecfa"
+}

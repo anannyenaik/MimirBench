@@ -1,0 +1,129 @@
+{
+  "benchmark": {
+    "model_rows": 8,
+    "records_by_file": {
+      "benchmark/claude_haiku_4_5.jsonl": 120,
+      "benchmark/claude_sonnet_4_6.jsonl": 120,
+      "benchmark/gemini_flash.jsonl": 120,
+      "benchmark/gemini_flash_lite.jsonl": 120,
+      "benchmark/gemini_pro_preview.jsonl": 120,
+      "benchmark/openai_gpt_4_1_mini.jsonl": 120,
+      "benchmark/openai_gpt_5_4.jsonl": 120,
+      "benchmark/openai_gpt_5_4_mini.jsonl": 120
+    },
+    "task_records": 960
+  },
+  "description": "Selected evidence used by the README and figures.",
+  "files": {
+    "benchmark/claude_haiku_4_5.jsonl": {
+      "bytes": 46973,
+      "sha256": "693ca080c4fe49eebe516764837c787e1713470d36e1bafbfe4f0262ff029e7d"
+    },
+    "benchmark/claude_sonnet_4_6.jsonl": {
+      "bytes": 47454,
+      "sha256": "cc54d7eb153e75824ffaff8bc98f1ccd24ceecf1049b3b9ba498c07b7bdec571"
+    },
+    "benchmark/gemini_flash.jsonl": {
+      "bytes": 46560,
+      "sha256": "35ba4fc9b2c77a535145fbdae32d71d26d3674a96227e824d8fb3f95c5075446"
+    },
+    "benchmark/gemini_flash_lite.jsonl": {
+      "bytes": 46712,
+      "sha256": "899e6ac7260658c6b18bd967be9ece36cc81caa3642dec8f535674f0b2c8e9b9"
+    },
+    "benchmark/gemini_pro_preview.jsonl": {
+      "bytes": 47487,
+      "sha256": "7fbd6cba445f84fd3174cc94387fe829eb63497ebba7e4b7a2c8eb2f96d09baa"
+    },
+    "benchmark/openai_gpt_4_1_mini.jsonl": {
+      "bytes": 46975,
+      "sha256": "c564f53ffdda279724d2f57721ed33554ddf72d64484968e5dcd6c0dbae507be"
+    },
+    "benchmark/openai_gpt_5_4.jsonl": {
+      "bytes": 46525,
+      "sha256": "93b93156dfb6fba830c3f23e312817ebc2ea88376d58d193a55d02b7355d2d34"
+    },
+    "benchmark/openai_gpt_5_4_mini.jsonl": {
+      "bytes": 47227,
+      "sha256": "ce6f7344e063d8c3c616d66b50912281ef77295aa24a8d6bf336f735f9d37293"
+    },
+    "benchmark/summary.json": {
+      "bytes": 21248,
+      "sha256": "20aa6ae433d2bd05b6d7bc869b0cf9a39f90970685ecf13a3721af2d262d070c"
+    },
+    "interpretability/checkpoint_hashes.json": {
+      "bytes": 958,
+      "sha256": "bcf82800031060e697c07cbdbab62419d8ce404032a623fe376493707ea5222e"
+    },
+    "interpretability/head_position_summary.json": {
+      "bytes": 135054,
+      "sha256": "883715c89090e648459f98dff75f5da204ce0cb16c9d2e09e2c3888825236cd5"
+    },
+    "interpretability/six_seed_summary.json": {
+      "bytes": 51778,
+      "sha256": "c3c9ad812d1730dd4ae79f453752fa2ac342a86d0c0780229dbfd409e48c46cc"
+    }
+  },
+  "interpretability": {
+    "seeds": [
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+    ]
+  },
+  "provenance": {
+    "benchmark": {
+      "configuration": "configs/benchmark/hosted_pilot.yaml",
+      "consolidation": "Numeric task outcomes were projected from eight completed direct-agent runs. Prompts, model responses, caches and provider logs were excluded.",
+      "settings": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20260606,
+        "confidence": 0.95,
+        "environments": 6,
+        "task_seed": 123,
+        "tasks_per_environment": 20
+      },
+      "source_evidence": [
+        "benchmark/claude_haiku_4_5.jsonl",
+        "benchmark/claude_sonnet_4_6.jsonl",
+        "benchmark/gemini_flash.jsonl",
+        "benchmark/gemini_flash_lite.jsonl",
+        "benchmark/gemini_pro_preview.jsonl",
+        "benchmark/openai_gpt_4_1_mini.jsonl",
+        "benchmark/openai_gpt_5_4.jsonl",
+        "benchmark/openai_gpt_5_4_mini.jsonl"
+      ]
+    },
+    "interpretability": {
+      "configuration": [
+        "configs/training/medium.yaml",
+        "configs/training/medium_eval.yaml",
+        "configs/interpretability/six_seed.yaml"
+      ],
+      "consolidation": "Numeric metrics were retained from six completed local training and causal-intervention runs. Checkpoints, activations and Markdown reports were excluded.",
+      "settings": {
+        "attention_heads_per_layer": 4,
+        "heldout_traces_per_seed": 2000,
+        "layers": 2,
+        "training_seeds": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "training_traces_per_seed": 12000
+      },
+      "source_evidence": [
+        "interpretability/six_seed_summary.json",
+        "interpretability/head_position_summary.json",
+        "interpretability/checkpoint_hashes.json"
+      ]
+    }
+  },
+  "schema_version": 1
+}
